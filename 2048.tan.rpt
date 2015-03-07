@@ -1,0 +1,718 @@
+Classic Timing Analyzer report for 2048
+Sat Mar 07 19:19:51 2015
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Parallel Compilation
+  6. Clock Setup: 'clk_50Mhz'
+  7. Clock Setup: 'PS2_CLK'
+  8. Clock Hold: 'PS2_CLK'
+  9. tsu
+ 10. tco
+ 11. th
+ 12. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                                                                          ;
++------------------------------+------------------------------------------+---------------+----------------------------------+----------------------------------------------+----------------------------------------------+------------+-----------+--------------+
+; Type                         ; Slack                                    ; Required Time ; Actual Time                      ; From                                         ; To                                           ; From Clock ; To Clock  ; Failed Paths ;
++------------------------------+------------------------------------------+---------------+----------------------------------+----------------------------------------------+----------------------------------------------+------------+-----------+--------------+
+; Worst-case tsu               ; N/A                                      ; None          ; 6.241 ns                         ; PS2_DAT                                      ; GAME_KEYBOARD:KeyboardController|bitCount[6] ; --         ; PS2_CLK   ; 0            ;
+; Worst-case tco               ; N/A                                      ; None          ; 10.207 ns                        ; GAME_VIEW:View|green[0]                      ; green[0]                                     ; clk_50Mhz  ; --        ; 0            ;
+; Worst-case th                ; N/A                                      ; None          ; -2.730 ns                        ; PS2_DAT                                      ; GAME_KEYBOARD:KeyboardController|scancode[7] ; --         ; PS2_CLK   ; 0            ;
+; Clock Setup: 'clk_50Mhz'     ; N/A                                      ; None          ; 97.63 MHz ( period = 10.243 ns ) ; GAME_VIEW:View|h_cnt[2]                      ; GAME_VIEW:View|blue[0]                       ; clk_50Mhz  ; clk_50Mhz ; 0            ;
+; Clock Setup: 'PS2_CLK'       ; N/A                                      ; None          ; 229.67 MHz ( period = 4.354 ns ) ; GAME_KEYBOARD:KeyboardController|bitCount[2] ; GAME_KEYBOARD:KeyboardController|bitCount[6] ; PS2_CLK    ; PS2_CLK   ; 0            ;
+; Clock Hold: 'PS2_CLK'        ; Not operational: Clock Skew > Data Delay ; None          ; N/A                              ; GAME_KEYBOARD:KeyboardController|scancode[4] ; GAME_KEYBOARD:KeyboardController|keyCode[4]  ; PS2_CLK    ; PS2_CLK   ; 13           ;
+; Total number of failed paths ;                                          ;               ;                                  ;                                              ;                                              ;            ;           ; 13           ;
++------------------------------+------------------------------------------+---------------+----------------------------------+----------------------------------------------+----------------------------------------------+------------+-----------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                                                                            ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                                                               ; Setting            ; From ; To ; Entity Name ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                                                                          ; EP2C20F484C7       ;      ;    ;             ;
+; Timing Models                                                                                        ; Final              ;      ;    ;             ;
+; Default hold multicycle                                                                              ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains                                                            ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                                                               ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                                                                       ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                                                                     ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                                                                ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements                                                              ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                                                                     ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                                                                 ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                                                                        ; Off                ;      ;    ;             ;
+; Number of source nodes to report per destination node                                                ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                                                                ; 10                 ;      ;    ;             ;
+; Number of paths to report                                                                            ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                                                                         ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                                                               ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                                                                           ; Off                ;      ;    ;             ;
+; Perform Multicorner Analysis                                                                         ; On                 ;      ;    ;             ;
+; Reports the worst-case path for each clock domain and analysis                                       ; Off                ;      ;    ;             ;
+; Reports worst-case timing paths for each clock domain and analysis                                   ; On                 ;      ;    ;             ;
+; Specifies the maximum number of worst-case timing paths to report for each clock domain and analysis ; 100                ;      ;    ;             ;
+; Removes common clock path pessimism (CCPP) during slack computation                                  ; Off                ;      ;    ;             ;
+; Output I/O Timing Endpoint                                                                           ; Near End           ;      ;    ;             ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; clk_50Mhz       ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
+; PS2_CLK         ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'clk_50Mhz'                                                                                                                                                                                                                                                  ;
++-----------------------------------------+-----------------------------------------------------+-------------------------------+------------------------------+------------+-----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                          ; To                           ; From Clock ; To Clock  ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+-------------------------------+------------------------------+------------+-----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 97.63 MHz ( period = 10.243 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.998 ns                ;
+; N/A                                     ; 97.63 MHz ( period = 10.243 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.998 ns                ;
+; N/A                                     ; 97.66 MHz ( period = 10.240 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.995 ns                ;
+; N/A                                     ; 97.68 MHz ( period = 10.238 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.993 ns                ;
+; N/A                                     ; 97.72 MHz ( period = 10.233 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.988 ns                ;
+; N/A                                     ; 98.32 MHz ( period = 10.171 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.926 ns                ;
+; N/A                                     ; 98.32 MHz ( period = 10.171 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.926 ns                ;
+; N/A                                     ; 98.35 MHz ( period = 10.168 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.923 ns                ;
+; N/A                                     ; 98.37 MHz ( period = 10.166 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.921 ns                ;
+; N/A                                     ; 98.42 MHz ( period = 10.161 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.916 ns                ;
+; N/A                                     ; 98.91 MHz ( period = 10.110 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.865 ns                ;
+; N/A                                     ; 98.91 MHz ( period = 10.110 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.865 ns                ;
+; N/A                                     ; 98.94 MHz ( period = 10.107 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.862 ns                ;
+; N/A                                     ; 98.96 MHz ( period = 10.105 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.860 ns                ;
+; N/A                                     ; 99.01 MHz ( period = 10.100 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.855 ns                ;
+; N/A                                     ; 99.09 MHz ( period = 10.092 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.847 ns                ;
+; N/A                                     ; 99.09 MHz ( period = 10.092 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.847 ns                ;
+; N/A                                     ; 99.12 MHz ( period = 10.089 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.844 ns                ;
+; N/A                                     ; 99.14 MHz ( period = 10.087 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.842 ns                ;
+; N/A                                     ; 99.19 MHz ( period = 10.082 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.837 ns                ;
+; N/A                                     ; 99.96 MHz ( period = 10.004 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.758 ns                ;
+; N/A                                     ; 100.38 MHz ( period = 9.962 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.721 ns                ;
+; N/A                                     ; 100.38 MHz ( period = 9.962 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.721 ns                ;
+; N/A                                     ; 100.41 MHz ( period = 9.959 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.718 ns                ;
+; N/A                                     ; 100.43 MHz ( period = 9.957 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.716 ns                ;
+; N/A                                     ; 100.48 MHz ( period = 9.952 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.711 ns                ;
+; N/A                                     ; 100.68 MHz ( period = 9.932 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.686 ns                ;
+; N/A                                     ; 101.31 MHz ( period = 9.871 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.625 ns                ;
+; N/A                                     ; 101.31 MHz ( period = 9.871 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.630 ns                ;
+; N/A                                     ; 101.31 MHz ( period = 9.871 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.630 ns                ;
+; N/A                                     ; 101.34 MHz ( period = 9.868 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.627 ns                ;
+; N/A                                     ; 101.36 MHz ( period = 9.866 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.625 ns                ;
+; N/A                                     ; 101.41 MHz ( period = 9.861 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.620 ns                ;
+; N/A                                     ; 101.49 MHz ( period = 9.853 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.607 ns                ;
+; N/A                                     ; 102.15 MHz ( period = 9.790 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.549 ns                ;
+; N/A                                     ; 102.15 MHz ( period = 9.790 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.549 ns                ;
+; N/A                                     ; 102.18 MHz ( period = 9.787 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.546 ns                ;
+; N/A                                     ; 102.20 MHz ( period = 9.785 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.544 ns                ;
+; N/A                                     ; 102.25 MHz ( period = 9.780 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.539 ns                ;
+; N/A                                     ; 102.51 MHz ( period = 9.755 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.514 ns                ;
+; N/A                                     ; 102.51 MHz ( period = 9.755 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.514 ns                ;
+; N/A                                     ; 102.54 MHz ( period = 9.752 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.511 ns                ;
+; N/A                                     ; 102.56 MHz ( period = 9.750 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.509 ns                ;
+; N/A                                     ; 102.62 MHz ( period = 9.745 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.504 ns                ;
+; N/A                                     ; 102.68 MHz ( period = 9.739 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.494 ns                ;
+; N/A                                     ; 102.85 MHz ( period = 9.723 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.481 ns                ;
+; N/A                                     ; 103.31 MHz ( period = 9.680 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.439 ns                ;
+; N/A                                     ; 103.31 MHz ( period = 9.680 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.439 ns                ;
+; N/A                                     ; 103.34 MHz ( period = 9.677 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.436 ns                ;
+; N/A                                     ; 103.35 MHz ( period = 9.676 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.435 ns                ;
+; N/A                                     ; 103.35 MHz ( period = 9.676 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.435 ns                ;
+; N/A                                     ; 103.36 MHz ( period = 9.675 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.434 ns                ;
+; N/A                                     ; 103.38 MHz ( period = 9.673 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.432 ns                ;
+; N/A                                     ; 103.40 MHz ( period = 9.671 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.430 ns                ;
+; N/A                                     ; 103.41 MHz ( period = 9.670 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.429 ns                ;
+; N/A                                     ; 103.44 MHz ( period = 9.667 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.422 ns                ;
+; N/A                                     ; 103.46 MHz ( period = 9.666 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.425 ns                ;
+; N/A                                     ; 103.54 MHz ( period = 9.658 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.416 ns                ;
+; N/A                                     ; 103.73 MHz ( period = 9.640 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.395 ns                ;
+; N/A                                     ; 103.73 MHz ( period = 9.640 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.395 ns                ;
+; N/A                                     ; 103.77 MHz ( period = 9.637 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.392 ns                ;
+; N/A                                     ; 103.79 MHz ( period = 9.635 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.390 ns                ;
+; N/A                                     ; 103.82 MHz ( period = 9.632 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.390 ns                ;
+; N/A                                     ; 103.84 MHz ( period = 9.630 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.385 ns                ;
+; N/A                                     ; 104.09 MHz ( period = 9.607 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.366 ns                ;
+; N/A                                     ; 104.09 MHz ( period = 9.607 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.366 ns                ;
+; N/A                                     ; 104.10 MHz ( period = 9.606 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.361 ns                ;
+; N/A                                     ; 104.12 MHz ( period = 9.604 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.363 ns                ;
+; N/A                                     ; 104.14 MHz ( period = 9.602 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.361 ns                ;
+; N/A                                     ; 104.20 MHz ( period = 9.597 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.356 ns                ;
+; N/A                                     ; 104.22 MHz ( period = 9.595 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.354 ns                ;
+; N/A                                     ; 104.22 MHz ( period = 9.595 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.354 ns                ;
+; N/A                                     ; 104.25 MHz ( period = 9.592 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.351 ns                ;
+; N/A                                     ; 104.28 MHz ( period = 9.590 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.349 ns                ;
+; N/A                                     ; 104.30 MHz ( period = 9.588 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.343 ns                ;
+; N/A                                     ; 104.33 MHz ( period = 9.585 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.344 ns                ;
+; N/A                                     ; 104.70 MHz ( period = 9.551 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.309 ns                ;
+; N/A                                     ; 104.76 MHz ( period = 9.546 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.304 ns                ;
+; N/A                                     ; 104.82 MHz ( period = 9.540 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.299 ns                ;
+; N/A                                     ; 104.82 MHz ( period = 9.540 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.299 ns                ;
+; N/A                                     ; 104.85 MHz ( period = 9.537 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.296 ns                ;
+; N/A                                     ; 104.88 MHz ( period = 9.535 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.294 ns                ;
+; N/A                                     ; 104.92 MHz ( period = 9.531 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.285 ns                ;
+; N/A                                     ; 104.93 MHz ( period = 9.530 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.289 ns                ;
+; N/A                                     ; 105.09 MHz ( period = 9.516 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.274 ns                ;
+; N/A                                     ; 105.72 MHz ( period = 9.459 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.213 ns                ;
+; N/A                                     ; 105.73 MHz ( period = 9.458 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.217 ns                ;
+; N/A                                     ; 105.75 MHz ( period = 9.456 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.214 ns                ;
+; N/A                                     ; 105.92 MHz ( period = 9.441 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.199 ns                ;
+; N/A                                     ; 105.97 MHz ( period = 9.437 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.195 ns                ;
+; N/A                                     ; 106.37 MHz ( period = 9.401 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.155 ns                ;
+; N/A                                     ; 106.41 MHz ( period = 9.398 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.152 ns                ;
+; N/A                                     ; 106.61 MHz ( period = 9.380 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.134 ns                ;
+; N/A                                     ; 106.75 MHz ( period = 9.368 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.126 ns                ;
+; N/A                                     ; 106.76 MHz ( period = 9.367 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.126 ns                ;
+; N/A                                     ; 106.77 MHz ( period = 9.366 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.124 ns                ;
+; N/A                                     ; 106.88 MHz ( period = 9.356 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.114 ns                ;
+; N/A                                     ; 107.30 MHz ( period = 9.320 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.076 ns                ;
+; N/A                                     ; 107.30 MHz ( period = 9.320 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.076 ns                ;
+; N/A                                     ; 107.33 MHz ( period = 9.317 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.073 ns                ;
+; N/A                                     ; 107.35 MHz ( period = 9.315 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.071 ns                ;
+; N/A                                     ; 107.41 MHz ( period = 9.310 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.066 ns                ;
+; N/A                                     ; 107.52 MHz ( period = 9.301 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.059 ns                ;
+; N/A                                     ; 107.69 MHz ( period = 9.286 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.045 ns                ;
+; N/A                                     ; 107.77 MHz ( period = 9.279 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.041 ns                ;
+; N/A                                     ; 107.77 MHz ( period = 9.279 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.041 ns                ;
+; N/A                                     ; 107.81 MHz ( period = 9.276 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.038 ns                ;
+; N/A                                     ; 107.83 MHz ( period = 9.274 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.036 ns                ;
+; N/A                                     ; 107.89 MHz ( period = 9.269 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.031 ns                ;
+; N/A                                     ; 108.10 MHz ( period = 9.251 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.010 ns                ;
+; N/A                                     ; 108.11 MHz ( period = 9.250 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.008 ns                ;
+; N/A                                     ; 108.13 MHz ( period = 9.248 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 9.006 ns                ;
+; N/A                                     ; 108.98 MHz ( period = 9.176 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.935 ns                ;
+; N/A                                     ; 109.03 MHz ( period = 9.172 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.931 ns                ;
+; N/A                                     ; 109.18 MHz ( period = 9.159 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.917 ns                ;
+; N/A                                     ; 109.22 MHz ( period = 9.156 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.915 ns                ;
+; N/A                                     ; 109.46 MHz ( period = 9.136 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.891 ns                ;
+; N/A                                     ; 109.65 MHz ( period = 9.120 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.875 ns                ;
+; N/A                                     ; 109.71 MHz ( period = 9.115 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.880 ns                ;
+; N/A                                     ; 109.85 MHz ( period = 9.103 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.862 ns                ;
+; N/A                                     ; 110.00 MHz ( period = 9.091 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.850 ns                ;
+; N/A                                     ; 110.14 MHz ( period = 9.079 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.834 ns                ;
+; N/A                                     ; 110.14 MHz ( period = 9.079 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.834 ns                ;
+; N/A                                     ; 110.16 MHz ( period = 9.078 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.836 ns                ;
+; N/A                                     ; 110.18 MHz ( period = 9.076 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.831 ns                ;
+; N/A                                     ; 110.20 MHz ( period = 9.074 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.829 ns                ;
+; N/A                                     ; 110.27 MHz ( period = 9.069 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.824 ns                ;
+; N/A                                     ; 110.52 MHz ( period = 9.048 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.803 ns                ;
+; N/A                                     ; 110.58 MHz ( period = 9.043 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.801 ns                ;
+; N/A                                     ; 110.67 MHz ( period = 9.036 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.795 ns                ;
+; N/A                                     ; 110.90 MHz ( period = 9.017 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.774 ns                ;
+; N/A                                     ; 110.90 MHz ( period = 9.017 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.774 ns                ;
+; N/A                                     ; 110.94 MHz ( period = 9.014 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.771 ns                ;
+; N/A                                     ; 110.96 MHz ( period = 9.012 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.769 ns                ;
+; N/A                                     ; 111.02 MHz ( period = 9.007 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.764 ns                ;
+; N/A                                     ; 111.27 MHz ( period = 8.987 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.742 ns                ;
+; N/A                                     ; 111.50 MHz ( period = 8.969 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.724 ns                ;
+; N/A                                     ; 111.51 MHz ( period = 8.968 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.726 ns                ;
+; N/A                                     ; 111.56 MHz ( period = 8.964 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.722 ns                ;
+; N/A                                     ; 111.72 MHz ( period = 8.951 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.706 ns                ;
+; N/A                                     ; 111.72 MHz ( period = 8.951 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.706 ns                ;
+; N/A                                     ; 111.76 MHz ( period = 8.948 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.703 ns                ;
+; N/A                                     ; 111.78 MHz ( period = 8.946 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.701 ns                ;
+; N/A                                     ; 111.84 MHz ( period = 8.941 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.696 ns                ;
+; N/A                                     ; 111.91 MHz ( period = 8.936 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.691 ns                ;
+; N/A                                     ; 112.01 MHz ( period = 8.928 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.682 ns                ;
+; N/A                                     ; 112.17 MHz ( period = 8.915 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.673 ns                ;
+; N/A                                     ; 112.40 MHz ( period = 8.897 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.658 ns                ;
+; N/A                                     ; 112.42 MHz ( period = 8.895 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.653 ns                ;
+; N/A                                     ; 112.57 MHz ( period = 8.883 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.641 ns                ;
+; N/A                                     ; 112.96 MHz ( period = 8.853 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.613 ns                ;
+; N/A                                     ; 113.10 MHz ( period = 8.842 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.600 ns                ;
+; N/A                                     ; 113.13 MHz ( period = 8.839 ns )                    ; GAME_VIEW:View|v_cnt[8]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.598 ns                ;
+; N/A                                     ; 113.28 MHz ( period = 8.828 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.586 ns                ;
+; N/A                                     ; 113.43 MHz ( period = 8.816 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.572 ns                ;
+; N/A                                     ; 113.80 MHz ( period = 8.787 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|blue[3]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.545 ns                ;
+; N/A                                     ; 113.96 MHz ( period = 8.775 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.537 ns                ;
+; N/A                                     ; 114.31 MHz ( period = 8.748 ns )                    ; GAME_VIEW:View|v_cnt[6]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.507 ns                ;
+; N/A                                     ; 114.55 MHz ( period = 8.730 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.488 ns                ;
+; N/A                                     ; 114.98 MHz ( period = 8.697 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.451 ns                ;
+; N/A                                     ; 115.38 MHz ( period = 8.667 ns )                    ; GAME_VIEW:View|v_cnt[7]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.426 ns                ;
+; N/A                                     ; 115.74 MHz ( period = 8.640 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.398 ns                ;
+; N/A                                     ; 115.85 MHz ( period = 8.632 ns )                    ; GAME_VIEW:View|v_cnt[3]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.391 ns                ;
+; N/A                                     ; 115.86 MHz ( period = 8.631 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.387 ns                ;
+; N/A                                     ; 116.18 MHz ( period = 8.607 ns )                    ; GAME_VIEW:View|h_cnt[2]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.361 ns                ;
+; N/A                                     ; 116.62 MHz ( period = 8.575 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.330 ns                ;
+; N/A                                     ; 116.70 MHz ( period = 8.569 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|red[3]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.323 ns                ;
+; N/A                                     ; 116.86 MHz ( period = 8.557 ns )                    ; GAME_VIEW:View|v_cnt[4]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.316 ns                ;
+; N/A                                     ; 116.92 MHz ( period = 8.553 ns )                    ; GAME_VIEW:View|v_cnt[1]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.312 ns                ;
+; N/A                                     ; 116.96 MHz ( period = 8.550 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.308 ns                ;
+; N/A                                     ; 117.41 MHz ( period = 8.517 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.272 ns                ;
+; N/A                                     ; 117.47 MHz ( period = 8.513 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.270 ns                ;
+; N/A                                     ; 117.72 MHz ( period = 8.495 ns )                    ; GAME_VIEW:View|h_cnt[0]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.249 ns                ;
+; N/A                                     ; 117.87 MHz ( period = 8.484 ns )                    ; GAME_VIEW:View|v_cnt[5]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.243 ns                ;
+; N/A                                     ; 118.04 MHz ( period = 8.472 ns )                    ; GAME_VIEW:View|v_cnt[2]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.231 ns                ;
+; N/A                                     ; 118.16 MHz ( period = 8.463 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.218 ns                ;
+; N/A                                     ; 118.39 MHz ( period = 8.447 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|red[0]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.202 ns                ;
+; N/A                                     ; 118.60 MHz ( period = 8.432 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.190 ns                ;
+; N/A                                     ; 118.71 MHz ( period = 8.424 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.185 ns                ;
+; N/A                                     ; 118.81 MHz ( period = 8.417 ns )                    ; GAME_VIEW:View|v_cnt[0]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.176 ns                ;
+; N/A                                     ; 118.98 MHz ( period = 8.405 ns )                    ; GAME_VIEW:View|h_cnt[1]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.159 ns                ;
+; N/A                                     ; 119.90 MHz ( period = 8.340 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.099 ns                ;
+; N/A                                     ; 120.26 MHz ( period = 8.315 ns )                    ; GAME_VIEW:View|h_cnt[3]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.069 ns                ;
+; N/A                                     ; 120.50 MHz ( period = 8.299 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 8.064 ns                ;
+; N/A                                     ; 121.60 MHz ( period = 8.224 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.978 ns                ;
+; N/A                                     ; 122.00 MHz ( period = 8.197 ns )                    ; GAME_VIEW:View|h_cnt[4]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.951 ns                ;
+; N/A                                     ; 122.58 MHz ( period = 8.158 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.914 ns                ;
+; N/A                                     ; 123.24 MHz ( period = 8.114 ns )                    ; GAME_CONTROL:ControlUnit|boot ; GAME_VIEW:View|green[1]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.871 ns                ;
+; N/A                                     ; 123.24 MHz ( period = 8.114 ns )                    ; GAME_CONTROL:ControlUnit|boot ; GAME_VIEW:View|blue[0]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.871 ns                ;
+; N/A                                     ; 123.29 MHz ( period = 8.111 ns )                    ; GAME_CONTROL:ControlUnit|boot ; GAME_VIEW:View|green[0]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.868 ns                ;
+; N/A                                     ; 123.32 MHz ( period = 8.109 ns )                    ; GAME_CONTROL:ControlUnit|boot ; GAME_VIEW:View|red[1]        ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.866 ns                ;
+; N/A                                     ; 123.38 MHz ( period = 8.105 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.860 ns                ;
+; N/A                                     ; 123.40 MHz ( period = 8.104 ns )                    ; GAME_CONTROL:ControlUnit|boot ; GAME_VIEW:View|blue[1]       ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.861 ns                ;
+; N/A                                     ; 123.47 MHz ( period = 8.099 ns )                    ; GAME_VIEW:View|h_cnt[6]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.857 ns                ;
+; N/A                                     ; 123.52 MHz ( period = 8.096 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|red_signal[3] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.850 ns                ;
+; N/A                                     ; 124.01 MHz ( period = 8.064 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|green[3]      ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.825 ns                ;
+; N/A                                     ; 124.19 MHz ( period = 8.052 ns )                    ; GAME_VIEW:View|h_cnt[5]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.808 ns                ;
+; N/A                                     ; 124.29 MHz ( period = 8.046 ns )                    ; GAME_VIEW:View|h_cnt[9]       ; GAME_VIEW:View|red_signal[0] ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.808 ns                ;
+; N/A                                     ; 124.42 MHz ( period = 8.037 ns )                    ; GAME_VIEW:View|h_cnt[8]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.797 ns                ;
+; N/A                                     ; 125.45 MHz ( period = 7.971 ns )                    ; GAME_VIEW:View|h_cnt[7]       ; GAME_VIEW:View|vsync         ; clk_50Mhz  ; clk_50Mhz ; None                        ; None                      ; 7.729 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                               ;                              ;            ;           ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+-------------------------------+------------------------------+------------+-----------+-----------------------------+---------------------------+-------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'PS2_CLK'                                                                                                                                                                                                                                                     ;
++-------+------------------------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From                                              ; To                                                ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 229.67 MHz ( period = 4.354 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.115 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 239.69 MHz ( period = 4.172 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.933 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 242.60 MHz ( period = 4.122 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.883 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 260.08 MHz ( period = 3.845 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.606 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 264.20 MHz ( period = 3.785 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.546 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 270.12 MHz ( period = 3.702 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.394 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 276.47 MHz ( period = 3.617 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 284.09 MHz ( period = 3.520 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.212 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 288.18 MHz ( period = 3.470 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 291.97 MHz ( period = 3.425 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.186 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 311.82 MHz ( period = 3.207 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.899 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 313.19 MHz ( period = 3.193 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.885 ns                ;
+; N/A   ; 325.52 MHz ( period = 3.072 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[2]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.833 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 329.06 MHz ( period = 3.039 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.731 ns                ;
+; N/A   ; 346.02 MHz ( period = 2.890 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[6]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.651 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 351.25 MHz ( period = 2.847 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 3.539 ns                ;
+; N/A   ; 352.11 MHz ( period = 2.840 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[4]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.601 ns                ;
+; N/A   ; 388.20 MHz ( period = 2.576 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[1]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.337 ns                ;
+; N/A   ; 390.17 MHz ( period = 2.563 ns )               ; GAME_KEYBOARD:KeyboardController|bitCount[5]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.324 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|bitCount[0]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.169 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|bitCount[3]      ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.977 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[7]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.064 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[0]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.061 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[3]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.061 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[1]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.032 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[6]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.029 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[4]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.029 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[3]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.921 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[0]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.920 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[7]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.916 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.902 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[4]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.899 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.887 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[2]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.810 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[1]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.810 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[6]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.809 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; GAME_KEYBOARD:KeyboardController|keyCode[5]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.809 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; GAME_KEYBOARD:KeyboardController|scancode[6]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.796 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.793 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.073 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[2]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.684 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|keyCode[5]       ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.683 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|breakReceived[1] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.682 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 2.046 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; GAME_KEYBOARD:KeyboardController|scancode[3]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.661 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[2]      ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.649 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; GAME_KEYBOARD:KeyboardController|scancode[4]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.649 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[1]      ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.642 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; GAME_KEYBOARD:KeyboardController|scancodeReady    ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.454 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 0.454 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[7]      ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.870 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[0]      ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.771 ns                ;
+; N/A   ; Restricted to 405.02 MHz ( period = 2.469 ns ) ; GAME_KEYBOARD:KeyboardController|scancode[5]      ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                        ; None                      ; 1.755 ns                ;
++-------+------------------------------------------------+---------------------------------------------------+---------------------------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'PS2_CLK'                                                                                                                                                                                                                                    ;
++------------------------------------------+----------------------------------------------+---------------------------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack                            ; From                                         ; To                                                ; From Clock ; To Clock ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++------------------------------------------+----------------------------------------------+---------------------------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[4] ; GAME_KEYBOARD:KeyboardController|keyCode[4]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 0.986 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[2] ; GAME_KEYBOARD:KeyboardController|keyCode[2]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 0.998 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[5] ; GAME_KEYBOARD:KeyboardController|keyCode[5]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.001 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[1] ; GAME_KEYBOARD:KeyboardController|keyCode[1]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.031 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[0] ; GAME_KEYBOARD:KeyboardController|keyCode[0]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.178 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[7] ; GAME_KEYBOARD:KeyboardController|keyCode[7]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.250 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[3] ; GAME_KEYBOARD:KeyboardController|keyCode[3]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.254 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[6] ; GAME_KEYBOARD:KeyboardController|keyCode[6]       ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.273 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[6] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.284 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[1] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.470 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[2] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.560 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[5] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.755 ns                 ;
+; Not operational: Clock Skew > Data Delay ; GAME_KEYBOARD:KeyboardController|scancode[0] ; GAME_KEYBOARD:KeyboardController|breakReceived[0] ; PS2_CLK    ; PS2_CLK  ; None                       ; None                       ; 1.771 ns                 ;
++------------------------------------------+----------------------------------------------+---------------------------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; tsu                                                                                                     ;
++-------+--------------+------------+---------+------------------------------------------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From    ; To                                             ; To Clock ;
++-------+--------------+------------+---------+------------------------------------------------+----------+
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[2]   ; PS2_CLK  ;
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[1]   ; PS2_CLK  ;
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[3]   ; PS2_CLK  ;
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[0]   ; PS2_CLK  ;
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[4]   ; PS2_CLK  ;
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[5]   ; PS2_CLK  ;
+; N/A   ; None         ; 6.241 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[6]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[2]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[0]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[1]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[3]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[6]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[7]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[5]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.663 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[4]   ; PS2_CLK  ;
+; N/A   ; None         ; 5.032 ns   ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancodeReady ; PS2_CLK  ;
++-------+--------------+------------+---------+------------------------------------------------+----------+
+
+
++-------------------------------------------------------------------------------------+
+; tco                                                                                 ;
++-------+--------------+------------+-------------------------+----------+------------+
+; Slack ; Required tco ; Actual tco ; From                    ; To       ; From Clock ;
++-------+--------------+------------+-------------------------+----------+------------+
+; N/A   ; None         ; 10.207 ns  ; GAME_VIEW:View|green[0] ; green[0] ; clk_50Mhz  ;
+; N/A   ; None         ; 10.153 ns  ; GAME_VIEW:View|blue[0]  ; blue[0]  ; clk_50Mhz  ;
+; N/A   ; None         ; 10.148 ns  ; GAME_VIEW:View|green[3] ; green[3] ; clk_50Mhz  ;
+; N/A   ; None         ; 9.896 ns   ; GAME_VIEW:View|red[0]   ; red[0]   ; clk_50Mhz  ;
+; N/A   ; None         ; 9.859 ns   ; GAME_VIEW:View|green[1] ; green[1] ; clk_50Mhz  ;
+; N/A   ; None         ; 9.840 ns   ; GAME_VIEW:View|red[3]   ; red[3]   ; clk_50Mhz  ;
+; N/A   ; None         ; 9.805 ns   ; GAME_VIEW:View|red[1]   ; red[1]   ; clk_50Mhz  ;
+; N/A   ; None         ; 9.525 ns   ; GAME_VIEW:View|blue[1]  ; blue[1]  ; clk_50Mhz  ;
+; N/A   ; None         ; 9.283 ns   ; GAME_VIEW:View|hsync    ; hsync    ; clk_50Mhz  ;
+; N/A   ; None         ; 9.249 ns   ; GAME_VIEW:View|blue[3]  ; blue[3]  ; clk_50Mhz  ;
+; N/A   ; None         ; 9.244 ns   ; GAME_VIEW:View|vsync    ; vsync    ; clk_50Mhz  ;
+; N/A   ; None         ; 8.828 ns   ; GAME_VIEW:View|leds4[1] ; leds4[1] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.823 ns   ; GAME_VIEW:View|leds4[2] ; leds4[2] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.662 ns   ; GAME_VIEW:View|leds3[3] ; leds3[3] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.659 ns   ; GAME_VIEW:View|leds3[5] ; leds3[5] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.652 ns   ; GAME_VIEW:View|leds3[4] ; leds3[4] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.631 ns   ; GAME_VIEW:View|leds1[1] ; leds1[1] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.623 ns   ; GAME_VIEW:View|leds1[3] ; leds1[3] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.618 ns   ; GAME_VIEW:View|leds2[3] ; leds2[3] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.616 ns   ; GAME_VIEW:View|leds1[2] ; leds1[2] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.601 ns   ; GAME_VIEW:View|leds2[2] ; leds2[2] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.601 ns   ; GAME_VIEW:View|leds2[1] ; leds2[1] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.596 ns   ; GAME_VIEW:View|leds1[0] ; leds1[0] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.292 ns   ; GAME_VIEW:View|leds1[6] ; leds1[6] ; clk_50Mhz  ;
+; N/A   ; None         ; 8.292 ns   ; GAME_VIEW:View|leds1[5] ; leds1[5] ; clk_50Mhz  ;
++-------+--------------+------------+-------------------------+----------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------+
+; th                                                                                                            ;
++---------------+-------------+-----------+---------+------------------------------------------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From    ; To                                             ; To Clock ;
++---------------+-------------+-----------+---------+------------------------------------------------+----------+
+; N/A           ; None        ; -2.730 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[7]   ; PS2_CLK  ;
+; N/A           ; None        ; -4.784 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancodeReady ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[2]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[1]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[3]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[0]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[4]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[5]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.340 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|bitCount[6]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[2]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[0]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[1]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[3]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[6]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[5]   ; PS2_CLK  ;
+; N/A           ; None        ; -5.415 ns ; PS2_DAT ; GAME_KEYBOARD:KeyboardController|scancode[4]   ; PS2_CLK  ;
++---------------+-------------+-----------+---------+------------------------------------------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Sat Mar 07 19:19:50 2015
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off 2048 -c 2048 --timing_analysis_only
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "clk_50Mhz" is an undefined clock
+    Info: Assuming node "PS2_CLK" is an undefined clock
+Warning: Found 2 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
+    Info: Detected ripple clock "GAME_KEYBOARD:KeyboardController|scancodeReady" as buffer
+    Info: Detected ripple clock "GAME_CLKGENERATOR:ClockGenerator|cnt[0]" as buffer
+Info: Clock "clk_50Mhz" has Internal fmax of 97.63 MHz between source register "GAME_VIEW:View|h_cnt[2]" and destination register "GAME_VIEW:View|green[1]" (period= 10.243 ns)
+    Info: + Longest register to register delay is 9.998 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y23_N7; Fanout = 3; REG Node = 'GAME_VIEW:View|h_cnt[2]'
+        Info: 2: + IC(0.599 ns) + CELL(0.495 ns) = 1.094 ns; Loc. = LCCOMB_X32_Y23_N6; Fanout = 2; COMB Node = 'GAME_VIEW:View|Add0~5'
+        Info: 3: + IC(0.000 ns) + CELL(0.458 ns) = 1.552 ns; Loc. = LCCOMB_X32_Y23_N8; Fanout = 14; COMB Node = 'GAME_VIEW:View|Add0~6'
+        Info: 4: + IC(1.176 ns) + CELL(0.322 ns) = 3.050 ns; Loc. = LCCOMB_X33_Y22_N28; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~12'
+        Info: 5: + IC(0.284 ns) + CELL(0.178 ns) = 3.512 ns; Loc. = LCCOMB_X33_Y22_N18; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~13'
+        Info: 6: + IC(0.302 ns) + CELL(0.521 ns) = 4.335 ns; Loc. = LCCOMB_X33_Y22_N0; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~15'
+        Info: 7: + IC(0.865 ns) + CELL(0.521 ns) = 5.721 ns; Loc. = LCCOMB_X32_Y23_N30; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~25'
+        Info: 8: + IC(0.294 ns) + CELL(0.178 ns) = 6.193 ns; Loc. = LCCOMB_X32_Y23_N24; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~27'
+        Info: 9: + IC(1.098 ns) + CELL(0.178 ns) = 7.469 ns; Loc. = LCCOMB_X30_Y22_N26; Fanout = 3; COMB Node = 'GAME_VIEW:View|green_signal~30'
+        Info: 10: + IC(0.309 ns) + CELL(0.177 ns) = 7.955 ns; Loc. = LCCOMB_X30_Y22_N28; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~1'
+        Info: 11: + IC(0.303 ns) + CELL(0.521 ns) = 8.779 ns; Loc. = LCCOMB_X30_Y22_N20; Fanout = 2; COMB Node = 'GAME_VIEW:View|red_signal~2'
+        Info: 12: + IC(0.300 ns) + CELL(0.319 ns) = 9.398 ns; Loc. = LCCOMB_X30_Y22_N0; Fanout = 6; COMB Node = 'GAME_VIEW:View|red~0'
+        Info: 13: + IC(0.326 ns) + CELL(0.178 ns) = 9.902 ns; Loc. = LCCOMB_X30_Y22_N22; Fanout = 1; COMB Node = 'GAME_VIEW:View|green[1]~feeder'
+        Info: 14: + IC(0.000 ns) + CELL(0.096 ns) = 9.998 ns; Loc. = LCFF_X30_Y22_N23; Fanout = 1; REG Node = 'GAME_VIEW:View|green[1]'
+        Info: Total cell delay = 4.142 ns ( 41.43 % )
+        Info: Total interconnect delay = 5.856 ns ( 58.57 % )
+    Info: - Smallest clock skew is -0.006 ns
+        Info: + Shortest clock path from clock "clk_50Mhz" to destination register is 4.599 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.026 ns) = 1.026 ns; Loc. = PIN_L1; Fanout = 1; CLK Node = 'clk_50Mhz'
+            Info: 2: + IC(0.404 ns) + CELL(0.879 ns) = 2.309 ns; Loc. = LCFF_X1_Y13_N1; Fanout = 2; REG Node = 'GAME_CLKGENERATOR:ClockGenerator|cnt[0]'
+            Info: 3: + IC(0.703 ns) + CELL(0.000 ns) = 3.012 ns; Loc. = CLKCTRL_G3; Fanout = 52; COMB Node = 'GAME_CLKGENERATOR:ClockGenerator|cnt[0]~clkctrl'
+            Info: 4: + IC(0.985 ns) + CELL(0.602 ns) = 4.599 ns; Loc. = LCFF_X30_Y22_N23; Fanout = 1; REG Node = 'GAME_VIEW:View|green[1]'
+            Info: Total cell delay = 2.507 ns ( 54.51 % )
+            Info: Total interconnect delay = 2.092 ns ( 45.49 % )
+        Info: - Longest clock path from clock "clk_50Mhz" to source register is 4.605 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.026 ns) = 1.026 ns; Loc. = PIN_L1; Fanout = 1; CLK Node = 'clk_50Mhz'
+            Info: 2: + IC(0.404 ns) + CELL(0.879 ns) = 2.309 ns; Loc. = LCFF_X1_Y13_N1; Fanout = 2; REG Node = 'GAME_CLKGENERATOR:ClockGenerator|cnt[0]'
+            Info: 3: + IC(0.703 ns) + CELL(0.000 ns) = 3.012 ns; Loc. = CLKCTRL_G3; Fanout = 52; COMB Node = 'GAME_CLKGENERATOR:ClockGenerator|cnt[0]~clkctrl'
+            Info: 4: + IC(0.991 ns) + CELL(0.602 ns) = 4.605 ns; Loc. = LCFF_X32_Y23_N7; Fanout = 3; REG Node = 'GAME_VIEW:View|h_cnt[2]'
+            Info: Total cell delay = 2.507 ns ( 54.44 % )
+            Info: Total interconnect delay = 2.098 ns ( 45.56 % )
+    Info: + Micro clock to output delay of source is 0.277 ns
+    Info: + Micro setup delay of destination is -0.038 ns
+Info: Clock "PS2_CLK" has Internal fmax of 229.67 MHz between source register "GAME_KEYBOARD:KeyboardController|bitCount[2]" and destination register "GAME_KEYBOARD:KeyboardController|bitCount[2]" (period= 4.354 ns)
+    Info: + Longest register to register delay is 4.115 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X22_Y24_N23; Fanout = 4; REG Node = 'GAME_KEYBOARD:KeyboardController|bitCount[2]'
+        Info: 2: + IC(0.609 ns) + CELL(0.455 ns) = 1.064 ns; Loc. = LCCOMB_X22_Y24_N16; Fanout = 3; COMB Node = 'GAME_KEYBOARD:KeyboardController|Equal1~0'
+        Info: 3: + IC(0.365 ns) + CELL(0.544 ns) = 1.973 ns; Loc. = LCCOMB_X22_Y24_N4; Fanout = 1; COMB Node = 'GAME_KEYBOARD:KeyboardController|Equal1~1'
+        Info: 4: + IC(0.305 ns) + CELL(0.322 ns) = 2.600 ns; Loc. = LCCOMB_X22_Y24_N6; Fanout = 8; COMB Node = 'GAME_KEYBOARD:KeyboardController|bitCount[6]~13'
+        Info: 5: + IC(0.306 ns) + CELL(0.178 ns) = 3.084 ns; Loc. = LCCOMB_X22_Y24_N8; Fanout = 7; COMB Node = 'GAME_KEYBOARD:KeyboardController|bitCount[6]~14'
+        Info: 6: + IC(0.273 ns) + CELL(0.758 ns) = 4.115 ns; Loc. = LCFF_X22_Y24_N23; Fanout = 4; REG Node = 'GAME_KEYBOARD:KeyboardController|bitCount[2]'
+        Info: Total cell delay = 2.257 ns ( 54.85 % )
+        Info: Total interconnect delay = 1.858 ns ( 45.15 % )
+    Info: - Smallest clock skew is 0.000 ns
+        Info: + Shortest clock path from clock "PS2_CLK" to destination register is 3.468 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.863 ns) = 0.863 ns; Loc. = PIN_H15; Fanout = 16; CLK Node = 'PS2_CLK'
+            Info: 2: + IC(2.003 ns) + CELL(0.602 ns) = 3.468 ns; Loc. = LCFF_X22_Y24_N23; Fanout = 4; REG Node = 'GAME_KEYBOARD:KeyboardController|bitCount[2]'
+            Info: Total cell delay = 1.465 ns ( 42.24 % )
+            Info: Total interconnect delay = 2.003 ns ( 57.76 % )
+        Info: - Longest clock path from clock "PS2_CLK" to source register is 3.468 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.863 ns) = 0.863 ns; Loc. = PIN_H15; Fanout = 16; CLK Node = 'PS2_CLK'
+            Info: 2: + IC(2.003 ns) + CELL(0.602 ns) = 3.468 ns; Loc. = LCFF_X22_Y24_N23; Fanout = 4; REG Node = 'GAME_KEYBOARD:KeyboardController|bitCount[2]'
+            Info: Total cell delay = 1.465 ns ( 42.24 % )
+            Info: Total interconnect delay = 2.003 ns ( 57.76 % )
+    Info: + Micro clock to output delay of source is 0.277 ns
+    Info: + Micro setup delay of destination is -0.038 ns
+Warning: Circuit may not operate. Detected 13 non-operational path(s) clocked by clock "PS2_CLK" with clock skew larger than data delay. See Compilation Report for details.
+Info: Found hold time violation between source  pin or register "GAME_KEYBOARD:KeyboardController|scancode[4]" and destination pin or register "GAME_KEYBOARD:KeyboardController|keyCode[4]" for clock "PS2_CLK" (Hold time is 855 ps)
+    Info: + Largest clock skew is 1.832 ns
+        Info: + Longest clock path from clock "PS2_CLK" to destination register is 6.231 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.863 ns) = 0.863 ns; Loc. = PIN_H15; Fanout = 16; CLK Node = 'PS2_CLK'
+            Info: 2: + IC(2.003 ns) + CELL(0.879 ns) = 3.745 ns; Loc. = LCFF_X23_Y24_N3; Fanout = 2; REG Node = 'GAME_KEYBOARD:KeyboardController|scancodeReady'
+            Info: 3: + IC(0.905 ns) + CELL(0.000 ns) = 4.650 ns; Loc. = CLKCTRL_G10; Fanout = 10; COMB Node = 'GAME_KEYBOARD:KeyboardController|scancodeReady~clkctrl'
+            Info: 4: + IC(0.979 ns) + CELL(0.602 ns) = 6.231 ns; Loc. = LCFF_X25_Y22_N15; Fanout = 1; REG Node = 'GAME_KEYBOARD:KeyboardController|keyCode[4]'
+            Info: Total cell delay = 2.344 ns ( 37.62 % )
+            Info: Total interconnect delay = 3.887 ns ( 62.38 % )
+        Info: - Shortest clock path from clock "PS2_CLK" to source register is 4.399 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.863 ns) = 0.863 ns; Loc. = PIN_H15; Fanout = 16; CLK Node = 'PS2_CLK'
+            Info: 2: + IC(2.934 ns) + CELL(0.602 ns) = 4.399 ns; Loc. = LCFF_X25_Y22_N23; Fanout = 3; REG Node = 'GAME_KEYBOARD:KeyboardController|scancode[4]'
+            Info: Total cell delay = 1.465 ns ( 33.30 % )
+            Info: Total interconnect delay = 2.934 ns ( 66.70 % )
+    Info: - Micro clock to output delay of source is 0.277 ns
+    Info: - Shortest register to register delay is 0.986 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X25_Y22_N23; Fanout = 3; REG Node = 'GAME_KEYBOARD:KeyboardController|scancode[4]'
+        Info: 2: + IC(0.612 ns) + CELL(0.278 ns) = 0.890 ns; Loc. = LCCOMB_X25_Y22_N14; Fanout = 1; COMB Node = 'GAME_KEYBOARD:KeyboardController|Mux5~0'
+        Info: 3: + IC(0.000 ns) + CELL(0.096 ns) = 0.986 ns; Loc. = LCFF_X25_Y22_N15; Fanout = 1; REG Node = 'GAME_KEYBOARD:KeyboardController|keyCode[4]'
+        Info: Total cell delay = 0.374 ns ( 37.93 % )
+        Info: Total interconnect delay = 0.612 ns ( 62.07 % )
+    Info: + Micro hold delay of destination is 0.286 ns
+    Info: Delay path is controlled by inverted clocks -- if clock duty cycle is 50%, fmax is divided by two
+Info: tsu for register "GAME_KEYBOARD:KeyboardController|bitCount[2]" (data pin = "PS2_DAT", clock pin = "PS2_CLK") is 6.241 ns
+    Info: + Longest pin to register delay is 9.747 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.853 ns) = 0.853 ns; Loc. = PIN_J14; Fanout = 2; PIN Node = 'PS2_DAT'
+        Info: 2: + IC(6.169 ns) + CELL(0.418 ns) = 7.440 ns; Loc. = LCCOMB_X22_Y24_N12; Fanout = 3; COMB Node = 'GAME_KEYBOARD:KeyboardController|Keyboard~1'
+        Info: 3: + IC(0.337 ns) + CELL(0.455 ns) = 8.232 ns; Loc. = LCCOMB_X22_Y24_N6; Fanout = 8; COMB Node = 'GAME_KEYBOARD:KeyboardController|bitCount[6]~13'
+        Info: 4: + IC(0.306 ns) + CELL(0.178 ns) = 8.716 ns; Loc. = LCCOMB_X22_Y24_N8; Fanout = 7; COMB Node = 'GAME_KEYBOARD:KeyboardController|bitCount[6]~14'
+        Info: 5: + IC(0.273 ns) + CELL(0.758 ns) = 9.747 ns; Loc. = LCFF_X22_Y24_N23; Fanout = 4; REG Node = 'GAME_KEYBOARD:KeyboardController|bitCount[2]'
+        Info: Total cell delay = 2.662 ns ( 27.31 % )
+        Info: Total interconnect delay = 7.085 ns ( 72.69 % )
+    Info: + Micro setup delay of destination is -0.038 ns
+    Info: - Shortest clock path from clock "PS2_CLK" to destination register is 3.468 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.863 ns) = 0.863 ns; Loc. = PIN_H15; Fanout = 16; CLK Node = 'PS2_CLK'
+        Info: 2: + IC(2.003 ns) + CELL(0.602 ns) = 3.468 ns; Loc. = LCFF_X22_Y24_N23; Fanout = 4; REG Node = 'GAME_KEYBOARD:KeyboardController|bitCount[2]'
+        Info: Total cell delay = 1.465 ns ( 42.24 % )
+        Info: Total interconnect delay = 2.003 ns ( 57.76 % )
+Info: tco from clock "clk_50Mhz" to destination pin "green[0]" through register "GAME_VIEW:View|green[0]" is 10.207 ns
+    Info: + Longest clock path from clock "clk_50Mhz" to source register is 4.599 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.026 ns) = 1.026 ns; Loc. = PIN_L1; Fanout = 1; CLK Node = 'clk_50Mhz'
+        Info: 2: + IC(0.404 ns) + CELL(0.879 ns) = 2.309 ns; Loc. = LCFF_X1_Y13_N1; Fanout = 2; REG Node = 'GAME_CLKGENERATOR:ClockGenerator|cnt[0]'
+        Info: 3: + IC(0.703 ns) + CELL(0.000 ns) = 3.012 ns; Loc. = CLKCTRL_G3; Fanout = 52; COMB Node = 'GAME_CLKGENERATOR:ClockGenerator|cnt[0]~clkctrl'
+        Info: 4: + IC(0.985 ns) + CELL(0.602 ns) = 4.599 ns; Loc. = LCFF_X30_Y22_N13; Fanout = 1; REG Node = 'GAME_VIEW:View|green[0]'
+        Info: Total cell delay = 2.507 ns ( 54.51 % )
+        Info: Total interconnect delay = 2.092 ns ( 45.49 % )
+    Info: + Micro clock to output delay of source is 0.277 ns
+    Info: + Longest register to pin delay is 5.331 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X30_Y22_N13; Fanout = 1; REG Node = 'GAME_VIEW:View|green[0]'
+        Info: 2: + IC(2.325 ns) + CELL(3.006 ns) = 5.331 ns; Loc. = PIN_B8; Fanout = 0; PIN Node = 'green[0]'
+        Info: Total cell delay = 3.006 ns ( 56.39 % )
+        Info: Total interconnect delay = 2.325 ns ( 43.61 % )
+Info: th for register "GAME_KEYBOARD:KeyboardController|scancode[7]" (data pin = "PS2_DAT", clock pin = "PS2_CLK") is -2.730 ns
+    Info: + Longest clock path from clock "PS2_CLK" to destination register is 4.399 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.863 ns) = 0.863 ns; Loc. = PIN_H15; Fanout = 16; CLK Node = 'PS2_CLK'
+        Info: 2: + IC(2.934 ns) + CELL(0.602 ns) = 4.399 ns; Loc. = LCFF_X25_Y22_N21; Fanout = 3; REG Node = 'GAME_KEYBOARD:KeyboardController|scancode[7]'
+        Info: Total cell delay = 1.465 ns ( 33.30 % )
+        Info: Total interconnect delay = 2.934 ns ( 66.70 % )
+    Info: + Micro hold delay of destination is 0.286 ns
+    Info: - Shortest pin to register delay is 7.415 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.853 ns) = 0.853 ns; Loc. = PIN_J14; Fanout = 2; PIN Node = 'PS2_DAT'
+        Info: 2: + IC(6.288 ns) + CELL(0.178 ns) = 7.319 ns; Loc. = LCCOMB_X25_Y22_N20; Fanout = 1; COMB Node = 'GAME_KEYBOARD:KeyboardController|scancode[7]~feeder'
+        Info: 3: + IC(0.000 ns) + CELL(0.096 ns) = 7.415 ns; Loc. = LCFF_X25_Y22_N21; Fanout = 3; REG Node = 'GAME_KEYBOARD:KeyboardController|scancode[7]'
+        Info: Total cell delay = 1.127 ns ( 15.20 % )
+        Info: Total interconnect delay = 6.288 ns ( 84.80 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 183 megabytes
+    Info: Processing ended: Sat Mar 07 19:19:51 2015
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
+
+
