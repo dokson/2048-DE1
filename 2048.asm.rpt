@@ -1,5 +1,5 @@
 Assembler report for 2048
-Sat Mar 07 19:19:49 2015
+Mon Mar 09 18:28:04 2015
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Ale/Desktop/2048_VHDL/2048.sof
-  6. Assembler Device Options: C:/Users/Ale/Desktop/2048_VHDL/2048.pof
+  5. Assembler Device Options: C:/Users/Ale/Desktop/2048-DE1/2048.sof
+  6. Assembler Device Options: C:/Users/Ale/Desktop/2048-DE1/2048.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Mar 07 19:19:49 2015 ;
+; Assembler Status      ; Successful - Mon Mar 09 18:28:04 2015 ;
 ; Revision Name         ; 2048                                  ;
 ; Top-level Entity Name ; GAME                                  ;
 ; Family                ; Cyclone II                            ;
@@ -78,37 +78,37 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+-----------------------------------------+
-; Assembler Generated Files               ;
-+-----------------------------------------+
-; File Name                               ;
-+-----------------------------------------+
-; C:/Users/Ale/Desktop/2048_VHDL/2048.sof ;
-; C:/Users/Ale/Desktop/2048_VHDL/2048.pof ;
-+-----------------------------------------+
++----------------------------------------+
+; Assembler Generated Files              ;
++----------------------------------------+
+; File Name                              ;
++----------------------------------------+
+; C:/Users/Ale/Desktop/2048-DE1/2048.sof ;
+; C:/Users/Ale/Desktop/2048-DE1/2048.pof ;
++----------------------------------------+
 
 
-+-------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Ale/Desktop/2048_VHDL/2048.sof ;
-+----------------+--------------------------------------------------+
-; Option         ; Setting                                          ;
-+----------------+--------------------------------------------------+
-; Device         ; EP2C20F484C7                                     ;
-; JTAG usercode  ; 0xFFFFFFFF                                       ;
-; Checksum       ; 0x001D8D99                                       ;
-+----------------+--------------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Ale/Desktop/2048-DE1/2048.sof ;
++----------------+-------------------------------------------------+
+; Option         ; Setting                                         ;
++----------------+-------------------------------------------------+
+; Device         ; EP2C20F484C7                                    ;
+; JTAG usercode  ; 0xFFFFFFFF                                      ;
+; Checksum       ; 0x001DBACC                                      ;
++----------------+-------------------------------------------------+
 
 
-+-------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Ale/Desktop/2048_VHDL/2048.pof ;
-+--------------------+----------------------------------------------+
-; Option             ; Setting                                      ;
-+--------------------+----------------------------------------------+
-; Device             ; EPCS16                                       ;
-; JTAG usercode      ; 0x00000000                                   ;
-; Checksum           ; 0x1DD356F0                                   ;
-; Compression Ratio  ; 3                                            ;
-+--------------------+----------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Ale/Desktop/2048-DE1/2048.pof ;
++--------------------+---------------------------------------------+
+; Option             ; Setting                                     ;
++--------------------+---------------------------------------------+
+; Device             ; EPCS16                                      ;
+; JTAG usercode      ; 0x00000000                                  ;
+; Checksum           ; 0x1DD319C6                                  ;
+; Compression Ratio  ; 3                                           ;
++--------------------+---------------------------------------------+
 
 
 +--------------------+
@@ -117,14 +117,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sat Mar 07 19:19:45 2015
+    Info: Processing started: Mon Mar 09 18:28:00 2015
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off 2048 -c 2048
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 233 megabytes
-    Info: Processing ended: Sat Mar 07 19:19:49 2015
+    Info: Processing ended: Mon Mar 09 18:28:04 2015
     Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Total CPU time (on all processors): 00:00:04
 
 

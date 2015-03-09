@@ -1944,6 +1944,39 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
+GAME_DATA
+# storage
+db|2048.(4).cnf
+db|2048.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+game_data.vhd
+ba4720d120e646b478811c95304e673a
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+GAME_DATA:Datapath
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
 Game
 # storage
 db|2048.(0).cnf
@@ -1955,7 +1988,7 @@ ON
 # case_insensitive
 # source_file
 game.vhd
-f8e57472cfd398f5f2b32c0def8b449
+cf736e1d3c215afa088c27bd145dd2c
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -1966,6 +1999,20 @@ AUTO_RAM_RECOGNITION
 ON
 AUTO_ROM_RECOGNITION
 ON
+}
+# include_file {
+game_clkgenerator.vhd
+4ec739f754f724a67ca658e761e9f658
+game_box.vhd
+62d3b118bb4bc928a2ce0722e5217e0
+game_keyboard.vhd
+8a335bff2b41bcd30b36147628b8bf
+game_control.vhd
+ba60c95cbc3a5332de3a9d8ff2fbf7fe
+game_view.vhd
+902ed884ed64808360ccb378339dc1df
+game_data.vhd
+ba4720d120e646b478811c95304e673a
 }
 # hierarchies {
 |
@@ -1988,7 +2035,7 @@ ON
 # case_insensitive
 # source_file
 game_view.vhd
-cf96af7ec8f8746cc29a7187e95c3735
+902ed884ed64808360ccb378339dc1df
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2030,6 +2077,10 @@ USR
 PARAMETER_STRING
 USR
 }
+# include_file {
+game_box.vhd
+62d3b118bb4bc928a2ce0722e5217e0
+}
 # hierarchies {
 GAME_VIEW:View
 }
@@ -2040,18 +2091,18 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
-GAME_DATA
+GAME_BOX
 # storage
-db|2048.(4).cnf
-db|2048.(4).cnf
+db|2048.(22).cnf
+db|2048.(22).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_insensitive
 # source_file
-game_data.vhd
-ba4720d120e646b478811c95304e673a
+game_box.vhd
+62d3b118bb4bc928a2ce0722e5217e0
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -2063,8 +2114,18 @@ ON
 AUTO_ROM_RECOGNITION
 ON
 }
+# user_parameter {
+xpos
+20
+PARAMETER_SIGNED_DEC
+USR
+ypos
+20
+PARAMETER_SIGNED_DEC
+USR
+}
 # hierarchies {
-GAME_DATA:Datapath
+GAME_VIEW:View|GAME_BOX:BOX1
 }
 # lmf
 |altera|91sp2|quartus|lmf|maxplus2.lmf

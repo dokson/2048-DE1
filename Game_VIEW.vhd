@@ -24,20 +24,37 @@ PORT
 		vsync		: OUT STD_LOGIC;
 		red, 
 		green,
-		blue		: out std_logic_vector(3 downto 0);
+		blue		: OUT STD_LOGIC_VECTOR(3 downto 0);
 		
-		leds1 : out std_logic_vector(6 downto 0); 	-- uscita 7 bit x 7 segmenti
-		leds2 : out std_logic_vector(6 downto 0); 	-- uscita 7 bit x 7 segmenti
-		leds3 : out std_logic_vector(6 downto 0); 	-- uscita 7 bit x 7 segmenti
-		leds4 : out std_logic_vector(6 downto 0) 	-- uscita 7 bit x 7 segmenti		
+		leds1 : OUT STD_LOGIC_VECTOR(6 downto 0); 	-- uscita 7 bit x 7 segmenti
+		leds2 : OUT STD_LOGIC_VECTOR(6 downto 0); 	-- uscita 7 bit x 7 segmenti
+		leds3 : OUT STD_LOGIC_VECTOR(6 downto 0); 	-- uscita 7 bit x 7 segmenti
+		leds4 : OUT STD_LOGIC_VECTOR(6 downto 0) 	-- uscita 7 bit x 7 segmenti	
 	); 
 		
 end  GAME_VIEW;
 
-ARCHITECTURE behavior of  GAME_VIEW IS
-		
-BEGIN	
-	
+ARCHITECTURE behavior of  GAME_VIEW IS	
+-- Sync Counters
+shared variable h_cnt	: integer range 0 to 1000;
+shared variable v_cnt  : integer range 0 to 500;
+
+signal drawbox: std_logic;
+BEGIN
+
+BOX1: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 20,
+		YPOS => 20
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		drawbox => drawbox
+	);
+
 PROCESS
 
 variable cntScrittaLampeggiante: integer range 0 to 16000000;
@@ -82,12 +99,11 @@ variable red_signal		: std_logic_vector(3 downto 0);
 variable green_signal	: std_logic_vector(3 downto 0);
 variable blue_signal	: std_logic_vector(3 downto 0);
 
--- Sync Counters
-variable h_cnt	: integer range 0 to 1000;
-variable v_cnt  : integer range 0 to 500;
+
 
 
 BEGIN
+
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
 
 		-- RESET
@@ -102,6 +118,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			leftBorder:= westBorder;
 			rightBorder:= eastBorder;
 		END IF;
+
 
 		--Horizontal Sync
 		
@@ -125,8 +142,15 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 -----------------------------------------------------------------------
 ------- SCRITTE
-
-
+		
+		-- draW BOXXXX
+		IF(drawbox='1')
+		THEN
+			red_signal(3) 	:= '0'; red_signal(2) 	:= '0';	red_signal(1) 	:= '0'; red_signal(0) 	:= '0';		
+			green_signal(3) := '0'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
+			blue_signal(3) 	:= '0'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '0';	blue_signal(0) 	:= '0';	
+		END IF;
+		
 -- DA CAMBIARE
 		IF(gameover='1') 
 		THEN
@@ -320,6 +344,13 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	-- fine DOWN
 
 --- fine BORDO SCHERMO
+
+---------------------------------------------------------------
+-- 			Draw Grid Logic
+---------------------------------------------------------------
+
+--gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 440) and (unsigned(pixel_x) > 120 and unsigned(pixel_x) <=520)) 
+	--else '0';
 
 
 	--Generazione segnale hsync (rispettando la specifica temporale di avere un ritardo "a" di 3.8 us fra un segnale e l'altro)
