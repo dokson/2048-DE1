@@ -12,29 +12,35 @@ entity GAME_BOX is
 	(
 		pixel_x : in integer range 0 to 1000;
 		pixel_y : in integer range 0 to 500;
-		--boxValue : in integer range 0 to 2500; 
-	
-		--this signal is so we can tell whether we should actually draw the color
-		--being output by the box or not!
+		number	: in integer range 0 to 2500; 		
 		
-		--red, green, blue		: OUT STD_LOGIC_VECTOR(3 downto 0)
-		drawBox : out STD_LOGIC := '0'
+		color	: OUT STD_LOGIC_VECTOR(11 downto 0);
+		-- segnale che indica alla view quando va disegnato il box
+		drawBox : OUT STD_LOGIC := '0'
 	);
 end GAME_BOX;
 
 
 architecture game_arch of GAME_BOX is
-	--============================================================================
-	------------------Constant Declarations---------------------------------------
-	--============================================================================
-	constant DIMENSIONS : integer range 0 to 200 := 150;
-	constant MAX_X : integer range 0 to 1000 := XPOS + DIMENSIONS - 1;
-	constant MAX_Y : integer range 0 to 500 := YPOS + DIMENSIONS - 1;
-
+	-- Coordinate finali del cubo sullo schermo
+	constant MAX_X 		: integer range 0 to 1000 	:= XPOS + 150;
+	constant MAX_Y 		: integer range 0 to 500 	:= YPOS + 105;
 begin
+
+	valueChange : process(number)
+	begin
+		case number is
+			when 2 => 
+				color 	<=	"111100000000"; -- ROSSINO
+			when others => 
+				color 	<=	"001101101100";
+		end case;
+	end process valueChange;
+	
 	drawBox <= '1' 
 		when 
 			pixel_x >= XPOS and pixel_x <= MAX_X and pixel_y >= YPOS and pixel_y <= MAX_Y 
 		else
 			'0';
+				
 end game_arch;

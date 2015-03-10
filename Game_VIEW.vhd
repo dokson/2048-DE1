@@ -37,22 +37,280 @@ end  GAME_VIEW;
 ARCHITECTURE behavior of  GAME_VIEW IS	
 -- Sync Counters
 shared variable h_cnt	: integer range 0 to 1000;
-shared variable v_cnt  : integer range 0 to 500;
+shared variable v_cnt  	: integer range 0 to 500;
 
-signal drawbox: std_logic;
+signal drawbox1	: std_logic;
+signal color1	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox2	: std_logic;
+signal color2	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox3	: std_logic;
+signal color3	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox4	: std_logic;
+signal color4	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox5	: std_logic;
+signal color5	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox6	: std_logic;
+signal color6	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox7	: std_logic;
+signal color7	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox8	: std_logic;
+signal color8	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox9	: std_logic;
+signal color9	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox10: std_logic;
+signal color10	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox11: std_logic;
+signal color11	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox12: std_logic;
+signal color12	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox13: std_logic;
+signal color13	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox14: std_logic;
+signal color14	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox15: std_logic;
+signal color15	: STD_LOGIC_VECTOR(11 downto 0);
+signal drawbox16: std_logic;
+signal color16	: STD_LOGIC_VECTOR(11 downto 0);
 BEGIN
 
 BOX1: entity work.GAME_BOX
 	generic map
 	(
-		XPOS => 20,
-		YPOS => 20
+		XPOS => 16,
+		YPOS => 46
 	)
 	port map
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		drawbox => drawbox
+		number 	=> 0,
+		drawbox => drawbox1,
+		color 	=> color1
+	);
+
+BOX2: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 168,
+		YPOS => 46
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox2,
+		color 	=> color2
+	);
+	
+BOX3: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 320,
+		YPOS => 46
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox3,
+		color 	=> color3
+	);
+
+BOX4: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 472,
+		YPOS => 46
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox4,
+		color 	=> color4
+	);
+
+BOX5: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 16,
+		YPOS => 153
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox5,
+		color 	=> color5
+	);
+
+BOX6: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 168,
+		YPOS => 153
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox6,
+		color 	=> color6
+	);
+	
+BOX7: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 320,
+		YPOS => 153
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox7,
+		color 	=> color7
+	);
+
+BOX8: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 472,
+		YPOS => 153
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox8,
+		color 	=> color8
+	);
+	
+BOX9: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 16,
+		YPOS => 260
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox9,
+		color 	=> color9
+	);
+	
+BOX10: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 168,
+		YPOS => 260
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox10,
+		color 	=> color10
+	);
+
+BOX11: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 320,
+		YPOS => 260
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox11,
+		color 	=> color11
+	);
+
+BOX12: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 472,
+		YPOS => 260
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox12,
+		color 	=> color12
+	);
+
+BOX13: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 16,
+		YPOS => 367
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 2,
+		drawbox => drawbox13,
+		color 	=> color13
+	);
+	
+BOX14: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 168,
+		YPOS => 367
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox14,
+		color 	=> color14
+	);
+
+BOX15: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 320,
+		YPOS => 367
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox15,
+		color 	=> color15
+	);
+	
+BOX16: entity work.GAME_BOX
+	generic map
+	(
+		XPOS => 472,
+		YPOS => 367
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y => v_cnt,
+		number 	=> 0,
+		drawbox => drawbox16,
+		color 	=> color16
 	);
 
 PROCESS
@@ -61,16 +319,16 @@ variable cntScrittaLampeggiante: integer range 0 to 16000000;
 variable scrittaLampeggia: STD_LOGIC:='0';
 
 -- costanti di utilità
-constant writePosition: integer range 0 to 500:=300;
+constant writePosition			: integer range 0 to 500:=300;
 
-constant gameOver_g_Position: integer range 0 to 1000:=282;
-constant gameOver_a_Position: integer range 0 to 1000:=288;
-constant gameOver_m_Position: integer range 0 to 1000:=294;
-constant gameOver_e_Position: integer range 0 to 1000:=300;
-constant gameOver_o_Position: integer range 0 to 1000:=312;
-constant gameOver_v_Position: integer range 0 to 1000:=318;
-constant gameOver_e2_Position: integer range 0 to 1000:=324;
-constant gameOver_r_Position: integer range 0 to 1000:=330;
+constant gameOver_g_Position	: integer range 0 to 1000:=282;
+constant gameOver_a_Position	: integer range 0 to 1000:=288;
+constant gameOver_m_Position	: integer range 0 to 1000:=294;
+constant gameOver_e_Position	: integer range 0 to 1000:=300;
+constant gameOver_o_Position	: integer range 0 to 1000:=312;
+constant gameOver_v_Position	: integer range 0 to 1000:=318;
+constant gameOver_e2_Position	: integer range 0 to 1000:=324;
+constant gameOver_r_Position	: integer range 0 to 1000:=330;
 
 constant youWin_y_Position	: integer range 0 to 1000:=288;
 constant youWin_o_Position	: integer range 0 to 1000:=294;
@@ -98,9 +356,6 @@ variable vertical_en	: STD_LOGIC;
 variable red_signal		: std_logic_vector(3 downto 0); 
 variable green_signal	: std_logic_vector(3 downto 0);
 variable blue_signal	: std_logic_vector(3 downto 0);
-
-
-
 
 BEGIN
 
@@ -141,16 +396,125 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		END IF;	
 		
 -----------------------------------------------------------------------
-------- SCRITTE
+------- DISEGNO DI OGNI BOX
 		
-		-- draW BOXXXX
-		IF(drawbox='1')
+		IF(drawbox1='1')
 		THEN
-			red_signal(3) 	:= '0'; red_signal(2) 	:= '0';	red_signal(1) 	:= '0'; red_signal(0) 	:= '0';		
-			green_signal(3) := '0'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
-			blue_signal(3) 	:= '0'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '0';	blue_signal(0) 	:= '0';	
+			red_signal(3 downto 0) 	:= color1(11 downto 8); 		
+			green_signal(3 downto 0):= color1(7 downto 4);  
+			blue_signal(3 downto 0) := color1(3 downto 0); 
 		END IF;
 		
+		IF(drawbox2='1')
+		THEN
+			red_signal(3 downto 0) 	:= color2(11 downto 8); 		
+			green_signal(3 downto 0):= color2(7 downto 4);  
+			blue_signal(3 downto 0) := color2(3 downto 0); 
+		END IF;
+		
+		IF(drawbox3='1')
+		THEN
+			red_signal(3 downto 0) 	:= color3(11 downto 8); 		
+			green_signal(3 downto 0):= color3(7 downto 4);  
+			blue_signal(3 downto 0) := color3(3 downto 0); 
+		END IF;
+		
+		IF(drawbox4='1')
+		THEN
+			red_signal(3 downto 0) 	:= color4(11 downto 8); 		
+			green_signal(3 downto 0):= color4(7 downto 4);  
+			blue_signal(3 downto 0) := color4(3 downto 0); 
+		END IF;
+		
+		IF(drawbox5='1')
+		THEN
+			red_signal(3 downto 0) 	:= color5(11 downto 8); 		
+			green_signal(3 downto 0):= color5(7 downto 4);  
+			blue_signal(3 downto 0) := color5(3 downto 0); 
+		END IF;
+		
+		IF(drawbox6='1')
+		THEN
+			red_signal(3 downto 0) 	:= color6(11 downto 8); 		
+			green_signal(3 downto 0):= color6(7 downto 4);  
+			blue_signal(3 downto 0) := color6(3 downto 0); 
+		END IF;
+		
+		IF(drawbox7='1')
+		THEN
+			red_signal(3 downto 0) 	:= color7(11 downto 8); 		
+			green_signal(3 downto 0):= color7(7 downto 4);  
+			blue_signal(3 downto 0) := color7(3 downto 0); 
+		END IF;
+		
+		IF(drawbox8='1')
+		THEN
+			red_signal(3 downto 0) 	:= color8(11 downto 8); 		
+			green_signal(3 downto 0):= color8(7 downto 4);  
+			blue_signal(3 downto 0) := color8(3 downto 0); 
+		END IF;
+		
+		IF(drawbox9='1')
+		THEN
+			red_signal(3 downto 0) 	:= color9(11 downto 8); 		
+			green_signal(3 downto 0):= color9(7 downto 4);  
+			blue_signal(3 downto 0) := color9(3 downto 0); 
+		END IF;
+		
+		IF(drawbox10='1')
+		THEN
+			red_signal(3 downto 0) 	:= color10(11 downto 8); 		
+			green_signal(3 downto 0):= color10(7 downto 4);  
+			blue_signal(3 downto 0) := color10(3 downto 0); 
+		END IF;
+		
+		IF(drawbox11='1')
+		THEN
+			red_signal(3 downto 0) 	:= color11(11 downto 8); 		
+			green_signal(3 downto 0):= color11(7 downto 4);  
+			blue_signal(3 downto 0) := color11(3 downto 0); 
+		END IF;
+		
+		IF(drawbox12='1')
+		THEN
+			red_signal(3 downto 0) 	:= color12(11 downto 8); 		
+			green_signal(3 downto 0):= color12(7 downto 4);  
+			blue_signal(3 downto 0) := color12(3 downto 0); 
+		END IF;
+		
+		IF(drawbox13='1')
+		THEN
+			red_signal(3 downto 0) 	:= color13(11 downto 8); 		
+			green_signal(3 downto 0):= color13(7 downto 4);  
+			blue_signal(3 downto 0) := color13(3 downto 0); 
+		END IF;
+		
+		IF(drawbox14='1')
+		THEN
+			red_signal(3 downto 0) 	:= color14(11 downto 8); 		
+			green_signal(3 downto 0):= color14(7 downto 4);  
+			blue_signal(3 downto 0) := color14(3 downto 0); 
+		END IF;
+		
+		IF(drawbox15='1')
+		THEN
+			red_signal(3 downto 0) 	:= color15(11 downto 8); 		
+			green_signal(3 downto 0):= color15(7 downto 4);  
+			blue_signal(3 downto 0) := color15(3 downto 0); 
+		END IF;
+		
+		IF(drawbox16='1')
+		THEN
+			red_signal(3 downto 0) 	:= color16(11 downto 8); 		
+			green_signal(3 downto 0):= color16(7 downto 4);  
+			blue_signal(3 downto 0) := color16(3 downto 0); 
+		END IF;
+		
+------- FINE BOX
+-----------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------
 -- DA CAMBIARE
 		IF(gameover='1') 
 		THEN

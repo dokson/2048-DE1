@@ -30,16 +30,14 @@ ARCHITECTURE behavior of  GAME_DATA IS
 BEGIN
 	
 PROCESS
-
-
 variable cntScrittaLampeggiante: integer range 0 to 16000000;
 variable scrittaLampeggia: STD_LOGIC;
 
 -- bordo schermo
-constant leftBorder:integer  range 0 to 1000:=16;
-constant rightBorder:integer  range 0 to 1000:=624;
-constant upBorder: integer  range 0 to 500:=16;	
-constant downBorder: integer  range 0 to 500:= 464;
+constant leftBorder:integer  range 0 to 1000:=15;
+constant rightBorder:integer  range 0 to 1000:=625;
+constant upBorder: integer  range 0 to 500:=44;	
+constant downBorder: integer  range 0 to 500:= 474;
 
 variable gameO: STD_LOGIC :='0';
 variable youWin: STD_LOGIC:='0';
