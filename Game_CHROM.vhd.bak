@@ -10,7 +10,7 @@ entity Game_CHROM is
 		row_addr	: IN STD_LOGIC_VECTOR(3 downto 0);
 		
 		-- OUTPUT
-		data		: OUT STD_LOGIC_VECTOR(7 downto 0)
+		data		: OUT STD_LOGIC_VECTOR(7 downto 0) -- vettore di pixel accesi/spenti
 	);
 end Game_CHROM;
 

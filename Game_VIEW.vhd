@@ -521,7 +521,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	THEN
 		rowAddr	 <= std_logic_vector(to_unsigned(v_cnt-writePositionV, 4)); 
 		charAddr <= "1000011"; -- C
-		
+
 		if(charOut(h_cnt-writeColaceH-1) = '1')
 		then
 			red_signal 	:= "0101";
@@ -529,7 +529,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			blue_signal	:= "0101";
 		end if;
 	END IF;
-	
+
 	IF(	v_cnt >= writePositionV AND -- limite alto del carattere
 		v_cnt < writePositionV+16 AND -- limite basso del carattere
 		h_cnt >= writeColaceH+distanceChar AND -- limite sinistro del carattere

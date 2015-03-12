@@ -428,7 +428,7 @@ leds4[5] <= leds4[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 leds4[6] <= leds4[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Game|GAME_VIEW:View|Game_CHROM:CHROM
+|Game|GAME_VIEW:View|GAME_CHROM:CHROM
 char_addr[0] => Mux0.IN2054
 char_addr[0] => Mux1.IN2054
 char_addr[0] => Mux2.IN2054

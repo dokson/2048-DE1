@@ -11,15 +11,14 @@ entity GAME_BOX is
 	port
 	(
 		-- INPUT
-		pixel_x : in integer range 0 to 1000;
-		pixel_y : in integer range 0 to 500;
-		number	: in integer range 0 to 2500; 		
+		pixel_x : IN INTEGER RANGE  0 to 1000;
+		pixel_y : IN INTEGER RANGE  0 to 500;
+		number	: IN INTEGER RANGE  0 to 2500; 		
 		
 		-- OUTPUT
-		-- colore attuale del box
-		color	: OUT STD_LOGIC_VECTOR(11 downto 0);
-		-- segnale che indica alla view quando va disegnato il box
-		drawBox : OUT STD_LOGIC := '0'
+
+		color	: OUT STD_LOGIC_VECTOR(11 downto 0); -- colore attuale del box
+		drawBox : OUT STD_LOGIC := '0' 	-- disegna il box quando drawBox = 1
 	);
 end GAME_BOX;
 

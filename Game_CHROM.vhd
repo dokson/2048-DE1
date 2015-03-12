@@ -2,7 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
-entity Game_CHROM is
+entity GAME_CHROM is
 	port
 	(
 		-- INPUT
@@ -12,9 +12,9 @@ entity Game_CHROM is
 		-- OUTPUT
 		data		: OUT STD_LOGIC_VECTOR(7 downto 0) -- vettore di pixel accesi/spenti
 	);
-end Game_CHROM;
+end GAME_CHROM;
 
-architecture arch of Game_CHROM is
+architecture arch of GAME_CHROM is
 	-- Dimensione dell'indirizzo 11
 	-- primi 7 bit identificano il carattere
 	-- ultimi 4 bit identificano una delle 16 righe di pixel

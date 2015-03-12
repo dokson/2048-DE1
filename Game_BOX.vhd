@@ -11,9 +11,9 @@ entity GAME_BOX is
 	port
 	(
 		-- INPUT
-		pixel_x : in integer range 0 to 1000;
-		pixel_y : in integer range 0 to 500;
-		number	: in integer range 0 to 2500; 		
+		pixel_x : IN INTEGER RANGE  0 to 1000;
+		pixel_y : IN INTEGER RANGE  0 to 500;
+		number	: IN INTEGER RANGE  0 to 2500; 		
 		
 		-- OUTPUT
 
@@ -23,7 +23,7 @@ entity GAME_BOX is
 end GAME_BOX;
 
 
-architecture game_arch of GAME_BOX is
+architecture box_arch of GAME_BOX is
 	-- Coordinate finali del cubo sullo schermo
 	constant MAX_X : integer range 0 to 1000 := XPOS + 150; -- larghezza
 	constant MAX_Y : integer range 0 to 500  := YPOS + 105; -- altezza
@@ -43,4 +43,4 @@ begin
 			pixel_x >= XPOS and pixel_x <= MAX_X and pixel_y >= YPOS and pixel_y <= MAX_Y 
 		else
 			'0';
-end game_arch;
+end box_arch;

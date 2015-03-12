@@ -188,20 +188,20 @@ AUTO_ROM_RECOGNITION
 ON
 }
 # include_file {
-game_keyboard.vhd
-8a335bff2b41bcd30b36147628b8bf
-game_chrom.vhd
-3f7ce2eab876be2d36552678eb2c83
-game_view.vhd
-759991dc64e9b1fee269c515052a6e9
-game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
-game_control.vhd
-ba60c95cbc3a5332de3a9d8ff2fbf7fe
 game_clkgenerator.vhd
 4ec739f754f724a67ca658e761e9f658
+game_keyboard.vhd
+8a335bff2b41bcd30b36147628b8bf
+game_view.vhd
+a51d51a4b03814b1e0713db3c9ba1a0
+game_control.vhd
+ba60c95cbc3a5332de3a9d8ff2fbf7fe
+game_box.vhd
+c21b5dcd5caf2237a7311f88abfdfbb2
 game_data.vhd
 70f2cc542f549116e012b6a73a80f7
+game_chrom.vhd
+de6c36402ecccc32b82525852e755d8a
 }
 # hierarchies {
 |
@@ -224,7 +224,7 @@ ON
 # case_insensitive
 # source_file
 game_view.vhd
-759991dc64e9b1fee269c515052a6e9
+a51d51a4b03814b1e0713db3c9ba1a0
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -267,10 +267,10 @@ PARAMETER_STRING
 USR
 }
 # include_file {
-game_chrom.vhd
-3f7ce2eab876be2d36552678eb2c83
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
+game_chrom.vhd
+de6c36402ecccc32b82525852e755d8a
 }
 # hierarchies {
 GAME_VIEW:View
@@ -282,7 +282,7 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
-Game_CHROM
+GAME_CHROM
 # storage
 db|2048.(6).cnf
 db|2048.(6).cnf
@@ -293,7 +293,7 @@ ON
 # case_insensitive
 # source_file
 game_chrom.vhd
-3f7ce2eab876be2d36552678eb2c83
+de6c36402ecccc32b82525852e755d8a
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -320,7 +320,7 @@ PARAMETER_STRING
 USR
 }
 # hierarchies {
-GAME_VIEW:View|Game_CHROM:CHROM
+GAME_VIEW:View|GAME_CHROM:CHROM
 }
 # lmf
 |altera|91sp2|quartus|lmf|maxplus2.lmf
@@ -340,7 +340,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -387,7 +387,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -434,7 +434,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -481,7 +481,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -528,7 +528,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -575,7 +575,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -622,7 +622,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -669,7 +669,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -716,7 +716,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -763,7 +763,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -810,7 +810,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -857,7 +857,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -904,7 +904,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -951,7 +951,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -998,7 +998,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -1045,7 +1045,7 @@ ON
 # case_insensitive
 # source_file
 game_box.vhd
-28f57fb0f8dc84e668eaccf3e2a65
+c21b5dcd5caf2237a7311f88abfdfbb2
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
