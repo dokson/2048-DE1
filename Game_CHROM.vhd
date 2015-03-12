@@ -1,33 +1,39 @@
--- Listing 13.1
--- ROM with synchonous read (inferring Block RAM)
--- character ROM
---   - 8-by-16 (8-by-2^4) font
---   - 128 (2^7) characters
---   - ROM size: 512-by-8 (2^11-by-8) bits
---               16K bits: 1 BRAM
-
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
 
 entity Game_CHROM is
-   port
-   (
-      addr: in std_logic_vector(10 downto 0);
-      data: out std_logic_vector(7 downto 0)
-   );
+	port
+	(
+		-- INPUT
+		char_addr	: IN STD_LOGIC_VECTOR(6 downto 0);
+		row_addr	: IN STD_LOGIC_VECTOR(3 downto 0);
+		
+		-- OUTPUT
+		data		: OUT STD_LOGIC_VECTOR(7 downto 0) -- vettore di pixel accesi/spenti
+	);
 end Game_CHROM;
 
 architecture arch of Game_CHROM is
-   constant ADDR_WIDTH: integer:=11;
-   constant DATA_WIDTH: integer:=8;
-   signal addr_reg: std_logic_vector(ADDR_WIDTH-1 downto 0);
-   type rom_type is array (0 to 2**ADDR_WIDTH-1)
-        of std_logic_vector(DATA_WIDTH-1 downto 0);
+	-- Dimensione dell'indirizzo 11
+	-- primi 7 bit identificano il carattere
+	-- ultimi 4 bit identificano una delle 16 righe di pixel
+	constant ADDR_WIDTH: integer:=11;
+	-- Dimensione della riga di pixel
+	constant DATA_WIDTH: integer:=8;
+	
+	-- Indirizzo
+	signal addr_reg: std_logic_vector(ADDR_WIDTH-1 downto 0);
+	
+	-- Dimensione di memoria della ROM = 512 (2^11)
+	type rom_type is array (0 to 2**ADDR_WIDTH-1)
+		-- di righe di 8 bits
+		of std_logic_vector(DATA_WIDTH-1 downto 0);
 
-   -- ROM definition - 2^11-by-8
-   constant ROM: rom_type := 
-   (
+	-- Contenuto della ROM (2^7 = 128 caratteri)
+	constant ROM: rom_type := 
+	(
+		-- carattere 0 (vuoto)
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -44,7 +50,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x01
+		-- carattere 1
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111110", -- 2  ******
@@ -61,7 +67,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x02
+		-- carattere 2
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111110", -- 2  ******
@@ -78,7 +84,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x03
+		-- carattere 3
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -95,7 +101,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x04
+		-- carattere 4
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -112,7 +118,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x05
+		-- carattere 5
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -129,7 +135,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x06
+		-- carattere 6
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -146,7 +152,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x07
+		-- carattere 7
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -163,7 +169,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x08
+		-- carattere 8
 		"11111111", -- 0 ********
 		"11111111", -- 1 ********
 		"11111111", -- 2 ********
@@ -180,7 +186,7 @@ architecture arch of Game_CHROM is
 		"11111111", -- d ********
 		"11111111", -- e ********
 		"11111111", -- f ********
-		-- code x09
+		-- carattere 9
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -197,7 +203,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x0a
+		-- carattere 10
 		"11111111", -- 0 ********
 		"11111111", -- 1 ********
 		"11111111", -- 2 ********
@@ -214,7 +220,7 @@ architecture arch of Game_CHROM is
 		"11111111", -- d ********
 		"11111111", -- e ********
 		"11111111", -- f ********
-		-- code x0b
+		-- carattere 11
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011110", -- 2    ****
@@ -231,7 +237,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x0c
+		-- carattere 12
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111100", -- 2   ****
@@ -248,7 +254,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x0d
+		-- carattere 13
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111111", -- 2   ******
@@ -265,7 +271,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x0e
+		-- carattere 14
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111111", -- 2  *******
@@ -282,7 +288,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x0f
+		-- carattere 15
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -299,7 +305,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x10
+		-- carattere 16
 		"00000000", -- 0
 		"10000000", -- 1 *
 		"11000000", -- 2 **
@@ -316,7 +322,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x11
+		-- carattere 17
 		"00000000", -- 0
 		"00000010", -- 1       *
 		"00000110", -- 2      **
@@ -333,7 +339,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x12
+		-- carattere 18
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -350,7 +356,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x13
+		-- carattere 19
 		"00000000", -- 0
 		"00000000", -- 1
 		"01100110", -- 2  **  **
@@ -367,7 +373,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x14
+		-- carattere 20
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111111", -- 2  *******
@@ -384,7 +390,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x15
+		-- carattere 21
 		"00000000", -- 0
 		"01111100", -- 1  *****
 		"11000110", -- 2 **   **
@@ -401,7 +407,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x16
+		-- carattere 22
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -418,7 +424,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x17
+		-- carattere 23
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -435,7 +441,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x18
+		-- carattere 24
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -452,7 +458,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x19
+		-- carattere 25
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -469,7 +475,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x1a
+		-- carattere 26
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -486,7 +492,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x1b
+		-- carattere 27
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -503,7 +509,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x1c
+		-- carattere 28
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -520,7 +526,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x1d
+		-- carattere 29
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -537,7 +543,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x1e
+		-- carattere 30
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -554,7 +560,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x1f
+		-- carattere 31
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -571,7 +577,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x20
+		-- carattere 32
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -588,7 +594,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x21
+		-- carattere 33
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -605,7 +611,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x22
+		-- carattere 34
 		"00000000", -- 0
 		"01100110", -- 1  **  **
 		"01100110", -- 2  **  **
@@ -622,7 +628,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x23
+		-- carattere 35
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -639,7 +645,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x24
+		-- carattere 36
 		"00011000", -- 0     **
 		"00011000", -- 1     **
 		"01111100", -- 2   *****
@@ -656,7 +662,7 @@ architecture arch of Game_CHROM is
 		"00011000", -- d     **
 		"00000000", -- e
 		"00000000", -- f
-		-- code x25
+		-- carattere 37
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -673,7 +679,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x26
+		-- carattere 38
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111000", -- 2   ***
@@ -690,7 +696,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x27
+		-- carattere 39
 		"00000000", -- 0
 		"00110000", -- 1   **
 		"00110000", -- 2   **
@@ -707,7 +713,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x28
+		-- carattere 40
 		"00000000", -- 0
 		"00000000", -- 1
 		"00001100", -- 2     **
@@ -724,7 +730,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x29
+		-- carattere 41
 		"00000000", -- 0
 		"00000000", -- 1
 		"00110000", -- 2   **
@@ -741,7 +747,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x2a
+		-- carattere 42
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -758,7 +764,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x2b
+		-- carattere 43
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -775,7 +781,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x2c
+		-- carattere 44
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -792,7 +798,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x2d
+		-- carattere 45
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -809,7 +815,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x2e
+		-- carattere 46
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -826,7 +832,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x2f
+		-- carattere 47
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -843,7 +849,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x30
+		-- carattere 48
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -860,7 +866,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x31
+		-- carattere 49
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2
@@ -877,7 +883,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d  ******
 		"00000000", -- e
 		"00000000", -- f
-		-- code x32
+		-- carattere 50
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -894,7 +900,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x33
+		-- carattere 51
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -911,7 +917,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x34
+		-- carattere 52
 		"00000000", -- 0
 		"00000000", -- 1
 		"00001100", -- 2     **
@@ -928,7 +934,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x35
+		-- carattere 53
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111110", -- 2 *******
@@ -945,7 +951,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x36
+		-- carattere 54
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111000", -- 2   ***
@@ -962,7 +968,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x37
+		-- carattere 55
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111110", -- 2 *******
@@ -979,7 +985,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x38
+		-- carattere 56
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -996,7 +1002,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x39
+		-- carattere 57
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -1013,7 +1019,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x3a
+		-- carattere 58
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1030,7 +1036,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x3b
+		-- carattere 59
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1047,7 +1053,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x3c
+		-- carattere 60
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1064,7 +1070,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x3d
+		-- carattere 61
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1081,7 +1087,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x3e
+		-- carattere 62
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1098,7 +1104,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x3f
+		-- carattere 63
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -1115,7 +1121,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x40
+		-- carattere 64
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -1132,7 +1138,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x41
+		-- carattere 65
 		"00000000", -- 0
 		"00000000", -- 1
 		"00010000", -- 2    *
@@ -1149,7 +1155,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x42
+		-- carattere 66
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111100", -- 2 ******
@@ -1166,7 +1172,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x43
+		-- carattere 67
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111100", -- 2   ****
@@ -1183,7 +1189,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x44
+		-- carattere 68
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111000", -- 2 *****
@@ -1200,7 +1206,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x45
+		-- carattere 69
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111110", -- 2 *******
@@ -1217,7 +1223,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x46
+		-- carattere 70
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111110", -- 2 *******
@@ -1234,7 +1240,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x47
+		-- carattere 71
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111100", -- 2   ****
@@ -1251,7 +1257,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x48
+		-- carattere 72
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000110", -- 2 **   **
@@ -1268,7 +1274,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x49
+		-- carattere 73
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111100", -- 2   ****
@@ -1285,7 +1291,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x4a
+		-- carattere 74
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011110", -- 2    ****
@@ -1302,7 +1308,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x4b
+		-- carattere 75
 		"00000000", -- 0
 		"00000000", -- 1
 		"11100110", -- 2 ***  **
@@ -1319,7 +1325,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x4c
+		-- carattere 76
 		"00000000", -- 0
 		"00000000", -- 1
 		"11110000", -- 2 ****
@@ -1336,7 +1342,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x4d
+		-- carattere 77
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000011", -- 2 **    **
@@ -1353,7 +1359,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x4e
+		-- carattere 78
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000110", -- 2 **   **
@@ -1370,7 +1376,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x4f
+		-- carattere 79
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -1387,7 +1393,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x50
+		-- carattere 80
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111100", -- 2 ******
@@ -1404,7 +1410,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x510
+		-- carattere 81
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -1421,7 +1427,7 @@ architecture arch of Game_CHROM is
 		"00001110", -- d     ***
 		"00000000", -- e
 		"00000000", -- f
-		-- code x52
+		-- carattere 82
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111100", -- 2 ******
@@ -1438,7 +1444,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x53
+		-- carattere 83
 		"00000000", -- 0
 		"00000000", -- 1
 		"01111100", -- 2  *****
@@ -1455,7 +1461,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x54
+		-- carattere 84
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111111", -- 2 ********
@@ -1472,7 +1478,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x55
+		-- carattere 85
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000110", -- 2 **   **
@@ -1489,7 +1495,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x56
+		-- carattere 86
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000011", -- 2 **    **
@@ -1506,7 +1512,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x57
+		-- carattere 87
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000011", -- 2 **    **
@@ -1523,8 +1529,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-
-		-- code x58
+		-- carattere 88
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000011", -- 2 **    **
@@ -1541,7 +1546,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x59
+		-- carattere 89
 		"00000000", -- 0
 		"00000000", -- 1
 		"11000011", -- 2 **    **
@@ -1558,7 +1563,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x5a
+		-- carattere 90
 		"00000000", -- 0
 		"00000000", -- 1
 		"11111111", -- 2 ********
@@ -1575,7 +1580,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x5b
+		-- carattere 91
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111100", -- 2   ****
@@ -1592,7 +1597,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x5c
+		-- carattere 92
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1609,7 +1614,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x5d
+		-- carattere 93
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111100", -- 2   ****
@@ -1626,7 +1631,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x5e
+		-- carattere 94
 		"00010000", -- 0    *
 		"00111000", -- 1   ***
 		"01101100", -- 2  ** **
@@ -1643,7 +1648,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x5f
+		-- carattere 95
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1660,7 +1665,7 @@ architecture arch of Game_CHROM is
 		"11111111", -- d ********
 		"00000000", -- e
 		"00000000", -- f
-		-- code x60
+		-- carattere 96
 		"00110000", -- 0   **
 		"00110000", -- 1   **
 		"00011000", -- 2    **
@@ -1677,7 +1682,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x61
+		-- carattere 97
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1694,7 +1699,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x62
+		-- carattere 98
 		"00000000", -- 0
 		"00000000", -- 1
 		"11100000", -- 2  ***
@@ -1711,7 +1716,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x63
+		-- carattere 99
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1728,7 +1733,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x64
+		-- carattere 100
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011100", -- 2    ***
@@ -1745,7 +1750,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x65
+		-- carattere 101
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1762,7 +1767,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x66
+		-- carattere 102
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111000", -- 2   ***
@@ -1779,7 +1784,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x67
+		-- carattere 103
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1796,7 +1801,7 @@ architecture arch of Game_CHROM is
 		"11001100", -- d **  **
 		"01111000", -- e  ****
 		"00000000", -- f
-		-- code x68
+		-- carattere 104
 		"00000000", -- 0
 		"00000000", -- 1
 		"11100000", -- 2 ***
@@ -1813,7 +1818,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x69
+		-- carattere 105
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -1830,7 +1835,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x6a
+		-- carattere 106
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000110", -- 2      **
@@ -1847,7 +1852,7 @@ architecture arch of Game_CHROM is
 		"01100110", -- d  **  **
 		"00111100", -- e   ****
 		"00000000", -- f
-		-- code x6b
+		-- carattere 107
 		"00000000", -- 0
 		"00000000", -- 1
 		"11100000", -- 2 ***
@@ -1864,7 +1869,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x6c
+		-- carattere 108
 		"00000000", -- 0
 		"00000000", -- 1
 		"00111000", -- 2   ***
@@ -1881,7 +1886,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x6d
+		-- carattere 109
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1898,7 +1903,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x6e
+		-- carattere 110
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1915,7 +1920,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x6f
+		-- carattere 111
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1932,7 +1937,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x70
+		-- carattere 112
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1949,7 +1954,7 @@ architecture arch of Game_CHROM is
 		"01100000", -- d  **
 		"11110000", -- e ****
 		"00000000", -- f
-		-- code x71
+		-- carattere 113
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1966,7 +1971,7 @@ architecture arch of Game_CHROM is
 		"00001100", -- d     **
 		"00011110", -- e    ****
 		"00000000", -- f
-		-- code x72
+		-- carattere 114
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -1983,7 +1988,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x73
+		-- carattere 115
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2000,7 +2005,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x74
+		-- carattere 116
 		"00000000", -- 0
 		"00000000", -- 1
 		"00010000", -- 2    *
@@ -2017,7 +2022,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x75
+		-- carattere 117
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2034,7 +2039,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x76
+		-- carattere 118
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2051,7 +2056,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x77
+		-- carattere 119
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2068,7 +2073,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x78
+		-- carattere 120
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2085,7 +2090,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x79
+		-- carattere 121
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2102,7 +2107,7 @@ architecture arch of Game_CHROM is
 		"00001100", -- d     **
 		"11111000", -- e *****
 		"00000000", -- f
-		-- code x7a
+		-- carattere 122
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2119,7 +2124,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x7b
+		-- carattere 123
 		"00000000", -- 0
 		"00000000", -- 1
 		"00001110", -- 2     ***
@@ -2136,7 +2141,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x7c
+		-- carattere 124
 		"00000000", -- 0
 		"00000000", -- 1
 		"00011000", -- 2    **
@@ -2153,7 +2158,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x7d
+		-- carattere 125
 		"00000000", -- 0
 		"00000000", -- 1
 		"01110000", -- 2  ***
@@ -2170,7 +2175,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x7e
+		-- carattere 126
 		"00000000", -- 0
 		"00000000", -- 1
 		"01110110", -- 2  *** **
@@ -2187,7 +2192,7 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000", -- f
-		-- code x7f
+		-- carattere 127
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2204,20 +2209,23 @@ architecture arch of Game_CHROM is
 		"00000000", -- d
 		"00000000", -- e
 		"00000000"  -- f
-   );
+	);
    
-    -- function reverse vector 
-   function reverse (a: in std_logic_vector)
+    -- Funzione di inversione del vettore per comodità della stampa
+	function reverse (a: in std_logic_vector)
 	return std_logic_vector is
-	  variable result: std_logic_vector(a'RANGE);
-	  alias aa: std_logic_vector(a'REVERSE_RANGE) is a;
+		variable result	: std_logic_vector(a'RANGE);
+		alias aa		: std_logic_vector(a'REVERSE_RANGE) is a;
 	begin
-	  for i in aa'RANGE loop
-		result(i) := aa(i);
-	  end loop;
-	  return result;
+		for i in aa'RANGE loop
+			result(i) := aa(i);
+		end loop;
+		return result;
 	end;
+
 begin
-   addr_reg <= addr;
-   data <= reverse(ROM(to_integer(unsigned(addr_reg))));
+	-- Primi 7 bit di indirizzamento relativi al carattere
+	-- ultimi 4 bit indirizzamento relativi alla riga di stampa
+	addr_reg	<= char_addr & row_addr;
+	data		<= reverse(ROM(to_integer(unsigned(addr_reg))));
 end arch;

@@ -92,12 +92,12 @@ Datapath: entity work.GAME_DATA
 View: entity work.GAME_VIEW
 	port map
 	(
-		clk		=> clock_25Mhz,
+		clk			=> clock_25Mhz,
 
-		northBorder	=> northBorder,
-		southBorder	=> southBorder,
-		westBorder	=> westBorder,
-		eastBorder	=> eastBorder,
+		upBorder	=> northBorder,
+		downBorder	=> southBorder,
+		leftBorder	=> westBorder,
+		rightBorder	=> eastBorder,
 
 		bootstrap	=> boot,
 		gameover	=> gameover,
