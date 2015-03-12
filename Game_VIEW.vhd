@@ -2,6 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 ENTITY GAME_VIEW IS
 PORT
@@ -39,6 +40,9 @@ ARCHITECTURE behavior of  GAME_VIEW IS
 shared variable h_cnt	: integer range 0 to 1000;
 shared variable v_cnt  	: integer range 0 to 500;
 
+signal charAddr : STD_LOGIC_VECTOR(10 downto 0);
+signal charOut : STD_LOGIC_VECTOR(7 downto 0);
+
 signal drawbox1	: std_logic;
 signal color1	: STD_LOGIC_VECTOR(11 downto 0);
 signal drawbox2	: std_logic;
@@ -72,6 +76,14 @@ signal color15	: STD_LOGIC_VECTOR(11 downto 0);
 signal drawbox16: std_logic;
 signal color16	: STD_LOGIC_VECTOR(11 downto 0);
 BEGIN
+
+CHROM: entity work.GAME_CHROM
+	port map
+	(
+		clock => clk,
+		addr => charAddr,
+		data => charOut
+	);
 
 BOX1: entity work.GAME_BOX
 	generic map
@@ -357,6 +369,8 @@ variable red_signal		: std_logic_vector(3 downto 0);
 variable green_signal	: std_logic_vector(3 downto 0);
 variable blue_signal	: std_logic_vector(3 downto 0);
 
+variable row_addr : std_logic_vector(3 downto 0);
+
 BEGIN
 
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
@@ -512,8 +526,37 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 ------- FINE BOX
 -----------------------------------------------------------------------
+case gameover is
+		when '0' => -- CIAO
+			leds1 <= not"0111111"; -- C
+			leds2 <= not"1110111"; -- I
+			leds3 <= not"0000110"; -- A
+			leds4 <= not"0111001"; -- O
+		when '1' => -- OVER
+			leds1 <= not"1010000"; -- O
+			leds2 <= not"1111001"; -- U
+			leds3 <= not"0111110"; -- E
+			leds4 <= not"0111111"; -- P
+		when others => 
+			NULL;
+	end case;
 
-
+		IF(gameover='0')
+		THEN
+			IF((v_cnt >=100 and v_cnt<=115) AND (h_cnt >= 100 AND h_cnt <= 107))
+			THEN
+				row_addr := std_logic_vector(to_unsigned(v_cnt-100, 4)); 
+				charAddr <= "1000001" & row_addr;
+				
+				if(charOut(h_cnt-100) = '1')
+				then
+					red_signal := "0101";
+					green_signal :="1111";
+					blue_signal:="0101";
+				end if;
+				
+			END IF;
+		END IF;
 -----------------------------------------------------------------------
 -- DA CAMBIARE
 		IF(gameover='1') 

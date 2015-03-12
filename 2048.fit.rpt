@@ -1,6 +1,6 @@
 Fitter report for 2048
-Tue Mar 10 17:31:03 2015
-Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+Tue Mar 10 17:39:57 2015
+Quartus II 64-Bit Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Full Version
 
 
 ---------------------
@@ -36,6 +36,7 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
  28. Operating Settings and Conditions
  29. Estimated Delay Added for Hold Timing
  30. Fitter Messages
+ 31. Fitter Suppressed Messages
 
 
 
@@ -58,26 +59,26 @@ applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------------+
-; Fitter Summary                                                                    ;
-+------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Tue Mar 10 17:31:03 2015        ;
-; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
-; Revision Name                      ; 2048                                         ;
-; Top-level Entity Name              ; GAME                                         ;
-; Family                             ; Cyclone II                                   ;
-; Device                             ; EP2C20F484C7                                 ;
-; Timing Models                      ; Final                                        ;
-; Total logic elements               ; 289 / 18,752 ( 2 % )                         ;
-;     Total combinational functions  ; 271 / 18,752 ( 1 % )                         ;
-;     Dedicated logic registers      ; 88 / 18,752 ( < 1 % )                        ;
-; Total registers                    ; 88                                           ;
-; Total pins                         ; 46 / 315 ( 15 % )                            ;
-; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 0 / 239,616 ( 0 % )                          ;
-; Embedded Multiplier 9-bit elements ; 0 / 52 ( 0 % )                               ;
-; Total PLLs                         ; 0 / 4 ( 0 % )                                ;
-+------------------------------------+----------------------------------------------+
++------------------------------------------------------------------------------------+
+; Fitter Summary                                                                     ;
++------------------------------------+-----------------------------------------------+
+; Fitter Status                      ; Successful - Tue Mar 10 17:39:57 2015         ;
+; Quartus II 64-Bit Version          ; 9.1 Build 350 03/24/2010 SP 2 SJ Full Version ;
+; Revision Name                      ; 2048                                          ;
+; Top-level Entity Name              ; GAME                                          ;
+; Family                             ; Cyclone II                                    ;
+; Device                             ; EP2C20F484C7                                  ;
+; Timing Models                      ; Final                                         ;
+; Total logic elements               ; 289 / 18,752 ( 2 % )                          ;
+;     Total combinational functions  ; 271 / 18,752 ( 1 % )                          ;
+;     Dedicated logic registers      ; 88 / 18,752 ( < 1 % )                         ;
+; Total registers                    ; 88                                            ;
+; Total pins                         ; 46 / 315 ( 15 % )                             ;
+; Total virtual pins                 ; 0                                             ;
+; Total memory bits                  ; 0 / 239,616 ( 0 % )                           ;
+; Embedded Multiplier 9-bit elements ; 0 / 52 ( 0 % )                                ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                                 ;
++------------------------------------+-----------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -131,15 +132,21 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------------------+--------------------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 2      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.86        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     1 processor            ; 100.0%      ;
+;     2-4 processors         ;   9.1%      ;
++----------------------------+-------------+
 
 
 +----------------------------------------------+
@@ -178,7 +185,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Users/Ale/Desktop/2048-DE1/2048.pin.
+The pin-out file can be found in C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/2048.pin.
 
 
 +-----------------------------------------------------------------------------------------------+
@@ -221,13 +228,13 @@ The pin-out file can be found in C:/Users/Ale/Desktop/2048-DE1/2048.pin.
 ; ASMI blocks                                 ; 0 / 1 ( 0 % )                                   ;
 ; CRC blocks                                  ; 0 / 1 ( 0 % )                                   ;
 ; Average interconnect usage (total/H/V)      ; 0% / 0% / 0%                                    ;
-; Peak interconnect usage (total/H/V)         ; 3% / 4% / 3%                                    ;
+; Peak interconnect usage (total/H/V)         ; 3% / 3% / 4%                                    ;
 ; Maximum fan-out node                        ; GAME_CLKGENERATOR:ClockGenerator|cnt[0]~clkctrl ;
 ; Maximum fan-out                             ; 61                                              ;
 ; Highest non-global fan-out signal           ; GAME_VIEW:View|v_cnt[4]                         ;
 ; Highest non-global fan-out                  ; 30                                              ;
-; Total fan-out                               ; 1152                                            ;
-; Average fan-out                             ; 2.74                                            ;
+; Total fan-out                               ; 1160                                            ;
+; Average fan-out                             ; 2.71                                            ;
 +---------------------------------------------+-------------------------------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -938,33 +945,33 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - GAME_KEYBOARD:KeyboardController|scancode[5]        ; 1                 ; 0       ;
 ;      - GAME_KEYBOARD:KeyboardController|scancode[6]        ; 1                 ; 0       ;
 ;      - GAME_KEYBOARD:KeyboardController|scancode[7]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancodeReady      ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[0]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[1]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[2]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[3]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[4]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[5]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[6]        ; 1                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancodeReady      ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[0]        ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[1]        ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[2]        ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[3]        ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[4]        ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[5]        ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[6]        ; 0                 ; 0       ;
 ; PS2_DAT                                                    ;                   ;         ;
-;      - GAME_KEYBOARD:KeyboardController|Keyboard~1         ; 1                 ; 6       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[7]~feeder ; 1                 ; 6       ;
+;      - GAME_KEYBOARD:KeyboardController|Keyboard~1         ; 0                 ; 6       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[7]~feeder ; 0                 ; 6       ;
 +------------------------------------------------------------+-------------------+---------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                                                              ;
-+-------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; Name                                            ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+-------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; GAME_CLKGENERATOR:ClockGenerator|cnt[0]         ; LCFF_X26_Y2_N9     ; 61      ; Clock        ; yes    ; Global Clock         ; GCLK13           ; --                        ;
-; GAME_KEYBOARD:KeyboardController|bitCount[6]~13 ; LCCOMB_X23_Y24_N6  ; 8       ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; GAME_KEYBOARD:KeyboardController|bitCount[6]~14 ; LCCOMB_X23_Y24_N0  ; 7       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; GAME_KEYBOARD:KeyboardController|scancodeReady  ; LCFF_X23_Y26_N1    ; 10      ; Clock        ; yes    ; Global Clock         ; GCLK9            ; --                        ;
-; GAME_KEYBOARD:KeyboardController|scancode[7]~0  ; LCCOMB_X23_Y24_N16 ; 8       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; PS2_CLK                                         ; PIN_H15            ; 16      ; Clock        ; no     ; --                   ; --               ; --                        ;
-; clk_50Mhz                                       ; PIN_L1             ; 1       ; Clock        ; no     ; --                   ; --               ; --                        ;
-+-------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                             ;
++-------------------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; Name                                            ; Location          ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++-------------------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; GAME_CLKGENERATOR:ClockGenerator|cnt[0]         ; LCFF_X26_Y2_N17   ; 61      ; Clock        ; yes    ; Global Clock         ; GCLK12           ; --                        ;
+; GAME_KEYBOARD:KeyboardController|bitCount[6]~13 ; LCCOMB_X36_Y23_N6 ; 8       ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; GAME_KEYBOARD:KeyboardController|bitCount[6]~14 ; LCCOMB_X36_Y23_N8 ; 7       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; GAME_KEYBOARD:KeyboardController|scancodeReady  ; LCFF_X37_Y26_N1   ; 10      ; Clock        ; yes    ; Global Clock         ; GCLK11           ; --                        ;
+; GAME_KEYBOARD:KeyboardController|scancode[7]~0  ; LCCOMB_X36_Y23_N0 ; 8       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; PS2_CLK                                         ; PIN_H15           ; 16      ; Clock        ; no     ; --                   ; --               ; --                        ;
+; clk_50Mhz                                       ; PIN_L1            ; 1       ; Clock        ; no     ; --                   ; --               ; --                        ;
++-------------------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -972,8 +979,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
 ; Name                                           ; Location        ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
-; GAME_CLKGENERATOR:ClockGenerator|cnt[0]        ; LCFF_X26_Y2_N9  ; 61      ; Global Clock         ; GCLK13           ; --                        ;
-; GAME_KEYBOARD:KeyboardController|scancodeReady ; LCFF_X23_Y26_N1 ; 10      ; Global Clock         ; GCLK9            ; --                        ;
+; GAME_CLKGENERATOR:ClockGenerator|cnt[0]        ; LCFF_X26_Y2_N17 ; 61      ; Global Clock         ; GCLK12           ; --                        ;
+; GAME_KEYBOARD:KeyboardController|scancodeReady ; LCFF_X37_Y26_N1 ; 10      ; Global Clock         ; GCLK11           ; --                        ;
 +------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
 
 
@@ -1040,14 +1047,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------+------------------------+
 ; Interconnect Resource Type ; Usage                  ;
 +----------------------------+------------------------+
-; Block interconnects        ; 420 / 54,004 ( < 1 % ) ;
+; Block interconnects        ; 433 / 54,004 ( < 1 % ) ;
 ; C16 interconnects          ; 2 / 2,100 ( < 1 % )    ;
-; C4 interconnects           ; 194 / 36,000 ( < 1 % ) ;
-; Direct links               ; 86 / 54,004 ( < 1 % )  ;
+; C4 interconnects           ; 233 / 36,000 ( < 1 % ) ;
+; Direct links               ; 80 / 54,004 ( < 1 % )  ;
 ; Global clocks              ; 2 / 16 ( 13 % )        ;
-; Local interconnects        ; 182 / 18,752 ( < 1 % ) ;
-; R24 interconnects          ; 6 / 1,900 ( < 1 % )    ;
-; R4 interconnects           ; 326 / 46,920 ( < 1 % ) ;
+; Local interconnects        ; 177 / 18,752 ( < 1 % ) ;
+; R24 interconnects          ; 2 / 1,900 ( < 1 % )    ;
+; R4 interconnects           ; 255 / 46,920 ( < 1 % ) ;
 +----------------------------+------------------------+
 
 
@@ -1089,7 +1096,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 14.19) ; Number of LABs  (Total = 26) ;
+; Number of Signals Sourced  (Average = 14.50) ; Number of LABs  (Total = 26) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 2                            ;
@@ -1112,16 +1119,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 18                                           ; 1                            ;
 ; 19                                           ; 2                            ;
 ; 20                                           ; 0                            ;
-; 21                                           ; 2                            ;
+; 21                                           ; 1                            ;
 ; 22                                           ; 1                            ;
 ; 23                                           ; 2                            ;
 ; 24                                           ; 0                            ;
 ; 25                                           ; 2                            ;
 ; 26                                           ; 0                            ;
 ; 27                                           ; 0                            ;
-; 28                                           ; 0                            ;
+; 28                                           ; 1                            ;
 ; 29                                           ; 0                            ;
-; 30                                           ; 1                            ;
+; 30                                           ; 0                            ;
+; 31                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -1234,13 +1242,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Info: *******************************************************************
-Info: Running Quartus II Fitter
-    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Mar 10 17:30:51 2015
+Info: Running Quartus II 64-Bit Fitter
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Full Version
+    Info: Processing started: Tue Mar 10 17:39:47 2015
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off 2048 -c 2048
+Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Selected device EP2C20F484C7 for design "2048"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
-Warning: Feature LogicLock is only available with a valid subscription license. Please purchase a software subscription to gain full access to this feature.
 Info: Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
     Info: Device EP2C15AF484C7 is compatible
     Info: Device EP2C35F484C7 is compatible
@@ -1260,39 +1268,33 @@ Info: Automatically promoted node GAME_KEYBOARD:KeyboardController|scancodeReady
     Info: Following destination nodes may be non-global or may not use global or regional clocks
         Info: Destination node GAME_KEYBOARD:KeyboardController|scancodeReady~0
 Info: Starting register packing
-Extra Info: Performing register packing on registers with non-logic cell location assignments
-Extra Info: Completed register packing on registers with non-logic cell location assignments
-Extra Info: Started Fast Input/Output/OE register processing
-Extra Info: Finished Fast Input/Output/OE register processing
-Extra Info: Moving registers into I/O cells, Multiplier Blocks, and RAM blocks to improve timing and density
-Extra Info: Finished moving registers into I/O cells, Multiplier Blocks, and RAM blocks
 Info: Finished register packing
     Extra Info: No registers were packed into other blocks
-Info: Fitter preparation operations ending: elapsed time is 00:00:00
+Info: Fitter preparation operations ending: elapsed time is 00:00:01
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:01
-Info: Estimated most critical path is register to register delay of 12.320 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X31_Y23; Fanout = 3; REG Node = 'GAME_VIEW:View|h_cnt[0]'
-    Info: 2: + IC(0.537 ns) + CELL(0.517 ns) = 1.054 ns; Loc. = LAB_X31_Y23; Fanout = 2; COMB Node = 'GAME_VIEW:View|Add0~1'
-    Info: 3: + IC(0.000 ns) + CELL(0.458 ns) = 1.512 ns; Loc. = LAB_X31_Y23; Fanout = 19; COMB Node = 'GAME_VIEW:View|Add0~2'
-    Info: 4: + IC(0.131 ns) + CELL(0.545 ns) = 2.188 ns; Loc. = LAB_X31_Y23; Fanout = 2; COMB Node = 'GAME_VIEW:View|process_0~33'
-    Info: 5: + IC(0.131 ns) + CELL(0.545 ns) = 2.864 ns; Loc. = LAB_X31_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~35'
-    Info: 6: + IC(0.131 ns) + CELL(0.545 ns) = 3.540 ns; Loc. = LAB_X31_Y23; Fanout = 2; COMB Node = 'GAME_VIEW:View|process_0~36'
-    Info: 7: + IC(0.694 ns) + CELL(0.521 ns) = 4.755 ns; Loc. = LAB_X33_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~47'
-    Info: 8: + IC(0.131 ns) + CELL(0.545 ns) = 5.431 ns; Loc. = LAB_X33_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~48'
-    Info: 9: + IC(1.039 ns) + CELL(0.178 ns) = 6.648 ns; Loc. = LAB_X36_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~49'
-    Info: 10: + IC(0.154 ns) + CELL(0.521 ns) = 7.323 ns; Loc. = LAB_X36_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~42'
-    Info: 11: + IC(0.354 ns) + CELL(0.322 ns) = 7.999 ns; Loc. = LAB_X36_Y23; Fanout = 6; COMB Node = 'GAME_VIEW:View|red_signal~43'
-    Info: 12: + IC(0.154 ns) + CELL(0.521 ns) = 8.674 ns; Loc. = LAB_X36_Y23; Fanout = 3; COMB Node = 'GAME_VIEW:View|green_signal~1'
-    Info: 13: + IC(0.365 ns) + CELL(0.545 ns) = 9.584 ns; Loc. = LAB_X37_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~7'
-    Info: 14: + IC(0.154 ns) + CELL(0.521 ns) = 10.259 ns; Loc. = LAB_X37_Y23; Fanout = 2; COMB Node = 'GAME_VIEW:View|green_signal~8'
-    Info: 15: + IC(0.365 ns) + CELL(0.544 ns) = 11.168 ns; Loc. = LAB_X38_Y23; Fanout = 2; COMB Node = 'GAME_VIEW:View|green~2'
-    Info: 16: + IC(1.056 ns) + CELL(0.096 ns) = 12.320 ns; Loc. = LAB_X38_Y24; Fanout = 1; REG Node = 'GAME_VIEW:View|green[2]'
-    Info: Total cell delay = 6.924 ns ( 56.20 % )
-    Info: Total interconnect delay = 5.396 ns ( 43.80 % )
+Info: Estimated most critical path is register to register delay of 12.360 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X34_Y19; Fanout = 3; REG Node = 'GAME_VIEW:View|h_cnt[0]'
+    Info: 2: + IC(0.537 ns) + CELL(0.517 ns) = 1.054 ns; Loc. = LAB_X34_Y19; Fanout = 2; COMB Node = 'GAME_VIEW:View|Add0~1'
+    Info: 3: + IC(0.000 ns) + CELL(0.458 ns) = 1.512 ns; Loc. = LAB_X34_Y19; Fanout = 19; COMB Node = 'GAME_VIEW:View|Add0~2'
+    Info: 4: + IC(0.131 ns) + CELL(0.545 ns) = 2.188 ns; Loc. = LAB_X34_Y19; Fanout = 2; COMB Node = 'GAME_VIEW:View|process_0~33'
+    Info: 5: + IC(0.131 ns) + CELL(0.545 ns) = 2.864 ns; Loc. = LAB_X34_Y19; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~35'
+    Info: 6: + IC(0.131 ns) + CELL(0.545 ns) = 3.540 ns; Loc. = LAB_X34_Y19; Fanout = 2; COMB Node = 'GAME_VIEW:View|process_0~36'
+    Info: 7: + IC(0.745 ns) + CELL(0.521 ns) = 4.806 ns; Loc. = LAB_X33_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~47'
+    Info: 8: + IC(0.131 ns) + CELL(0.545 ns) = 5.482 ns; Loc. = LAB_X33_Y23; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~48'
+    Info: 9: + IC(1.073 ns) + CELL(0.178 ns) = 6.733 ns; Loc. = LAB_X33_Y22; Fanout = 1; COMB Node = 'GAME_VIEW:View|process_0~49'
+    Info: 10: + IC(0.154 ns) + CELL(0.521 ns) = 7.408 ns; Loc. = LAB_X33_Y22; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~42'
+    Info: 11: + IC(0.354 ns) + CELL(0.322 ns) = 8.084 ns; Loc. = LAB_X33_Y22; Fanout = 6; COMB Node = 'GAME_VIEW:View|red_signal~43'
+    Info: 12: + IC(0.154 ns) + CELL(0.521 ns) = 8.759 ns; Loc. = LAB_X33_Y22; Fanout = 3; COMB Node = 'GAME_VIEW:View|green_signal~1'
+    Info: 13: + IC(0.365 ns) + CELL(0.545 ns) = 9.669 ns; Loc. = LAB_X34_Y22; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~7'
+    Info: 14: + IC(0.154 ns) + CELL(0.521 ns) = 10.344 ns; Loc. = LAB_X34_Y22; Fanout = 2; COMB Node = 'GAME_VIEW:View|green_signal~8'
+    Info: 15: + IC(0.671 ns) + CELL(0.544 ns) = 11.559 ns; Loc. = LAB_X32_Y22; Fanout = 2; COMB Node = 'GAME_VIEW:View|green~2'
+    Info: 16: + IC(0.705 ns) + CELL(0.096 ns) = 12.360 ns; Loc. = LAB_X31_Y22; Fanout = 1; REG Node = 'GAME_VIEW:View|blue[2]'
+    Info: Total cell delay = 6.924 ns ( 56.02 % )
+    Info: Total interconnect delay = 5.436 ns ( 43.98 % )
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 0% of the available device resources
     Info: Peak interconnect usage is 2% of the available device resources in the region that extends from location X25_Y14 to location X37_Y27
@@ -1346,10 +1348,17 @@ Warning: Found 42 output pins without output pin load capacitance assignment
     Info: Pin "leds4[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
 Warning: The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info: Quartus II Fitter was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 257 megabytes
-    Info: Processing ended: Tue Mar 10 17:31:04 2015
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:15
+Info: Generated suppressed messages file C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/2048.fit.smsg
+Info: Quartus II 64-Bit Fitter was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 358 megabytes
+    Info: Processing ended: Tue Mar 10 17:39:58 2015
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:16
+
+
++----------------------------+
+; Fitter Suppressed Messages ;
++----------------------------+
+The suppressed messages can be found in C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/2048.fit.smsg.
 
 
