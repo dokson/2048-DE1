@@ -39,7 +39,6 @@ architecture Behavioral of GAME is
 	signal westBorder: INTEGER range 0 to 1000;
 	signal eastBorder: INTEGER range 0 to 1000;
 	
-	signal drawboxV : STD_LOGIC;
 	signal gameover: STD_LOGIC;
 	signal victory: STD_LOGIC;
 
@@ -109,8 +108,6 @@ View: entity work.GAME_VIEW
 		red			=> red,	
 		green		=> green,		
 		blue		=> blue,		
-		
-		drawboxV => drawboxV,
 				
 		leds1		=> leds1,		
 		leds2 		=> leds2,

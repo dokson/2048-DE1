@@ -11,8 +11,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity Game_CHROM is
-   port(
-      clock: in std_logic;
+   port
+   (
       addr: in std_logic_vector(10 downto 0);
       data: out std_logic_vector(7 downto 0)
    );
@@ -26,7 +26,8 @@ architecture arch of Game_CHROM is
         of std_logic_vector(DATA_WIDTH-1 downto 0);
 
    -- ROM definition - 2^11-by-8
-   constant ROM: rom_type := (
+   constant ROM: rom_type := 
+   (
 		"00000000", -- 0
 		"00000000", -- 1
 		"00000000", -- 2
@@ -2204,13 +2205,19 @@ architecture arch of Game_CHROM is
 		"00000000", -- e
 		"00000000"  -- f
    );
+   
+    -- function reverse vector 
+   function reverse (a: in std_logic_vector)
+	return std_logic_vector is
+	  variable result: std_logic_vector(a'RANGE);
+	  alias aa: std_logic_vector(a'REVERSE_RANGE) is a;
+	begin
+	  for i in aa'RANGE loop
+		result(i) := aa(i);
+	  end loop;
+	  return result;
+	end;
 begin
-   -- addr register to infer block RAM
-   process(clock)
-   begin
-      if clock'event and clock = '1' then
-        addr_reg <= addr;
-      end if;
-   end process;
-   data <= ROM(to_integer(unsigned(addr_reg)));
+   addr_reg <= addr;
+   data <= reverse(ROM(to_integer(unsigned(addr_reg))));
 end arch;

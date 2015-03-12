@@ -41,7 +41,7 @@ shared variable h_cnt	: integer range 0 to 1000;
 shared variable v_cnt  	: integer range 0 to 500;
 
 signal charAddr : STD_LOGIC_VECTOR(10 downto 0);
-signal charOut : STD_LOGIC_VECTOR(7 downto 0);
+signal charOut 	: STD_LOGIC_VECTOR(7 downto 0);
 
 signal drawbox1	: std_logic;
 signal color1	: STD_LOGIC_VECTOR(11 downto 0);
@@ -80,7 +80,6 @@ BEGIN
 CHROM: entity work.GAME_CHROM
 	port map
 	(
-		clock => clk,
 		addr => charAddr,
 		data => charOut
 	);
@@ -331,24 +330,9 @@ variable cntScrittaLampeggiante: integer range 0 to 16000000;
 variable scrittaLampeggia: STD_LOGIC:='0';
 
 -- costanti di utilità
-constant writePosition			: integer range 0 to 500:=300;
-
-constant gameOver_g_Position	: integer range 0 to 1000:=282;
-constant gameOver_a_Position	: integer range 0 to 1000:=288;
-constant gameOver_m_Position	: integer range 0 to 1000:=294;
-constant gameOver_e_Position	: integer range 0 to 1000:=300;
-constant gameOver_o_Position	: integer range 0 to 1000:=312;
-constant gameOver_v_Position	: integer range 0 to 1000:=318;
-constant gameOver_e2_Position	: integer range 0 to 1000:=324;
-constant gameOver_r_Position	: integer range 0 to 1000:=330;
-
-constant youWin_y_Position	: integer range 0 to 1000:=288;
-constant youWin_o_Position	: integer range 0 to 1000:=294;
-constant youWin_u_Position	: integer range 0 to 1000:=300;
-constant youWin_w_Position	: integer range 0 to 1000:=312;
-constant youWin_i_Position	: integer range 0 to 1000:=318;
-constant youWin_n_Position	: integer range 0 to 1000:=324;
-constant youWin_e_Position	: integer range 0 to 1000:=330;		
+constant writePositionV	: integer range 0 to 50:=20;
+constant distanceChar	: integer range 0 to 10:= 8;
+constant writeColaceH	: integer range 0 to 1000:=40;
 
 -- bordi dello schermo
 variable leftBorder		: integer range 0 to 1000;
@@ -356,8 +340,8 @@ variable rightBorder	: integer range 0 to 1000;
 variable upBorder		: integer range 0 to 500;	
 variable downBorder		: integer range 0 to 500;	
 
-variable h_sync	: STD_LOGIC;
-variable v_sync	: STD_LOGIC;
+variable h_sync			: STD_LOGIC;
+variable v_sync			: STD_LOGIC;
 
 -- Enable del video
 variable video_en		: STD_LOGIC; 
@@ -408,9 +392,49 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			green_signal(3) := '1'; green_signal(2) := '0'; green_signal(1) := '1'; green_signal(0) := '1';
 			blue_signal(3) 	:= '1'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '1';	blue_signal(0) 	:= '1';	
 		END IF;	
-		
------------------------------------------------------------------------
-------- DISEGNO DI OGNI BOX
+
+---BORDO SCHERMO
+
+	--BORDO LEFT
+		IF ((h_cnt <= leftBorder)  AND ((v_cnt >= upBorder) AND (v_cnt <= downBorder))) 
+		THEN
+			red_signal 	:= "1000";
+			green_signal:= "1000";
+			blue_signal	:= "1000";
+		END IF;
+	-- fine LEFT
+			
+			
+	-- RIGHT
+		IF ((h_cnt >= RightBorder)  AND ((v_cnt >= upBorder) AND (v_cnt <= downBorder))) 
+		THEN
+			red_signal 	:= "1000";
+			green_signal:= "1000";
+			blue_signal	:= "1000";
+		END IF;
+	-- fine RIGHT
+			
+	-- UP				
+		IF ((v_cnt <= upBorder)) 
+		THEN
+			red_signal 	:= "1000";
+			green_signal:= "1000";
+			blue_signal	:= "1000";
+		END IF;
+	-- fine UP
+
+	--DOWN
+		IF ((v_cnt >= downBorder)) THEN
+			red_signal 	:= "1000";
+			green_signal:= "1000";
+			blue_signal	:= "1000";
+		END IF;
+	-- fine DOWN
+
+--- fine BORDO SCHERMO
+
+
+--- DISEGNO DI OGNI BOX
 		
 		IF(drawbox1='1')
 		THEN
@@ -526,243 +550,39 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 ------- FINE BOX
 -----------------------------------------------------------------------
-case gameover is
-		when '0' => -- CIAO
-			leds1 <= not"0111111"; -- C
-			leds2 <= not"1110111"; -- I
-			leds3 <= not"0000110"; -- A
-			leds4 <= not"0111001"; -- O
-		when '1' => -- OVER
-			leds1 <= not"1010000"; -- O
-			leds2 <= not"1111001"; -- U
-			leds3 <= not"0111110"; -- E
-			leds4 <= not"0111111"; -- P
-		when others => 
-			NULL;
-	end case;
 
-		IF(gameover='0')
+		IF(v_cnt >= writePositionV and v_cnt < writePositionV+16 
+			AND h_cnt >= writeColaceH AND h_cnt < writeColaceH+9)
 		THEN
-			IF((v_cnt >=100 and v_cnt<=115) AND (h_cnt >= 100 AND h_cnt <= 107))
-			THEN
-				row_addr := std_logic_vector(to_unsigned(v_cnt-100, 4)); 
-				charAddr <= "10000001" & row_addr;
-				
-				if(charOut(h_cnt-100) = '1')
-				then
-					red_signal := "0101";
-					green_signal :="1111";
-					blue_signal:="0101";
-				end if;
-				
-			END IF;
+			row_addr := std_logic_vector(to_unsigned(v_cnt-100, 4)); 
+			charAddr <= "1000111" & row_addr;
+			
+			if(charOut(h_cnt-101) = '1')
+			then
+				red_signal 	:= "0101";
+				green_signal:= "1111";
+				blue_signal	:= "0101";
+			end if;
 		END IF;
------------------------------------------------------------------------
--- DA CAMBIARE
-		IF(gameover='1') 
-		THEN
-		-- GAME OVER draw
-		--G
-			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= gameOver_g_Position+1) AND (h_cnt <= gameOver_g_Position+3))) OR
-				(((h_cnt = gameOver_g_Position+4 )) AND ((v_cnt = writePosition+1) OR (v_cnt = writePosition+9) OR (v_cnt = writePosition+8) OR (v_cnt = writePosition+7))) OR
-				(((h_cnt = gameOver_g_Position )) AND ((v_cnt >= writePosition+1) AND (v_cnt <= writePosition+9))) OR
-				(((v_cnt = writePosition+7 )) AND ((h_cnt >= gameOver_g_Position+2) AND (h_cnt <= gameOver_g_Position+4))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine G
-		--A
-			IF (((v_cnt = writePosition OR v_cnt = writePosition+5)) AND ((h_cnt >= gameOver_a_Position+1) AND (h_cnt <= gameOver_a_Position+3))) OR
-			(((h_cnt = gameOver_a_Position OR h_cnt = gameOver_a_Position+4)) AND ((v_cnt >= writePosition+1) AND (v_cnt <= 310))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine A
-		--M
-			IF (((h_cnt = gameOver_m_Position OR h_cnt = gameOver_m_Position+4)) AND ((v_cnt >= writePosition) AND (v_cnt <= 310))) OR
-			(((h_cnt = gameOver_m_Position+1 OR h_cnt = gameOver_m_Position+3) AND (v_cnt >= writePosition+1) AND (v_cnt <= writePosition+2)) )OR
-			((h_cnt = gameOver_m_Position+2) AND (v_cnt >= writePosition+2) AND (v_cnt <= writePosition+3)) OR 
-			((h_cnt = gameOver_m_Position+2) AND (v_cnt >= writePosition+2) AND (v_cnt <= writePosition+3)) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine M
-		--E
-			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= gameOver_e_Position) AND (h_cnt <= gameOver_e_Position+4))) OR
-			(((v_cnt = writePosition+5)) AND ((h_cnt >= gameOver_e_Position) AND (h_cnt <= gameOver_e_Position+3)))OR 
-			(((h_cnt = gameOver_e_Position)) AND ((v_cnt >= writePosition) AND (v_cnt <= 310)))THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine E
-		--0
-			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= gameOver_o_Position+1) AND (h_cnt <= gameOver_o_Position+3))) OR
-				(((h_cnt = gameOver_o_Position OR h_cnt = gameOver_o_Position+4)) AND ((v_cnt >= writePosition+1) AND (v_cnt <= writePosition+9))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine 0
-		--V
-			IF ((v_cnt >= writePosition AND v_cnt <= writePosition+5) AND ((h_cnt = gameOver_v_Position) OR (h_cnt = gameOver_v_Position+4))) OR
-				((v_cnt >= writePosition+5 AND v_cnt <= writePosition+7) AND ((h_cnt = gameOver_v_Position+1) OR (h_cnt = gameOver_v_Position+3))) OR 
-				((v_cnt >= writePosition+8 AND v_cnt <= 310) AND ((h_cnt = gameOver_v_Position+2))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine V
-		--E
-			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= gameOver_e2_Position) AND (h_cnt <= gameOver_e2_Position+4))) OR
-			(((v_cnt = writePosition+5)) AND ((h_cnt >= gameOver_e2_Position) AND (h_cnt <= gameOver_e2_Position+3))) OR
-			(((h_cnt = gameOver_e2_Position)) AND ((v_cnt >= writePosition) AND (v_cnt <= 310))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine E
-		--R
-			IF ((v_cnt >= writePosition AND v_cnt<=310) AND ((h_cnt = gameOver_r_Position))) OR
-				((v_cnt = writePosition OR v_cnt = writePosition+5  OR v_cnt = writePosition+7 ) AND ((h_cnt = gameOver_r_Position+1))) OR
-				((v_cnt = writePosition OR v_cnt = writePosition+5  OR v_cnt = writePosition+8 ) AND ((h_cnt = gameOver_r_Position+2))) OR
-				((v_cnt = writePosition OR v_cnt = writePosition+4  OR v_cnt = writePosition+9 ) AND ((h_cnt = gameOver_r_Position+3))) OR
-				((v_cnt = writePosition+1 OR v_cnt = writePosition+2 OR v_cnt = writePosition+3  OR v_cnt = 310 ) AND ((h_cnt = gameOver_r_Position+4))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine R
 		
-		END IF;
-		-- fine GAME OVER draw
-		
-		-- You Win
-		IF(victory='1') 
+		IF(v_cnt >= writeposition and v_cnt < writeposition+16 
+			AND h_cnt >= writeColaceH+distanceChar AND h_cnt < writeColaceH+distanceChar+9)
 		THEN
-		--Y
-			IF (((v_cnt = writePosition)) AND ((h_cnt = youWin_y_Position) OR (h_cnt = youWin_y_Position+4))) OR
-			(((v_cnt = writePosition+1)) AND ((h_cnt = youWin_y_Position+1) OR (h_cnt = youWin_y_Position+3)))OR 
-			(((h_cnt = youWin_y_Position+2)) AND ((v_cnt >= writePosition+2) AND (v_cnt <= 310)))THEN
-				red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-				green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-				blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine Y
-	--0
-		IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= youWin_o_Position+1) AND (h_cnt <= youWin_o_Position+3))) OR
-			(((h_cnt = youWin_o_Position OR h_cnt = youWin_o_Position+4)) AND ((v_cnt >= writePosition+1) AND (v_cnt <= writePosition+9))) THEN
-				red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-				green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-				blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-		END IF;
-	-- fine 0			
-		--U
-			IF (((v_cnt = 310)) AND ((h_cnt >= youWin_u_Position+1) AND (h_cnt <= youWin_u_Position+3))) OR 
-			(((h_cnt = youWin_u_Position OR h_cnt = youWin_u_Position+4)) AND ((v_cnt >= writePosition) AND (v_cnt <= writePosition+9))) THEN
-				red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-				green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-				blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine U		
-		--W
-			IF (((h_cnt = youWin_w_Position OR h_cnt = youWin_w_Position+4)) AND ((v_cnt >= writePosition) AND (v_cnt <= writePosition+9))) OR
-				(((h_cnt = youWin_w_Position+1 OR h_cnt = youWin_w_Position+3)) AND ((v_cnt = 310)))OR 
-				(((h_cnt = youWin_w_Position+2)) AND ((v_cnt >= writePosition+6) AND v_cnt<=writePosition+9))THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-
-		-- fine W	
-		--I
-			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= youWin_i_Position+1) AND (h_cnt <= youWin_i_Position+3))) OR
-				(((h_cnt = youWin_i_Position+2)) AND ((v_cnt >= writePosition) AND (v_cnt <= 310))) THEN
-				red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-				green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-				blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine I	
-		--N
-			IF (((h_cnt = youWin_n_Position OR h_cnt = youWin_n_Position+4)) AND ((v_cnt >=writePosition) AND (v_cnt <= 310))) OR
-				((h_cnt = youWin_n_Position+1) AND (v_cnt >= writePosition+1) AND (v_cnt <= writePosition+2)) OR
-				(((h_cnt = youWin_n_Position+2) AND (v_cnt >= writePosition+3) AND (v_cnt <= writePosition+4))) OR
-				((h_cnt = youWin_n_Position+3) AND (v_cnt >= writePosition+5) AND (v_cnt <= writePosition+6)) THEN
-				red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-				green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-				blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';	
-			END IF;
-		-- fine N			
-		--!
-			IF (((v_cnt >= writePosition AND v_cnt<writePosition+8)) AND ((h_cnt = youWin_e_Position+3) )) OR
-				(((v_cnt = 310)) AND ((h_cnt = youWin_e_Position+3) )) THEN
-				red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-				green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-				blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine !
-						
-		END IF;
-		--You Win
-
-------- FINE SCRITTE
------------------------------------------------------------------------		
-
-
----BORDO SCHERMO
-
-	--BORDO LEFT
-		IF ((h_cnt <= leftBorder)  AND ((v_cnt >= upBorder) AND (v_cnt <= downBorder))) 
-		THEN
-			red_signal(3) 	:= '1'; red_signal(2) 	:= '0';	red_signal(1) 	:= '0'; red_signal(0) 	:= '0';		
-			green_signal(3) := '1'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
-			blue_signal(3) 	:= '1'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '0';	blue_signal(0) 	:= '0';		
-		END IF;
-	-- fine LEFT
+			row_addr := std_logic_vector(to_unsigned(v_cnt-100, 4)); 
+			charAddr <= "1000101" & row_addr;
 			
-			
-	-- RIGHT
-		IF ((h_cnt >= RightBorder)  AND ((v_cnt >= upBorder) AND (v_cnt <= downBorder))) 
-		THEN
-			red_signal(3) 	:= '1'; red_signal(2) 	:= '0';	red_signal(1) 	:= '0'; red_signal(0) 	:= '0';		
-			green_signal(3) := '1'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
-			blue_signal(3) 	:= '1'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '0';	blue_signal(0) 	:= '0';		
+			if(charOut(h_cnt-111) = '1')
+			then
+				red_signal 	:= "0101";
+				green_signal:= "1111";
+				blue_signal	:= "0101";
+			end if;
 		END IF;
-	-- fine RIGHT
-			
-	-- UP				
-		IF ((v_cnt <= upBorder)) 
-		THEN
-			red_signal(3) 	:= '1'; red_signal(2) 	:= '0';	red_signal(1) 	:= '0'; red_signal(0) 	:= '0';		
-			green_signal(3) := '1'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
-			blue_signal(3) 	:= '1'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '0';	blue_signal(0) 	:= '0';			
-		END IF;
-	-- fine UP
-
-	--DOWN
-		IF ((v_cnt >= downBorder)) THEN
-			red_signal(3) 	:= '1'; red_signal(2) 	:= '0';	red_signal(1) 	:= '0'; red_signal(0) 	:= '0';		
-			green_signal(3) := '1'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
-			blue_signal(3) 	:= '1'; blue_signal(2) 	:= '0';	blue_signal(1) 	:= '0';	blue_signal(0) 	:= '0';			
-		END IF;
-	-- fine DOWN
-
---- fine BORDO SCHERMO
-
----------------------------------------------------------------
--- 			Draw Grid Logic
----------------------------------------------------------------
-
---gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 440) and (unsigned(pixel_x) > 120 and unsigned(pixel_x) <=520)) 
-	--else '0';
-
 
 	--Generazione segnale hsync (rispettando la specifica temporale di avere un ritardo "a" di 3.8 us fra un segnale e l'altro)
 	--Infatti (659-639)/25000000 = 0.6 us, ossia il tempo di Front Porch "d". (755-659)/25000000 = 3.8, ossia il tempo "a"
-	IF (h_cnt <= 755) AND (h_cnt >= 659) THEN
+	IF (h_cnt <= 755) AND (h_cnt >= 659) 
+	THEN
 		h_sync := '0';
 	ELSE
 		h_sync := '1';
@@ -772,7 +592,7 @@ case gameover is
 	--Reset Vertical Counter. Non ci si ferma a 480 per rispettare le specifiche temporali
 	--Infatti (524-479)= 45 = 2(a)+33(b)+10(d) righe
 	IF (v_cnt >= 524) AND (h_cnt >= 699) 
-		THEN
+	THEN
 		v_cnt := 0;
 	ELSIF (h_cnt = 699) 
 		THEN

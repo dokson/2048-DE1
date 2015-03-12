@@ -75,7 +75,7 @@ ControlUnit: entity work.GAME_CONTROL
 Datapath: entity work.GAME_DATA
 	port map
 	(
-		clk		=> clock_25Mhz,
+		clk			=> clock_25Mhz,
 		enable		=> enable,
 		bootstrap	=> boot,
 
