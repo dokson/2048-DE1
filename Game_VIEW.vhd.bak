@@ -78,18 +78,180 @@ signal drawbox16: STD_LOGIC;
 signal color16	: STD_LOGIC_VECTOR(11 downto 0);
 
 -- Segnali per il disegno dei caratteri su schermo
+signal drawCharC : STD_LOGIC;
+signal drawCharO : STD_LOGIC;
+signal drawCharL : STD_LOGIC;
+signal drawCharA : STD_LOGIC;
+signal drawCharC1 : STD_LOGIC;
+signal drawCharE : STD_LOGIC;
+signal drawCharSep: STD_LOGIC;
+signal drawCharG : STD_LOGIC;
+signal drawCharE1 : STD_LOGIC;
+signal drawCharZ : STD_LOGIC;
+signal drawCharZ1 : STD_LOGIC;
+signal drawCharI : STD_LOGIC;
 signal charAddr : STD_LOGIC_VECTOR(6 downto 0); -- Indirizzo del carattere sulla ROM
 signal rowAddr	: STD_LOGIC_VECTOR(3 downto 0); -- Numero della riga di pixel del singolo carattere (0-15)
 signal charOut 	: STD_LOGIC_VECTOR(7 downto 0); -- Vettore di visualizzazione del carattere alla linea impostata
 
 BEGIN
 
-CHROM: entity work.GAME_CHROM
+CHC: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 16,
+		YPOS => 26
+	)
 	port map
 	(
-		char_addr 	=> charAddr,
-		row_addr	=> rowAddr,
-		data 		=> charOut
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 67,
+		drawChar 	=> drawCharC
+	);
+CHO: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 26,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 79,
+		drawChar 	=> drawCharO
+	);
+CHL: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 36,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 76,
+		drawChar 	=> drawCharL
+	);
+CHA: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 46,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 65,
+		drawChar 	=> drawCharA
+	);
+CHC1: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 56,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 67,
+		drawChar 	=> drawCharC1
+	);
+CHE: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 66,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 69,
+		drawChar 	=> drawCharE
+	);
+
+CHSEP: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 76,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 3,
+		drawChar 	=> drawCharSep
+	);
+CHG: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 86,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 71,
+		drawChar 	=> drawCharG
+	);
+CHE1: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 96,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 69,
+		drawChar 	=> drawCharE1
+	);
+CHZ: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 106,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 90,
+		drawChar 	=> drawCharZ
+	);
+CHZ1: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 116,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 90,
+		drawChar 	=> drawCharZ1
+	);
+CHI: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 126,
+		YPOS => 26
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 73,
+		drawChar 	=> drawCharI
 	);
 
 BOX1: entity work.GAME_BOX
@@ -397,6 +559,82 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	END IF;
 --- fine BORDO SCHERMO
 
+--- DISEGNO DI OGNI CARATTERE
+
+--- fine DISEGNO CHAR
+
+	IF(drawCharC='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharO='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111";
+	END IF;
+	IF(drawCharL='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharA='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111";
+	END IF;
+	IF(drawCharC1='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharE='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharSep='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharG='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharE1='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharZ='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharZ1='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
+	IF(drawCharI='1')
+	THEN
+		red_signal(3 downto 0) 	:= "1111"; 		
+		green_signal(3 downto 0):= "1111";  
+		blue_signal(3 downto 0) := "1111"; 
+	END IF;
 
 --- DISEGNO DI OGNI BOX
 	IF(drawbox1='1')
@@ -529,7 +767,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			blue_signal	:= "0101";
 		end if;
 	END IF;
-	
+
 	IF(	v_cnt >= writePositionV AND -- limite alto del carattere
 		v_cnt < writePositionV+16 AND -- limite basso del carattere
 		h_cnt >= writeColaceH+distanceChar AND -- limite sinistro del carattere

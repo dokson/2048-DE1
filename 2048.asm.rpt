@@ -1,5 +1,5 @@
 Assembler report for 2048
-Fri Mar 13 10:06:21 2015
+Fri Mar 13 13:07:10 2015
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Mar 13 10:06:21 2015 ;
+; Assembler Status      ; Successful - Fri Mar 13 13:07:10 2015 ;
 ; Revision Name         ; 2048                                  ;
 ; Top-level Entity Name ; GAME                                  ;
 ; Family                ; Cyclone II                            ;
@@ -95,7 +95,7 @@ applicable agreement for further details.
 +----------------+--------------------------------------------------------------------------------+
 ; Device         ; EP2C20F484C7                                                                   ;
 ; JTAG usercode  ; 0xFFFFFFFF                                                                     ;
-; Checksum       ; 0x001DE740                                                                     ;
+; Checksum       ; 0x001EE40E                                                                     ;
 +----------------+--------------------------------------------------------------------------------+
 
 
@@ -106,7 +106,7 @@ applicable agreement for further details.
 +--------------------+----------------------------------------------------------------------------+
 ; Device             ; EPCS16                                                                     ;
 ; JTAG usercode      ; 0x00000000                                                                 ;
-; Checksum           ; 0x1DD2B1E3                                                                 ;
+; Checksum           ; 0x1DD25A91                                                                 ;
 ; Compression Ratio  ; 3                                                                          ;
 +--------------------+----------------------------------------------------------------------------+
 
@@ -117,14 +117,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Fri Mar 13 10:06:19 2015
+    Info: Processing started: Fri Mar 13 13:07:08 2015
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off 2048 -c 2048
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 235 megabytes
-    Info: Processing ended: Fri Mar 13 10:06:21 2015
+    Info: Peak virtual memory: 234 megabytes
+    Info: Processing ended: Fri Mar 13 13:07:10 2015
     Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
 
 

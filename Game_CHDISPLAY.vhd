@@ -5,8 +5,8 @@ USE IEEE.NUMERIC_STD.ALL;
 entity Game_CHDISPLAY is
 	generic
 	(
-		XPOS 	: in NATURAL;
-		YPOS 	: in NATURAL
+		XPOS 	: IN NATURAL;
+		YPOS 	: IN NATURAL
 	);
 	port
 	(
@@ -39,10 +39,10 @@ CHROM: entity work.GAME_CHROM
 		row_addr	=> rowAddr,
 		data 		=> charOut
 	);
-
+	
 	codeChange : process(char_code)
 	begin
-		rowAddr	 <= std_logic_vector(to_unsigned(pixel_x-XPOS, 4)); -- i-esima riga (0-15)
+		rowAddr	 <= std_logic_vector(to_unsigned(pixel_y-YPOS, 4)); -- i-esima riga (0-15)
 		charAddr <= std_logic_vector(to_unsigned(char_code, 7)); -- codice carattere (0-127)
 	end process codeChange;
 	
@@ -52,7 +52,7 @@ CHROM: entity work.GAME_CHROM
 			pixel_x < MAX_X and -- limite basso del carattere
 			pixel_y >= YPOS and -- limite sinistro del carattere
 			pixel_y < MAX_Y and -- limite destro del carattere
-			charOut(pixel_y-YPOS-1) = '1'
+			charOut(pixel_x-XPOS-1) = '1'
 		else
 			'0';
 

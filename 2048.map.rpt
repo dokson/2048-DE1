@@ -1,5 +1,5 @@
 Analysis & Synthesis report for 2048
-Fri Mar 13 10:06:10 2015
+Fri Mar 13 13:08:13 2015
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -16,39 +16,63 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   8. Registers Removed During Synthesis
   9. General Register Statistics
  10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX1
- 12. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX2
- 13. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX3
- 14. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX4
- 15. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX5
- 16. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX6
- 17. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX7
- 18. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX8
- 19. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX9
- 20. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX10
- 21. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX11
- 22. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX12
- 23. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX13
- 24. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX14
- 25. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX15
- 26. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX16
- 27. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX16"
- 28. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX15"
- 29. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX14"
- 30. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX13"
- 31. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX12"
- 32. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX11"
- 33. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX10"
- 34. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX9"
- 35. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX8"
- 36. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX7"
- 37. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX6"
- 38. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX5"
- 39. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX4"
- 40. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX3"
- 41. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX2"
- 42. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX1"
- 43. Analysis & Synthesis Messages
+ 11. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHC
+ 12. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHO
+ 13. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHL
+ 14. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHA
+ 15. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHC1
+ 16. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHE
+ 17. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHSEP
+ 18. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHG
+ 19. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHE1
+ 20. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHZ
+ 21. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHZ1
+ 22. Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHI
+ 23. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX1
+ 24. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX2
+ 25. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX3
+ 26. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX4
+ 27. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX5
+ 28. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX6
+ 29. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX7
+ 30. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX8
+ 31. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX9
+ 32. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX10
+ 33. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX11
+ 34. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX12
+ 35. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX13
+ 36. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX14
+ 37. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX15
+ 38. Parameter Settings for User Entity Instance: GAME_VIEW:View|GAME_BOX:BOX16
+ 39. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX16"
+ 40. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX15"
+ 41. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX14"
+ 42. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX13"
+ 43. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX12"
+ 44. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX11"
+ 45. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX10"
+ 46. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX9"
+ 47. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX8"
+ 48. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX7"
+ 49. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX6"
+ 50. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX5"
+ 51. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX4"
+ 52. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX3"
+ 53. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX2"
+ 54. Port Connectivity Checks: "GAME_VIEW:View|GAME_BOX:BOX1"
+ 55. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHI"
+ 56. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHZ1"
+ 57. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHZ"
+ 58. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHE1"
+ 59. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHG"
+ 60. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHSEP"
+ 61. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHE"
+ 62. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHC1"
+ 63. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHA"
+ 64. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHL"
+ 65. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHO"
+ 66. Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHC"
+ 67. Analysis & Synthesis Messages
 
 
 
@@ -74,15 +98,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Mar 13 10:06:10 2015        ;
+; Analysis & Synthesis Status        ; Successful - Fri Mar 13 13:08:13 2015        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; 2048                                         ;
 ; Top-level Entity Name              ; GAME                                         ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 227                                          ;
-;     Total combinational functions  ; 207                                          ;
-;     Dedicated logic registers      ; 94                                           ;
-; Total registers                    ; 94                                           ;
+; Total logic elements               ; 313                                          ;
+;     Total combinational functions  ; 293                                          ;
+;     Dedicated logic registers      ; 87                                           ;
+; Total registers                    ; 87                                           ;
 ; Total pins                         ; 46                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
@@ -194,6 +218,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Game_VIEW.vhd                    ; yes             ; User VHDL File  ; C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/Game_VIEW.vhd         ;
 ; Game_BOX.vhd                     ; yes             ; User VHDL File  ; C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/Game_BOX.vhd          ;
 ; Game_CHROM.vhd                   ; yes             ; User VHDL File  ; C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/Game_CHROM.vhd        ;
+; Game_CHDISPLAY.vhd               ; yes             ; User VHDL File  ; C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/Game_CHDISPLAY.vhd    ;
 +----------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------+
 
 
@@ -202,54 +227,72 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------------------------------------+
 ; Resource                                    ; Usage                                   ;
 +---------------------------------------------+-----------------------------------------+
-; Estimated Total logic elements              ; 227                                     ;
+; Estimated Total logic elements              ; 313                                     ;
 ;                                             ;                                         ;
-; Total combinational functions               ; 207                                     ;
+; Total combinational functions               ; 293                                     ;
 ; Logic element usage by number of LUT inputs ;                                         ;
-;     -- 4 input functions                    ; 113                                     ;
-;     -- 3 input functions                    ; 40                                      ;
-;     -- <=2 input functions                  ; 54                                      ;
+;     -- 4 input functions                    ; 178                                     ;
+;     -- 3 input functions                    ; 49                                      ;
+;     -- <=2 input functions                  ; 66                                      ;
 ;                                             ;                                         ;
 ; Logic elements by mode                      ;                                         ;
-;     -- normal mode                          ; 184                                     ;
+;     -- normal mode                          ; 270                                     ;
 ;     -- arithmetic mode                      ; 23                                      ;
 ;                                             ;                                         ;
-; Total registers                             ; 94                                      ;
-;     -- Dedicated logic registers            ; 94                                      ;
+; Total registers                             ; 87                                      ;
+;     -- Dedicated logic registers            ; 87                                      ;
 ;     -- I/O registers                        ; 0                                       ;
 ;                                             ;                                         ;
 ; I/O pins                                    ; 46                                      ;
 ; Maximum fan-out node                        ; GAME_CLKGENERATOR:ClockGenerator|cnt[0] ;
-; Maximum fan-out                             ; 68                                      ;
-; Total fan-out                               ; 910                                     ;
-; Average fan-out                             ; 2.62                                    ;
+; Maximum fan-out                             ; 61                                      ;
+; Total fan-out                               ; 1203                                    ;
+; Average fan-out                             ; 2.82                                    ;
 +---------------------------------------------+-----------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                       ;
-+---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+--------------+
-; Compilation Hierarchy Node            ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                    ; Library Name ;
-+---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+--------------+
-; |GAME                                 ; 207 (0)           ; 94 (0)       ; 0           ; 0            ; 0       ; 0         ; 46   ; 0            ; |GAME                                  ; work         ;
-;    |GAME_CLKGENERATOR:ClockGenerator| ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_CLKGENERATOR:ClockGenerator ;              ;
-;    |GAME_CONTROL:ControlUnit|         ; 6 (6)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_CONTROL:ControlUnit         ;              ;
-;    |GAME_DATA:Datapath|               ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_DATA:Datapath               ;              ;
-;    |GAME_KEYBOARD:KeyboardController| ; 29 (29)           ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_KEYBOARD:KeyboardController ;              ;
-;    |GAME_VIEW:View|                   ; 169 (125)         ; 62 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View                   ;              ;
-;       |GAME_BOX:BOX10|                ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10    ;              ;
-;       |GAME_BOX:BOX13|                ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13    ;              ;
-;       |GAME_BOX:BOX14|                ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14    ;              ;
-;       |GAME_BOX:BOX15|                ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15    ;              ;
-;       |GAME_BOX:BOX16|                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16    ;              ;
-;       |GAME_BOX:BOX1|                 ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1     ;              ;
-;       |GAME_BOX:BOX2|                 ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2     ;              ;
-;       |GAME_BOX:BOX3|                 ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3     ;              ;
-;       |GAME_BOX:BOX4|                 ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4     ;              ;
-;       |GAME_BOX:BOX5|                 ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5     ;              ;
-;       |GAME_BOX:BOX9|                 ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9     ;              ;
-;       |GAME_CHROM:CHROM|              ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_CHROM:CHROM  ;              ;
-+---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                         ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------+--------------+
+; Compilation Hierarchy Node            ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                      ; Library Name ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------+--------------+
+; |GAME                                 ; 293 (0)           ; 87 (0)       ; 0           ; 0            ; 0       ; 0         ; 46   ; 0            ; |GAME                                                    ; work         ;
+;    |GAME_CLKGENERATOR:ClockGenerator| ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_CLKGENERATOR:ClockGenerator                   ;              ;
+;    |GAME_CONTROL:ControlUnit|         ; 6 (6)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_CONTROL:ControlUnit                           ;              ;
+;    |GAME_DATA:Datapath|               ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_DATA:Datapath                                 ;              ;
+;    |GAME_KEYBOARD:KeyboardController| ; 29 (29)           ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_KEYBOARD:KeyboardController                   ;              ;
+;    |GAME_VIEW:View|                   ; 255 (113)         ; 55 (55)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View                                     ;              ;
+;       |GAME_BOX:BOX10|                ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10                      ;              ;
+;       |GAME_BOX:BOX13|                ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13                      ;              ;
+;       |GAME_BOX:BOX14|                ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14                      ;              ;
+;       |GAME_BOX:BOX15|                ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15                      ;              ;
+;       |GAME_BOX:BOX16|                ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16                      ;              ;
+;       |GAME_BOX:BOX1|                 ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1                       ;              ;
+;       |GAME_BOX:BOX2|                 ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2                       ;              ;
+;       |GAME_BOX:BOX3|                 ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3                       ;              ;
+;       |GAME_BOX:BOX4|                 ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4                       ;              ;
+;       |GAME_BOX:BOX5|                 ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5                       ;              ;
+;       |GAME_BOX:BOX6|                 ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6                       ;              ;
+;       |GAME_BOX:BOX9|                 ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9                       ;              ;
+;       |Game_CHDISPLAY:CHA|            ; 8 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHA                  ;              ;
+;          |GAME_CHROM:CHROM|           ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHA|GAME_CHROM:CHROM ;              ;
+;       |Game_CHDISPLAY:CHC1|           ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC1                 ;              ;
+;       |Game_CHDISPLAY:CHC|            ; 19 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC                  ;              ;
+;          |GAME_CHROM:CHROM|           ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC|GAME_CHROM:CHROM ;              ;
+;       |Game_CHDISPLAY:CHE1|           ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE1                 ;              ;
+;       |Game_CHDISPLAY:CHE|            ; 8 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE                  ;              ;
+;          |GAME_CHROM:CHROM|           ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE|GAME_CHROM:CHROM ;              ;
+;       |Game_CHDISPLAY:CHG|            ; 8 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHG                  ;              ;
+;          |GAME_CHROM:CHROM|           ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHG|GAME_CHROM:CHROM ;              ;
+;       |Game_CHDISPLAY:CHI|            ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHI                  ;              ;
+;       |Game_CHDISPLAY:CHL|            ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHL                  ;              ;
+;       |Game_CHDISPLAY:CHO|            ; 19 (18)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHO                  ;              ;
+;          |GAME_CHROM:CHROM|           ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHO|GAME_CHROM:CHROM ;              ;
+;       |Game_CHDISPLAY:CHSEP|          ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHSEP                ;              ;
+;       |Game_CHDISPLAY:CHZ1|           ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ1                 ;              ;
+;       |Game_CHDISPLAY:CHZ|            ; 13 (4)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ                  ;              ;
+;          |GAME_CHROM:CHROM|           ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ|GAME_CHROM:CHROM ;              ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -287,13 +330,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; GAME_DATA:Datapath|westBorder[1]            ; Merged with GAME_DATA:Datapath|westBorder[2]  ;
 ; GAME_DATA:Datapath|westBorder[2]            ; Merged with GAME_DATA:Datapath|westBorder[3]  ;
 ; GAME_DATA:Datapath|westBorder[3]            ; Merged with GAME_DATA:Datapath|southBorder[1] ;
-; GAME_VIEW:View|charAddr[4..5]               ; Merged with GAME_VIEW:View|charAddr[3]        ;
-; GAME_VIEW:View|charAddr[0,6]                ; Merged with GAME_VIEW:View|charAddr[1]        ;
-; GAME_VIEW:View|charAddr[3]                  ; Stuck at GND due to stuck port data_in        ;
-; GAME_VIEW:View|charAddr[1]                  ; Stuck at VCC due to stuck port data_in        ;
-; GAME_VIEW:View|blue_signal[0]               ; Merged with GAME_VIEW:View|green_signal[0]    ;
+; GAME_VIEW:View|red_signal[1]                ; Merged with GAME_VIEW:View|red_signal[0]      ;
+; GAME_VIEW:View|blue_signal[0..1]            ; Merged with GAME_VIEW:View|green_signal[0]    ;
 ; GAME_VIEW:View|blue_signal[2]               ; Merged with GAME_VIEW:View|green_signal[2]    ;
-; Total Number of Removed Registers = 59      ;                                               ;
+; Total Number of Removed Registers = 55      ;                                               ;
 +---------------------------------------------+-----------------------------------------------+
 
 
@@ -302,12 +342,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 94    ;
+; Total registers                              ; 87    ;
 ; Number of registers using Synchronous Clear  ; 7     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 20    ;
+; Number of registers using Clock Enable       ; 15    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -317,14 +357,146 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                              ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------+
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GAME|GAME_VIEW:View|charAddr[1]                        ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; Yes        ; |GAME|GAME_VIEW:View|rowAddr[0]                         ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GAME|GAME_KEYBOARD:KeyboardController|keyCode[4]       ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GAME|GAME_KEYBOARD:KeyboardController|keyCode[7]       ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |GAME|GAME_KEYBOARD:KeyboardController|breakReceived[0] ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |GAME|GAME_KEYBOARD:KeyboardController|bitCount[6]      ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |GAME|GAME_CONTROL:ControlUnit|state[0]                 ;
-; 21:1               ; 12 bits   ; 168 LEs       ; 156 LEs              ; 12 LEs                 ; No         ; |GAME|GAME_VIEW:View|blue_signal                        ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |GAME|GAME_KEYBOARD:KeyboardController|bitCount[4]      ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |GAME|GAME_CONTROL:ControlUnit|state[1]                 ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE1|Mux0           ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE|Mux0            ;
+; 31:1               ; 12 bits   ; 240 LEs       ; 240 LEs              ; 0 LEs                  ; No         ; |GAME|GAME_VIEW:View|green_signal                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHC ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 16    ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHO ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 26    ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHL ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 36    ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHA ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 46    ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHC1 ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; xpos           ; 56    ; Signed Integer                                         ;
+; ypos           ; 26    ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHE ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 66    ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHSEP ;
++----------------+-------+---------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                    ;
++----------------+-------+---------------------------------------------------------+
+; xpos           ; 76    ; Signed Integer                                          ;
+; ypos           ; 26    ; Signed Integer                                          ;
++----------------+-------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHG ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 86    ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHE1 ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; xpos           ; 96    ; Signed Integer                                         ;
+; ypos           ; 26    ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHZ ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 106   ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHZ1 ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; xpos           ; 116   ; Signed Integer                                         ;
+; ypos           ; 26    ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GAME_VIEW:View|Game_CHDISPLAY:CHI ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; xpos           ; 126   ; Signed Integer                                        ;
+; ypos           ; 26    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +---------------------------------------------------------------------------+
@@ -661,13 +833,161 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+-------+----------+------------------------------+
 
 
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHI" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[5..4] ; Input ; Info     ; Stuck at GND             ;
+; char_code[2..1] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[3]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[0]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHZ1" ;
++-----------------+-------+----------+---------------------------+
+; Port            ; Type  ; Severity ; Details                   ;
++-----------------+-------+----------+---------------------------+
+; char_code[4..3] ; Input ; Info     ; Stuck at VCC              ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC              ;
+; char_code[5]    ; Input ; Info     ; Stuck at GND              ;
+; char_code[2]    ; Input ; Info     ; Stuck at GND              ;
+; char_code[1]    ; Input ; Info     ; Stuck at VCC              ;
+; char_code[0]    ; Input ; Info     ; Stuck at GND              ;
++-----------------+-------+----------+---------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHZ" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[4..3] ; Input ; Info     ; Stuck at VCC             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[5]    ; Input ; Info     ; Stuck at GND             ;
+; char_code[2]    ; Input ; Info     ; Stuck at GND             ;
+; char_code[1]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[0]    ; Input ; Info     ; Stuck at GND             ;
++-----------------+-------+----------+--------------------------+
+
+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHE1" ;
++-----------------+-------+----------+---------------------------+
+; Port            ; Type  ; Severity ; Details                   ;
++-----------------+-------+----------+---------------------------+
+; char_code[5..3] ; Input ; Info     ; Stuck at GND              ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC              ;
+; char_code[2]    ; Input ; Info     ; Stuck at VCC              ;
+; char_code[1]    ; Input ; Info     ; Stuck at GND              ;
+; char_code[0]    ; Input ; Info     ; Stuck at VCC              ;
++-----------------+-------+----------+---------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHG" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[2..0] ; Input ; Info     ; Stuck at VCC             ;
+; char_code[5..3] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
++-----------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHSEP" ;
++-----------------+-------+----------+----------------------------+
+; Port            ; Type  ; Severity ; Details                    ;
++-----------------+-------+----------+----------------------------+
+; char_code[3..2] ; Input ; Info     ; Stuck at VCC               ;
+; char_code[6]    ; Input ; Info     ; Stuck at GND               ;
+; char_code[5]    ; Input ; Info     ; Stuck at VCC               ;
+; char_code[4]    ; Input ; Info     ; Stuck at GND               ;
+; char_code[1]    ; Input ; Info     ; Stuck at GND               ;
+; char_code[0]    ; Input ; Info     ; Stuck at VCC               ;
++-----------------+-------+----------+----------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHE" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[5..3] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[2]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[1]    ; Input ; Info     ; Stuck at GND             ;
+; char_code[0]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHC1" ;
++-----------------+-------+----------+---------------------------+
+; Port            ; Type  ; Severity ; Details                   ;
++-----------------+-------+----------+---------------------------+
+; char_code[1..0] ; Input ; Info     ; Stuck at VCC              ;
+; char_code[5..2] ; Input ; Info     ; Stuck at GND              ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC              ;
++-----------------+-------+----------+---------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHA" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[5..1] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
+; char_code[0]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHL" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[3..2] ; Input ; Info     ; Stuck at VCC             ;
+; char_code[5..4] ; Input ; Info     ; Stuck at GND             ;
+; char_code[1..0] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHO" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[3..0] ; Input ; Info     ; Stuck at VCC             ;
+; char_code[5..4] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "GAME_VIEW:View|Game_CHDISPLAY:CHC" ;
++-----------------+-------+----------+--------------------------+
+; Port            ; Type  ; Severity ; Details                  ;
++-----------------+-------+----------+--------------------------+
+; char_code[1..0] ; Input ; Info     ; Stuck at VCC             ;
+; char_code[5..2] ; Input ; Info     ; Stuck at GND             ;
+; char_code[6]    ; Input ; Info     ; Stuck at VCC             ;
++-----------------+-------+----------+--------------------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Fri Mar 13 10:06:06 2015
+    Info: Processing started: Fri Mar 13 13:08:07 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off 2048 -c 2048
 Info: Found 2 design units, including 1 entities, in source file game.vhd
     Info: Found design unit 1: GAME-Behavioral
@@ -703,7 +1023,34 @@ Info: Elaborating entity "GAME_CONTROL" for hierarchy "GAME_CONTROL:ControlUnit"
 Info: Elaborating entity "GAME_DATA" for hierarchy "GAME_DATA:Datapath"
 Warning (10541): VHDL Signal Declaration warning at Game_DATA.vhd(22): used implicit default value for signal "goingReady" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info: Elaborating entity "GAME_VIEW" for hierarchy "GAME_VIEW:View"
-Info: Elaborating entity "GAME_CHROM" for hierarchy "GAME_VIEW:View|GAME_CHROM:CHROM"
+Warning (10036): Verilog HDL or VHDL warning at Game_VIEW.vhd(93): object "charAddr" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Game_VIEW.vhd(94): object "rowAddr" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at Game_VIEW.vhd(95): used implicit default value for signal "charOut" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHC"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "GAME_CHROM" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHC|GAME_CHROM:CHROM"
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHO"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHL"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHA"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHC1"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHE"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHSEP"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHG"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHE1"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHZ"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHZ1"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info: Elaborating entity "Game_CHDISPLAY" for hierarchy "GAME_VIEW:View|Game_CHDISPLAY:CHI"
+Warning (10492): VHDL Process Statement warning at Game_CHDISPLAY.vhd(45): signal "pixel_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info: Elaborating entity "GAME_BOX" for hierarchy "GAME_VIEW:View|GAME_BOX:BOX1"
 Info: Elaborating entity "GAME_BOX" for hierarchy "GAME_VIEW:View|GAME_BOX:BOX2"
 Info: Elaborating entity "GAME_BOX" for hierarchy "GAME_VIEW:View|GAME_BOX:BOX3"
@@ -737,14 +1084,14 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "leds4[6]" is stuck at VCC
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "cheatKey"
-Info: Implemented 302 device resources after synthesis - the final resource count might be different
+Info: Implemented 387 device resources after synthesis - the final resource count might be different
     Info: Implemented 4 input pins
     Info: Implemented 42 output pins
-    Info: Implemented 256 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Peak virtual memory: 244 megabytes
-    Info: Processing ended: Fri Mar 13 10:06:10 2015
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Implemented 341 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 33 warnings
+    Info: Peak virtual memory: 252 megabytes
+    Info: Processing ended: Fri Mar 13 13:08:13 2015
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:07
 
 
