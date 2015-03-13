@@ -106,7 +106,7 @@ CHC: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 67,
+		char_code =>  'C',
 		drawChar 	=> drawCharC
 	);
 CHO: entity work.GAME_CHDISPLAY
@@ -119,7 +119,7 @@ CHO: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 79,
+		char_code => 'o',
 		drawChar 	=> drawCharO
 	);
 CHL: entity work.GAME_CHDISPLAY
@@ -132,7 +132,7 @@ CHL: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 76,
+		char_code => 'l',
 		drawChar 	=> drawCharL
 	);
 CHA: entity work.GAME_CHDISPLAY
@@ -145,7 +145,7 @@ CHA: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 65,
+		char_code => 'a',
 		drawChar 	=> drawCharA
 	);
 CHC1: entity work.GAME_CHDISPLAY
@@ -158,7 +158,7 @@ CHC1: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 67,
+		char_code => 'c',
 		drawChar 	=> drawCharC1
 	);
 CHE: entity work.GAME_CHDISPLAY
@@ -171,7 +171,7 @@ CHE: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 69,
+		char_code => 'e',
 		drawChar 	=> drawCharE
 	);
 
@@ -185,7 +185,7 @@ CHSEP: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 3,
+		char_code => 45,
 		drawChar 	=> drawCharSep
 	);
 CHG: entity work.GAME_CHDISPLAY
@@ -198,7 +198,7 @@ CHG: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 71,
+		char_code => 'G',
 		drawChar 	=> drawCharG
 	);
 CHE1: entity work.GAME_CHDISPLAY
@@ -211,7 +211,7 @@ CHE1: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 69,
+		char_code => 'e',
 		drawChar 	=> drawCharE1
 	);
 CHZ: entity work.GAME_CHDISPLAY
@@ -224,7 +224,7 @@ CHZ: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 90,
+		char_code => 'z',
 		drawChar 	=> drawCharZ
 	);
 CHZ1: entity work.GAME_CHDISPLAY
@@ -237,7 +237,7 @@ CHZ1: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 90,
+		char_code => 'z',
 		drawChar 	=> drawCharZ1
 	);
 CHI: entity work.GAME_CHDISPLAY
@@ -250,7 +250,7 @@ CHI: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code => 73,
+		char_code => 'i',
 		drawChar 	=> drawCharI
 	);
 
@@ -541,9 +541,9 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	IF (v_cnt >= 0) AND (v_cnt <= 479) 
 	THEN
 		-- Grigio scuro
-		red_signal 	:= "1011";
-		green_signal:= "1011";
-		blue_signal	:= "1011";	
+		red_signal 	:= "0000";
+		green_signal:= "0000";
+		blue_signal	:= "0000";	
 	END IF;	
 
 --- BORDI SCHERMO

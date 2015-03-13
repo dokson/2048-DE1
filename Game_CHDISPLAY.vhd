@@ -13,7 +13,7 @@ entity Game_CHDISPLAY is
 		-- INPUT
 		pixel_x 	: IN INTEGER RANGE  0 to 1000;
 		pixel_y 	: IN INTEGER RANGE  0 to 500;
-		char_code	: IN INTEGER RANGE 	0 to 127;
+		char_code	: IN CHARACTER;
 		
 		-- OUTPUT
 		drawChar	: OUT STD_LOGIC := '0' -- disegna il char quando drawChar = 1
@@ -43,7 +43,7 @@ CHROM: entity work.GAME_CHROM
 	codeChange : process(char_code)
 	begin
 		rowAddr	 <= std_logic_vector(to_unsigned(pixel_y-YPOS, 4)); -- i-esima riga (0-15)
-		charAddr <= std_logic_vector(to_unsigned(char_code, 7)); -- codice carattere (0-127)
+		charAddr <= std_logic_vector(to_unsigned(character'pos(char_code), 7)); -- codice carattere (0-127)
 	end process codeChange;
 	
 	drawChar <= '1' 
