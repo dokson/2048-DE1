@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.716 ns
+Actual Time    : 6.873 ns
 From           : PS2_DAT
-To             : GAME_KEYBOARD:KeyboardController|bitCount[5]
+To             : GAME_KEYBOARD:KeyboardController|bitCount[4]
 From Clock     : --
 To Clock       : PS2_CLK
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 13.371 ns
-From           : GAME_VIEW:View|leds1[2]
-To             : leds1[2]
+Actual Time    : 13.009 ns
+From           : GAME_VIEW:View|red[3]
+To             : red[3]
 From Clock     : clk_50Mhz
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -2.359 ns
+Actual Time    : -2.811 ns
 From           : PS2_DAT
 To             : GAME_KEYBOARD:KeyboardController|scancode[7]
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'clk_50Mhz'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 85.84 MHz ( period = 11.650 ns )
-From           : GAME_VIEW:View|h_cnt[7]
-To             : GAME_VIEW:View|green[1]
+Actual Time    : 88.41 MHz ( period = 11.311 ns )
+From           : GAME_VIEW:View|h_cnt[0]
+To             : GAME_VIEW:View|red[3]
 From Clock     : clk_50Mhz
 To Clock       : clk_50Mhz
 Failed Paths   : 0
@@ -45,9 +45,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'PS2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 230.57 MHz ( period = 4.337 ns )
-From           : GAME_KEYBOARD:KeyboardController|bitCount[2]
-To             : GAME_KEYBOARD:KeyboardController|bitCount[5]
+Actual Time    : 227.95 MHz ( period = 4.387 ns )
+From           : GAME_KEYBOARD:KeyboardController|bitCount[6]
+To             : GAME_KEYBOARD:KeyboardController|bitCount[4]
 From Clock     : PS2_CLK
 To Clock       : PS2_CLK
 Failed Paths   : 0
@@ -56,8 +56,8 @@ Type           : Clock Hold: 'PS2_CLK'
 Slack          : Not operational: Clock Skew > Data Delay
 Required Time  : None
 Actual Time    : N/A
-From           : GAME_KEYBOARD:KeyboardController|scancode[4]
-To             : GAME_KEYBOARD:KeyboardController|keyCode[4]
+From           : GAME_KEYBOARD:KeyboardController|scancode[5]
+To             : GAME_KEYBOARD:KeyboardController|keyCode[5]
 From Clock     : PS2_CLK
 To Clock       : PS2_CLK
 Failed Paths   : 16

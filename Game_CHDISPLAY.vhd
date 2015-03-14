@@ -3,16 +3,17 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
 entity Game_CHDISPLAY is
+	-- Coordinate del box
 	generic
 	(
-		XPOS 	: IN NATURAL;
-		YPOS 	: IN NATURAL
+		XPOS 		: IN NATURAL;
+		YPOS 		: IN NATURAL
 	);
 	port
 	(
 		-- INPUT
-		pixel_x 	: IN INTEGER RANGE  0 to 1000;
-		pixel_y 	: IN INTEGER RANGE  0 to 500;
+		pixel_x 	: IN INTEGER RANGE 0 to 1000;
+		pixel_y 	: IN INTEGER RANGE 0 to 500;
 		char_code	: IN CHARACTER;
 		
 		-- OUTPUT
@@ -21,9 +22,12 @@ entity Game_CHDISPLAY is
 end Game_CHDISPLAY;
 
 architecture arch of Game_CHDISPLAY is
+	-- Dimensioni fisse di tutti i caratteri
+	constant larghezza 	: integer := 9; 	
+	constant altezza 	: integer := 16;
 	-- Coordinate finali del carattere sullo schermo
-	constant MAX_X : integer range 0 to 1000 := XPOS + 9; -- larghezza
-	constant MAX_Y : integer range 0 to 500  := YPOS + 16; -- altezza
+	constant MAX_X 		: integer := XPOS + larghezza; -- larghezza
+	constant MAX_Y 		: integer := YPOS + altezza; -- altezza
 	
 	-- Segnali per il disegno dei caratteri su schermo
 	signal charAddr : STD_LOGIC_VECTOR(6 downto 0); -- Indirizzo del carattere sulla ROM
@@ -42,8 +46,8 @@ CHROM: entity work.GAME_CHROM
 	
 	codeChange : process(char_code)
 	begin
-		rowAddr	 <= std_logic_vector(to_unsigned(pixel_y-YPOS, 4)); -- i-esima riga (0-15)
-		charAddr <= std_logic_vector(to_unsigned(character'pos(char_code), 7)); -- codice carattere (0-127)
+		rowAddr	 <= std_logic_vector(to_unsigned(pixel_y-YPOS, rowAddr'length)); -- i-esima riga (0-15)
+		charAddr <= std_logic_vector(to_unsigned(character'pos(char_code), charAddr'length)); -- codice carattere (0-127)
 	end process codeChange;
 	
 	drawChar <= '1' 
