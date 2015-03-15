@@ -96,6 +96,8 @@ signal charOut 	: STD_LOGIC_VECTOR(7 downto 0); -- Vettore di visualizzazione de
 
 BEGIN
 
+
+--Disegno caratteri
 CHC: entity work.GAME_CHDISPLAY
 	generic map
 	(
@@ -253,6 +255,8 @@ CHI: entity work.GAME_CHDISPLAY
 		char_code => 'i',
 		drawChar 	=> drawCharI
 	);
+	
+-- costanti per le scritte	
 
 BOX1: entity work.GAME_BOX
 	generic map
