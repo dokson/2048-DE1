@@ -1,20 +1,21 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
- 
+
+-- Definizioni delle funzioni contenute nel package
 PACKAGE GAME_UTILS IS
-	FUNCTION INT_TO7SEG (A:INTEGER) 
+	FUNCTION digit_to7seg (A:INTEGER) 
+		RETURN STD_LOGIC_VECTOR;
+	FUNCTION reverse (A: IN STD_LOGIC_VECTOR) 
 		RETURN STD_LOGIC_VECTOR;
 END GAME_UTILS;
  
- 
 PACKAGE BODY GAME_UTILS IS
-	
-FUNCTION DIGIT_TO7SEG (A:INTEGER) RETURN STD_LOGIC_VECTOR IS
-	
--- Risultato: uscita 7 bit per 7 segmenti
-VARIABLE RESULT: STD_LOGIC_VECTOR(6 downto 0);
 
+-- Conversione da cifra a vettore di bit per 7 segmenti
+FUNCTION digit_to7seg (A:INTEGER) RETURN STD_LOGIC_VECTOR IS
+	-- Risultato: uscita 7 bit per 7 segmenti
+	VARIABLE RESULT: STD_LOGIC_VECTOR(6 downto 0);
 BEGIN
 	CASE A IS
 		WHEN 0 => RESULT:="1000000";
@@ -30,6 +31,18 @@ BEGIN
 		WHEN OTHERS => RESULT:=(OTHERS=>'0');
 	END CASE;
 	RETURN RESULT;
+END digit_to7seg;
 
-END DIGIT_TO7SEG;
+-- Inversione di un generico vettore
+FUNCTION reverse (A: IN STD_LOGIC_VECTOR) RETURN STD_LOGIC_VECTOR IS
+	-- Risultato: vettore della stessa dimensione del vettore d'ingresso
+	VARIABLE RESULT	: STD_LOGIC_VECTOR(A'RANGE);
+	ALIAS AA		: STD_LOGIC_VECTOR(A'REVERSE_RANGE) IS A;
+BEGIN
+	FOR i IN AA'RANGE LOOP
+		RESULT(i) := AA(i);
+	END LOOP;
+	RETURN RESULT;
+END reverse;
+
 END GAME_UTILS;

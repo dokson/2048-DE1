@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+USE WORK.GAME_UTILS.ALL;
 
 entity GAME_CHROM is
 	port
@@ -2210,18 +2211,6 @@ architecture arch of GAME_CHROM is
 		"00000000", -- e
 		"00000000"  -- f
 	);
-   
-    -- Funzione di inversione del vettore per comodità della stampa
-	function reverse (a: in std_logic_vector)
-	return std_logic_vector is
-		variable result	: std_logic_vector(a'RANGE);
-		alias aa		: std_logic_vector(a'REVERSE_RANGE) is a;
-	begin
-		for i in aa'RANGE loop
-			result(i) := aa(i);
-		end loop;
-		return result;
-	end;
 
 begin
 	-- Primi 7 bit di indirizzamento relativi al carattere
