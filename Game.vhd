@@ -2,6 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE WORK.GAME_TYPES.ALL;
 
 entity GAME is
     port
@@ -42,6 +43,7 @@ architecture Behavioral of GAME is
 	
 	signal gameover: STD_LOGIC;
 	signal victory: STD_LOGIC;
+	signal box_values : GAME_GRID;
 
 BEGIN
 
@@ -87,7 +89,8 @@ Datapath: entity work.GAME_DATA
 		
 		goingReady	=> goingReady,
 		victory		=> victory,
-		gameover 	=> gameover
+		gameover 	=> gameover,
+		box_values 	=> box_values
 	);
 
 View: entity work.GAME_VIEW
@@ -99,6 +102,8 @@ View: entity work.GAME_VIEW
 		downBorder	=> southBorder,
 		leftBorder	=> westBorder,
 		rightBorder	=> eastBorder,
+		
+		box_values 	=> box_values,
 
 		bootstrap	=> boot,
 		gameover	=> gameover,

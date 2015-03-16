@@ -3,6 +3,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+USE WORK.GAME_TYPES.ALL;
 
 ENTITY GAME_VIEW IS
 PORT
@@ -14,6 +15,9 @@ PORT
 		downBorder 	: IN INTEGER RANGE 0 to 500;
 		leftBorder 	: IN INTEGER RANGE 0 to 1000;
 		rightBorder : IN INTEGER RANGE 0 to 1000;
+		
+		-- MODEL STATUS
+		box_values	: IN GAME_GRID;
 		
 		bootstrap	: IN STD_LOGIC;
 		
@@ -77,7 +81,7 @@ signal color15	: STD_LOGIC_VECTOR(11 downto 0);
 signal drawbox16: STD_LOGIC;
 signal color16	: STD_LOGIC_VECTOR(11 downto 0);
 
--- Segnali per il disegno dei caratteri su schermo
+-- Segnali per il disegno dei caratteri su schermo : autori
 signal drawCharC : STD_LOGIC;
 signal drawCharO : STD_LOGIC;
 signal drawCharL : STD_LOGIC;
@@ -91,10 +95,20 @@ signal drawCharZ : STD_LOGIC;
 signal drawCharZ1 : STD_LOGIC;
 signal drawCharI : STD_LOGIC;
 
+-- game over
+signal drawGoG : STD_LOGIC;
+signal drawGoA : STD_LOGIC;
+signal drawGoM : STD_LOGIC;
+signal drawGoE : STD_LOGIC;
+signal drawGoO : STD_LOGIC;
+signal drawGoV : STD_LOGIC;
+signal drawGoE1: STD_LOGIC;
+signal drawGoR : STD_LOGIC;
+
 BEGIN
 
 
---Disegno caratteri
+--Disegno caratteri : autori
 CHC: entity work.GAME_CHDISPLAY
 	generic map
 	(
@@ -252,8 +266,122 @@ CHI: entity work.GAME_CHDISPLAY
 		char_code => 'i',
 		drawChar 	=> drawCharI
 	);
+
+
+-- disegno caratteri : game over
+CHGOG: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 280,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'G',
+		drawChar 	=> drawGoG
+	);
 	
--- costanti per le scritte	
+CHGOA: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 290,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'A',
+		drawChar 	=> drawGoA
+	);
+
+CHGOM: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 300,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'M',
+		drawChar 	=> drawGoM
+	);
+
+CHGOE: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 310,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'E',
+		drawChar 	=> drawGoE
+	);
+--over
+
+CHGOO: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 330,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'O',
+		drawChar 	=> drawGoO
+	);
+
+CHGOV: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 340,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'V',
+		drawChar 	=> drawGoV
+	);
+
+CHGOE1: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 350,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'E',
+		drawChar 	=> drawGoE1
+	);
+
+CHGOR: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 360,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'R',
+		drawChar 	=> drawGoR
+	);
+
 
 BOX1: entity work.GAME_BOX
 	generic map
@@ -265,7 +393,7 @@ BOX1: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> box_values(0,0),
 		drawbox => drawbox1,
 		color 	=> color1
 	);
@@ -280,7 +408,7 @@ BOX2: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 32,
+		number 	=> box_values(0,1),
 		drawbox => drawbox2,
 		color 	=> color2
 	);
@@ -295,7 +423,7 @@ BOX3: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 2,
+		number 	=> box_values(0,2),
 		drawbox => drawbox3,
 		color 	=> color3
 	);
@@ -310,7 +438,7 @@ BOX4: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> box_values(0,3),
 		drawbox => drawbox4,
 		color 	=> color4
 	);
@@ -325,7 +453,7 @@ BOX5: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 1024,
+		number 	=> box_values(1,0),
 		drawbox => drawbox5,
 		color 	=> color5
 	);
@@ -340,7 +468,7 @@ BOX6: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 16,
+		number 	=> box_values(1,1),
 		drawbox => drawbox6,
 		color 	=> color6
 	);
@@ -355,7 +483,7 @@ BOX7: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 4,
+		number 	=> box_values(1,2),
 		drawbox => drawbox7,
 		color 	=> color7
 	);
@@ -370,7 +498,7 @@ BOX8: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 256,
+		number 	=> box_values(1,3),
 		drawbox => drawbox8,
 		color 	=> color8
 	);
@@ -385,7 +513,7 @@ BOX9: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 32,
+		number 	=> box_values(2,0),
 		drawbox => drawbox9,
 		color 	=> color9
 	);
@@ -400,7 +528,7 @@ BOX10: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 16,
+		number 	=> box_values(2,1),
 		drawbox => drawbox10,
 		color 	=> color10
 	);
@@ -415,7 +543,7 @@ BOX11: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 512,
+		number 	=> box_values(2,2),
 		drawbox => drawbox11,
 		color 	=> color11
 	);
@@ -430,7 +558,7 @@ BOX12: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 2,
+		number 	=> box_values(2,3),
 		drawbox => drawbox12,
 		color 	=> color12
 	);
@@ -445,7 +573,7 @@ BOX13: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 128,
+		number 	=> box_values(3,0),
 		drawbox => drawbox13,
 		color 	=> color13
 	);
@@ -460,7 +588,7 @@ BOX14: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 2048,
+		number 	=> box_values(3,1),
 		drawbox => drawbox14,
 		color 	=> color14
 	);
@@ -475,7 +603,7 @@ BOX15: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 8,
+		number 	=> box_values(3,2),
 		drawbox => drawbox15,
 		color 	=> color15
 	);
@@ -490,7 +618,7 @@ BOX16: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 64,
+		number 	=> box_values(3,3),
 		drawbox => drawbox16,
 		color 	=> color16
 	);
@@ -560,10 +688,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	END IF;
 --- fine BORDO SCHERMO
 
---- DISEGNO DI OGNI CARATTERE
-
---- fine DISEGNO CHAR
-
+--- DISEGNO DI OGNI CARATTERE : AUTORI
 	IF(drawCharC='1')
 	THEN
 		red_signal(3 downto 0) 	:= "1111"; 		
@@ -636,6 +761,63 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		green_signal(3 downto 0):= "1111";  
 		blue_signal(3 downto 0) := "1111"; 
 	END IF;
+
+--- fine DISEGNO CHAR
+
+--- DISEGNO DI OGNI CARATTERE : GAME OVER
+	IF (gameover = '1')
+	THEN
+		IF(drawGoG='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoA='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101";
+		END IF;
+		IF(drawGoM='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoE='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101";
+		END IF;
+		
+		IF(drawGoO='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoV='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoE1='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101";
+		END IF;
+		IF(drawGoR='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+	END IF;
+--- fine DISEGNO CHAR
 
 --- DISEGNO DI OGNI BOX
 	IF(drawbox1='1')

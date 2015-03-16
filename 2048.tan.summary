@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.869 ns
+Actual Time    : 6.162 ns
 From           : PS2_DAT
 To             : GAME_KEYBOARD:KeyboardController|bitCount[5]
 From Clock     : --
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 13.442 ns
-From           : GAME_VIEW:View|leds1[0]
-To             : leds1[0]
+Actual Time    : 11.036 ns
+From           : GAME_VIEW:View|red[1]
+To             : red[1]
 From Clock     : clk_50Mhz
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -2.876 ns
+Actual Time    : -2.673 ns
 From           : PS2_DAT
 To             : GAME_KEYBOARD:KeyboardController|scancode[7]
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'clk_50Mhz'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 86.24 MHz ( period = 11.596 ns )
-From           : GAME_VIEW:View|v_cnt[0]
-To             : GAME_VIEW:View|red[1]
+Actual Time    : 89.90 MHz ( period = 11.124 ns )
+From           : GAME_VIEW:View|v_cnt[2]
+To             : GAME_VIEW:View|green[3]
 From Clock     : clk_50Mhz
 To Clock       : clk_50Mhz
 Failed Paths   : 0
@@ -45,7 +45,7 @@ Failed Paths   : 0
 Type           : Clock Setup: 'PS2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 229.94 MHz ( period = 4.349 ns )
+Actual Time    : 232.77 MHz ( period = 4.296 ns )
 From           : GAME_KEYBOARD:KeyboardController|bitCount[4]
 To             : GAME_KEYBOARD:KeyboardController|bitCount[5]
 From Clock     : PS2_CLK
@@ -56,8 +56,8 @@ Type           : Clock Hold: 'PS2_CLK'
 Slack          : Not operational: Clock Skew > Data Delay
 Required Time  : None
 Actual Time    : N/A
-From           : GAME_KEYBOARD:KeyboardController|scancode[6]
-To             : GAME_KEYBOARD:KeyboardController|keyCode[6]
+From           : GAME_KEYBOARD:KeyboardController|scancode[7]
+To             : GAME_KEYBOARD:KeyboardController|keyCode[7]
 From Clock     : PS2_CLK
 To Clock       : PS2_CLK
 Failed Paths   : 16
