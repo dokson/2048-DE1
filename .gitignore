@@ -22,10 +22,6 @@
 # or you create an own submodule in the folder to keep binary files out of your
 # design.
 
-# ignore hdl source files in top level directory
-*.vhd
-*.v
-
 # ignore Quartus II generated files
 *sopc_*
 *.jdi
@@ -67,7 +63,7 @@ testbench/
 *_sim/
 *_builder/
 
-# OS generated files #
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
