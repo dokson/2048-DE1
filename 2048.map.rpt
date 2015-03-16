@@ -1,5 +1,5 @@
 Analysis & Synthesis report for 2048
-Sat Mar 14 18:22:44 2015
+Mon Mar 16 10:48:23 2015
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -86,7 +86,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Mar 14 18:22:44 2015        ;
+; Analysis & Synthesis Status        ; Successful - Mon Mar 16 10:48:23 2015        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; 2048                                         ;
 ; Top-level Entity Name              ; GAME                                         ;
@@ -831,7 +831,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sat Mar 14 18:22:27 2015
+    Info: Processing started: Mon Mar 16 10:47:58 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off 2048 -c 2048
 Info: Found 2 design units, including 1 entities, in source file game.vhd
     Info: Found design unit 1: GAME-Behavioral
@@ -860,6 +860,9 @@ Info: Found 2 design units, including 1 entities, in source file game_chrom.vhd
 Info: Found 2 design units, including 1 entities, in source file game_chdisplay.vhd
     Info: Found design unit 1: Game_CHDISPLAY-arch
     Info: Found entity 1: Game_CHDISPLAY
+Info: Found 2 design units, including 0 entities, in source file game_utils.vhd
+    Info: Found design unit 1: GAME_UTILS
+    Info: Found design unit 2: GAME_UTILS-body
 Info: Elaborating entity "Game" for the top level hierarchy
 Info: Elaborating entity "GAME_CLKGENERATOR" for hierarchy "GAME_CLKGENERATOR:ClockGenerator"
 Info: Elaborating entity "GAME_KEYBOARD" for hierarchy "GAME_KEYBOARD:KeyboardController"
@@ -934,8 +937,8 @@ Info: Implemented 423 device resources after synthesis - the final resource coun
     Info: Implemented 377 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 33 warnings
     Info: Peak virtual memory: 252 megabytes
-    Info: Processing ended: Sat Mar 14 18:22:44 2015
-    Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:17
+    Info: Processing ended: Mon Mar 16 10:48:23 2015
+    Info: Elapsed time: 00:00:25
+    Info: Total CPU time (on all processors): 00:00:19
 
 
