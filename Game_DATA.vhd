@@ -21,7 +21,6 @@ PORT
 		
 		goingReady	: OUT STD_LOGIC;
 		gameover	: OUT STD_LOGIC;
-		box_status	: OUT INT_ARR (15 downto 0);
 		victory		: OUT STD_LOGIC
 	);
 end  GAME_DATA;
@@ -40,8 +39,6 @@ variable gameO		: STD_LOGIC :='0';
 variable youWin		: STD_LOGIC :='0';
 
 variable i			: integer range 0 to 128 :=0;
-
-variable box_values: INT_ARR(0 to 9);
 
 BEGIN
 	WAIT UNTIL(clk'EVENT) AND (clk = '1');
