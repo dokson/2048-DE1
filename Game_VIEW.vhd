@@ -325,7 +325,7 @@ BOX5: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> 1024,
 		drawbox => drawbox5,
 		color 	=> color5
 	);
@@ -370,7 +370,7 @@ BOX8: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> 256,
 		drawbox => drawbox8,
 		color 	=> color8
 	);
@@ -415,7 +415,7 @@ BOX11: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 2,
+		number 	=> 512,
 		drawbox => drawbox11,
 		color 	=> color11
 	);
@@ -445,7 +445,7 @@ BOX13: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 4,
+		number 	=> 128,
 		drawbox => drawbox13,
 		color 	=> color13
 	);
@@ -460,7 +460,7 @@ BOX14: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> 2048,
 		drawbox => drawbox14,
 		color 	=> color14
 	);
@@ -475,7 +475,7 @@ BOX15: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> 8,
 		drawbox => drawbox15,
 		color 	=> color15
 	);
@@ -490,7 +490,7 @@ BOX16: entity work.GAME_BOX
 	(
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
-		number 	=> 0,
+		number 	=> 64,
 		drawbox => drawbox16,
 		color 	=> color16
 	);

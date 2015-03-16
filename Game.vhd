@@ -39,6 +39,7 @@ architecture Behavioral of GAME is
 	signal westBorder: INTEGER range 0 to 1000;
 	signal eastBorder: INTEGER range 0 to 1000;
 	
+	
 	signal gameover: STD_LOGIC;
 	signal victory: STD_LOGIC;
 

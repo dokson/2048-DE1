@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Mon Mar 16 11:42:12 2015
+Analysis & Synthesis Status : Failed - Mon Mar 16 12:11:30 2015
 Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
 Revision Name : 2048
-Top-level Entity Name : GAME
+Top-level Entity Name : Game
 Family : Cyclone II
-Total logic elements : 722
-    Total combinational functions : 702
-    Dedicated logic registers : 87
-Total registers : 87
-Total pins : 46
-Total virtual pins : 0
-Total memory bits : 0
-Embedded Multiplier 9-bit elements : 0
-Total PLLs : 0
+Total logic elements : N/A until Partition Merge
+    Total combinational functions : N/A until Partition Merge
+    Dedicated logic registers : N/A until Partition Merge
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge

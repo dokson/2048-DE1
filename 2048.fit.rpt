@@ -1,5 +1,5 @@
 Fitter report for 2048
-Mon Mar 16 11:42:19 2015
+Mon Mar 16 12:03:51 2015
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -62,17 +62,17 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Mon Mar 16 11:42:19 2015        ;
+; Fitter Status                      ; Successful - Mon Mar 16 12:03:51 2015        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; 2048                                         ;
 ; Top-level Entity Name              ; GAME                                         ;
 ; Family                             ; Cyclone II                                   ;
 ; Device                             ; EP2C20F484C7                                 ;
 ; Timing Models                      ; Final                                        ;
-; Total logic elements               ; 720 / 18,752 ( 4 % )                         ;
-;     Total combinational functions  ; 702 / 18,752 ( 4 % )                         ;
-;     Dedicated logic registers      ; 87 / 18,752 ( < 1 % )                        ;
-; Total registers                    ; 87                                           ;
+; Total logic elements               ; 644 / 18,752 ( 3 % )                         ;
+;     Total combinational functions  ; 630 / 18,752 ( 3 % )                         ;
+;     Dedicated logic registers      ; 91 / 18,752 ( < 1 % )                        ;
+; Total registers                    ; 91                                           ;
 ; Total pins                         ; 46 / 315 ( 15 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0 / 239,616 ( 0 % )                          ;
@@ -149,8 +149,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Type                    ; Value              ;
 +-------------------------+--------------------+
 ; Placement               ;                    ;
-;     -- Requested        ; 0 / 841 ( 0.00 % ) ;
-;     -- Achieved         ; 0 / 841 ( 0.00 % ) ;
+;     -- Requested        ; 0 / 773 ( 0.00 % ) ;
+;     -- Achieved         ; 0 / 773 ( 0.00 % ) ;
 ;                         ;                    ;
 ; Routing (by Connection) ;                    ;
 ;     -- Requested        ; 0 / 0 ( 0.00 % )   ;
@@ -172,7 +172,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +----------------+---------+-------------------+-------------------------+-------------------+
-; Top            ; 841     ; 0                 ; N/A                     ; Source File       ;
+; Top            ; 773     ; 0                 ; N/A                     ; Source File       ;
 +----------------+---------+-------------------+-------------------------+-------------------+
 
 
@@ -187,26 +187,26 @@ The pin-out file can be found in C:/Users/Giacomo/Documents/Unibo/Sistemi Digita
 +---------------------------------------------+-------------------------+
 ; Resource                                    ; Usage                   ;
 +---------------------------------------------+-------------------------+
-; Total logic elements                        ; 720 / 18,752 ( 4 % )    ;
-;     -- Combinational with no register       ; 633                     ;
-;     -- Register only                        ; 18                      ;
-;     -- Combinational with a register        ; 69                      ;
+; Total logic elements                        ; 644 / 18,752 ( 3 % )    ;
+;     -- Combinational with no register       ; 553                     ;
+;     -- Register only                        ; 14                      ;
+;     -- Combinational with a register        ; 77                      ;
 ;                                             ;                         ;
 ; Logic element usage by number of LUT inputs ;                         ;
-;     -- 4 input functions                    ; 465                     ;
-;     -- 3 input functions                    ; 139                     ;
-;     -- <=2 input functions                  ; 98                      ;
-;     -- Register only                        ; 18                      ;
+;     -- 4 input functions                    ; 436                     ;
+;     -- 3 input functions                    ; 106                     ;
+;     -- <=2 input functions                  ; 88                      ;
+;     -- Register only                        ; 14                      ;
 ;                                             ;                         ;
 ; Logic elements by mode                      ;                         ;
-;     -- normal mode                          ; 679                     ;
+;     -- normal mode                          ; 607                     ;
 ;     -- arithmetic mode                      ; 23                      ;
 ;                                             ;                         ;
-; Total registers*                            ; 87 / 19,649 ( < 1 % )   ;
-;     -- Dedicated logic registers            ; 87 / 18,752 ( < 1 % )   ;
+; Total registers*                            ; 91 / 19,649 ( < 1 % )   ;
+;     -- Dedicated logic registers            ; 91 / 18,752 ( < 1 % )   ;
 ;     -- I/O registers                        ; 0 / 897 ( 0 % )         ;
 ;                                             ;                         ;
-; Total LABs:  partially or completely used   ; 64 / 1,172 ( 5 % )      ;
+; Total LABs:  partially or completely used   ; 57 / 1,172 ( 5 % )      ;
 ; User inserted logic elements                ; 0                       ;
 ; Virtual pins                                ; 0                       ;
 ; I/O pins                                    ; 46 / 315 ( 15 % )       ;
@@ -222,13 +222,13 @@ The pin-out file can be found in C:/Users/Giacomo/Documents/Unibo/Sistemi Digita
 ; ASMI blocks                                 ; 0 / 1 ( 0 % )           ;
 ; CRC blocks                                  ; 0 / 1 ( 0 % )           ;
 ; Average interconnect usage (total/H/V)      ; 1% / 1% / 1%            ;
-; Peak interconnect usage (total/H/V)         ; 7% / 6% / 7%            ;
+; Peak interconnect usage (total/H/V)         ; 6% / 5% / 7%            ;
 ; Maximum fan-out node                        ; GAME_VIEW:View|v_cnt[2] ;
-; Maximum fan-out                             ; 100                     ;
+; Maximum fan-out                             ; 118                     ;
 ; Highest non-global fan-out signal           ; GAME_VIEW:View|v_cnt[2] ;
-; Highest non-global fan-out                  ; 100                     ;
-; Total fan-out                               ; 2704                    ;
-; Average fan-out                             ; 3.16                    ;
+; Highest non-global fan-out                  ; 118                     ;
+; Total fan-out                               ; 2473                    ;
+; Average fan-out                             ; 3.15                    ;
 +---------------------------------------------+-------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -847,112 +847,94 @@ Note: User assignments will override these defaults. The user specified values a
 +---------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node            ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                     ; Library Name ;
 +---------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------------------------------+--------------+
-; |GAME                                 ; 720 (0)     ; 87 (0)                    ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 46   ; 0            ; 633 (0)      ; 18 (0)            ; 69 (0)           ; |GAME                                                                   ; work         ;
+; |GAME                                 ; 644 (0)     ; 91 (0)                    ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 46   ; 0            ; 553 (0)      ; 14 (0)            ; 77 (0)           ; |GAME                                                                   ; work         ;
 ;    |GAME_CLKGENERATOR:ClockGenerator| ; 1 (1)       ; 1 (1)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_CLKGENERATOR:ClockGenerator                                  ;              ;
 ;    |GAME_CONTROL:ControlUnit|         ; 6 (6)       ; 3 (3)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 3 (3)            ; |GAME|GAME_CONTROL:ControlUnit                                          ;              ;
 ;    |GAME_DATA:Datapath|               ; 2 (2)       ; 2 (2)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |GAME|GAME_DATA:Datapath                                                ;              ;
 ;    |GAME_KEYBOARD:KeyboardController| ; 36 (36)     ; 26 (26)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 10 (10)      ; 7 (7)             ; 19 (19)          ; |GAME|GAME_KEYBOARD:KeyboardController                                  ;              ;
-;    |GAME_VIEW:View|                   ; 675 (217)   ; 55 (55)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 620 (162)    ; 11 (11)           ; 44 (36)          ; |GAME|GAME_VIEW:View                                                    ;              ;
-;       |GAME_BOX:BOX10|                ; 19 (7)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 19 (7)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10                                     ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 9 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH3                  ; work         ;
-;             |GAME_CHROM:CHROM|        ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM ;              ;
-;          |Game_CHDISPLAY:CH4|         ; 3 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH4                  ; work         ;
-;             |GAME_CHROM:CHROM|        ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM ; work         ;
-;       |GAME_BOX:BOX11|                ; 10 (4)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 10 (4)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11                                     ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11|Game_CHDISPLAY:CH1                  ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11|Game_CHDISPLAY:CH2                  ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11|Game_CHDISPLAY:CH3                  ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11|Game_CHDISPLAY:CH4                  ;              ;
-;       |GAME_BOX:BOX12|                ; 5 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX12                                     ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX12|Game_CHDISPLAY:CH1                  ; work         ;
-;       |GAME_BOX:BOX13|                ; 37 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 37 (14)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13                                     ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 13 (6)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 13 (6)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH1                  ; work         ;
-;             |GAME_CHROM:CHROM|        ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH1|GAME_CHROM:CHROM ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH2                  ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH3                  ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 6 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH4                  ; work         ;
-;             |GAME_CHROM:CHROM|        ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM ; work         ;
-;       |GAME_BOX:BOX14|                ; 17 (4)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 17 (4)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14                                     ;              ;
-;          |Game_CHDISPLAY:CH1|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH1                  ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH2                  ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH3                  ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 9 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH4                  ; work         ;
-;             |GAME_CHROM:CHROM|        ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM ; work         ;
-;       |GAME_BOX:BOX15|                ; 11 (4)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 11 (4)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15                                     ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15|Game_CHDISPLAY:CH1                  ;              ;
-;          |Game_CHDISPLAY:CH2|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15|Game_CHDISPLAY:CH2                  ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15|Game_CHDISPLAY:CH3                  ; work         ;
+;    |GAME_VIEW:View|                   ; 599 (203)   ; 59 (59)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 540 (144)    ; 7 (7)             ; 52 (44)          ; |GAME|GAME_VIEW:View                                                    ;              ;
+;       |GAME_BOX:BOX10|                ; 16 (2)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 16 (2)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10                                     ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH3                  ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 7 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH4                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM ; work         ;
+;       |GAME_BOX:BOX11|                ; 16 (10)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 16 (10)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11                                     ; work         ;
+;          |Game_CHDISPLAY:CH2|         ; 6 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11|Game_CHDISPLAY:CH2                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX11|Game_CHDISPLAY:CH2|GAME_CHROM:CHROM ; work         ;
+;       |GAME_BOX:BOX12|                ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX12                                     ; work         ;
+;       |GAME_BOX:BOX13|                ; 40 (11)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 36 (11)      ; 0 (0)             ; 4 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13                                     ; work         ;
+;          |Game_CHDISPLAY:CH2|         ; 8 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 1 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH2                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH2|GAME_CHROM:CHROM ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 17 (11)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 15 (10)      ; 0 (0)             ; 2 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH3                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 4 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (2)        ; 0 (0)             ; 1 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH4                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX13|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM ; work         ;
+;       |GAME_BOX:BOX14|                ; 26 (18)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 26 (18)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14                                     ; work         ;
+;          |Game_CHDISPLAY:CH2|         ; 1 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (0)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH2                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH2|GAME_CHROM:CHROM ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 7 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH3                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX14|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM ; work         ;
+;       |GAME_BOX:BOX15|                ; 3 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15                                     ; work         ;
 ;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX15|Game_CHDISPLAY:CH4                  ; work         ;
-;       |GAME_BOX:BOX16|                ; 14 (6)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (6)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16                                     ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH1                  ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH2                  ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH3                  ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH4                  ; work         ;
-;       |GAME_BOX:BOX1|                 ; 40 (5)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 40 (5)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1                                      ;              ;
-;          |Game_CHDISPLAY:CH1|         ; 18 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (12)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH1                   ;              ;
-;             |GAME_CHROM:CHROM|        ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH1|GAME_CHROM:CHROM  ;              ;
-;          |Game_CHDISPLAY:CH2|         ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH2                   ;              ;
-;          |Game_CHDISPLAY:CH3|         ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH3                   ;              ;
-;          |Game_CHDISPLAY:CH4|         ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH4                   ;              ;
-;       |GAME_BOX:BOX2|                 ; 22 (10)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 21 (9)       ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2                                      ;              ;
-;          |Game_CHDISPLAY:CH1|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH1                   ;              ;
-;          |Game_CHDISPLAY:CH2|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH2                   ;              ;
-;          |Game_CHDISPLAY:CH3|         ; 7 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH3                   ;              ;
-;             |GAME_CHROM:CHROM|        ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM  ;              ;
-;          |Game_CHDISPLAY:CH4|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH4                   ;              ;
-;       |GAME_BOX:BOX3|                 ; 13 (5)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 13 (5)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3                                      ;              ;
-;          |Game_CHDISPLAY:CH1|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3|Game_CHDISPLAY:CH1                   ;              ;
-;          |Game_CHDISPLAY:CH2|         ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3|Game_CHDISPLAY:CH2                   ;              ;
-;          |Game_CHDISPLAY:CH3|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3|Game_CHDISPLAY:CH3                   ;              ;
-;       |GAME_BOX:BOX4|                 ; 15 (7)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 15 (7)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4                                      ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4|Game_CHDISPLAY:CH1                   ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4|Game_CHDISPLAY:CH2                   ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4|Game_CHDISPLAY:CH3                   ; work         ;
+;       |GAME_BOX:BOX16|                ; 18 (5)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 17 (5)       ; 0 (0)             ; 1 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16                                     ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 10 (7)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (7)        ; 0 (0)             ; 1 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH3                  ; work         ;
+;             |GAME_CHROM:CHROM|        ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX16|Game_CHDISPLAY:CH4                  ; work         ;
+;       |GAME_BOX:BOX1|                 ; 8 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1                                      ;              ;
+;          |Game_CHDISPLAY:CH1|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH1                   ;              ;
+;          |Game_CHDISPLAY:CH2|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH2                   ;              ;
+;          |Game_CHDISPLAY:CH3|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH3                   ;              ;
+;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH4                   ;              ;
+;       |GAME_BOX:BOX2|                 ; 31 (4)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 31 (4)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2                                      ;              ;
+;          |Game_CHDISPLAY:CH3|         ; 12 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (12)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH3                   ;              ;
+;          |Game_CHDISPLAY:CH4|         ; 15 (9)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 15 (9)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH4                   ;              ;
+;             |GAME_CHROM:CHROM|        ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM  ;              ;
+;       |GAME_BOX:BOX3|                 ; 4 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3                                      ;              ;
+;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX3|Game_CHDISPLAY:CH4                   ; work         ;
+;       |GAME_BOX:BOX4|                 ; 8 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4                                      ; work         ;
 ;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX4|Game_CHDISPLAY:CH4                   ; work         ;
-;       |GAME_BOX:BOX5|                 ; 37 (6)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 37 (6)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5                                      ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 16 (11)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 16 (11)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH1                   ; work         ;
-;             |GAME_CHROM:CHROM|        ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH1|GAME_CHROM:CHROM  ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH2                   ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH3                   ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH4                   ; work         ;
-;       |GAME_BOX:BOX6|                 ; 23 (3)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 23 (3)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6                                      ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 8 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6|Game_CHDISPLAY:CH3                   ; work         ;
-;             |GAME_CHROM:CHROM|        ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM  ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 12 (8)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (8)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6|Game_CHDISPLAY:CH4                   ; work         ;
-;             |GAME_CHROM:CHROM|        ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM  ; work         ;
-;       |GAME_BOX:BOX7|                 ; 18 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (12)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX7                                      ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 6 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX7|Game_CHDISPLAY:CH4                   ; work         ;
-;             |GAME_CHROM:CHROM|        ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX7|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM  ; work         ;
-;       |GAME_BOX:BOX8|                 ; 6 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8                                      ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8|Game_CHDISPLAY:CH1                   ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8|Game_CHDISPLAY:CH3                   ; work         ;
-;       |GAME_BOX:BOX9|                 ; 54 (11)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 49 (10)      ; 0 (0)             ; 5 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9                                      ; work         ;
-;          |Game_CHDISPLAY:CH1|         ; 23 (19)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 19 (16)      ; 0 (0)             ; 4 (3)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH1                   ; work         ;
-;             |GAME_CHROM:CHROM|        ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH1|GAME_CHROM:CHROM  ; work         ;
-;          |Game_CHDISPLAY:CH2|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH2                   ; work         ;
-;          |Game_CHDISPLAY:CH3|         ; 11 (10)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 11 (10)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH3                   ;              ;
-;             |GAME_CHROM:CHROM|        ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM  ; work         ;
-;          |Game_CHDISPLAY:CH4|         ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH4                   ; work         ;
-;       |Game_CHDISPLAY:CHA|            ; 12 (10)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (10)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHA                                 ;              ;
-;          |GAME_CHROM:CHROM|           ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHA|GAME_CHROM:CHROM                ;              ;
-;       |Game_CHDISPLAY:CHC1|           ; 5 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC1                                ;              ;
+;       |GAME_BOX:BOX5|                 ; 42 (9)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 39 (9)       ; 0 (0)             ; 3 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5                                      ; work         ;
+;          |Game_CHDISPLAY:CH1|         ; 15 (15)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH1                   ; work         ;
+;          |Game_CHDISPLAY:CH2|         ; 8 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (2)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH2                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH2|GAME_CHROM:CHROM  ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 4 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (1)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH3                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM  ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 6 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH4                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM  ; work         ;
+;       |GAME_BOX:BOX6|                 ; 12 (2)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (2)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6                                      ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 10 (5)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 10 (5)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6|Game_CHDISPLAY:CH4                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX6|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM  ; work         ;
+;       |GAME_BOX:BOX7|                 ; 1 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (0)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX7                                      ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX7|Game_CHDISPLAY:CH4                   ; work         ;
+;       |GAME_BOX:BOX8|                 ; 20 (10)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 20 (10)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8                                      ; work         ;
+;          |Game_CHDISPLAY:CH2|         ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8|Game_CHDISPLAY:CH2                   ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 8 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8|Game_CHDISPLAY:CH3                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX8|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM  ; work         ;
+;       |GAME_BOX:BOX9|                 ; 44 (6)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 44 (6)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9                                      ; work         ;
+;          |Game_CHDISPLAY:CH1|         ; 9 (9)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (9)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH1                   ; work         ;
+;          |Game_CHDISPLAY:CH3|         ; 15 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 15 (12)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH3                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH3|GAME_CHROM:CHROM  ; work         ;
+;          |Game_CHDISPLAY:CH4|         ; 14 (8)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (8)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH4                   ; work         ;
+;             |GAME_CHROM:CHROM|        ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|GAME_BOX:BOX9|Game_CHDISPLAY:CH4|GAME_CHROM:CHROM  ; work         ;
+;       |Game_CHDISPLAY:CHA|            ; 11 (8)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 11 (8)       ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHA                                 ;              ;
+;          |GAME_CHROM:CHROM|           ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHA|GAME_CHROM:CHROM                ;              ;
+;       |Game_CHDISPLAY:CHC1|           ; 6 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC1                                ;              ;
 ;          |GAME_CHROM:CHROM|           ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC1|GAME_CHROM:CHROM               ;              ;
-;       |Game_CHDISPLAY:CHC|            ; 21 (20)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 20 (19)      ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC                                 ;              ;
-;          |GAME_CHROM:CHROM|           ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC|GAME_CHROM:CHROM                ;              ;
+;       |Game_CHDISPLAY:CHC|            ; 18 (16)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (16)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC                                 ;              ;
+;          |GAME_CHROM:CHROM|           ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHC|GAME_CHROM:CHROM                ;              ;
 ;       |Game_CHDISPLAY:CHE1|           ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE1                                ;              ;
-;       |Game_CHDISPLAY:CHE|            ; 7 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE                                 ;              ;
-;          |GAME_CHROM:CHROM|           ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE|GAME_CHROM:CHROM                ;              ;
-;       |Game_CHDISPLAY:CHG|            ; 9 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHG                                 ;              ;
+;       |Game_CHDISPLAY:CHE|            ; 8 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE                                 ;              ;
+;          |GAME_CHROM:CHROM|           ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHE|GAME_CHROM:CHROM                ;              ;
+;       |Game_CHDISPLAY:CHG|            ; 8 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHG                                 ;              ;
 ;          |GAME_CHROM:CHROM|           ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHG|GAME_CHROM:CHROM                ;              ;
 ;       |Game_CHDISPLAY:CHI|            ; 9 (8)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (8)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHI                                 ;              ;
 ;          |GAME_CHROM:CHROM|           ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHI|GAME_CHROM:CHROM                ;              ;
-;       |Game_CHDISPLAY:CHL|            ; 8 (8)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHL                                 ;              ;
-;       |Game_CHDISPLAY:CHO|            ; 32 (29)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 32 (29)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHO                                 ;              ;
+;       |Game_CHDISPLAY:CHL|            ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHL                                 ;              ;
+;       |Game_CHDISPLAY:CHO|            ; 24 (21)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 24 (21)      ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHO                                 ;              ;
 ;          |GAME_CHROM:CHROM|           ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHO|GAME_CHROM:CHROM                ;              ;
-;       |Game_CHDISPLAY:CHSEP|          ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHSEP                               ;              ;
-;       |Game_CHDISPLAY:CHZ1|           ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ1                                ;              ;
-;       |Game_CHDISPLAY:CHZ|            ; 9 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (5)        ; 0 (0)             ; 1 (1)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ                                 ;              ;
-;          |GAME_CHROM:CHROM|           ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ|GAME_CHROM:CHROM                ;              ;
+;       |Game_CHDISPLAY:CHSEP|          ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHSEP                               ;              ;
+;       |Game_CHDISPLAY:CHZ1|           ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ1                                ;              ;
+;       |Game_CHDISPLAY:CHZ|            ; 7 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (2)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ                                 ;              ;
+;          |GAME_CHROM:CHROM|           ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 0 (0)            ; |GAME|GAME_VIEW:View|Game_CHDISPLAY:CHZ|GAME_CHROM:CHROM                ;              ;
 +---------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -1011,34 +993,34 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------+----------+---------------+---------------+-----------------------+-----+
 
 
-+------------------------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                                           ;
-+------------------------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                                        ; Pad To Core Index ; Setting ;
-+------------------------------------------------------------+-------------------+---------+
-; cheatKey                                                   ;                   ;         ;
-; clk_50Mhz                                                  ;                   ;         ;
-; PS2_CLK                                                    ;                   ;         ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[0]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[1]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[2]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[3]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[4]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[5]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[6]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[7]        ; 1                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|scancodeReady      ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[0]        ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[1]        ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[2]        ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[3]        ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[4]        ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[5]        ; 0                 ; 0       ;
-;      - GAME_KEYBOARD:KeyboardController|bitCount[6]        ; 0                 ; 0       ;
-; PS2_DAT                                                    ;                   ;         ;
-;      - GAME_KEYBOARD:KeyboardController|Keyboard~1         ; 1                 ; 6       ;
-;      - GAME_KEYBOARD:KeyboardController|scancode[7]~feeder ; 1                 ; 6       ;
-+------------------------------------------------------------+-------------------+---------+
++-------------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                      ;
++-------------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                                   ; Pad To Core Index ; Setting ;
++-------------------------------------------------------+-------------------+---------+
+; cheatKey                                              ;                   ;         ;
+; clk_50Mhz                                             ;                   ;         ;
+; PS2_CLK                                               ;                   ;         ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[0]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[1]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[2]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[3]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[4]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[5]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[6]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[7]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|scancodeReady ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[0]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[1]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[2]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[3]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[4]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[5]   ; 0                 ; 0       ;
+;      - GAME_KEYBOARD:KeyboardController|bitCount[6]   ; 0                 ; 0       ;
+; PS2_DAT                                               ;                   ;         ;
+;      - GAME_KEYBOARD:KeyboardController|scancode[7]   ; 0                 ; 6       ;
+;      - GAME_KEYBOARD:KeyboardController|Keyboard~1    ; 0                 ; 6       ;
++-------------------------------------------------------+-------------------+---------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1046,82 +1028,82 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 ; Name                                            ; Location          ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-------------------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; GAME_CLKGENERATOR:ClockGenerator|cnt[0]         ; LCFF_X1_Y13_N29   ; 60      ; Clock        ; yes    ; Global Clock         ; GCLK2            ; --                        ;
-; GAME_KEYBOARD:KeyboardController|bitCount[6]~13 ; LCCOMB_X37_Y19_N6 ; 8       ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; GAME_KEYBOARD:KeyboardController|bitCount[6]~14 ; LCCOMB_X37_Y19_N8 ; 7       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; GAME_KEYBOARD:KeyboardController|scancodeReady  ; LCFF_X38_Y19_N17  ; 10      ; Clock        ; yes    ; Global Clock         ; GCLK5            ; --                        ;
-; GAME_KEYBOARD:KeyboardController|scancode[7]~0  ; LCCOMB_X37_Y19_N0 ; 8       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; GAME_CLKGENERATOR:ClockGenerator|cnt[0]         ; LCFF_X26_Y7_N11   ; 64      ; Clock        ; yes    ; Global Clock         ; GCLK12           ; --                        ;
+; GAME_KEYBOARD:KeyboardController|bitCount[4]~13 ; LCCOMB_X40_Y25_N6 ; 8       ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; GAME_KEYBOARD:KeyboardController|bitCount[4]~14 ; LCCOMB_X40_Y25_N8 ; 7       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; GAME_KEYBOARD:KeyboardController|scancodeReady  ; LCFF_X43_Y25_N9   ; 10      ; Clock        ; yes    ; Global Clock         ; GCLK9            ; --                        ;
+; GAME_KEYBOARD:KeyboardController|scancode[7]~0  ; LCCOMB_X40_Y25_N0 ; 8       ; Clock enable ; no     ; --                   ; --               ; --                        ;
 ; PS2_CLK                                         ; PIN_H15           ; 16      ; Clock        ; no     ; --                   ; --               ; --                        ;
 ; clk_50Mhz                                       ; PIN_L1            ; 1       ; Clock        ; no     ; --                   ; --               ; --                        ;
 +-------------------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Global & Other Fast Signals                                                                                                                       ;
-+------------------------------------------------+------------------+---------+----------------------+------------------+---------------------------+
-; Name                                           ; Location         ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+------------------------------------------------+------------------+---------+----------------------+------------------+---------------------------+
-; GAME_CLKGENERATOR:ClockGenerator|cnt[0]        ; LCFF_X1_Y13_N29  ; 60      ; Global Clock         ; GCLK2            ; --                        ;
-; GAME_KEYBOARD:KeyboardController|scancodeReady ; LCFF_X38_Y19_N17 ; 10      ; Global Clock         ; GCLK5            ; --                        ;
-+------------------------------------------------+------------------+---------+----------------------+------------------+---------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Global & Other Fast Signals                                                                                                                      ;
++------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
+; Name                                           ; Location        ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
+; GAME_CLKGENERATOR:ClockGenerator|cnt[0]        ; LCFF_X26_Y7_N11 ; 64      ; Global Clock         ; GCLK12           ; --                        ;
+; GAME_KEYBOARD:KeyboardController|scancodeReady ; LCFF_X43_Y25_N9 ; 10      ; Global Clock         ; GCLK9            ; --                        ;
++------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
 
 
-+------------------------------------------------------------------+
-; Non-Global High Fan-Out Signals                                  ;
-+--------------------------------------------------------+---------+
-; Name                                                   ; Fan-Out ;
-+--------------------------------------------------------+---------+
-; GAME_VIEW:View|v_cnt[1]                                ; 100     ;
-; GAME_VIEW:View|v_cnt[2]                                ; 100     ;
-; GAME_VIEW:View|v_cnt[3]                                ; 91      ;
-; GAME_VIEW:View|h_cnt[0]                                ; 84      ;
-; GAME_VIEW:View|v_cnt[0]                                ; 83      ;
-; GAME_VIEW:View|h_cnt[2]                                ; 65      ;
-; GAME_VIEW:View|h_cnt[1]                                ; 64      ;
-; GAME_VIEW:View|h_cnt[5]                                ; 33      ;
-; GAME_VIEW:View|h_cnt[4]                                ; 32      ;
-; GAME_VIEW:View|h_cnt[3]                                ; 28      ;
-; GAME_VIEW:View|h_cnt[6]                                ; 27      ;
-; GAME_VIEW:View|h_cnt[9]                                ; 24      ;
-; GAME_VIEW:View|h_cnt[7]                                ; 22      ;
-; GAME_VIEW:View|v_cnt[5]                                ; 18      ;
-; PS2_CLK                                                ; 16      ;
-; GAME_VIEW:View|h_cnt[8]                                ; 16      ;
-; GAME_VIEW:View|Game_CHDISPLAY:CHO|Add2~0               ; 15      ;
-; GAME_DATA:Datapath|gameover                            ; 14      ;
-; GAME_VIEW:View|v_cnt[7]                                ; 14      ;
-; GAME_VIEW:View|v_cnt[4]                                ; 14      ;
-; GAME_VIEW:View|v_cnt[8]                                ; 13      ;
-; GAME_VIEW:View|GAME_BOX:BOX8|drawBox~0                 ; 12      ;
-; GAME_VIEW:View|v_cnt[6]                                ; 12      ;
-; GAME_VIEW:View|GAME_BOX:BOX16|drawBox~1                ; 11      ;
-; GAME_VIEW:View|GAME_BOX:BOX16|drawBox~0                ; 11      ;
-; GAME_KEYBOARD:KeyboardController|breakReceived[0]      ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX16|drawBox                  ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX8|drawBox                   ; 10      ;
-; GAME_VIEW:View|h_cnt~1                                 ; 10      ;
-; GAME_VIEW:View|Game_CHDISPLAY:CHC|Add2~1               ; 10      ;
-; GAME_VIEW:View|Game_CHDISPLAY:CHC|Add2~0               ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX5|valueChange~1             ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX13|drawBox~0                ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX15|drawBox~0                ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX15|valueChange~1            ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX16|valueChange~1            ; 10      ;
-; GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH2|Add2~0 ; 10      ;
-; GAME_KEYBOARD:KeyboardController|breakReceived[1]      ; 9       ;
-; GAME_VIEW:View|GAME_BOX:BOX11|drawBox~1                ; 9       ;
-; GAME_VIEW:View|LessThan3~0                             ; 9       ;
-; GAME_VIEW:View|GAME_BOX:BOX1|valueChange~1             ; 9       ;
-; GAME_VIEW:View|GAME_BOX:BOX4|valueChange~1             ; 9       ;
-; GAME_VIEW:View|Game_CHDISPLAY:CHA|drawChar~0           ; 9       ;
-; GAME_VIEW:View|GAME_BOX:BOX12|valueChange~1            ; 9       ;
-; GAME_VIEW:View|LessThan9~0                             ; 9       ;
-; GAME_KEYBOARD:KeyboardController|bitCount[6]~13        ; 8       ;
-; GAME_KEYBOARD:KeyboardController|scancode[7]~0         ; 8       ;
-; GAME_VIEW:View|GAME_BOX:BOX5|drawBox                   ; 8       ;
-; GAME_VIEW:View|red_signal~19                           ; 8       ;
-; GAME_VIEW:View|red_signal~14                           ; 8       ;
-+--------------------------------------------------------+---------+
++-------------------------------------------------------------------+
+; Non-Global High Fan-Out Signals                                   ;
++---------------------------------------------------------+---------+
+; Name                                                    ; Fan-Out ;
++---------------------------------------------------------+---------+
+; GAME_VIEW:View|v_cnt[2]                                 ; 118     ;
+; GAME_VIEW:View|v_cnt[1]                                 ; 114     ;
+; GAME_VIEW:View|v_cnt[3]                                 ; 111     ;
+; GAME_VIEW:View|v_cnt[0]                                 ; 97      ;
+; GAME_VIEW:View|h_cnt[0]                                 ; 91      ;
+; GAME_VIEW:View|h_cnt[1]                                 ; 71      ;
+; GAME_VIEW:View|h_cnt[2]                                 ; 70      ;
+; GAME_VIEW:View|h_cnt[5]                                 ; 31      ;
+; GAME_VIEW:View|h_cnt[4]                                 ; 26      ;
+; GAME_VIEW:View|h_cnt[6]                                 ; 24      ;
+; GAME_VIEW:View|h_cnt[3]                                 ; 23      ;
+; GAME_VIEW:View|h_cnt[7]                                 ; 19      ;
+; GAME_VIEW:View|v_cnt[5]                                 ; 17      ;
+; GAME_VIEW:View|h_cnt[9]                                 ; 17      ;
+; PS2_CLK                                                 ; 16      ;
+; GAME_VIEW:View|v_cnt[7]                                 ; 16      ;
+; GAME_VIEW:View|v_cnt[8]                                 ; 15      ;
+; GAME_VIEW:View|v_cnt[4]                                 ; 15      ;
+; GAME_DATA:Datapath|gameover                             ; 14      ;
+; GAME_VIEW:View|h_cnt~1                                  ; 14      ;
+; GAME_VIEW:View|v_cnt[6]                                 ; 14      ;
+; GAME_VIEW:View|h_cnt[8]                                 ; 14      ;
+; GAME_VIEW:View|LessThan3~0                              ; 13      ;
+; GAME_VIEW:View|GAME_BOX:BOX14|drawBox~0                 ; 13      ;
+; GAME_VIEW:View|LessThan9~0                              ; 13      ;
+; GAME_VIEW:View|GAME_BOX:BOX16|drawBox                   ; 12      ;
+; GAME_VIEW:View|GAME_BOX:BOX16|drawBox~3                 ; 12      ;
+; GAME_VIEW:View|GAME_BOX:BOX13|drawBox~0                 ; 11      ;
+; GAME_KEYBOARD:KeyboardController|breakReceived[0]       ; 10      ;
+; GAME_VIEW:View|Game_CHDISPLAY:CHO|Add2~0                ; 10      ;
+; GAME_VIEW:View|GAME_BOX:BOX5|Game_CHDISPLAY:CH1|Mux0~11 ; 10      ;
+; GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH4|Add2~0  ; 10      ;
+; GAME_VIEW:View|Equal0~0                                 ; 10      ;
+; GAME_VIEW:View|green_signal~37                          ; 9       ;
+; GAME_KEYBOARD:KeyboardController|breakReceived[1]       ; 9       ;
+; GAME_VIEW:View|blue_signal~3                            ; 9       ;
+; GAME_VIEW:View|red_signal~31                            ; 9       ;
+; GAME_VIEW:View|GAME_BOX:BOX8|drawBox~0                  ; 9       ;
+; GAME_VIEW:View|GAME_BOX:BOX9|drawBox~0                  ; 9       ;
+; GAME_VIEW:View|red_signal~26                            ; 9       ;
+; GAME_KEYBOARD:KeyboardController|bitCount[4]~13         ; 8       ;
+; GAME_KEYBOARD:KeyboardController|scancode[7]~0          ; 8       ;
+; GAME_VIEW:View|Game_CHDISPLAY:CHC|Add2~0                ; 8       ;
+; GAME_VIEW:View|blue_signal~2                            ; 8       ;
+; GAME_VIEW:View|Equal0~4                                 ; 8       ;
+; GAME_KEYBOARD:KeyboardController|bitCount[4]~14         ; 7       ;
+; GAME_VIEW:View|red_signal~46                            ; 7       ;
+; GAME_VIEW:View|GAME_BOX:BOX4|drawBox~1                  ; 7       ;
+; GAME_VIEW:View|GAME_BOX:BOX11|valueChange~1             ; 7       ;
+; GAME_VIEW:View|Equal0~5                                 ; 7       ;
++---------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -1129,47 +1111,47 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------+------------------------+
 ; Interconnect Resource Type ; Usage                  ;
 +----------------------------+------------------------+
-; Block interconnects        ; 1,213 / 54,004 ( 2 % ) ;
-; C16 interconnects          ; 2 / 2,100 ( < 1 % )    ;
-; C4 interconnects           ; 642 / 36,000 ( 2 % )   ;
-; Direct links               ; 152 / 54,004 ( < 1 % ) ;
+; Block interconnects        ; 1,023 / 54,004 ( 2 % ) ;
+; C16 interconnects          ; 4 / 2,100 ( < 1 % )    ;
+; C4 interconnects           ; 542 / 36,000 ( 2 % )   ;
+; Direct links               ; 113 / 54,004 ( < 1 % ) ;
 ; Global clocks              ; 2 / 16 ( 13 % )        ;
-; Local interconnects        ; 475 / 18,752 ( 3 % )   ;
-; R24 interconnects          ; 18 / 1,900 ( < 1 % )   ;
-; R4 interconnects           ; 823 / 46,920 ( 2 % )   ;
+; Local interconnects        ; 420 / 18,752 ( 2 % )   ;
+; R24 interconnects          ; 12 / 1,900 ( < 1 % )   ;
+; R4 interconnects           ; 634 / 46,920 ( 1 % )   ;
 +----------------------------+------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 11.25) ; Number of LABs  (Total = 64) ;
+; Number of Logic Elements  (Average = 11.30) ; Number of LABs  (Total = 57) ;
 +---------------------------------------------+------------------------------+
 ; 1                                           ; 12                           ;
-; 2                                           ; 2                            ;
-; 3                                           ; 2                            ;
-; 4                                           ; 2                            ;
-; 5                                           ; 0                            ;
+; 2                                           ; 1                            ;
+; 3                                           ; 3                            ;
+; 4                                           ; 0                            ;
+; 5                                           ; 1                            ;
 ; 6                                           ; 0                            ;
-; 7                                           ; 1                            ;
-; 8                                           ; 2                            ;
+; 7                                           ; 0                            ;
+; 8                                           ; 1                            ;
 ; 9                                           ; 1                            ;
 ; 10                                          ; 0                            ;
 ; 11                                          ; 0                            ;
-; 12                                          ; 3                            ;
-; 13                                          ; 0                            ;
+; 12                                          ; 0                            ;
+; 13                                          ; 2                            ;
 ; 14                                          ; 1                            ;
-; 15                                          ; 0                            ;
-; 16                                          ; 38                           ;
+; 15                                          ; 1                            ;
+; 16                                          ; 34                           ;
 +---------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 0.33) ; Number of LABs  (Total = 64) ;
+; LAB-wide Signals  (Average = 0.35) ; Number of LABs  (Total = 57) ;
 +------------------------------------+------------------------------+
-; 1 Clock                            ; 18                           ;
+; 1 Clock                            ; 17                           ;
 ; 1 Clock enable                     ; 1                            ;
 ; 2 Clocks                           ; 2                            ;
 +------------------------------------+------------------------------+
@@ -1178,31 +1160,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 12.59) ; Number of LABs  (Total = 64) ;
+; Number of Signals Sourced  (Average = 12.88) ; Number of LABs  (Total = 57) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
-; 1                                            ; 10                           ;
+; 1                                            ; 9                            ;
 ; 2                                            ; 4                            ;
-; 3                                            ; 1                            ;
-; 4                                            ; 3                            ;
-; 5                                            ; 0                            ;
+; 3                                            ; 2                            ;
+; 4                                            ; 1                            ;
+; 5                                            ; 1                            ;
 ; 6                                            ; 0                            ;
-; 7                                            ; 1                            ;
-; 8                                            ; 1                            ;
-; 9                                            ; 0                            ;
-; 10                                           ; 1                            ;
+; 7                                            ; 0                            ;
+; 8                                            ; 0                            ;
+; 9                                            ; 1                            ;
+; 10                                           ; 0                            ;
 ; 11                                           ; 0                            ;
-; 12                                           ; 2                            ;
-; 13                                           ; 0                            ;
-; 14                                           ; 1                            ;
-; 15                                           ; 0                            ;
-; 16                                           ; 26                           ;
-; 17                                           ; 3                            ;
-; 18                                           ; 4                            ;
-; 19                                           ; 1                            ;
-; 20                                           ; 1                            ;
+; 12                                           ; 0                            ;
+; 13                                           ; 1                            ;
+; 14                                           ; 0                            ;
+; 15                                           ; 1                            ;
+; 16                                           ; 25                           ;
+; 17                                           ; 2                            ;
+; 18                                           ; 1                            ;
+; 19                                           ; 0                            ;
+; 20                                           ; 3                            ;
 ; 21                                           ; 0                            ;
-; 22                                           ; 0                            ;
+; 22                                           ; 1                            ;
 ; 23                                           ; 2                            ;
 ; 24                                           ; 0                            ;
 ; 25                                           ; 1                            ;
@@ -1210,80 +1192,78 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 27                                           ; 0                            ;
 ; 28                                           ; 0                            ;
 ; 29                                           ; 0                            ;
-; 30                                           ; 1                            ;
-; 31                                           ; 1                            ;
+; 30                                           ; 2                            ;
 +----------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 6.61) ; Number of LABs  (Total = 64) ;
+; Number of Signals Sourced Out  (Average = 6.33) ; Number of LABs  (Total = 57) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 14                           ;
-; 2                                               ; 3                            ;
+; 1                                               ; 12                           ;
+; 2                                               ; 5                            ;
 ; 3                                               ; 4                            ;
-; 4                                               ; 4                            ;
-; 5                                               ; 4                            ;
-; 6                                               ; 3                            ;
-; 7                                               ; 5                            ;
-; 8                                               ; 5                            ;
-; 9                                               ; 5                            ;
-; 10                                              ; 5                            ;
-; 11                                              ; 3                            ;
-; 12                                              ; 5                            ;
-; 13                                              ; 0                            ;
-; 14                                              ; 1                            ;
+; 4                                               ; 2                            ;
+; 5                                               ; 2                            ;
+; 6                                               ; 4                            ;
+; 7                                               ; 4                            ;
+; 8                                               ; 8                            ;
+; 9                                               ; 2                            ;
+; 10                                              ; 4                            ;
+; 11                                              ; 5                            ;
+; 12                                              ; 2                            ;
+; 13                                              ; 1                            ;
+; 14                                              ; 0                            ;
 ; 15                                              ; 0                            ;
-; 16                                              ; 1                            ;
+; 16                                              ; 0                            ;
 ; 17                                              ; 0                            ;
 ; 18                                              ; 0                            ;
 ; 19                                              ; 0                            ;
 ; 20                                              ; 0                            ;
 ; 21                                              ; 1                            ;
-; 22                                              ; 0                            ;
-; 23                                              ; 1                            ;
+; 22                                              ; 1                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 15.89) ; Number of LABs  (Total = 64) ;
+; Number of Distinct Inputs  (Average = 14.19) ; Number of LABs  (Total = 57) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 1                            ;
-; 2                                            ; 5                            ;
-; 3                                            ; 6                            ;
-; 4                                            ; 4                            ;
-; 5                                            ; 0                            ;
-; 6                                            ; 2                            ;
-; 7                                            ; 1                            ;
+; 2                                            ; 4                            ;
+; 3                                            ; 4                            ;
+; 4                                            ; 5                            ;
+; 5                                            ; 3                            ;
+; 6                                            ; 1                            ;
+; 7                                            ; 0                            ;
 ; 8                                            ; 1                            ;
-; 9                                            ; 4                            ;
-; 10                                           ; 0                            ;
-; 11                                           ; 2                            ;
-; 12                                           ; 2                            ;
-; 13                                           ; 0                            ;
-; 14                                           ; 4                            ;
-; 15                                           ; 2                            ;
-; 16                                           ; 2                            ;
+; 9                                            ; 2                            ;
+; 10                                           ; 3                            ;
+; 11                                           ; 1                            ;
+; 12                                           ; 3                            ;
+; 13                                           ; 1                            ;
+; 14                                           ; 2                            ;
+; 15                                           ; 1                            ;
+; 16                                           ; 4                            ;
 ; 17                                           ; 1                            ;
-; 18                                           ; 2                            ;
-; 19                                           ; 1                            ;
-; 20                                           ; 0                            ;
+; 18                                           ; 1                            ;
+; 19                                           ; 3                            ;
+; 20                                           ; 1                            ;
 ; 21                                           ; 0                            ;
-; 22                                           ; 2                            ;
+; 22                                           ; 0                            ;
 ; 23                                           ; 3                            ;
-; 24                                           ; 0                            ;
+; 24                                           ; 1                            ;
 ; 25                                           ; 1                            ;
 ; 26                                           ; 1                            ;
 ; 27                                           ; 0                            ;
-; 28                                           ; 1                            ;
+; 28                                           ; 0                            ;
 ; 29                                           ; 4                            ;
-; 30                                           ; 7                            ;
-; 31                                           ; 5                            ;
+; 30                                           ; 3                            ;
+; 31                                           ; 2                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -1329,7 +1309,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Mar 16 11:42:13 2015
+    Info: Processing started: Mon Mar 16 12:03:45 2015
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off 2048 -c 2048
 Info: Selected device EP2C20F484C7 for design "2048"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -1365,27 +1345,23 @@ Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:00:01
-Info: Estimated most critical path is register to register delay of 15.543 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X22_Y17; Fanout = 84; REG Node = 'GAME_VIEW:View|v_cnt[0]'
-    Info: 2: + IC(1.088 ns) + CELL(0.545 ns) = 1.633 ns; Loc. = LAB_X19_Y15; Fanout = 2; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH1|GAME_CHROM:CHROM|Mux2~0'
-    Info: 3: + IC(1.053 ns) + CELL(0.521 ns) = 3.207 ns; Loc. = LAB_X21_Y18; Fanout = 5; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH1|GAME_CHROM:CHROM|Mux2~3'
-    Info: 4: + IC(0.131 ns) + CELL(0.545 ns) = 3.883 ns; Loc. = LAB_X21_Y18; Fanout = 2; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH2|Mux0~1'
-    Info: 5: + IC(0.714 ns) + CELL(0.521 ns) = 5.118 ns; Loc. = LAB_X26_Y18; Fanout = 3; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX1|Game_CHDISPLAY:CH2|drawChar~0'
-    Info: 6: + IC(0.719 ns) + CELL(0.516 ns) = 6.353 ns; Loc. = LAB_X22_Y18; Fanout = 1; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX3|valueChange~0'
-    Info: 7: + IC(0.131 ns) + CELL(0.545 ns) = 7.029 ns; Loc. = LAB_X22_Y18; Fanout = 8; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX3|valueChange~1'
-    Info: 8: + IC(1.002 ns) + CELL(0.545 ns) = 8.576 ns; Loc. = LAB_X30_Y18; Fanout = 4; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX3|drawBox~0'
-    Info: 9: + IC(0.498 ns) + CELL(0.178 ns) = 9.252 ns; Loc. = LAB_X30_Y18; Fanout = 6; COMB Node = 'GAME_VIEW:View|red_signal~39'
-    Info: 10: + IC(1.238 ns) + CELL(0.322 ns) = 10.812 ns; Loc. = LAB_X27_Y17; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~61'
-    Info: 11: + IC(0.354 ns) + CELL(0.319 ns) = 11.485 ns; Loc. = LAB_X27_Y17; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~62'
-    Info: 12: + IC(1.084 ns) + CELL(0.178 ns) = 12.747 ns; Loc. = LAB_X27_Y19; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~63'
-    Info: 13: + IC(0.354 ns) + CELL(0.319 ns) = 13.420 ns; Loc. = LAB_X27_Y19; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~64'
-    Info: 14: + IC(0.498 ns) + CELL(0.178 ns) = 14.096 ns; Loc. = LAB_X27_Y19; Fanout = 1; COMB Node = 'GAME_VIEW:View|red_signal~65'
-    Info: 15: + IC(0.131 ns) + CELL(0.545 ns) = 14.772 ns; Loc. = LAB_X27_Y19; Fanout = 2; COMB Node = 'GAME_VIEW:View|red_signal~66'
-    Info: 16: + IC(0.131 ns) + CELL(0.544 ns) = 15.447 ns; Loc. = LAB_X27_Y19; Fanout = 1; COMB Node = 'GAME_VIEW:View|red~3'
-    Info: 17: + IC(0.000 ns) + CELL(0.096 ns) = 15.543 ns; Loc. = LAB_X27_Y19; Fanout = 1; REG Node = 'GAME_VIEW:View|red[3]'
-    Info: Total cell delay = 6.417 ns ( 41.29 % )
-    Info: Total interconnect delay = 9.126 ns ( 58.71 % )
+Info: Fitter placement operations ending: elapsed time is 00:00:00
+Info: Estimated most critical path is register to register delay of 12.301 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X24_Y20; Fanout = 72; REG Node = 'GAME_VIEW:View|h_cnt[1]'
+    Info: 2: + IC(0.957 ns) + CELL(0.322 ns) = 1.279 ns; Loc. = LAB_X21_Y20; Fanout = 5; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX14|valueChange~3'
+    Info: 3: + IC(0.691 ns) + CELL(0.545 ns) = 2.515 ns; Loc. = LAB_X26_Y20; Fanout = 1; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX2|Game_CHDISPLAY:CH4|LessThan0~0'
+    Info: 4: + IC(1.260 ns) + CELL(0.322 ns) = 4.097 ns; Loc. = LAB_X24_Y19; Fanout = 4; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX10|Game_CHDISPLAY:CH4|drawChar~0'
+    Info: 5: + IC(1.031 ns) + CELL(0.544 ns) = 5.672 ns; Loc. = LAB_X21_Y22; Fanout = 1; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX14|valueChange~16'
+    Info: 6: + IC(0.732 ns) + CELL(0.178 ns) = 6.582 ns; Loc. = LAB_X22_Y22; Fanout = 3; COMB Node = 'GAME_VIEW:View|GAME_BOX:BOX14|valueChange~17'
+    Info: 7: + IC(0.745 ns) + CELL(0.416 ns) = 7.743 ns; Loc. = LAB_X22_Y18; Fanout = 4; COMB Node = 'GAME_VIEW:View|green_signal~7'
+    Info: 8: + IC(0.131 ns) + CELL(0.542 ns) = 8.416 ns; Loc. = LAB_X22_Y18; Fanout = 5; COMB Node = 'GAME_VIEW:View|green_signal~8'
+    Info: 9: + IC(0.498 ns) + CELL(0.178 ns) = 9.092 ns; Loc. = LAB_X22_Y18; Fanout = 2; COMB Node = 'GAME_VIEW:View|green_signal~14'
+    Info: 10: + IC(0.365 ns) + CELL(0.545 ns) = 10.002 ns; Loc. = LAB_X21_Y18; Fanout = 1; COMB Node = 'GAME_VIEW:View|green_signal~25'
+    Info: 11: + IC(0.983 ns) + CELL(0.545 ns) = 11.530 ns; Loc. = LAB_X27_Y18; Fanout = 2; COMB Node = 'GAME_VIEW:View|green_signal~30'
+    Info: 12: + IC(0.131 ns) + CELL(0.544 ns) = 12.205 ns; Loc. = LAB_X27_Y18; Fanout = 1; COMB Node = 'GAME_VIEW:View|green~2'
+    Info: 13: + IC(0.000 ns) + CELL(0.096 ns) = 12.301 ns; Loc. = LAB_X27_Y18; Fanout = 1; REG Node = 'GAME_VIEW:View|green[2]'
+    Info: Total cell delay = 4.777 ns ( 38.83 % )
+    Info: Total interconnect delay = 7.524 ns ( 61.17 % )
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 1% of the available device resources
     Info: Peak interconnect usage is 5% of the available device resources in the region that extends from location X12_Y14 to location X24_Y27
@@ -1441,10 +1417,10 @@ Info: Delay annotation completed successfully
 Warning: The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
 Info: Generated suppressed messages file C:/Users/Giacomo/Documents/Unibo/Sistemi Digitali M/2048-DE1/2048.fit.smsg
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 283 megabytes
-    Info: Processing ended: Mon Mar 16 11:42:20 2015
+    Info: Peak virtual memory: 282 megabytes
+    Info: Processing ended: Mon Mar 16 12:03:52 2015
     Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:08
+    Info: Total CPU time (on all processors): 00:00:07
 
 
 +----------------------------+
