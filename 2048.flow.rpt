@@ -1,5 +1,5 @@
 Flow report for 2048
-Sat Mar 14 18:23:08 2015
+Mon Mar 16 11:42:24 2015
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Sat Mar 14 18:23:08 2015        ;
+; Flow Status                        ; Successful - Mon Mar 16 11:42:24 2015        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; 2048                                         ;
 ; Top-level Entity Name              ; GAME                                         ;
@@ -46,8 +46,8 @@ applicable agreement for further details.
 ; Device                             ; EP2C20F484C7                                 ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; No                                           ;
-; Total logic elements               ; 346 / 18,752 ( 2 % )                         ;
-;     Total combinational functions  ; 328 / 18,752 ( 2 % )                         ;
+; Total logic elements               ; 720 / 18,752 ( 4 % )                         ;
+;     Total combinational functions  ; 702 / 18,752 ( 4 % )                         ;
 ;     Dedicated logic registers      ; 87 / 18,752 ( < 1 % )                        ;
 ; Total registers                    ; 87                                           ;
 ; Total pins                         ; 46 / 315 ( 15 % )                            ;
@@ -63,24 +63,24 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/14/2015 18:22:28 ;
+; Start date & time ; 03/16/2015 11:41:54 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; 2048                ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                               ;
-+------------------------------------+--------------------------------+---------------+-------------+------------+
-; Assignment Name                    ; Value                          ; Default Value ; Entity Name ; Section Id ;
-+------------------------------------+--------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID              ; 25105117753407.142635374801256 ; --            ; --          ; --         ;
-; CYCLONEII_OPTIMIZATION_TECHNIQUE   ; Area                           ; Balanced      ; --          ; --         ;
-; PARTITION_COLOR                    ; 2147039                        ; --            ; Game        ; Top        ;
-; PARTITION_NETLIST_TYPE             ; SOURCE                         ; --            ; Game        ; Top        ;
-; TOP_LEVEL_ENTITY                   ; Game                           ; 2048          ; --          ; --         ;
-; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                            ; --            ; --          ; eda_palace ;
-+------------------------------------+--------------------------------+---------------+-------------+------------+
++---------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                              ;
++------------------------------------+-------------------------------+---------------+-------------+------------+
+; Assignment Name                    ; Value                         ; Default Value ; Entity Name ; Section Id ;
++------------------------------------+-------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID              ; 1095806214167.142650251300448 ; --            ; --          ; --         ;
+; CYCLONEII_OPTIMIZATION_TECHNIQUE   ; Area                          ; Balanced      ; --          ; --         ;
+; PARTITION_COLOR                    ; 2147039                       ; --            ; Game        ; Top        ;
+; PARTITION_NETLIST_TYPE             ; SOURCE                        ; --            ; Game        ; Top        ;
+; TOP_LEVEL_ENTITY                   ; Game                          ; 2048          ; --          ; --         ;
+; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                           ; --            ; --          ; eda_palace ;
++------------------------------------+-------------------------------+---------------+-------------+------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------+
@@ -88,11 +88,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:16     ; 1.0                     ; 252 MB              ; 00:00:16                           ;
-; Fitter                  ; 00:00:13     ; 1.0                     ; 281 MB              ; 00:00:15                           ;
-; Assembler               ; 00:00:05     ; 1.0                     ; 234 MB              ; 00:00:04                           ;
-; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 183 MB              ; 00:00:01                           ;
-; Total                   ; 00:00:35     ; --                      ; --                  ; 00:00:36                           ;
+; Analysis & Synthesis    ; 00:00:18     ; 1.0                     ; 349 MB              ; 00:00:19                           ;
+; Fitter                  ; 00:00:06     ; 1.0                     ; 283 MB              ; 00:00:07                           ;
+; Assembler               ; 00:00:02     ; 1.0                     ; 235 MB              ; 00:00:02                           ;
+; Classic Timing Analyzer ; 00:00:00     ; 1.0                     ; 186 MB              ; 00:00:01                           ;
+; Total                   ; 00:00:26     ; --                      ; --                  ; 00:00:29                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -101,10 +101,10 @@ applicable agreement for further details.
 +-------------------------+------------------+---------------+------------+----------------+
 ; Module Name             ; Machine Hostname ; OS Name       ; OS Version ; Processor type ;
 +-------------------------+------------------+---------------+------------+----------------+
-; Analysis & Synthesis    ; FuJiTsAh         ; Windows Vista ; 6.2        ; x86_64         ;
-; Fitter                  ; FuJiTsAh         ; Windows Vista ; 6.2        ; x86_64         ;
-; Assembler               ; FuJiTsAh         ; Windows Vista ; 6.2        ; x86_64         ;
-; Classic Timing Analyzer ; FuJiTsAh         ; Windows Vista ; 6.2        ; x86_64         ;
+; Analysis & Synthesis    ; Giacomo-PC       ; Windows Vista ; 6.2        ; x86_64         ;
+; Fitter                  ; Giacomo-PC       ; Windows Vista ; 6.2        ; x86_64         ;
+; Assembler               ; Giacomo-PC       ; Windows Vista ; 6.2        ; x86_64         ;
+; Classic Timing Analyzer ; Giacomo-PC       ; Windows Vista ; 6.2        ; x86_64         ;
 +-------------------------+------------------+---------------+------------+----------------+
 
 

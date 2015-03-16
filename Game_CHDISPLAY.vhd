@@ -44,7 +44,7 @@ CHROM: entity work.GAME_CHROM
 		data 		=> charOut
 	);
 	
-	codeChange : process(char_code)
+	codeChange : process(char_code, pixel_x, pixel_y)
 	begin
 		rowAddr	 <= std_logic_vector(to_unsigned(pixel_y-YPOS, rowAddr'length)); -- i-esima riga (0-15)
 		charAddr <= std_logic_vector(to_unsigned(character'pos(char_code), charAddr'length)); -- codice carattere (0-127)

@@ -90,9 +90,6 @@ signal drawCharE1 : STD_LOGIC;
 signal drawCharZ : STD_LOGIC;
 signal drawCharZ1 : STD_LOGIC;
 signal drawCharI : STD_LOGIC;
-signal charAddr : STD_LOGIC_VECTOR(6 downto 0); -- Indirizzo del carattere sulla ROM
-signal rowAddr	: STD_LOGIC_VECTOR(3 downto 0); -- Numero della riga di pixel del singolo carattere (0-15)
-signal charOut 	: STD_LOGIC_VECTOR(7 downto 0); -- Vettore di visualizzazione del carattere alla linea impostata
 
 BEGIN
 
@@ -755,38 +752,6 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 ------- FINE BOX
 -----------------------------------------------------------------------
-
-	IF(	v_cnt >= writePositionV AND -- limite alto del carattere
-		v_cnt < writePositionV+16 AND -- limite basso del carattere
-		h_cnt >= writeColaceH AND -- limite sinistro del carattere
-		h_cnt < writeColaceH+9) -- limite destro del carattere
-	THEN
-		rowAddr	 <= std_logic_vector(to_unsigned(v_cnt-writePositionV, 4)); 
-		charAddr <= "1000011"; -- C
-
-		if(charOut(h_cnt-writeColaceH-1) = '1')
-		then
-			red_signal 	:= "0101";
-			green_signal:= "1111";
-			blue_signal	:= "0101";
-		end if;
-	END IF;
-
-	IF(	v_cnt >= writePositionV AND -- limite alto del carattere
-		v_cnt < writePositionV+16 AND -- limite basso del carattere
-		h_cnt >= writeColaceH+distanceChar AND -- limite sinistro del carattere
-		h_cnt < writeColaceH+distanceChar+9) -- limite destro del carattere
-	THEN
-		rowAddr	 <= std_logic_vector(to_unsigned(v_cnt-writePositionV, 4)); 
-		charAddr <= "1000111"; -- G
-		
-		if(charOut(h_cnt-writeColaceH+distanceChar-1) = '1')
-		then
-			red_signal 	:= "0101";
-			green_signal:= "1111";
-			blue_signal	:= "0101";
-		end if;
-	END IF;
 
 	--Generazione segnale hsync (rispettando la specifica temporale di avere un ritardo "a" di 3.8 us fra un segnale e l'altro)
 	--Infatti (659-639)/25000000 = 0.6 us, ossia il tempo di Front Porch "d". (755-659)/25000000 = 3.8, ossia il tempo "a"
