@@ -4,7 +4,7 @@ USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 USE IEEE.STD_LOGIC_MISC.ALL;
 USE WORK.GAME_TYPES.ALL;
-
+USE WORK.GAME_UTILS.ALL;
 
 ENTITY GAME_DATA IS
 PORT
@@ -24,7 +24,8 @@ PORT
 		goingReady	: OUT STD_LOGIC;
 		gameover	: OUT STD_LOGIC;
 		victory		: OUT STD_LOGIC;
-		box_values	: BUFFER GAME_GRID
+		box_values	: BUFFER GAME_GRID;
+		score		: BUFFER INTEGER RANGE 0 to 9999
 	);
 end  GAME_DATA;
 
@@ -45,40 +46,7 @@ variable box_values_status : GAME_GRID;
 variable i			: integer range 0 to 128 :=0;
 
 
--- Funz. che stabilisce se la partita è stata persa oppure no
-FUNCTION isGameOver(values: GAME_GRID) RETURN std_logic IS
-variable result: std_logic := '0';
-variable zeroCount : integer;
-BEGIN
-	for i in 0 to 3 loop
-		for j in 0 to 3 loop
-			if(values(i,j) = 0)
-			then
-				zeroCount := zeroCount +1;
-			end if;
-		end loop;
-	end loop;
-	if (zeroCount = 0)
-	then
-		result := '1';
-	end if;
-	return result;
-END FUNCTION isGameOver;
 
---Funz. che stabilisce se la partita è terminata con la vittoria
-FUNCTION isVictory(values: GAME_GRID) RETURN std_logic IS
-variable result: std_logic := '0';
-BEGIN
-	for i in 0 to 3 loop
-		for j in 0 to 3 loop
-			if(values(i,j) = 0)
-			then
-				result := '1';
-			end if;
-		end loop;
-	end loop;
-	return result;
-END FUNCTION isVictory;
 
 BEGIN
 
@@ -93,7 +61,8 @@ BEGIN
 		box_values_status(2,3) := 4;
 		box_values_status(3,1) := 2;
 		box_values_status(3,2) := 2;
-		box_values_status(3,3) := 2048;
+		box_values_status(3,3) := 2;
+		score <= 0;
 		
 		gameO := isGameOver(box_values_status); 
 		youWin:= isVictory(box_values_status);

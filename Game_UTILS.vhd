@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+USE WORK.GAME_TYPES.ALL;
 
 -- Definizioni delle funzioni contenute nel package
 PACKAGE GAME_UTILS IS
@@ -8,6 +9,10 @@ PACKAGE GAME_UTILS IS
 		RETURN STD_LOGIC_VECTOR;
 	FUNCTION reverse (A: IN STD_LOGIC_VECTOR) 
 		RETURN STD_LOGIC_VECTOR;
+	FUNCTION isGameOver (values: GAME_GRID)
+		RETURN STD_LOGIC;
+	FUNCTION isVictory (values: GAME_GRID)
+		RETURN STD_LOGIC;
 END GAME_UTILS;
  
 PACKAGE BODY GAME_UTILS IS
@@ -44,5 +49,35 @@ BEGIN
 	END LOOP;
 	RETURN RESULT;
 END reverse;
+
+-- Funz. che stabilisce se la partita è stata persa oppure no
+FUNCTION isGameOver(values: GAME_GRID) RETURN std_logic IS
+variable result: std_logic := '1';
+BEGIN
+	for i in 0 to 3 loop
+		for j in 0 to 3 loop
+			if(values(i,j) = 0)
+			then
+				result := '0';
+			end if;
+		end loop;
+	end loop;
+	return result;
+END FUNCTION isGameOver;
+
+--Funz. che stabilisce se la partita è terminata con la vittoria
+FUNCTION isVictory(values: GAME_GRID) RETURN std_logic IS
+variable result: std_logic := '0';
+BEGIN
+	for i in 0 to 3 loop
+		for j in 0 to 3 loop
+			if(values(i,j) = 2048)
+			then
+				result := '1';
+			end if;
+		end loop;
+	end loop;
+	return result;
+END FUNCTION isVictory;
 
 END GAME_UTILS;

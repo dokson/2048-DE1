@@ -18,6 +18,7 @@ PORT
 		
 		-- MODEL STATUS
 		box_values	: IN GAME_GRID;
+		score : IN INTEGER RANGE 0 to 9999;
 		
 		bootstrap	: IN STD_LOGIC;
 		
@@ -622,6 +623,20 @@ BOX16: entity work.GAME_BOX
 		drawbox => drawbox16,
 		color 	=> color16
 	);
+	
+SEGCTRL: entity work.GAME_7SEGCTRL
+	port map
+	(
+		-- INPUT
+		num	 => score,
+		
+		-- OUTPUT 
+		seven_segs4 => leds4,
+		seven_segs3 => leds3,
+		seven_segs2 => leds2,
+		seven_segs1	=> leds1
+	);
+
 
 PROCESS
 
@@ -647,14 +662,14 @@ variable blue_signal	: STD_LOGIC_VECTOR(3 downto 0);
 BEGIN
 
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
-	-- RESET
-	IF (bootstrap='1')  
-		THEN
-		leds1 <= "0000000";
-		leds2 <= "0000000";
-		leds3 <= "0000000";
-		leds4 <= "0000000";
-	END IF;
+--	-- RESET
+--	IF (bootstrap='1')  
+--		THEN
+--		leds1 <= "0000000";
+--		leds2 <= "0000000";
+--		leds3 <= "0000000";
+--		leds4 <= "0000000";
+--	END IF;
 
 	--Horizontal Sync
 	--Reset Horizontal Counter	
@@ -997,20 +1012,20 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	hsync		<= h_sync;
 	vsync		<= v_sync;
 
-	case gameover is
-		when '0' => -- CIAO
-			leds1 <= not"0111111"; -- C
-			leds2 <= not"1110111"; -- I
-			leds3 <= not"0000110"; -- A
-			leds4 <= not"0111001"; -- O
-		when '1' => -- OVER
-			leds1 <= not"1010000"; -- O
-			leds2 <= not"1111001"; -- U
-			leds3 <= not"0111110"; -- E
-			leds4 <= not"0111111"; -- P
-		when others => 
-			NULL;
-	end case;
+--	case gameover is
+--		when '0' => -- CIAO
+--			leds1 <= not"0111111"; -- C
+--			leds2 <= not"1110111"; -- I
+--			leds3 <= not"0000110"; -- A
+--			leds4 <= not"0111001"; -- O
+--		when '1' => -- OVER
+--			leds1 <= not"1010000"; -- O
+--			leds2 <= not"1111001"; -- U
+--			leds3 <= not"0111110"; -- E
+--			leds4 <= not"0111111"; -- P
+--		when others => 
+--			NULL;
+--	end case;
 	
 END PROCESS;
 END behavior;

@@ -18,10 +18,11 @@ entity Game_7SEGCTRL is
 end Game_7SEGCTRL;
 
 architecture arch of Game_7SEGCTRL is
-	variable digit4, digit3, digit2, digit1		: integer range 0 to 9;
-	variable temp								: integer range 0 to 9999;
+	
 begin
 	numChange : process(num)
+		variable digit4, digit3, digit2, digit1		: integer range 0 to 9;
+		variable temp								: integer range 0 to 9999;
 		begin
 		temp := num;
 		IF(temp > 999)

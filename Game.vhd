@@ -44,6 +44,7 @@ architecture Behavioral of GAME is
 	signal gameover: STD_LOGIC;
 	signal victory: STD_LOGIC;
 	signal box_values : GAME_GRID;
+	signal score: INTEGER RANGE 0 to 9999;
 
 BEGIN
 
@@ -90,7 +91,8 @@ Datapath: entity work.GAME_DATA
 		goingReady	=> goingReady,
 		victory		=> victory,
 		gameover 	=> gameover,
-		box_values 	=> box_values
+		box_values 	=> box_values,
+		score		=> score
 	);
 
 View: entity work.GAME_VIEW
@@ -104,6 +106,7 @@ View: entity work.GAME_VIEW
 		rightBorder	=> eastBorder,
 		
 		box_values 	=> box_values,
+		score		=> score,
 
 		bootstrap	=> boot,
 		gameover	=> gameover,
