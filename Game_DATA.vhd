@@ -14,6 +14,8 @@ PORT
 		
 		enable		: IN STD_LOGIC;
 		bootstrap	: IN STD_LOGIC;
+		
+		movepadDirection: IN STD_LOGIC_VECTOR(3 downto 0);
 
 		-- OUTPUT
 		northBorder	: OUT INTEGER range 0 to 500;
@@ -51,11 +53,17 @@ variable i			: integer range 0 to 128 :=0;
 BEGIN
 
 	WAIT UNTIL(clk'EVENT) AND (clk = '1');
+	
+
+	northBorder <= upBorder;
+	southBorder <= downBorder;
+	westBorder <= leftBorder;
+	eastBorder <= rightBorder;
 		
 	IF (bootstrap='1') 
 	THEN	-- reset
 		
-		-- iniz. stato iniziale gioco, sempre uguale per regolamento
+		-- iniz. stato iniziale gioco
 		box_values_status := ((others=> (others=>0)));
 		box_values_status(2,2) := 2;
 		box_values_status(2,3) := 4;
@@ -67,18 +75,14 @@ BEGIN
 		gameO := isGameOver(box_values_status); 
 		youWin:= isVictory(box_values_status);
 		
-		northBorder <= upBorder;
-		southBorder <= downBorder;
-		westBorder <= leftBorder;
-		eastBorder <= rightBorder;
 		gameover <= gameO;
 		victory <= youWin;
-		box_values <= box_values_status;
 	END IF;
 	
 	-- segnali in uscita
 	gameover<= gameO;
 	victory	<= youWin;
+	box_values <= box_values_status;
 	
 END PROCESS;
 END behavior;

@@ -45,6 +45,7 @@ architecture Behavioral of GAME is
 	signal victory: STD_LOGIC;
 	signal box_values : GAME_GRID;
 	signal score: INTEGER RANGE 0 to 9999;
+	signal movepadDirection: STD_LOGIC_VECTOR(3 downto 0);
 
 BEGIN
 
@@ -73,7 +74,8 @@ ControlUnit: entity work.GAME_CONTROL
 		goingReady	=> goingReady, 
 
 		enable		=> enable,		
-		boot		=> boot
+		boot		=> boot,
+		movepadDirection => movepadDirection
 	);
 
 Datapath: entity work.GAME_DATA
@@ -82,6 +84,8 @@ Datapath: entity work.GAME_DATA
 		clk			=> clock_25Mhz,
 		enable		=> enable,
 		bootstrap	=> boot,
+		
+		movepadDirection => movepadDirection,
 
 		northBorder	=> northBorder,
 		southBorder	=> southBorder,

@@ -12,7 +12,8 @@ PORT
 		goingReady: IN STD_LOGIC;
 		
 		enable: OUT STD_LOGIC;
-		boot: OUT STD_LOGIC
+		boot: OUT STD_LOGIC;
+		movepadDirection: OUT STD_LOGIC_VECTOR(3 downto 0) -- usiamo 4 bit anche se ne basterebbero 2 per descrivere le 4 direzioni
 	);
 end  GAME_CONTROL;
 
@@ -37,6 +38,13 @@ constant keyPLAY: std_logic_vector(7 downto 0):="00101001";
 constant keyPAUSE: std_logic_vector(7 downto 0):="01001101";
 constant keyRIGHT: std_logic_vector(7 downto 0):="01110100";
 constant keyLEFT: std_logic_vector(7 downto 0):="01101011";
+constant keyUP 	: std_logic_vector(7 downto 0):="01110010";
+constant keyDOWN : std_logic_vector(7 downto 0):="01110101";
+
+constant dirUP : std_logic_vector(3 downto 0):="1000";
+constant dirDOWN : std_logic_vector(3 downto 0):="0001";
+constant dirLEFT : std_logic_vector(3 downto 0):="0100";
+constant dirRIGHT : std_logic_vector(3 downto 0):="0010";
 
 
 BEGIN
@@ -54,9 +62,13 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		when PLAYING =>
 			case keyboardData is
 				when keyRIGHT => -- do move right
-					NULL;
+					movepadDirection <= dirRIGHT;
 				when keyLEFT => -- do move left
-					NULL;
+					movepadDirection <= dirLEFT;
+				when KEYUP => -- do move right
+					movepadDirection <= dirUP;
+				when KEYDOWN => -- do move left
+					movepadDirection <= dirDOWN;
 				when others => -- do nothing
 					NULL;
 			end case;	
