@@ -43,7 +43,8 @@ constant downBorder	: integer := 474;
 
 variable gameO		: STD_LOGIC :='0';
 variable youWin		: STD_LOGIC :='0';
-variable box_values_status : GAME_GRID;
+variable score_status		: INTEGER RANGE 0 to 9999 := 0;
+variable box_values_status : GAME_GRID := ((others=> (others=>0)));
 
 variable i			: integer range 0 to 128 :=0;
 
@@ -60,28 +61,20 @@ BEGIN
 	westBorder <= leftBorder;
 	eastBorder <= rightBorder;
 		
-	IF (bootstrap='1') 
-	THEN	-- reset
-		
-		-- iniz. stato iniziale gioco
-		box_values_status := ((others=> (others=>0)));
-		box_values_status(2,2) := 2;
-		box_values_status(2,3) := 4;
-		box_values_status(3,1) := 2;
-		box_values_status(3,2) := 2;
-		box_values_status(3,3) := 2;
-		score <= 0;
-		
-		gameO := isGameOver(box_values_status); 
-		youWin:= isVictory(box_values_status);
-		
-		gameover <= gameO;
-		victory <= youWin;
-	END IF;
+	-- iniz. stato iniziale gioco, sempre uguale per regolamento
+	box_values_status(2,2) := 2;
+	box_values_status(2,3) := 4;
+	box_values_status(3,1) := 2;
+	box_values_status(3,2) := 2;
+	box_values_status(3,3) := 2;
+	
+	gameO := isGameOver(box_values_status); 
+	youWin:= isVictory(box_values_status);
 	
 	-- segnali in uscita
 	gameover<= gameO;
 	victory	<= youWin;
+	score <= score_status;
 	box_values <= box_values_status;
 	
 END PROCESS;

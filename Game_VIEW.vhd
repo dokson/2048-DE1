@@ -779,61 +779,6 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 
 --- fine DISEGNO CHAR
 
---- DISEGNO DI OGNI CARATTERE : GAME OVER
-	IF (gameover = '1')
-	THEN
-		IF(drawGoG='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoA='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101";
-		END IF;
-		IF(drawGoM='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoE='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101";
-		END IF;
-		
-		IF(drawGoO='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoV='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoE1='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101";
-		END IF;
-		IF(drawGoR='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-	END IF;
---- fine DISEGNO CHAR
-
 --- DISEGNO DI OGNI BOX
 	IF(drawbox1='1')
 	THEN
@@ -948,6 +893,61 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	END IF;
 		
 ------- FINE BOX
+
+--- DISEGNO DI OGNI CARATTERE : GAME OVER
+	IF (gameover = '1')
+	THEN
+		IF(drawGoG='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoA='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101";
+		END IF;
+		IF(drawGoM='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoE='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101";
+		END IF;
+		
+		IF(drawGoO='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoV='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+		IF(drawGoE1='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101";
+		END IF;
+		IF(drawGoR='1')
+		THEN
+			red_signal(3 downto 0) 	:= "0000"; 		
+			green_signal(3 downto 0):= "0110";  
+			blue_signal(3 downto 0) := "0101"; 
+		END IF;
+	END IF;
+--- fine DISEGNO CHAR
 -----------------------------------------------------------------------
 
 	--Generazione segnale hsync (rispettando la specifica temporale di avere un ritardo "a" di 3.8 us fra un segnale e l'altro)
