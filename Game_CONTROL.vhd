@@ -53,7 +53,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	case state IS
 		when BOOTSTRAP => 
 			boot<='1';
-			IF(keyboardData=keyPLAY) THEN
+			IF(goingReady = '1') THEN
 				state:=PLAYING;
 				boot<='0';
 				enable<='1';

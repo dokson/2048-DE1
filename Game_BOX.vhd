@@ -10,6 +10,7 @@ entity GAME_BOX is
 	);
 	port
 	(
+		clk		: IN STD_LOGIC;
 		-- INPUT
 		pixel_x : IN INTEGER RANGE 0 to 1000;
 		pixel_y : IN INTEGER RANGE 0 to 500;
@@ -94,86 +95,89 @@ begin
 		char_code =>  numberToDraw4,
 		drawChar 	=> drawNum4
 	);
-	valueChange : process(number, drawNum1, drawNum2,  drawNum3, drawNum4)
+	valueChange : process(number, drawNum1, drawNum2,  drawNum3, drawNum4, clk)
 	begin
-		if not(drawNum1 = '1' or drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
+		if(clk'event and clk = '1')
 		then
-			case number is
-				when 2 => 
-					numberToDraw4 <= '2';
-					numberToDraw3 <= NUL;
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"101110111011"; -- grigio chiaro
-				when 4 => 
-					numberToDraw4 <= '4';
-					numberToDraw3 <= NUL;
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"101010101010"; -- grigio scuro
-				when 8 => 
-					numberToDraw4 <= '8';
-					numberToDraw3 <= NUL;
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"110101110110"; -- rosa
-				when 16 => 
-					numberToDraw4 <= '6';
-					numberToDraw3 <= '1';
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"111001000100"; -- rosa +
-				when 32 => 
-					numberToDraw4 <= '2';
-					numberToDraw3 <= '3';
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"111000110011"; -- rosa ++
-				when 64 => 
-					numberToDraw4 <= '4';
-					numberToDraw3 <= '6';
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"111100000000"; -- rosso +++
-				when 128 =>
-					numberToDraw4 <= '8';
-					numberToDraw3 <= '2';
-					numberToDraw2 <= '1';
-					numbertoDraw1 <= NUL;
-					color 	<=	"111111100101"; -- giallo
-				when 256 =>
-					numberToDraw4 <= '6';
-					numberToDraw3 <= '5';
-					numberToDraw2 <= '2';
-					numbertoDraw1 <= NUL;
-					color 	<=	"111011010100"; -- giallo ++
-				when 512 =>
-					numberToDraw4 <= '2';
-					numberToDraw3 <= '1';
-					numberToDraw2 <= '5';
-					numbertoDraw1 <= NUL;
-					color 	<=	"111011010000"; -- giallo +++
-				when 1024 =>
-					numberToDraw4 <= '4';
-					numberToDraw3 <= '2';
-					numberToDraw2 <= '0';
-					numbertoDraw1 <= '1';
-					color 	<=	"111011000000"; -- giallo +++
-				when 2048 =>
-					numberToDraw4 <= '8';
-					numberToDraw3 <= '4';
-					numberToDraw2 <= '0';
-					numbertoDraw1 <= '2';
-					color 	<=	"111010110000"; -- giallo ++++
-				when others => 
-					numberToDraw4 <= NUL;
-					numberToDraw3 <= NUL;
-					numberToDraw2 <= NUL;
-					numbertoDraw1 <= NUL;
-					color 	<=	"111111111111";
-			end case;
-		else
-			color <= "000000000000";
+			if not(drawNum1 = '1' or drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
+			then
+				case number is
+					when 2 => 
+						numberToDraw4 <= '2';
+						numberToDraw3 <= NUL;
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"101110111011"; -- grigio chiaro
+					when 4 => 
+						numberToDraw4 <= '4';
+						numberToDraw3 <= NUL;
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"101010101010"; -- grigio scuro
+					when 8 => 
+						numberToDraw4 <= '8';
+						numberToDraw3 <= NUL;
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"110101110110"; -- rosa
+					when 16 => 
+						numberToDraw4 <= '6';
+						numberToDraw3 <= '1';
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"111001000100"; -- rosa +
+					when 32 => 
+						numberToDraw4 <= '2';
+						numberToDraw3 <= '3';
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"111000110011"; -- rosa ++
+					when 64 => 
+						numberToDraw4 <= '4';
+						numberToDraw3 <= '6';
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"111100000000"; -- rosso +++
+					when 128 =>
+						numberToDraw4 <= '8';
+						numberToDraw3 <= '2';
+						numberToDraw2 <= '1';
+						numbertoDraw1 <= NUL;
+						color 	<=	"111111100101"; -- giallo
+					when 256 =>
+						numberToDraw4 <= '6';
+						numberToDraw3 <= '5';
+						numberToDraw2 <= '2';
+						numbertoDraw1 <= NUL;
+						color 	<=	"111011010100"; -- giallo ++
+					when 512 =>
+						numberToDraw4 <= '2';
+						numberToDraw3 <= '1';
+						numberToDraw2 <= '5';
+						numbertoDraw1 <= NUL;
+						color 	<=	"111011010000"; -- giallo +++
+					when 1024 =>
+						numberToDraw4 <= '4';
+						numberToDraw3 <= '2';
+						numberToDraw2 <= '0';
+						numbertoDraw1 <= '1';
+						color 	<=	"111011000000"; -- giallo +++
+					when 2048 =>
+						numberToDraw4 <= '8';
+						numberToDraw3 <= '4';
+						numberToDraw2 <= '0';
+						numbertoDraw1 <= '2';
+						color 	<=	"111010110000"; -- giallo ++++
+					when others => 
+						numberToDraw4 <= NUL;
+						numberToDraw3 <= NUL;
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color 	<=	"111111111111";
+				end case;
+			else
+				color <= "000000000000";
+			end if;
 		end if;
 	end process valueChange;
 	

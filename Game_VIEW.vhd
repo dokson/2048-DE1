@@ -392,6 +392,7 @@ BOX1: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(0,0),
@@ -407,6 +408,7 @@ BOX2: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(0,1),
@@ -422,6 +424,7 @@ BOX3: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(0,2),
@@ -437,6 +440,7 @@ BOX4: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(0,3),
@@ -452,6 +456,7 @@ BOX5: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(1,0),
@@ -467,6 +472,7 @@ BOX6: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(1,1),
@@ -482,6 +488,7 @@ BOX7: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(1,2),
@@ -497,6 +504,7 @@ BOX8: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(1,3),
@@ -512,6 +520,7 @@ BOX9: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(2,0),
@@ -527,6 +536,7 @@ BOX10: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(2,1),
@@ -542,6 +552,7 @@ BOX11: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(2,2),
@@ -557,6 +568,7 @@ BOX12: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(2,3),
@@ -572,6 +584,7 @@ BOX13: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(3,0),
@@ -587,6 +600,7 @@ BOX14: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(3,1),
@@ -602,6 +616,7 @@ BOX15: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(3,2),
@@ -617,6 +632,7 @@ BOX16: entity work.GAME_BOX
 	)
 	port map
 	(
+		clk => clk,
 		pixel_x => h_cnt,
 		pixel_y => v_cnt,
 		number 	=> box_values(3,3),
