@@ -4,7 +4,10 @@ USE IEEE.NUMERIC_STD.ALL;
 
 PACKAGE GAME_TYPES IS
 	
-	type 	GAME_GRID 	is array (3 downto 0, 3 downto 0) of integer;
+	
+	constant GRID_WIDTH : INTEGER := 4;
+	constant GRID_HEIGHT : INTEGER := 4; 
+	type 	GAME_GRID 	is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer;
 	subtype RGB_COLOR	is std_logic_vector(11 downto 0);
 	
 	-- Definizioni di alcuni colori

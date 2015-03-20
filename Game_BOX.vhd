@@ -95,6 +95,8 @@ begin
 		char_code =>  numberToDraw4,
 		drawChar 	=> drawNum4
 	);
+	
+	
 	valueChange : process(number, drawNum1, drawNum2,  drawNum3, drawNum4, clk)
 	begin
 		if(clk'event and clk = '1')
@@ -102,6 +104,12 @@ begin
 			if not(drawNum1 = '1' or drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
 			then
 				case number is
+					when 0 => 
+						numberToDraw4 <= NUL;
+						numberToDraw3 <= NUL;
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
+						color <= "111111111111";
 					when 2 => 
 						numberToDraw4 <= '2';
 						numberToDraw3 <= NUL;
@@ -173,7 +181,7 @@ begin
 						numberToDraw3 <= NUL;
 						numberToDraw2 <= NUL;
 						numbertoDraw1 <= NUL;
-						color 	<=	"111111111111";
+						color 	<=	"000000000000";
 				end case;
 			else
 				color <= "000000000000";
@@ -182,11 +190,10 @@ begin
 	end process valueChange;
 	
 	drawBox <= '1' 
-		when 
-			(pixel_x >= XPOS and pixel_x <= MAX_X and pixel_y >= YPOS and pixel_y <= MAX_Y)  or (drawNum1 = '1' or 
-				drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
-		else
-			'0';
-			
+	when 
+		(pixel_x >= XPOS and pixel_x <= MAX_X and pixel_y >= YPOS and pixel_y <= MAX_Y)  or (drawNum1 = '1' or 
+			drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
+	else
+		'0';	
 	
 end box_arch;

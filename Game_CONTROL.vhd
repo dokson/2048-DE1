@@ -38,8 +38,8 @@ constant keyPLAY: std_logic_vector(7 downto 0):="00101001";
 constant keyPAUSE: std_logic_vector(7 downto 0):="01001101";
 constant keyRIGHT: std_logic_vector(7 downto 0):="01110100";
 constant keyLEFT: std_logic_vector(7 downto 0):="01101011";
-constant keyUP 	: std_logic_vector(7 downto 0):="01110010";
-constant keyDOWN : std_logic_vector(7 downto 0):="01110101";
+constant keyUP 	: std_logic_vector(7 downto 0):="01110101";
+constant keyDOWN : std_logic_vector(7 downto 0):="01110010";
 
 constant dirUP : std_logic_vector(3 downto 0):="1000";
 constant dirDOWN : std_logic_vector(3 downto 0):="0001";
@@ -70,7 +70,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 				when KEYDOWN => -- do move left
 					movepadDirection <= dirDOWN;
 				when others => -- do nothing
-					NULL;
+					movepadDirection <= "0000";
 			end case;	
 			
 			IF(keyboardData=keyRESET) 
