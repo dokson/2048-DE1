@@ -7,7 +7,7 @@ ENTITY GAME_RANDOMGEN IS
 PORT
 	( 
 		clk : IN  STD_LOGIC;
-		random_num : OUT INTEGER
+		random_num : OUT STD_LOGIC_VECTOR(3 downto 0)
 	 );
 			 
 END GAME_RANDOMGEN;
@@ -25,7 +25,7 @@ BEGIN
 		rand_temp(GRID_WIDTH-1 downto 1) := rand_temp(GRID_WIDTH-2 downto 0);
 		rand_temp(0) := temp;
 	end if;
-	random_num <= to_integer(unsigned(rand_temp));
+	random_num <= rand_temp;
 end process;
 
 end behavior;

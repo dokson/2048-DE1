@@ -39,7 +39,8 @@ signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
 signal next_score	: INTEGER RANGE 0 to 9999 := 0;
 signal gameO		: STD_LOGIC := '0';
 signal youWin		: STD_LOGIC := '0';
-signal randNum		: INTEGER RANGE 0 to 32;
+signal INrandNum		: STD_LOGIC_VECTOR(3 downto 0) := "0000";
+signal randNum		:  UNSIGNED(3 downto 0) := "0000";
 
 type STATE_TYPE is(randupdate, idle, merge1, move1, merge2, move2, merge3, move3);
 
@@ -47,7 +48,8 @@ signal reg_state, reg_next_state : STATE_TYPE := idle;
 signal directionPosEdge : STD_LOGIC_VECTOR(3 downto 0);
 signal directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
 signal merge_reg, merge_next : STD_LOGIC_VECTOR(3 downto 0);
-shared variable addedRand : STD_LOGIC := '0';
+signal addedRand : STD_LOGIC := '0';
+signal next_addedRand : STD_LOGIC := '0';
 
 PROCEDURE convertCoord(signal position: IN INTEGER; variable x: OUT INTEGER; variable y: OUT INTEGER) IS
 BEGIN
@@ -112,8 +114,10 @@ RANDGEN: entity work.GAME_RANDOMGEN
 	port map
 	(
 		clk => clk,
-		random_num => randNum
+		random_num => INrandNum
 	);
+	
+
 
 process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 	constant score_initial_status		: INTEGER RANGE 0 to 9999 := 0;
@@ -123,15 +127,18 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 			then
 				box_values_curr_status <= box_values_initial_status;
 				curr_score <= score_initial_status;
+				addedRand <= '0';
 				goingReady <= '1';
 				directionPosEdge <= (others => '0');
 				merge_reg <= (others => '0');
 				reg_state <= idle;
 			elsif(clk'event and clk = '1')
 			then
+				randNum <= unsigned(INrandNum);
 				directionPosEdge <= directionPosEdge_next;
 				box_values_curr_status <= box_values_next_status;
 				curr_score <= next_score;
+				addedRand <= next_addedRand;
 				reg_state <= reg_next_state;
 				merge_reg <= merge_next;
 				goingReady <= '0';
@@ -173,13 +180,13 @@ BEGIN
 	next_score <= curr_score;
 	merge_next <= merge_reg;
 	reg_next_state <= reg_state;
+	next_addedRand <= addedRand;
 	directionPosEdge_next <= directionPosEdge;
 	
 	if (gameO = '0' and youWin = '0')
 	then
 	
 		if(reg_state = idle) then
-			addedRand := '0';
 			merge_next <= (others => '0');
 			if(unsigned(directionPosEdge) > 0) then
 				reg_next_state <= merge1;
@@ -187,7 +194,6 @@ BEGIN
 				directionPosEdge_next <= movepadDirection;
 			end if;
 		elsif(reg_state = merge1 or reg_state = merge2 or reg_state = merge3) then
-			addedRand := '0';
 			--next state logic
 			if(reg_state = merge1) 
 			then
@@ -830,6 +836,7 @@ BEGIN
 			
 			case directionPosEdge is
 				when dirRIGHT =>
+				
 					-- prima riga
 					if(box_values_curr_status(0,2) > 0 and box_values_curr_status(0,3) = 0)
 					then
@@ -837,15 +844,18 @@ BEGIN
 						box_values_next_status(0,1) <= box_values_curr_status(0,0);
 						box_values_next_status(0,2) <= box_values_curr_status(0,1);
 						box_values_next_status(0,3) <= box_values_curr_status(0,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,1) > 0 and box_values_curr_status(0,2) = 0)
 					then
 						box_values_next_status(0,0) <= 0;
 						box_values_next_status(0,1) <= box_values_curr_status(0,0);
 						box_values_next_status(0,2) <= box_values_curr_status(0,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,0) > 0 and box_values_curr_status(0,1) = 0)
 					then
 						box_values_next_status(0,0) <= 0;
 						box_values_next_status(0,1) <= box_values_curr_status(0,0);
+						next_addedRand <= '1';
 					end if;
 					
 					--seconda riga
@@ -855,15 +865,18 @@ BEGIN
 						box_values_next_status(1,1) <= box_values_curr_status(1,0);
 						box_values_next_status(1,2) <= box_values_curr_status(1,1);
 						box_values_next_status(1,3) <= box_values_curr_status(1,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,1) > 0 and box_values_curr_status(1,2) = 0)
 					then
 						box_values_next_status(1,0) <= 0;
 						box_values_next_status(1,1) <= box_values_curr_status(1,0);
 						box_values_next_status(1,2) <= box_values_curr_status(1,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,0) > 0 and box_values_curr_status(1,1) = 0)
 					then
 						box_values_next_status(1,0) <= 0;
 						box_values_next_status(1,1) <= box_values_curr_status(1,0);
+						next_addedRand <= '1';
 					end if;
 					
 					--terza riga
@@ -873,15 +886,18 @@ BEGIN
 						box_values_next_status(2,1) <= box_values_curr_status(2,0);
 						box_values_next_status(2,2) <= box_values_curr_status(2,1);
 						box_values_next_status(2,3) <= box_values_curr_status(2,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,1) > 0 and box_values_curr_status(2,2) = 0)
 					then
 						box_values_next_status(2,0) <= 0;
 						box_values_next_status(2,1) <= box_values_curr_status(2,0);
 						box_values_next_status(2,2) <= box_values_curr_status(2,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,0) > 0 and box_values_curr_status(2,1) = 0)
 					then
 						box_values_next_status(2,0) <= 0;
 						box_values_next_status(2,1) <= box_values_curr_status(2,0);
+						next_addedRand <= '1';
 					end if;
 					
 					--quarta riga
@@ -891,18 +907,21 @@ BEGIN
 						box_values_next_status(3,1) <= box_values_curr_status(3,0);
 						box_values_next_status(3,2) <= box_values_curr_status(3,1);
 						box_values_next_status(3,3) <= box_values_curr_status(3,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,1) > 0 and box_values_curr_status(3,2) = 0)
 					then
 						box_values_next_status(3,0) <= 0;
 						box_values_next_status(3,1) <= box_values_curr_status(3,0);
 						box_values_next_status(3,2) <= box_values_curr_status(3,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,0) > 0 and box_values_curr_status(3,1) = 0)
 					then
 						box_values_next_status(3,0) <= 0;
 						box_values_next_status(3,1) <= box_values_curr_status(3,0);
+						next_addedRand <= '1';
 					end if;
 				when dirLEFT =>
-				
+
 					-- prima riga
 					if(box_values_curr_status(0,1) > 0 and box_values_curr_status(0,0) = 0)
 					then
@@ -910,15 +929,18 @@ BEGIN
 						box_values_next_status(0,2) <= box_values_curr_status(0,3);
 						box_values_next_status(0,1) <= box_values_curr_status(0,2);
 						box_values_next_status(0,0) <= box_values_curr_status(0,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,2) > 0 and box_values_curr_status(0,1) = 0)
 					then
 						box_values_next_status(0,3) <= 0;
 						box_values_next_status(0,2) <= box_values_curr_status(0,3);
 						box_values_next_status(0,1) <= box_values_curr_status(0,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,3) > 0 and box_values_curr_status(0,2) = 0)
 					then
 						box_values_next_status(0,3) <= 0;
 						box_values_next_status(0,2) <= box_values_curr_status(0,3);
+						next_addedRand <= '1';
 					end if;
 					
 					-- seconda riga
@@ -928,15 +950,18 @@ BEGIN
 						box_values_next_status(1,2) <= box_values_curr_status(1,3);
 						box_values_next_status(1,1) <= box_values_curr_status(1,2);
 						box_values_next_status(1,0) <= box_values_curr_status(1,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,2) > 0 and box_values_curr_status(1,1) = 0)
 					then
 						box_values_next_status(1,3) <= 0;
 						box_values_next_status(1,2) <= box_values_curr_status(1,3);
 						box_values_next_status(1,1) <= box_values_curr_status(1,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,3) > 0 and box_values_curr_status(1,2) = 0)
 					then
 						box_values_next_status(1,3) <= 0;
 						box_values_next_status(1,2) <= box_values_curr_status(1,3);
+						next_addedRand <= '1';
 					end if;
 					
 					-- terza riga
@@ -946,15 +971,18 @@ BEGIN
 						box_values_next_status(2,2) <= box_values_curr_status(2,3);
 						box_values_next_status(2,1) <= box_values_curr_status(2,2);
 						box_values_next_status(2,0) <= box_values_curr_status(2,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,2) > 0 and box_values_curr_status(2,1) = 0)
 					then
 						box_values_next_status(2,3) <= 0;
 						box_values_next_status(2,2) <= box_values_curr_status(2,3);
 						box_values_next_status(2,1) <= box_values_curr_status(2,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,3) > 0 and box_values_curr_status(2,2) = 0)
 					then
 						box_values_next_status(2,3) <= 0;
 						box_values_next_status(2,2) <= box_values_curr_status(2,3);
+						next_addedRand <= '1';
 					end if;
 					
 					-- quarta riga
@@ -964,19 +992,21 @@ BEGIN
 						box_values_next_status(3,2) <= box_values_curr_status(3,3);
 						box_values_next_status(3,1) <= box_values_curr_status(3,2);
 						box_values_next_status(3,0) <= box_values_curr_status(3,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,2) > 0 and box_values_curr_status(3,1) = 0)
 					then
 						box_values_next_status(3,3) <= 0;
 						box_values_next_status(3,2) <= box_values_curr_status(3,3);
 						box_values_next_status(3,1) <= box_values_curr_status(3,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,3) > 0 and box_values_curr_status(3,2) = 0)
 					then
 						box_values_next_status(3,3) <= 0;
 						box_values_next_status(3,2) <= box_values_curr_status(3,3);
+						next_addedRand <= '1';
 					end if;
 
 				when dirUP =>
-					
 					--prima colonna
 					if(box_values_curr_status(1,0) > 0 and box_values_curr_status(0,0) = 0)
 					then
@@ -984,15 +1014,18 @@ BEGIN
 						box_values_next_status(2,0)	<= box_values_curr_status(3,0);
 						box_values_next_status(1,0) <= box_values_curr_status(2,0);
 						box_values_next_status(0,0) <= box_values_curr_status(1,0);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,0) > 0 and box_values_curr_status(1,0) = 0)
 					then
 						box_values_next_status(3,0) <= 0;
 						box_values_next_status(2,0)	<= box_values_curr_status(3,0);
 						box_values_next_status(1,0) <= box_values_curr_status(2,0);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,0) > 0 and box_values_curr_status(2,0) = 0)
 					then
 						box_values_next_status(3,0) <= 0;
 						box_values_next_status(2,0)	<= box_values_curr_status(3,0);
+						next_addedRand <= '1';
 					end if;
 					
 					--seconda colonna
@@ -1002,15 +1035,18 @@ BEGIN
 						box_values_next_status(2,1)	<= box_values_curr_status(3,1);
 						box_values_next_status(1,1) <= box_values_curr_status(2,1);
 						box_values_next_status(0,1) <= box_values_curr_status(1,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,1) > 0 and box_values_curr_status(1,1) = 0)
 					then
 						box_values_next_status(3,1) <= 0;
 						box_values_next_status(2,1)	<= box_values_curr_status(3,1);
 						box_values_next_status(1,1) <= box_values_curr_status(2,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,1) > 0 and box_values_curr_status(2,1) = 0)
 					then
 						box_values_next_status(3,1) <= 0;
 						box_values_next_status(2,1)	<= box_values_curr_status(3,1);
+						next_addedRand <= '1';
 					end if;
 					
 					--terza colonna
@@ -1020,15 +1056,18 @@ BEGIN
 						box_values_next_status(2,2)	<= box_values_curr_status(3,2);
 						box_values_next_status(1,2) <= box_values_curr_status(2,2);
 						box_values_next_status(0,2) <= box_values_curr_status(1,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,2) > 0 and box_values_curr_status(1,2) = 0)
 					then
 						box_values_next_status(3,2) <= 0;
 						box_values_next_status(2,2)	<= box_values_curr_status(3,2);
 						box_values_next_status(1,2) <= box_values_curr_status(2,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,2) > 0 and box_values_curr_status(2,2) = 0)
 					then
 						box_values_next_status(3,2) <= 0;
 						box_values_next_status(2,2)	<= box_values_curr_status(3,2);
+						next_addedRand <= '1';
 					end if;
 					
 					--quarta colonna
@@ -1038,18 +1077,20 @@ BEGIN
 						box_values_next_status(2,3)	<= box_values_curr_status(3,3);
 						box_values_next_status(1,3) <= box_values_curr_status(2,3);
 						box_values_next_status(0,3) <= box_values_curr_status(1,3);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(2,3) > 0 and box_values_curr_status(1,3) = 0)
 					then
 						box_values_next_status(3,3) <= 0;
 						box_values_next_status(2,3)	<= box_values_curr_status(3,3);
 						box_values_next_status(1,3) <= box_values_curr_status(2,3);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(3,3) > 0 and box_values_curr_status(2,3) = 0)
 					then
 						box_values_next_status(3,3) <= 0;
 						box_values_next_status(2,3)	<= box_values_curr_status(3,3);
+						next_addedRand <= '1';
 					end if;
 				when dirDOWN =>
-				
 					-- prima colonna
 					if(box_values_curr_status(2,0) > 0 and box_values_curr_status(3,0) = 0)
 					then
@@ -1057,15 +1098,18 @@ BEGIN
 						box_values_next_status(1,0) <= box_values_curr_status(0,0);
 						box_values_next_status(2,0) <= box_values_curr_status(1,0);
 						box_values_next_status(3,0) <= box_values_curr_status(2,0);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,0) > 0 and box_values_curr_status(2,0) = 0)
 					then
 						box_values_next_status(0,0) <= 0;
 						box_values_next_status(1,0) <= box_values_curr_status(0,0);
 						box_values_next_status(2,0) <= box_values_curr_status(1,0);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,0) > 0 and box_values_curr_status(1,0) = 0)
 					then
 						box_values_next_status(0,0) <= 0;
 						box_values_next_status(1,0) <= box_values_curr_status(0,0);
+						next_addedRand <= '1';
 					end if;
 					
 					-- seconda colonna
@@ -1075,15 +1119,18 @@ BEGIN
 						box_values_next_status(1,1) <= box_values_curr_status(0,1);
 						box_values_next_status(2,1) <= box_values_curr_status(1,1);
 						box_values_next_status(3,1) <= box_values_curr_status(2,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,1) > 0 and box_values_curr_status(2,1) = 0)
 					then
 						box_values_next_status(0,1) <= 0;
 						box_values_next_status(1,1) <= box_values_curr_status(0,1);
 						box_values_next_status(2,1) <= box_values_curr_status(1,1);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,1) > 0 and box_values_curr_status(1,1) = 0)
 					then
 						box_values_next_status(0,1) <= 0;
 						box_values_next_status(1,1) <= box_values_curr_status(0,1);
+						next_addedRand <= '1';
 					end if;
 					
 					-- terza colonna
@@ -1093,15 +1140,18 @@ BEGIN
 						box_values_next_status(1,2) <= box_values_curr_status(0,2);
 						box_values_next_status(2,2) <= box_values_curr_status(1,2);
 						box_values_next_status(3,2) <= box_values_curr_status(2,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,2) > 0 and box_values_curr_status(2,2) = 0)
 					then
 						box_values_next_status(0,2) <= 0;
 						box_values_next_status(1,2) <= box_values_curr_status(0,2);
 						box_values_next_status(2,2) <= box_values_curr_status(1,2);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,2) > 0 and box_values_curr_status(1,2) = 0)
 					then
 						box_values_next_status(0,2) <= 0;
 						box_values_next_status(1,2) <= box_values_curr_status(0,2);
+						next_addedRand <= '1';
 					end if;
 
 					-- quarta colonna
@@ -1111,15 +1161,18 @@ BEGIN
 						box_values_next_status(1,3) <= box_values_curr_status(0,3);
 						box_values_next_status(2,3) <= box_values_curr_status(1,3);
 						box_values_next_status(3,3) <= box_values_curr_status(2,3);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(1,3) > 0 and box_values_curr_status(2,3) = 0)
 					then
 						box_values_next_status(0,3) <= 0;
 						box_values_next_status(1,3) <= box_values_curr_status(0,3);
 						box_values_next_status(2,3) <= box_values_curr_status(1,3);
+						next_addedRand <= '1';
 					elsif(box_values_curr_status(0,3) > 0 and box_values_curr_status(1,3) = 0)
 					then
 						box_values_next_status(0,3) <= 0;
 						box_values_next_status(1,3) <= box_values_curr_status(0,3);
+						next_addedRand <= '1';
 					end if;
 				when others =>
 					reg_next_state <= idle;
@@ -1128,73 +1181,61 @@ BEGIN
 		then
 			directionPosEdge_next <= movepadDirection;
 			reg_next_state <= idle;
-			convertCoord(randNum, x, y);
-			if(box_values_curr_status(x,y) = 0)
+			convertCoord(to_integer(randNum), x, y);
+			if(addedRand = '1') 
 			then
-				box_values_next_status(x,Y) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x,y+1) = 0)
-			then
-				box_values_next_status(x,y+1) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x,y+2) = 0)
-			then
-				box_values_next_status(x,y+2) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x,y+3) = 0)
-			then
-				box_values_next_status(x,y+3) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+1,y) = 0)
-			then
-				box_values_next_status(x+1,y) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+1,y+1) = 0)
-			then
-				box_values_next_status(x+1,y+1) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+1,y+2) = 0)
-			then
-				box_values_next_status(x+1,y+2) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+1,y+3) = 0)
-			then
-				box_values_next_status(x+1,y+3) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+2,y) = 0)
-			then
-				box_values_next_status(x+2,y) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+2,y+1) = 0)
-			then
-				box_values_next_status(x+2,y+1) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+2,y+2) = 0)
-			then
-				box_values_next_status(x+2,y+2) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+2,y+3) = 0)
-			then
-				box_values_next_status(x+2,y+3) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+3,y) = 0)
-			then
-				box_values_next_status(x+3,y) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+3,y+1) = 0)
-			then
-				box_values_next_status(x+3,y+1) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+3,y+2) = 0)
-			then
-				box_values_next_status(x+3,y+2) <= 2;
-				addedRand := '1';
-			elsif(box_values_curr_status(x+3,y+3) = 0)
-			then
-				box_values_next_status(x+3,y+3) <= 2;
-				addedRand := '1';
-			else
---				gameO <= '1';
+				next_addedRand <= '0';
+				if(box_values_curr_status(x,y) = 0)
+				then
+					box_values_next_status(x,y) <= 2;
+				elsif(box_values_curr_status(x,y+1) = 0)
+				then
+					box_values_next_status(x,y+1) <= 2;
+				elsif(box_values_curr_status(x,y+2) = 0)
+				then
+					box_values_next_status(x,y+2) <= 2;
+				elsif(box_values_curr_status(x,y+3) = 0)
+				then
+					box_values_next_status(x,y+3) <= 2;
+				elsif(box_values_curr_status(x+1,y) = 0)
+				then
+					box_values_next_status(x+1,y) <= 2;
+				elsif(box_values_curr_status(x+1,y+1) = 0)
+				then
+					box_values_next_status(x+1,y+1) <= 2;
+				elsif(box_values_curr_status(x+1,y+2) = 0)
+				then
+					box_values_next_status(x+1,y+2) <= 2;
+				elsif(box_values_curr_status(x+1,y+3) = 0)
+				then
+					box_values_next_status(x+1,y+3) <= 2;
+				elsif(box_values_curr_status(x+2,y) = 0)
+				then
+					box_values_next_status(x+2,y) <= 2;
+				elsif(box_values_curr_status(x+2,y+1) = 0)
+				then
+					box_values_next_status(x+2,y+1) <= 2;
+				elsif(box_values_curr_status(x+2,y+2) = 0)
+				then
+					box_values_next_status(x+2,y+2) <= 2;
+				elsif(box_values_curr_status(x+2,y+3) = 0)
+				then
+					box_values_next_status(x+2,y+3) <= 2;
+				elsif(box_values_curr_status(x+3,y) = 0)
+				then
+					box_values_next_status(x+3,y) <= 2;
+				elsif(box_values_curr_status(x+3,y+1) = 0)
+				then
+					box_values_next_status(x+3,y+1) <= 2;
+				elsif(box_values_curr_status(x+3,y+2) = 0)
+				then
+					box_values_next_status(x+3,y+2) <= 2;
+				elsif(box_values_curr_status(x+3,y+3) = 0)
+				then
+					box_values_next_status(x+3,y+3) <= 2;
+				else
+					gameO <= '1';
+				end if;
 			end if;
 		end if;
 	end if;
