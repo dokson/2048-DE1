@@ -33,82 +33,77 @@ end  GAME_DATA;
 
 ARCHITECTURE behavior of GAME_DATA IS
 
-signal box_values_curr_status : GAME_GRID := (others => (others => 0));
+signal box_values_curr_status : GAME_GRID := ((2,2,2,0),(4,2,0,0),(0,0,0,0),(0,0,0,0));
 signal box_values_next_status : GAME_GRID := (others => (others => 0));
 signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
 signal next_score	: INTEGER RANGE 0 to 9999 := 0;
 signal gameO		: STD_LOGIC := '0';
 signal youWin		: STD_LOGIC := '0';
-signal randNum		: INTEGER RANGE 0 to 15;
+signal randNum		: INTEGER RANGE 0 to 32;
 
 type STATE_TYPE is(randupdate, idle, merge1, move1, merge2, move2, merge3, move3);
 
-signal reg_state, reg_next_state : STATE_TYPE;
+signal reg_state, reg_next_state : STATE_TYPE := idle;
 signal directionPosEdge : STD_LOGIC_VECTOR(3 downto 0);
 signal directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
 signal merge_reg, merge_next : STD_LOGIC_VECTOR(3 downto 0);
+shared variable addedRand : STD_LOGIC := '0';
 
-PROCEDURE addNumRand(signal values: IN GAME_GRID; signal position: IN INTEGER; signal result: INOUT GAME_GRID) IS
-variable row : INTEGER;
-variable col : INTEGER;
+PROCEDURE convertCoord(signal position: IN INTEGER; variable x: OUT INTEGER; variable y: OUT INTEGER) IS
 BEGIN
 	case position is
 		when 1 =>
-			row := 0;
-			col := 0;
+			x := 0;
+			y := 0;
 		when 2 =>
-			row := 0;
-			col := 1;
+			x := 0;
+			y := 1;
 		when 3 =>
-			row := 0;
-			col := 2;
+			x := 0;
+			y := 2;
 		when 4 =>
-			row := 0;
-			col := 3;
+			x := 0;
+			y := 3;
 		when 5 =>
-			row := 1;
-			col := 0;
+			x := 1;
+			y := 0;
 		when 6 =>
-			row := 1;
-			col := 1;
+			x := 1;
+			y := 1;
 		when 7 =>
-			row := 1;
-			col := 2;
+			x := 1;
+			y := 2;
 		when 8 =>
-			row := 1;
-			col := 3;
+			x := 1;
+			y := 3;
 		when 9 =>
-			row := 2;
-			col := 0;
+			x := 2;
+			y := 0;
 		when 10 =>
-			row := 2;
-			col := 1;
+			x := 2;
+			y := 1;
 		when 11 =>
-			row := 2;
-			col := 2;
+			x := 2;
+			y := 2;
 		when 12 =>
-			row := 2;
-			col := 3;
+			x := 2;
+			y := 3;
 		when 13 =>
-			row := 3;
-			col := 0;
+			x := 3;
+			y := 0;
 		when 14 =>
-			row := 3;
-			col := 1;
+			x := 3;
+			y := 1;
 		when 15 =>
-			row := 3;
-			col := 2;
+			x := 3;
+			y := 2;
 		when 16 =>
-			row := 3;
-			col := 3;
+			x := 3;
+			y := 3;
 		when others =>
 			NULL;
 	end case;
-	if (values(row,col) = 0)
-	then
-		result(row,col) <= 2;
-	end if;
-END addNumRand;
+END convertCoord;
 
 
 BEGIN
@@ -150,7 +145,7 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 	end process;
 	
 PROCESS (box_values_curr_status, curr_score, movepadDirection, box_values_next_status, 
-			randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg, merge_next)
+			randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg, merge_next, next_score)
 -- bordo schermo
 constant leftBorder	: integer := 15;
 constant rightBorder: integer := 625;
@@ -163,6 +158,9 @@ constant dirLEFT : std_logic_vector(3 downto 0):="0100";
 constant dirRIGHT : std_logic_vector(3 downto 0):="0010";
 
 variable i			: integer range 0 to 128 :=0;
+variable x		: INTEGER RANGE 0 to 8;
+variable y		: INTEGER RANGE 0 to 8;
+
 
 BEGIN
 
@@ -181,6 +179,7 @@ BEGIN
 	then
 	
 		if(reg_state = idle) then
+			addedRand := '0';
 			merge_next <= (others => '0');
 			if(unsigned(directionPosEdge) > 0) then
 				reg_next_state <= merge1;
@@ -188,7 +187,7 @@ BEGIN
 				directionPosEdge_next <= movepadDirection;
 			end if;
 		elsif(reg_state = merge1 or reg_state = merge2 or reg_state = merge3) then
-			
+			addedRand := '0';
 			--next state logic
 			if(reg_state = merge1) 
 			then
@@ -213,7 +212,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,0) + box_values_curr_status(0,1);
 							box_values_next_status(0,3) <= box_values_curr_status(0,2)+box_values_curr_status(0,3);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,2) + box_values_next_status(0,3);
+--							next_score <= next_score + box_values_next_status(0,2) + box_values_next_status(0,3);
 						elsif(box_values_curr_status(0,2) = box_values_curr_status(0,3))
 						then
 							box_values_next_status(0,0) <= 0;
@@ -221,7 +220,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,1);
 							box_values_next_status(0,3) <= box_values_curr_status(0,2)+box_values_curr_status(0,3);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_curr_status(0,2);
+--							next_score <= next_score + box_values_curr_status(0,2);
 						elsif(box_values_curr_status(0,1) = box_values_curr_status(0,2))
 						then
 							box_values_next_status(0,0) <= 0;
@@ -229,7 +228,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,1)+box_values_curr_status(0,2);
 							box_values_next_status(0,3) <= box_values_curr_status(0,3);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,2);
+--							next_score <= next_score + box_values_next_status(0,2);
 						elsif(box_values_curr_status(0,0) = box_values_curr_status(0,1)) 
 						then
 							box_values_next_status(0,0) <= 0;
@@ -237,7 +236,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,2);
 							box_values_next_status(0,3) <= box_values_curr_status(0,3);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,1);
+--							next_score <= next_score + box_values_next_status(0,1);
 						end if;
 					end if;
 					
@@ -252,7 +251,7 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,0)+box_values_curr_status(1,1);
 							box_values_next_status(1,3) <= box_values_curr_status(1,2)+box_values_curr_status(1,3);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,2) + box_values_next_status(1,3);
+--							next_score <= next_score + box_values_next_status(1,2) + box_values_next_status(1,3);
 						elsif(box_values_curr_status(1,2) = box_values_curr_status(1,3))
 						then
 							box_values_next_status(1,0) <= 0;
@@ -260,7 +259,7 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,1);
 							box_values_next_status(1,3) <= box_values_curr_status(1,2)+box_values_curr_status(1,3);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,3);
+--							next_score <= next_score + box_values_next_status(1,3);
 						elsif(box_values_curr_status(1,1) = box_values_curr_status(1,2))
 						then
 							box_values_next_status(1,0) <= 0;
@@ -268,7 +267,7 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,1)+box_values_curr_status(1,2);
 							box_values_next_status(1,3) <= box_values_curr_status(1,3);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,2);
+--							next_score <= next_score + box_values_next_status(1,2);
 						elsif(box_values_curr_status(1,0) = box_values_curr_status(1,1)) 
 						then
 							box_values_next_status(1,0) <= 0;
@@ -276,11 +275,10 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,2);
 							box_values_next_status(1,3) <= box_values_curr_status(1,3);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,1);
-							next_score <= box_values_curr_status(1,0)+box_values_curr_status(1,1);
+--							next_score <= box_values_curr_status(1,0)+box_values_curr_status(1,1);
 						end if;
 					end if;
-					
+--					
 					-- terza riga
 					if(merge_reg(2) = '0') 
 					then
@@ -292,7 +290,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,0)+box_values_curr_status(2,1);
 							box_values_next_status(2,3) <= box_values_curr_status(2,2)+box_values_curr_status(2,3);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,2) + box_values_next_status(2,3);
+--							next_score <= next_score + box_values_next_status(2,2) + box_values_next_status(2,3);
 						elsif(box_values_curr_status(2,2) = box_values_curr_status(2,3))
 						then
 							box_values_next_status(2,0) <= 0;
@@ -300,7 +298,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,1);
 							box_values_next_status(2,3) <= box_values_curr_status(2,2)+box_values_curr_status(2,3);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,3);
+--							next_score <= next_score + box_values_next_status(2,3);
 						elsif(box_values_curr_status(2,1) = box_values_curr_status(2,2))
 						then
 							box_values_next_status(2,0) <= 0;
@@ -308,7 +306,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,1)+ box_values_curr_status(2,2);
 							box_values_next_status(2,3) <= box_values_curr_status(2,3);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,2);
+--							next_score <= next_score + box_values_next_status(2,2);
 						elsif(box_values_curr_status(2,0) = box_values_curr_status(2,1)) 
 						then
 							box_values_next_status(2,0) <= 0;
@@ -316,7 +314,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,2);
 							box_values_next_status(2,3) <= box_values_curr_status(2,3);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,1);
+--							next_score <= next_score + box_values_next_status(2,1);
 						end if;
 					end if;
 					
@@ -331,7 +329,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,0)+box_values_curr_status(3,1);
 							box_values_next_status(3,3) <= box_values_curr_status(3,2)+box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,2) + box_values_next_status(3,3);
+--							next_score <= next_score + box_values_next_status(3,2) + box_values_next_status(3,3);
 						elsif(box_values_curr_status(3,2) = box_values_curr_status(3,3))
 						then
 							box_values_next_status(3,0) <= 0;
@@ -339,7 +337,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,1);
 							box_values_next_status(3,3) <= box_values_curr_status(3,2)+box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,3);
+--							next_score <= next_score + box_values_next_status(3,3);
 						elsif(box_values_curr_status(3,1) = box_values_curr_status(3,2))
 						then
 							box_values_next_status(3,0) <= 0;
@@ -347,7 +345,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,1) + box_values_curr_status(3,2);
 							box_values_next_status(3,3) <= box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,2);
+--							next_score <= next_score + box_values_next_status(3,2);
 						elsif(box_values_curr_status(3,0) = box_values_curr_status(3,1)) 
 						then
 							box_values_next_status(3,0) <= 0;
@@ -355,7 +353,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,2);
 							box_values_next_status(3,3) <= box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,1);
+--							next_score <= next_score + box_values_next_status(3,1);
 						end if;
 					end if;
 				when dirLEFT =>
@@ -370,7 +368,7 @@ BEGIN
 							box_values_next_status(0,2) <= 0;
 							box_values_next_status(0,3) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,1) + box_values_next_status(0,0);
+--							next_score <= next_score + box_values_next_status(0,1) + box_values_next_status(0,0);
 						elsif(box_values_curr_status(0,0) = box_values_curr_status(0,1))
 						then
 							box_values_next_status(0,0) <= box_values_curr_status(0,0)+box_values_curr_status(0,1);
@@ -378,7 +376,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,3);
 							box_values_next_status(0,3) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,0);
+--							next_score <= next_score + box_values_next_status(0,0);
 						elsif(box_values_curr_status(0,1) = box_values_curr_status(0,2))
 						then
 							box_values_next_status(0,0) <= box_values_curr_status(0,0);
@@ -386,7 +384,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,3);
 							box_values_next_status(0,3) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,1);
+--							next_score <= next_score + box_values_next_status(0,1);
 						elsif(box_values_curr_status(0,2) = box_values_curr_status(0,3)) 
 						then
 							box_values_next_status(0,0) <= box_values_curr_status(0,0);
@@ -394,7 +392,7 @@ BEGIN
 							box_values_next_status(0,2) <= box_values_curr_status(0,2)+box_values_curr_status(0,3);
 							box_values_next_status(0,3) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,2);
+--							next_score <= next_score + box_values_next_status(0,2);
 						end if;
 					end if;
 					-- seconda riga
@@ -408,7 +406,7 @@ BEGIN
 							box_values_next_status(1,2) <= 0;
 							box_values_next_status(1,3) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,0) + box_values_next_status(1,1);
+--							next_score <= next_score + box_values_next_status(1,0) + box_values_next_status(1,1);
 						elsif(box_values_curr_status(1,0) = box_values_curr_status(1,1))
 						then
 							box_values_next_status(1,0) <= box_values_curr_status(1,0)+box_values_curr_status(1,1);
@@ -416,7 +414,7 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,3);
 							box_values_next_status(1,3) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,0);
+--							next_score <= next_score + box_values_next_status(1,0);
 						elsif(box_values_curr_status(1,1) = box_values_curr_status(1,2))
 						then
 							box_values_next_status(1,0) <= box_values_curr_status(1,0);
@@ -424,7 +422,7 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,3);
 							box_values_next_status(1,3) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,1);
+--							next_score <= next_score + box_values_next_status(1,1);
 						elsif(box_values_curr_status(1,2) = box_values_curr_status(1,3)) 
 						then
 							box_values_next_status(1,0) <= box_values_curr_status(1,0);
@@ -432,7 +430,7 @@ BEGIN
 							box_values_next_status(1,2) <= box_values_curr_status(1,2)+box_values_curr_status(1,3);
 							box_values_next_status(1,3) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,2);
+--							next_score <= next_score + box_values_next_status(1,2);
 						end if;
 					end if;
 					-- terza riga
@@ -446,7 +444,7 @@ BEGIN
 							box_values_next_status(2,2) <= 0;
 							box_values_next_status(2,3) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,1) + box_values_next_status(2,0);
+--							next_score <= next_score + box_values_next_status(2,1) + box_values_next_status(2,0);
 						elsif(box_values_curr_status(2,0) = box_values_curr_status(2,1))
 						then
 							box_values_next_status(2,0) <= box_values_curr_status(2,0)+box_values_curr_status(2,1);
@@ -454,7 +452,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,3);
 							box_values_next_status(2,3) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,0);
+--							next_score <= next_score + box_values_next_status(2,0);
 						elsif(box_values_curr_status(2,1) = box_values_curr_status(2,2))
 						then
 							box_values_next_status(2,0) <= box_values_curr_status(2,0);
@@ -462,7 +460,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,3);
 							box_values_next_status(2,3) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,1);
+--							next_score <= next_score + box_values_next_status(2,1);
 						elsif(box_values_curr_status(2,2) = box_values_curr_status(2,3)) 
 						then
 							box_values_next_status(2,0) <= box_values_curr_status(2,0);
@@ -470,7 +468,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,2)+box_values_curr_status(2,3);
 							box_values_next_status(2,3) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,2);
+--							next_score <= next_score + box_values_next_status(2,2);
 						end if;
 					end if;
 					-- quarta riga
@@ -484,7 +482,7 @@ BEGIN
 							box_values_next_status(3,2) <= 0;
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,0) + box_values_next_status(3,1);
+--							next_score <= next_score + box_values_next_status(3,0) + box_values_next_status(3,1);
 						elsif(box_values_curr_status(3,0) = box_values_curr_status(3,1))
 						then
 							box_values_next_status(3,0) <= box_values_curr_status(3,0)+box_values_curr_status(3,1);
@@ -492,7 +490,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,3);
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,0);
+--							next_score <= next_score + box_values_next_status(3,0);
 						elsif(box_values_curr_status(3,1) = box_values_curr_status(3,2))
 						then
 							box_values_next_status(3,0) <= box_values_curr_status(3,0);
@@ -500,7 +498,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,3);
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,1);
+--							next_score <= next_score + box_values_next_status(3,1);
 						elsif(box_values_curr_status(3,2) = box_values_curr_status(3,3)) 
 						then
 							box_values_next_status(3,0) <= box_values_curr_status(3,0);
@@ -508,7 +506,7 @@ BEGIN
 							box_values_next_status(3,2) <= box_values_curr_status(3,2)+box_values_curr_status(3,3);
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,2);
+--							next_score <= next_score + box_values_next_status(3,2);
 						end if;
 					end if;
 				when dirUP =>
@@ -523,7 +521,7 @@ BEGIN
 							box_values_next_status(2,0) <= 0;
 							box_values_next_status(3,0) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(1,0) + box_values_next_status(0,0);
+--							next_score <= next_score + box_values_next_status(1,0) + box_values_next_status(0,0);
 						elsif(box_values_curr_status(0,0) = box_values_curr_status(1,0))
 						then
 							box_values_next_status(0,0) <= box_values_curr_status(0,0)+box_values_curr_status(1,0);
@@ -531,7 +529,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(3,0);
 							box_values_next_status(3,0) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(0,0);
+--							next_score <= next_score + box_values_next_status(0,0);
 						elsif(box_values_curr_status(1,0) = box_values_curr_status(2,0))
 						then
 							box_values_next_status(0,0) <= box_values_curr_status(0,0);
@@ -539,7 +537,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(3,0);
 							box_values_next_status(3,0) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(1,0);
+--							next_score <= next_score + box_values_next_status(1,0);
 						elsif(box_values_curr_status(2,0) = box_values_curr_status(3,0))
 						then
 							box_values_next_status(0,0) <= box_values_curr_status(0,0);
@@ -547,7 +545,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(2,0)+box_values_curr_status(3,0);
 							box_values_next_status(3,0) <= 0;
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(2,0);
+--							next_score <= next_score + box_values_next_status(2,0);
 						end if;
 					end if;
 					-- seconda colonna
@@ -561,7 +559,7 @@ BEGIN
 							box_values_next_status(2,1) <= 0;
 							box_values_next_status(3,1) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(0,1) + box_values_next_status(1,1);
+--							next_score <= next_score + box_values_next_status(0,1) + box_values_next_status(1,1);
 						elsif(box_values_curr_status(0,1) = box_values_curr_status(1,1))
 						then
 							box_values_next_status(0,1) <= box_values_curr_status(0,1)+box_values_curr_status(1,1);
@@ -569,7 +567,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(3,1);
 							box_values_next_status(3,1) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(0,1);
+--							next_score <= next_score + box_values_next_status(0,1);
 						elsif(box_values_curr_status(1,1) = box_values_curr_status(2,1))
 						then
 							box_values_next_status(0,1) <= box_values_curr_status(0,1);
@@ -577,7 +575,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(3,1);
 							box_values_next_status(3,1) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,1);
+--							next_score <= next_score + box_values_next_status(1,1);
 						elsif(box_values_curr_status(2,1) = box_values_curr_status(3,1))
 						then
 							box_values_next_status(0,1) <= box_values_curr_status(0,1);
@@ -585,7 +583,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(2,1)+box_values_curr_status(3,1);
 							box_values_next_status(3,1) <= 0;
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(2,1);
+--							next_score <= next_score + box_values_next_status(2,1);
 						end if;
 					end if;
 					-- terza colonna
@@ -599,7 +597,7 @@ BEGIN
 							box_values_next_status(2,2) <= 0;
 							box_values_next_status(3,2) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(0,2) + box_values_next_status(1,2);
+--							next_score <= next_score + box_values_next_status(0,2) + box_values_next_status(1,2);
 						elsif(box_values_curr_status(0,2) = box_values_curr_status(1,2))
 						then
 							box_values_next_status(0,2) <= box_values_curr_status(0,2)+box_values_curr_status(1,2);
@@ -607,7 +605,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(3,2);
 							box_values_next_status(3,2) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(0,2);
+--							next_score <= next_score + box_values_next_status(0,2);
 						elsif(box_values_curr_status(1,2) = box_values_curr_status(2,2))
 						then
 							box_values_next_status(0,2) <= box_values_curr_status(0,2);
@@ -615,14 +613,14 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(3,2);
 							box_values_next_status(3,2) <= 0;
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(1,2);
+--							next_score <= next_score + box_values_next_status(1,2);
 						elsif(box_values_curr_status(2,2) = box_values_curr_status(3,2))
 						then
 							box_values_next_status(0,2) <= box_values_curr_status(0,2);
 							box_values_next_status(1,2) <= box_values_curr_status(1,2);
 							box_values_next_status(2,2) <= box_values_curr_status(2,2)+box_values_curr_status(3,2);
 							box_values_next_status(3,2) <= 0;
-							next_score <= next_score + box_values_next_status(2,2);
+--							next_score <= next_score + box_values_next_status(2,2);
 							merge_next(2) <= '1';
 						end if;
 					end if;
@@ -637,7 +635,7 @@ BEGIN
 							box_values_next_status(2,3) <= 0;
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(0,3) + box_values_next_status(1,3);
+--							next_score <= next_score + box_values_next_status(0,3) + box_values_next_status(1,3);
 						elsif(box_values_curr_status(0,3) = box_values_curr_status(1,3))
 						then
 							box_values_next_status(0,3) <= box_values_curr_status(0,3)+box_values_curr_status(1,3);
@@ -645,7 +643,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(3,3);
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(0,3);
+--							next_score <= next_score + box_values_next_status(0,3);
 						elsif(box_values_curr_status(1,3) = box_values_curr_status(2,3))
 						then
 							box_values_next_status(0,3) <= box_values_curr_status(0,3);
@@ -653,7 +651,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(3,3);
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(1,3);
+--							next_score <= next_score + box_values_next_status(1,3);
 						elsif(box_values_curr_status(2,3) = box_values_curr_status(3,3))
 						then
 							box_values_next_status(0,3) <= box_values_curr_status(0,3);
@@ -661,7 +659,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(2,3)+box_values_curr_status(3,3);
 							box_values_next_status(3,3) <= 0;
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(2,3);
+--							next_score <= next_score + box_values_next_status(2,3);
 						end if;
 					end if;
 				when dirDOWN =>
@@ -676,7 +674,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(0,0)+box_values_curr_status(1,0);
 							box_values_next_status(3,0) <= box_values_curr_status(2,0)+box_values_curr_status(3,0);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(2,0) + box_values_next_status(3,0);
+--							next_score <= next_score + box_values_next_status(2,0) + box_values_next_status(3,0);
 						elsif(box_values_curr_status(2,0) = box_values_curr_status(3,0))
 						then
 							box_values_next_status(0,0) <= 0;
@@ -684,7 +682,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(1,0);
 							box_values_next_status(3,0) <= box_values_curr_status(2,0) + box_values_curr_status(3,0);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(3,0);
+--							next_score <= next_score + box_values_next_status(3,0);
 						elsif(box_values_curr_status(1,0) = box_values_curr_status(2,0))
 						then
 							box_values_next_status(0,0) <= 0;
@@ -692,7 +690,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(1,0)+box_values_curr_status(2,0);
 							box_values_next_status(3,0) <= box_values_curr_status(3,0);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(2,0);
+--							next_score <= next_score + box_values_next_status(2,0);
 						elsif(box_values_curr_status(0,0) = box_values_curr_status(1,0))
 						then
 							box_values_next_status(0,0) <= 0;
@@ -700,7 +698,7 @@ BEGIN
 							box_values_next_status(2,0) <= box_values_curr_status(2,0);
 							box_values_next_status(3,0) <= box_values_curr_status(3,0);
 							merge_next(0) <= '1';
-							next_score <= next_score + box_values_next_status(1,0);
+--							next_score <= next_score + box_values_next_status(1,0);
 						end if;
 					end if;
 					-- seconda colonna
@@ -714,7 +712,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(0,1)+box_values_curr_status(1,1);
 							box_values_next_status(3,1) <= box_values_curr_status(2,1)+box_values_curr_status(3,1);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(3,1) + box_values_next_status(2,1);
+--							next_score <= next_score + box_values_next_status(3,1) + box_values_next_status(2,1);
 						elsif(box_values_curr_status(2,1) = box_values_curr_status(3,1))
 						then
 							box_values_next_status(0,1) <= 0;
@@ -722,7 +720,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(1,1);
 							box_values_next_status(3,1) <= box_values_curr_status(2,1) + box_values_curr_status(3,1);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(3,1);
+--							next_score <= next_score + box_values_next_status(3,1);
 						elsif(box_values_curr_status(1,1) = box_values_curr_status(2,1))
 						then
 							box_values_next_status(0,1) <= 0;
@@ -730,7 +728,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(1,1)+box_values_curr_status(2,1);
 							box_values_next_status(3,1) <= box_values_curr_status(3,1);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(2,1);
+--							next_score <= next_score + box_values_next_status(2,1);
 						elsif(box_values_curr_status(0,1) = box_values_curr_status(1,1))
 						then
 							box_values_next_status(0,1) <= 0;
@@ -738,7 +736,7 @@ BEGIN
 							box_values_next_status(2,1) <= box_values_curr_status(2,1);
 							box_values_next_status(3,1) <= box_values_curr_status(3,1);
 							merge_next(1) <= '1';
-							next_score <= next_score + box_values_next_status(1,1);
+--							next_score <= next_score + box_values_next_status(1,1);
 						end if;
 					end if;
 					-- terza colonna
@@ -752,7 +750,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(0,2)+box_values_curr_status(1,2);
 							box_values_next_status(3,2) <= box_values_curr_status(2,2)+box_values_curr_status(3,2);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,2) + box_values_next_status(3,2);
+--							next_score <= next_score + box_values_next_status(2,2) + box_values_next_status(3,2);
 						elsif(box_values_curr_status(2,2) = box_values_curr_status(3,2))
 						then
 							box_values_next_status(0,2) <= 0;
@@ -760,7 +758,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(1,2);
 							box_values_next_status(3,2) <= box_values_curr_status(2,2) + box_values_curr_status(3,2);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(3,2);
+--							next_score <= next_score + box_values_next_status(3,2);
 						elsif(box_values_curr_status(1,2) = box_values_curr_status(2,2))
 						then
 							box_values_next_status(0,2) <= 0;
@@ -768,7 +766,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(1,2)+box_values_curr_status(2,2);
 							box_values_next_status(3,2) <= box_values_curr_status(3,2);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(2,2);
+--							next_score <= next_score + box_values_next_status(2,2);
 						elsif(box_values_curr_status(0,2) = box_values_curr_status(1,2))
 						then
 							box_values_next_status(0,2) <= 0;
@@ -776,7 +774,7 @@ BEGIN
 							box_values_next_status(2,2) <= box_values_curr_status(2,2);
 							box_values_next_status(3,2) <= box_values_curr_status(3,2);
 							merge_next(2) <= '1';
-							next_score <= next_score + box_values_next_status(1,2);
+--							next_score <= next_score + box_values_next_status(1,2);
 						end if;
 					end if;
 					-- quarta colonna
@@ -790,7 +788,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(0,3)+box_values_curr_status(1,3);
 							box_values_next_status(3,3) <= box_values_curr_status(2,3)+box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(2,3) + box_values_next_status(3,3);
+--							next_score <= next_score + box_values_next_status(2,3) + box_values_next_status(3,3);
 						elsif(box_values_curr_status(2,3) = box_values_curr_status(3,3))
 						then
 							box_values_next_status(0,3) <= 0;
@@ -798,7 +796,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(1,3);
 							box_values_next_status(3,3) <= box_values_curr_status(2,3) + box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(3,3);
+--							next_score <= next_score + box_values_next_status(3,3);
 						elsif(box_values_curr_status(1,3) = box_values_curr_status(2,3))
 						then
 							box_values_next_status(0,3) <= 0;
@@ -806,7 +804,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(1,3)+box_values_curr_status(2,3);
 							box_values_next_status(3,3) <= box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(2,3);
+--							next_score <= next_score + box_values_next_status(2,3);
 						elsif(box_values_curr_status(0,3) = box_values_curr_status(1,3))
 						then
 							box_values_next_status(0,3) <= 0;
@@ -814,7 +812,7 @@ BEGIN
 							box_values_next_status(2,3) <= box_values_curr_status(2,3);
 							box_values_next_status(3,3) <= box_values_curr_status(3,3);
 							merge_next(3) <= '1';
-							next_score <= next_score + box_values_next_status(1,3);
+--							next_score <= next_score + box_values_next_status(1,3);
 						end if;
 					end if;
 				when others =>
@@ -1130,20 +1128,76 @@ BEGIN
 		then
 			directionPosEdge_next <= movepadDirection;
 			reg_next_state <= idle;
---			addNumRand(box_values_curr_status, randNum, box_values_next_status);
+			convertCoord(randNum, x, y);
+			if(box_values_curr_status(x,y) = 0)
+			then
+				box_values_next_status(x,Y) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x,y+1) = 0)
+			then
+				box_values_next_status(x,y+1) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x,y+2) = 0)
+			then
+				box_values_next_status(x,y+2) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x,y+3) = 0)
+			then
+				box_values_next_status(x,y+3) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+1,y) = 0)
+			then
+				box_values_next_status(x+1,y) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+1,y+1) = 0)
+			then
+				box_values_next_status(x+1,y+1) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+1,y+2) = 0)
+			then
+				box_values_next_status(x+1,y+2) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+1,y+3) = 0)
+			then
+				box_values_next_status(x+1,y+3) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+2,y) = 0)
+			then
+				box_values_next_status(x+2,y) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+2,y+1) = 0)
+			then
+				box_values_next_status(x+2,y+1) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+2,y+2) = 0)
+			then
+				box_values_next_status(x+2,y+2) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+2,y+3) = 0)
+			then
+				box_values_next_status(x+2,y+3) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+3,y) = 0)
+			then
+				box_values_next_status(x+3,y) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+3,y+1) = 0)
+			then
+				box_values_next_status(x+3,y+1) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+3,y+2) = 0)
+			then
+				box_values_next_status(x+3,y+2) <= 2;
+				addedRand := '1';
+			elsif(box_values_curr_status(x+3,y+3) = 0)
+			then
+				box_values_next_status(x+3,y+3) <= 2;
+				addedRand := '1';
+			else
+--				gameO <= '1';
+			end if;
 		end if;
 	end if;
---	-- iniz. stato iniziale gioco, sempre uguale per regolamento
---	box_values_status(2,2) := 2;
---	box_values_status(2,3) := 4;
---	box_values_status(3,1) := 2;
---	box_values_status(3,2) := 2;
---	box_values_status(3,3) := 2;
-
-
-
-
-	
 	-- segnali in uscita
 END PROCESS;
 END behavior;
