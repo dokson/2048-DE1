@@ -10,12 +10,10 @@ ENTITY GAME_DATA IS
 PORT
 	(   
 		-- INPUT
-		clk			: IN STD_LOGIC;
-		
-		enable		: IN STD_LOGIC;
-		bootstrap	: IN STD_LOGIC;
-		
-		movepadDirection: IN STD_LOGIC_VECTOR(3 downto 0);
+		clk					: IN STD_LOGIC;
+		enable				: IN STD_LOGIC;
+		bootstrap			: IN STD_LOGIC;
+		movepadDirection	: IN STD_LOGIC_VECTOR(3 downto 0);
 
 		-- OUTPUT
 		northBorder	: OUT INTEGER range 0 to 500;
@@ -39,7 +37,7 @@ signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
 signal next_score	: INTEGER RANGE 0 to 9999 := 0;
 signal gameO		: STD_LOGIC := '0';
 signal youWin		: STD_LOGIC := '0';
-signal INrandNum		: STD_LOGIC_VECTOR(3 downto 0) := "0000";
+signal INrandNum	: STD_LOGIC_VECTOR(3 downto 0) := "0000";
 signal randNum		:  UNSIGNED(3 downto 0) := "0000";
 
 type STATE_TYPE is(randupdate, idle, merge1, move1, merge2, move2, merge3, move3);
@@ -50,62 +48,6 @@ signal directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
 signal merge_reg, merge_next : STD_LOGIC_VECTOR(3 downto 0);
 signal addedRand : STD_LOGIC := '0';
 signal next_addedRand : STD_LOGIC := '0';
-
-PROCEDURE convertCoord(signal position: IN INTEGER; variable x: OUT INTEGER; variable y: OUT INTEGER) IS
-BEGIN
-	case position is
-		when 1 =>
-			x := 0;
-			y := 0;
-		when 2 =>
-			x := 0;
-			y := 1;
-		when 3 =>
-			x := 0;
-			y := 2;
-		when 4 =>
-			x := 0;
-			y := 3;
-		when 5 =>
-			x := 1;
-			y := 0;
-		when 6 =>
-			x := 1;
-			y := 1;
-		when 7 =>
-			x := 1;
-			y := 2;
-		when 8 =>
-			x := 1;
-			y := 3;
-		when 9 =>
-			x := 2;
-			y := 0;
-		when 10 =>
-			x := 2;
-			y := 1;
-		when 11 =>
-			x := 2;
-			y := 2;
-		when 12 =>
-			x := 2;
-			y := 3;
-		when 13 =>
-			x := 3;
-			y := 0;
-		when 14 =>
-			x := 3;
-			y := 1;
-		when 15 =>
-			x := 3;
-			y := 2;
-		when 16 =>
-			x := 3;
-			y := 3;
-		when others =>
-			NULL;
-	end case;
-END convertCoord;
 
 
 BEGIN
@@ -118,10 +60,9 @@ RANDGEN: entity work.GAME_RANDOMGEN
 	);
 	
 
-
 process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
-	constant score_initial_status		: INTEGER RANGE 0 to 9999 := 0;
-	constant box_values_initial_status : GAME_GRID := ((2,2,2,0),(4,2,0,0),(0,0,0,0),(0,0,0,0));
+	constant score_initial_status		: INTEGER 	:= 0;
+	constant box_values_initial_status 	: GAME_GRID := ((2,2,2,0),(4,2,0,0),(0,0,0,0),(0,0,0,0));
 	begin
 			if(bootstrap = '1')
 			then
@@ -152,7 +93,7 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 	end process;
 	
 PROCESS (box_values_curr_status, curr_score, movepadDirection, box_values_next_status, 
-			randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg, merge_next, next_score)
+		addedRand, randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg, merge_next, next_score)
 -- bordo schermo
 constant leftBorder	: integer := 15;
 constant rightBorder: integer := 625;
@@ -164,7 +105,7 @@ constant dirDOWN : std_logic_vector(3 downto 0):="0001";
 constant dirLEFT : std_logic_vector(3 downto 0):="0100";
 constant dirRIGHT : std_logic_vector(3 downto 0):="0010";
 
-variable i			: integer range 0 to 128 :=0;
+variable i		: integer range 0 to 128 :=0;
 variable x		: INTEGER RANGE 0 to 8;
 variable y		: INTEGER RANGE 0 to 8;
 

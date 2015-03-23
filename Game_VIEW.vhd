@@ -678,15 +678,6 @@ variable blue_signal	: STD_LOGIC_VECTOR(3 downto 0);
 BEGIN
 
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
---	-- RESET
---	IF (bootstrap='1')  
---		THEN
---		leds1 <= "0000000";
---		leds2 <= "0000000";
---		leds3 <= "0000000";
---		leds4 <= "0000000";
---	END IF;
-
 	--Horizontal Sync
 	--Reset Horizontal Counter	
 	-- resettato al valore 799, anzichè 640, per rispettare i tempi di Front Porch
@@ -1027,21 +1018,6 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	blue(3)		<= blue_signal(3) AND video_en;
 	hsync		<= h_sync;
 	vsync		<= v_sync;
-
---	case gameover is
---		when '0' => -- CIAO
---			leds1 <= not"0111111"; -- C
---			leds2 <= not"1110111"; -- I
---			leds3 <= not"0000110"; -- A
---			leds4 <= not"0111001"; -- O
---		when '1' => -- OVER
---			leds1 <= not"1010000"; -- O
---			leds2 <= not"1111001"; -- U
---			leds3 <= not"0111110"; -- E
---			leds4 <= not"0111111"; -- P
---		when others => 
---			NULL;
---	end case;
 	
 END PROCESS;
 END behavior;

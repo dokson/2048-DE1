@@ -9,7 +9,6 @@ entity GAME is
 	(
 		-- INPUT
 		clk_50Mhz		: IN  STD_LOGIC;
-		cheatKey		: IN  STD_LOGIC;
 		PS2_CLK			: IN  STD_LOGIC;
 		PS2_DAT			: IN  STD_LOGIC;
 			

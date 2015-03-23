@@ -23,38 +23,37 @@ begin
 	numChange : process(num)
 		variable digit4, digit3, digit2, digit1		: integer range 0 to 9;
 		variable temp								: integer range 0 to 9999;
-		begin
+	begin
 		temp := num;
 		IF(temp > 999)
 		THEN
-			digit4 := num/1000;
-			temp := temp-digit4*1000;
+			digit4 	:= temp/1000;
+			temp 	:= temp-digit4*1000;
 		ELSE
-			digit1 := 0;
+			digit4 	:= 0;
 		END IF;
 		
 		IF(temp > 99)
 		THEN
-			digit3 := temp/100;
-			temp := temp-digit3*100;
+			digit3 	:= temp/100;
+			temp 	:= temp-digit3*100;
 		ELSE
-			digit3 := 0;
+			digit3 	:= 0;
 		END IF;
 		
-		IF(temp>9)
+		IF(temp > 9)
 		THEN
-			digit2 := temp/10;
-			temp := temp-digit2*10;
+			digit2 	:= temp/10;
+			temp 	:= temp-digit2*10;
 		ELSE
-			digit2 := 0;
+			digit2 	:= 0;
 		END IF;
 		
-		digit1 := temp;
+		digit1:= temp;
 		
 		seven_segs4 <= digit_to7seg(digit4);
 		seven_segs3 <= digit_to7seg(digit3);
 		seven_segs2 <= digit_to7seg(digit2);
 		seven_segs1 <= digit_to7seg(digit1);
 	end process numChange;
-	
 END arch;

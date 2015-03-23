@@ -17,8 +17,8 @@ ARCHITECTURE behavior of GAME_RANDOMGEN IS
 BEGIN
 
 PROCESS(clk)
-variable rand_temp : std_logic_vector(GRID_WIDTH-1 downto 0):=("1000");
-variable temp : std_logic := '0';
+	variable rand_temp : std_logic_vector(GRID_WIDTH-1 downto 0):=("1000");
+	variable temp : std_logic := '0';
 BEGIN
 	if(rising_edge(clk)) then
 		temp := rand_temp(GRID_WIDTH-1) xor rand_temp(GRID_WIDTH-2);
