@@ -691,10 +691,10 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	--Sfondo
 	IF (v_cnt >= 0) AND (v_cnt <= 479) 
 	THEN
-		-- Grigio scuro
-		red_signal 	:= "0000";
-		green_signal:= "0000";
-		blue_signal	:= "0000";	
+		-- Nero
+		red_signal 	:= COLOR_BLACK(11 downto 8);
+		green_signal:= COLOR_BLACK(7 downto 4);
+		blue_signal	:= COLOR_BLACK(3 downto 0);	
 	END IF;	
 
 --- BORDI SCHERMO
@@ -703,87 +703,27 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		v_cnt <= upBorder OR -- BORDO UP
 		v_cnt >= downBorder) -- BORDO DOWN
 	THEN
-		-- Grigio chiaro
-		red_signal 	:= "1000";
-		green_signal:= "1000";
-		blue_signal	:= "1000";
+		-- Grigio
+		red_signal 	:= COLOR_GREY(11 downto 8);
+		green_signal:= COLOR_GREY(7 downto 4);
+		blue_signal	:= COLOR_GREY(3 downto 0);
 	END IF;
 --- fine BORDO SCHERMO
 
---- DISEGNO DI OGNI CARATTERE : AUTORI
-	IF(drawCharC='1')
+--- DISEGNO SCRITTA AUTORI
+	IF
+	(	
+		drawCharC='1' OR drawCharO='1' OR drawCharL='1' OR 
+		drawCharA='1' OR drawCharC1='1' OR drawCharE='1' OR 
+		drawCharSep='1' OR drawCharG='1' OR drawCharE1='1' OR
+		drawCharZ='1' OR drawCharZ1='1' OR drawCharI='1'
+	)
 	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
+		-- Bianco
+		red_signal(3 downto 0) 	:= COLOR_WHITE(11 downto 8); 		
+		green_signal(3 downto 0):= COLOR_WHITE(7 downto 4);  
+		blue_signal(3 downto 0) := COLOR_WHITE(3 downto 0);  
 	END IF;
-	IF(drawCharO='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111";
-	END IF;
-	IF(drawCharL='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharA='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111";
-	END IF;
-	IF(drawCharC1='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharE='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharSep='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharG='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharE1='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharZ='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharZ1='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-	IF(drawCharI='1')
-	THEN
-		red_signal(3 downto 0) 	:= "1111"; 		
-		green_signal(3 downto 0):= "1111";  
-		blue_signal(3 downto 0) := "1111"; 
-	END IF;
-
 --- fine DISEGNO CHAR
 
 --- DISEGNO DI OGNI BOX
@@ -904,54 +844,16 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 --- DISEGNO DI OGNI CARATTERE : GAME OVER
 	IF (gameover = '1')
 	THEN
-		IF(drawGoG='1')
+		IF
+		(
+			drawGoG='1' OR drawGoA='1' OR drawGoM='1' OR
+			drawGoE='1' OR drawGoO='1' OR drawGoV='1' OR 
+			drawGoE1='1' OR drawGoR='1'
+		)
 		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoA='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101";
-		END IF;
-		IF(drawGoM='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoE='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101";
-		END IF;
-		
-		IF(drawGoO='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoV='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
-		END IF;
-		IF(drawGoE1='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101";
-		END IF;
-		IF(drawGoR='1')
-		THEN
-			red_signal(3 downto 0) 	:= "0000"; 		
-			green_signal(3 downto 0):= "0110";  
-			blue_signal(3 downto 0) := "0101"; 
+			red_signal(3 downto 0) 	:= COLOR_TEAL(11 downto 8); 		
+			green_signal(3 downto 0):= COLOR_TEAL(7 downto 4);  
+			blue_signal(3 downto 0) := COLOR_TEAL(3 downto 0); 
 		END IF;
 	END IF;
 --- fine DISEGNO CHAR
