@@ -8,20 +8,20 @@ entity GAME is
     port
 	(
 		-- INPUT
-		clk_50Mhz		: IN  STD_LOGIC;
-		PS2_CLK			: IN  STD_LOGIC;
-		PS2_DAT			: IN  STD_LOGIC;
-			
+		clk_50Mhz	: IN  STD_LOGIC;
+		PS2_CLK		: IN  STD_LOGIC;
+		PS2_DAT		: IN  STD_LOGIC;
+
 		-- OUTPUT	
 		hsync,
-		vsync			: OUT  STD_LOGIC;		
+		vsync		: OUT  STD_LOGIC;		
 		red, 
 		green,
-		blue			: OUT STD_LOGIC_VECTOR(3 downto 0);				
-		leds1 			: OUT STD_LOGIC_VECTOR(6 downto 0); 
-		leds2 			: OUT STD_LOGIC_VECTOR(6 downto 0);
-		leds3 			: OUT STD_LOGIC_VECTOR(6 downto 0); 
-		leds4 			: OUT STD_LOGIC_VECTOR(6 downto 0)
+		blue		: OUT STD_LOGIC_VECTOR(3 downto 0);				
+		leds1 		: OUT STD_LOGIC_VECTOR(6 downto 0); 
+		leds2 		: OUT STD_LOGIC_VECTOR(6 downto 0);
+		leds3 		: OUT STD_LOGIC_VECTOR(6 downto 0); 
+		leds4 		: OUT STD_LOGIC_VECTOR(6 downto 0)
 	);
 end GAME;
 
@@ -51,8 +51,8 @@ BEGIN
 ClockGenerator: entity work.GAME_CLKGENERATOR
 	port map
 	(
-		clock		=> clk_50Mhz,
-		clock_mezzi => clock_25Mhz
+		clock			=> clk_50Mhz,
+		clock_mezzi 	=> clock_25Mhz
 	);
 
 KeyboardController: entity work.GAME_KEYBOARD
@@ -67,64 +67,63 @@ KeyboardController: entity work.GAME_KEYBOARD
 ControlUnit: entity work.GAME_CONTROL
 	port map
 	(
-		clk			=> clock_25Mhz,
+		clk				=> clock_25Mhz,
 		
-		keyboardData=> keyCode,	
-		goingReady	=> goingReady, 
+		keyboardData	=> keyCode,	
+		goingReady		=> goingReady, 
 
-		enable		=> enable,		
-		boot		=> boot,
-		movepadDirection => movepadDirection
+		enable			=> enable,		
+		boot			=> boot,
+		movepadDirection=> movepadDirection
 	);
 
 Datapath: entity work.GAME_DATA
 	port map
 	(
-		clk			=> clock_25Mhz,
-		enable		=> enable,
-		bootstrap	=> boot,
+		clk				=> clock_25Mhz,
+		enable			=> enable,
+		bootstrap		=> boot,
 		
-		movepadDirection => movepadDirection,
+		movepadDirection=> movepadDirection,
 
-		northBorder	=> northBorder,
-		southBorder	=> southBorder,
-		westBorder	=> westBorder,
-		eastBorder	=> eastBorder,
+		northBorder		=> northBorder,
+		southBorder		=> southBorder,
+		westBorder		=> westBorder,
+		eastBorder		=> eastBorder,
 		
-		goingReady	=> goingReady,
-		victory		=> victory,
-		gameover 	=> gameover,
-		box_values 	=> box_values,
-		score		=> score
+		goingReady		=> goingReady,
+		victory			=> victory,
+		gameover 		=> gameover,
+		box_values 		=> box_values,
+		score			=> score
 	);
 
 View: entity work.GAME_VIEW
 	port map
 	(
-		clk			=> clock_25Mhz,
+		clk				=> clock_25Mhz,
 
-		upBorder	=> northBorder,
-		downBorder	=> southBorder,
-		leftBorder	=> westBorder,
-		rightBorder	=> eastBorder,
+		upBorder		=> northBorder,
+		downBorder		=> southBorder,
+		leftBorder		=> westBorder,
+		rightBorder		=> eastBorder,
 		
-		box_values 	=> box_values,
-		score		=> score,
+		box_values 		=> box_values,
+		score			=> score,
 
-		bootstrap	=> boot,
-		gameover	=> gameover,
-		victory		=> victory,
+		bootstrap		=> boot,
+		gameover		=> gameover,
+		victory			=> victory,
 		
-		hsync		=> hsync,		
-		vsync		=> vsync,		
-		red			=> red,	
-		green		=> green,		
-		blue		=> blue,		
+		hsync			=> hsync,		
+		vsync			=> vsync,		
+		red				=> red,	
+		green			=> green,		
+		blue			=> blue,		
 				
-		leds1		=> leds1,		
-		leds2 		=> leds2,
-		leds3 		=> leds3, 
-		leds4 		=> leds4 
+		leds1			=> leds1,		
+		leds2 			=> leds2,
+		leds3 			=> leds3, 
+		leds4 			=> leds4 
 	);
-
 end Behavioral;

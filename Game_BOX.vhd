@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+USE WORK.GAME_TYPES.ALL;
 
 entity GAME_BOX is
 	generic
@@ -10,8 +11,8 @@ entity GAME_BOX is
 	);
 	port
 	(
-		clk		: IN STD_LOGIC;
 		-- INPUT
+		clk		: IN STD_LOGIC;
 		pixel_x : IN INTEGER RANGE 0 to 1000;
 		pixel_y : IN INTEGER RANGE 0 to 500;
 		number	: IN INTEGER RANGE 0 to 2500; 		
@@ -26,173 +27,166 @@ architecture box_arch of GAME_BOX is
 	-- Dimensioni fisse di tutti i box
 	constant larghezza 	: integer := 150; 	
 	constant altezza 	: integer := 105;
-	constant posNumeroH	: integer := 53;
-	constant posNumeroV : integer := 75;
 	-- Coordinate finali del cubo sullo schermo
 	constant MAX_X 		: integer := XPOS + larghezza; -- larghezza
 	constant MAX_Y 		: integer := YPOS + altezza; -- altezza
-	
-	--
-	signal numberToDraw1		: character;
-	signal numberToDraw2		: character;
-	signal numberToDraw3		: character;
-	signal numberToDraw4		: character;
-	signal drawNum1			: std_logic;
-	signal drawNum2			: std_logic;
-	signal drawNum3			: std_logic;
-	signal drawNum4			: std_logic;
+	-- Coordinate delle cifre sullo schermo
+	constant X_CHAR		: integer := XPOS + larghezza/2;
+	constant Y_CHAR		: integer := YPOS + altezza/2;
+	 
+	-- Segnali per la scrittura dei numeri a video
+	signal numberToDraw1: character;
+	signal numberToDraw2: character;
+	signal numberToDraw3: character;
+	signal numberToDraw4: character;
+	signal drawNum1		: std_logic;
+	signal drawNum2		: std_logic;
+	signal drawNum3		: std_logic;
+	signal drawNum4		: std_logic;
 
 begin
 	CH1: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => XPOS+55,
-		YPOS => YPOS+53
+		XPOS => X_CHAR-20,
+		YPOS => Y_CHAR
 	)
 	port map
 	(
-		pixel_x => pixel_x,
-		pixel_y	=> pixel_y,
-		char_code =>  numberToDraw1,
+		pixel_x 	=> pixel_x,
+		pixel_y		=> pixel_y,
+		char_code 	=> numberToDraw1,
 		drawChar 	=> drawNum1
 	);
 	CH2: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => XPOS+65,
-		YPOS => YPOS+53
+		XPOS => X_CHAR-10,
+		YPOS => Y_CHAR
 	)
 	port map
 	(
-		pixel_x => pixel_x,
-		pixel_y	=> pixel_y,
-		char_code =>  numberToDraw2,
+		pixel_x		=> pixel_x,
+		pixel_y		=> pixel_y,
+		char_code 	=> numberToDraw2,
 		drawChar 	=> drawNum2
 	);
 	CH3: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => XPOS+75,
-		YPOS => YPOS+53
+		XPOS => X_CHAR,
+		YPOS => Y_CHAR
 	)
 	port map
 	(
-		pixel_x => pixel_x,
-		pixel_y	=> pixel_y,
-		char_code =>  numberToDraw3,
+		pixel_x 	=> pixel_x,
+		pixel_y		=> pixel_y,
+		char_code 	=> numberToDraw3,
 		drawChar 	=> drawNum3
 	);
 	CH4: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => XPOS+85,
-		YPOS => YPOS+53
+		XPOS => X_CHAR+10,
+		YPOS => Y_CHAR
 	)
 	port map
 	(
-		pixel_x => pixel_x,
-		pixel_y	=> pixel_y,
-		char_code =>  numberToDraw4,
+		pixel_x 	=> pixel_x,
+		pixel_y		=> pixel_y,
+		char_code 	=> numberToDraw4,
 		drawChar 	=> drawNum4
 	);
 	
-	
-	valueChange : process(number, drawNum1, drawNum2,  drawNum3, drawNum4, clk)
+	valueChange : process(number, drawNum1, drawNum2, drawNum3, drawNum4, clk)
 	begin
 		if(clk'event and clk = '1')
 		then
 			if not(drawNum1 = '1' or drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
 			then
 				case number is
-					when 0 => 
-						numberToDraw4 <= NUL;
-						numberToDraw3 <= NUL;
-						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color <= "111111111111";
 					when 2 => 
-						numberToDraw4 <= '2';
-						numberToDraw3 <= NUL;
+						numberToDraw1 <= NUL;
 						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color 	<=	"101110111011"; -- grigio chiaro
+						numberToDraw3 <= NUL;
+						numbertoDraw4 <= '2';
+						color <= COLOR_2;
 					when 4 => 
-						numberToDraw4 <= '4';
-						numberToDraw3 <= NUL;
+						numberToDraw1 <= NUL;
 						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color 	<=	"101010101010"; -- grigio scuro
+						numberToDraw3 <= NUL;
+						numbertoDraw4 <= '4';
+						color <= COLOR_4;
 					when 8 => 
-						numberToDraw4 <= '8';
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
 						numberToDraw3 <= NUL;
-						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color 	<=	"110101110110"; -- rosa
+						numbertoDraw4 <= '8';
+						color <= COLOR_8;
 					when 16 => 
-						numberToDraw4 <= '6';
-						numberToDraw3 <= '1';
+						numberToDraw1 <= NUL;
 						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color 	<=	"111001000100"; -- rosa +
+						numberToDraw3 <= '1';
+						numbertoDraw4 <= '6';
+						color <= COLOR_16;
 					when 32 => 
-						numberToDraw4 <= '2';
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
 						numberToDraw3 <= '3';
-						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color 	<=	"111000110011"; -- rosa ++
+						numbertoDraw4 <= '2';
+						color <= COLOR_32;
 					when 64 => 
-						numberToDraw4 <= '4';
-						numberToDraw3 <= '6';
+						numberToDraw1 <= NUL;
 						numberToDraw2 <= NUL;
-						numbertoDraw1 <= NUL;
-						color 	<=	"111100000000"; -- rosso +++
+						numberToDraw3 <= '6';
+						numbertoDraw4 <= '4';
+						color <= COLOR_64;
 					when 128 =>
-						numberToDraw4 <= '8';
-						numberToDraw3 <= '2';
+						numberToDraw1 <= NUL;
 						numberToDraw2 <= '1';
-						numbertoDraw1 <= NUL;
-						color 	<=	"111111100101"; -- giallo
-					when 256 =>
-						numberToDraw4 <= '6';
-						numberToDraw3 <= '5';
-						numberToDraw2 <= '2';
-						numbertoDraw1 <= NUL;
-						color 	<=	"111011010100"; -- giallo ++
-					when 512 =>
-						numberToDraw4 <= '2';
-						numberToDraw3 <= '1';
-						numberToDraw2 <= '5';
-						numbertoDraw1 <= NUL;
-						color 	<=	"111011010000"; -- giallo +++
-					when 1024 =>
-						numberToDraw4 <= '4';
 						numberToDraw3 <= '2';
+						numbertoDraw4 <= '8';
+						color <= COLOR_128;
+					when 256 =>
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= '2';
+						numberToDraw3 <= '5';
+						numbertoDraw4 <= '6';
+						color <= COLOR_256;
+					when 512 =>
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= '5';
+						numberToDraw3 <= '1';
+						numbertoDraw4 <= '2';
+						color <= COLOR_512;
+					when 1024 =>
+						numberToDraw1 <= '1';
 						numberToDraw2 <= '0';
-						numbertoDraw1 <= '1';
-						color 	<=	"111011000000"; -- giallo +++
+						numberToDraw3 <= '2';
+						numbertoDraw4 <= '4';
+						color <= COLOR_1024;
 					when 2048 =>
-						numberToDraw4 <= '8';
-						numberToDraw3 <= '4';
+						numberToDraw1 <= '2';
 						numberToDraw2 <= '0';
-						numbertoDraw1 <= '2';
-						color 	<=	"111010110000"; -- giallo ++++
+						numberToDraw3 <= '4';
+						numbertoDraw4 <= '8';
+						color <= COLOR_2048;
 					when others => 
 						numberToDraw4 <= NUL;
 						numberToDraw3 <= NUL;
 						numberToDraw2 <= NUL;
 						numbertoDraw1 <= NUL;
-						color 	<=	"000000000000";
+						color <= COLOR_BLACK;
 				end case;
 			else
-				color <= "000000000000";
+				color <= COLOR_BLACK;
 			end if;
 		end if;
 	end process valueChange;
 	
 	drawBox <= '1' 
 	when 
-		(pixel_x >= XPOS and pixel_x <= MAX_X and pixel_y >= YPOS and pixel_y <= MAX_Y)  or (drawNum1 = '1' or 
-			drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
+		(pixel_x >= XPOS and pixel_x <= MAX_X and pixel_y >= YPOS and pixel_y <= MAX_Y)
 	else
 		'0';	
 	
