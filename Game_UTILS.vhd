@@ -13,10 +13,15 @@ PACKAGE GAME_UTILS IS
 		RETURN STD_LOGIC;
 	FUNCTION isVictory (values: GAME_GRID)
 		RETURN STD_LOGIC;
+	PROCEDURE splitNumber 
+	(
+		number			: IN INTEGER RANGE 0 TO 9999; 
+		X4, X3, X2, X1	: OUT INTEGER RANGE 0 TO 9
+	);
 	PROCEDURE convertCoord 
 	(
-		SIGNAL position: IN INTEGER; 
-		VARIABLE X, Y: OUT INTEGER RANGE 0 TO 3
+		position		: IN INTEGER RANGE 0 TO 16; 
+		X, Y			: OUT INTEGER RANGE 0 TO 3
 	);
 END GAME_UTILS;
  
@@ -89,7 +94,46 @@ BEGIN
 	return result;
 END FUNCTION isVictory;
 
-PROCEDURE convertCoord (SIGNAL position: IN INTEGER; VARIABLE X, Y: OUT INTEGER RANGE 0 TO 3) IS
+-- Procedura per suddividere un intero 0-9999 nelle sue 4 cifre
+PROCEDURE splitNumber (SIGNAL number: IN INTEGER RANGE 0 TO 9999; SIGNAL X4, X3, X2, X1: OUT INTEGER RANGE 0 TO 9) IS
+	variable digit4, digit3, digit2, digit1		: INTEGER RANGE 0 TO 9;
+	variable temp								: INTEGER RANGE 0 TO 9999;
+BEGIN
+	temp := number;
+	IF(temp > 999)
+	THEN
+		digit4 	:= temp/1000;
+		temp 	:= temp-digit4*1000;
+	ELSE
+		digit4 	:= 0;
+	END IF;
+	
+	IF(temp > 99)
+	THEN
+		digit3 	:= temp/100;
+		temp 	:= temp-digit3*100;
+	ELSE
+		digit3 	:= 0;
+	END IF;
+	
+	IF(temp > 9)
+	THEN
+		digit2 	:= temp/10;
+		temp 	:= temp-digit2*10;
+	ELSE
+		digit2 	:= 0;
+	END IF;
+	
+	digit1 := temp;
+	
+	X4 <= digit4;
+	X3 <= digit3;
+	X2 <= digit2;
+	X1 <= digit1;
+END splitNumber;
+
+-- Procedura per convertire un numero 1-16 nella relativa coordinata (x,y)
+PROCEDURE convertCoord (SIGNAL position: IN INTEGER RANGE 0 TO 16; VARIABLE X, Y: OUT INTEGER RANGE 0 TO 3) IS
 BEGIN
 	case position is
 		when 1 =>

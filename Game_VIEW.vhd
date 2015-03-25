@@ -121,7 +121,7 @@ CHC: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code =>  'C',
-		drawChar 	=> drawCharC
+		drawChar => drawCharC
 	);
 CHO: entity work.GAME_CHDISPLAY
 	generic map
@@ -134,7 +134,7 @@ CHO: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'o',
-		drawChar 	=> drawCharO
+		drawChar => drawCharO
 	);
 CHL: entity work.GAME_CHDISPLAY
 	generic map
@@ -147,7 +147,7 @@ CHL: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'l',
-		drawChar 	=> drawCharL
+		drawChar => drawCharL
 	);
 CHA: entity work.GAME_CHDISPLAY
 	generic map
@@ -160,7 +160,7 @@ CHA: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'a',
-		drawChar 	=> drawCharA
+		drawChar => drawCharA
 	);
 CHC1: entity work.GAME_CHDISPLAY
 	generic map
@@ -173,7 +173,7 @@ CHC1: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'c',
-		drawChar 	=> drawCharC1
+		drawChar => drawCharC1
 	);
 CHE: entity work.GAME_CHDISPLAY
 	generic map
@@ -186,7 +186,7 @@ CHE: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'e',
-		drawChar 	=> drawCharE
+		drawChar => drawCharE
 	);
 
 CHSEP: entity work.GAME_CHDISPLAY
@@ -200,7 +200,7 @@ CHSEP: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => '-',
-		drawChar 	=> drawCharSep
+		drawChar => drawCharSep
 	);
 CHG: entity work.GAME_CHDISPLAY
 	generic map
@@ -213,7 +213,7 @@ CHG: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'G',
-		drawChar 	=> drawCharG
+		drawChar => drawCharG
 	);
 CHE1: entity work.GAME_CHDISPLAY
 	generic map
@@ -226,7 +226,7 @@ CHE1: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'e',
-		drawChar 	=> drawCharE1
+		drawChar => drawCharE1
 	);
 CHZ: entity work.GAME_CHDISPLAY
 	generic map
@@ -239,7 +239,7 @@ CHZ: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'z',
-		drawChar 	=> drawCharZ
+		drawChar => drawCharZ
 	);
 CHZ1: entity work.GAME_CHDISPLAY
 	generic map
@@ -252,7 +252,7 @@ CHZ1: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'z',
-		drawChar 	=> drawCharZ1
+		drawChar => drawCharZ1
 	);
 CHI: entity work.GAME_CHDISPLAY
 	generic map
@@ -265,7 +265,7 @@ CHI: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'i',
-		drawChar 	=> drawCharI
+		drawChar => drawCharI
 	);
 
 
@@ -281,7 +281,7 @@ CHGOG: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'G',
-		drawChar 	=> drawGoG
+		drawChar => drawGoG
 	);
 	
 CHGOA: entity work.GAME_CHDISPLAY
@@ -295,7 +295,7 @@ CHGOA: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'A',
-		drawChar 	=> drawGoA
+		drawChar => drawGoA
 	);
 
 CHGOM: entity work.GAME_CHDISPLAY
@@ -309,7 +309,7 @@ CHGOM: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'M',
-		drawChar 	=> drawGoM
+		drawChar => drawGoM
 	);
 
 CHGOE: entity work.GAME_CHDISPLAY
@@ -323,7 +323,7 @@ CHGOE: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'E',
-		drawChar 	=> drawGoE
+		drawChar => drawGoE
 	);
 --over
 
@@ -338,7 +338,7 @@ CHGOO: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'O',
-		drawChar 	=> drawGoO
+		drawChar => drawGoO
 	);
 
 CHGOV: entity work.GAME_CHDISPLAY
@@ -352,7 +352,7 @@ CHGOV: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'V',
-		drawChar 	=> drawGoV
+		drawChar => drawGoV
 	);
 
 CHGOE1: entity work.GAME_CHDISPLAY
@@ -366,7 +366,7 @@ CHGOE1: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'E',
-		drawChar 	=> drawGoE1
+		drawChar => drawGoE1
 	);
 
 CHGOR: entity work.GAME_CHDISPLAY
@@ -380,7 +380,7 @@ CHGOR: entity work.GAME_CHDISPLAY
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
 		char_code => 'R',
-		drawChar 	=> drawGoR
+		drawChar => drawGoR
 	);
 
 
@@ -413,7 +413,7 @@ BOX2: entity work.GAME_BOX
 		pixel_y => v_cnt,
 		number 	=> box_values(0,1),
 		drawbox => drawbox2,
-		color 	=> color2
+		color => color2
 	);
 	
 BOX3: entity work.GAME_BOX
