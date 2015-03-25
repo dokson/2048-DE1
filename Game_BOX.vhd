@@ -107,6 +107,8 @@ begin
 			if not(drawNum1 = '1' or drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
 			then
 				case number is
+					when 0 => 
+						color <= COLOR_0;
 					when 2 => 
 						color <= COLOR_2;
 					when 4 => 
@@ -134,10 +136,38 @@ begin
 				end case;
 				
 				splitNumber(number, digit4, digit3, digit2, digit1);
-				numberToDraw1 <= character'val(digit4);
-				numberToDraw2 <= character'val(digit3);
-				numberToDraw3 <= character'val(digit2);
-				numbertoDraw4 <= character'val(digit1);
+				
+				if(digit4 = 0)
+				then
+					numberToDraw1 <= NUL;
+					if(digit3 = 0)
+					then
+						numberToDraw2 <= NUL;
+						if(digit2 = 0)
+						then
+							numberToDraw3 <= NUL;
+							if(digit1 = 0)
+							then
+								numberToDraw4 <= NUL;
+							else
+								numbertoDraw4 <= digit_to_char(digit1);
+							end if;
+						else
+							numberToDraw3 <= digit_to_char(digit2);
+							numberToDraw4 <= digit_to_char(digit1);
+						end if;
+					else
+						numberToDraw2 <= digit_to_char(digit3);
+						numberToDraw3 <= digit_to_char(digit2);
+						numberToDraw4 <= digit_to_char(digit1);
+					end if;
+				else
+					numberToDraw1 <= digit_to_char(digit4);
+					numberToDraw2 <= digit_to_char(digit3);
+					numberToDraw3 <= digit_to_char(digit2);
+					numberToDraw4 <= digit_to_char(digit1);
+				end if;
+				
 			else
 				color <= COLOR_BLACK;
 			end if;

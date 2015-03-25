@@ -444,7 +444,7 @@ GND*                         : R18       :        :                   :         
 GND*                         : R19       :        :                   :         : 6         :                
 GND*                         : R20       :        :                   :         : 6         :                
 GND*                         : R21       :        :                   :         : 6         :                
-cheatKey                     : R22       : input  : 3.3-V LVTTL       :         : 6         : Y              
+GND*                         : R22       :        :                   :         : 6         :                
 GND*                         : T1        :        :                   :         : 1         :                
 GND*                         : T2        :        :                   :         : 1         :                
 GND*                         : T3        :        :                   :         : 1         :                

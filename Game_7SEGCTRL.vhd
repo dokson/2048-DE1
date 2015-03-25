@@ -25,9 +25,9 @@ begin
 	begin
 		splitNumber(num, digit4, digit3, digit2, digit1);
 		
-		seven_segs4 <= digit_to7seg(digit4);
-		seven_segs3 <= digit_to7seg(digit3);
-		seven_segs2 <= digit_to7seg(digit2);
-		seven_segs1 <= digit_to7seg(digit1);
+		seven_segs4 <= digit_to_7seg(digit4);
+		seven_segs3 <= digit_to_7seg(digit3);
+		seven_segs2 <= digit_to_7seg(digit2);
+		seven_segs1 <= digit_to_7seg(digit1);
 	end process numChange;
 END arch;

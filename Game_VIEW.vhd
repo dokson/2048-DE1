@@ -692,9 +692,9 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	IF (v_cnt >= 0) AND (v_cnt <= 479) 
 	THEN
 		-- Nero
-		red_signal 	:= COLOR_BLACK(11 downto 8);
-		green_signal:= COLOR_BLACK(7 downto 4);
-		blue_signal	:= COLOR_BLACK(3 downto 0);	
+		red_signal 	:= COLOR_BG(11 downto 8);
+		green_signal:= COLOR_BG(7 downto 4);
+		blue_signal	:= COLOR_BG(3 downto 0);	
 	END IF;	
 
 --- BORDI SCHERMO

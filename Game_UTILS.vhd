@@ -5,8 +5,10 @@ USE WORK.GAME_TYPES.ALL;
 
 -- Definizioni delle funzioni e delle procedure contenute nel package
 PACKAGE GAME_UTILS IS
-	FUNCTION digit_to7seg (A: INTEGER) 
+	FUNCTION digit_to_7seg (A: INTEGER RANGE 0 TO 9) 
 		RETURN STD_LOGIC_VECTOR;
+	FUNCTION digit_to_char (A: INTEGER RANGE 0 TO 9)
+		RETURN CHARACTER;
 	FUNCTION reverse (A: STD_LOGIC_VECTOR) 
 		RETURN STD_LOGIC_VECTOR;
 	FUNCTION isGameOver (values: GAME_GRID)
@@ -28,7 +30,7 @@ END GAME_UTILS;
 PACKAGE BODY GAME_UTILS IS
 
 -- Conversione da cifra a vettore di bit per 7 segmenti
-FUNCTION digit_to7seg (A: INTEGER) RETURN STD_LOGIC_VECTOR IS
+FUNCTION digit_to_7seg (A: INTEGER RANGE 0 TO 9) RETURN STD_LOGIC_VECTOR IS
 	-- Risultato: uscita 7 bit per 7 segmenti
 	VARIABLE RESULT: STD_LOGIC_VECTOR(6 downto 0);
 BEGIN
@@ -44,12 +46,34 @@ BEGIN
 		WHEN 7 	=> RESULT := NOT"0000111";
 		WHEN 8 	=> RESULT := NOT"1111111";
 		WHEN 9 	=> RESULT := NOT"1101111";
-		WHEN 
+		WHEN -- caso impossibile 
 		OTHERS 	=> RESULT := NOT"0000000";
 	END CASE;
 	RETURN RESULT;
-END digit_to7seg;
+END digit_to_7seg;
 
+FUNCTION digit_to_char (A: INTEGER) RETURN CHARACTER IS
+	-- Risultato: uscita 7 bit per 7 segmenti
+	VARIABLE RESULT: CHARACTER;
+BEGIN
+	CASE A IS
+		-- Logica negativa
+		WHEN 0 	=> RESULT := '0';
+		WHEN 1 	=> RESULT := '1';
+		WHEN 2 	=> RESULT := '2';
+		WHEN 3 	=> RESULT := '3';
+		WHEN 4 	=> RESULT := '4';
+		WHEN 5 	=> RESULT := '5';
+		WHEN 6 	=> RESULT := '6';
+		WHEN 7 	=> RESULT := '7';
+		WHEN 8 	=> RESULT := '8';
+		WHEN 9 	=> RESULT := '9';
+		WHEN -- caso impossibile 
+		OTHERS 	=> RESULT := NUL;
+	END CASE;
+	RETURN RESULT;
+END digit_to_char;
+		
 -- Inversione di un generico vettore
 FUNCTION reverse (A: STD_LOGIC_VECTOR) RETURN STD_LOGIC_VECTOR IS
 	-- Risultato: vettore della stessa dimensione del vettore d'ingresso

@@ -62,7 +62,7 @@ RANDGEN: entity work.GAME_RANDOMGEN
 
 process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 	constant score_initial_status		: INTEGER 	:= 0;
-	constant box_values_initial_status 	: GAME_GRID := ((2,2,2,0),(4,2,0,0),(0,0,0,0),(0,0,0,0));
+	constant box_values_initial_status 	: GAME_GRID := ((8,16,32,64),(4,128,0,256),(0,0,0,0),(0,0,0,0));
 	begin
 			if(bootstrap = '1')
 			then

@@ -29,7 +29,6 @@ PACKAGE GAME_TYPES IS
 	constant COLOR_LIME		: RGB_COLOR := X"0F0";
 	constant COLOR_MAGENTA	: RGB_COLOR := X"F0F";
 	constant COLOR_MAROON	: RGB_COLOR := X"800";
-	constant COLOR_MISTYROSE: RGB_COLOR := X"FEE";
 	constant COLOR_NAVY		: RGB_COLOR := X"008";
 	constant COLOR_OLIVE	: RGB_COLOR := X"880";
 	constant COLOR_ORANGE	: RGB_COLOR := X"FA0";
@@ -55,16 +54,18 @@ PACKAGE GAME_TYPES IS
 	constant COLOR_YLLWGREEN: RGB_COLOR := X"AD3";
 	
 	-- Colori personalizzati per il gioco
-	constant COLOR_2		: RGB_COLOR := X"BBB"; -- grigio chiaro
-	constant COLOR_4		: RGB_COLOR := X"AAA"; -- grigio scuro
-	constant COLOR_8		: RGB_COLOR := X"D76"; -- rosa
-	constant COLOR_16		: RGB_COLOR := X"E66"; -- rosa +
-	constant COLOR_32		: RGB_COLOR := X"E33"; -- rosa ++
-	constant COLOR_64		: RGB_COLOR := COLOR_RED;
-	constant COLOR_128		: RGB_COLOR := X"FE5"; -- giallo
-	constant COLOR_256		: RGB_COLOR := X"ED4"; -- giallo +
-	constant COLOR_512		: RGB_COLOR := X"ED0"; -- giallo ++
-	constant COLOR_1024		: RGB_COLOR := X"EC0"; -- giallo +++
-	constant COLOR_2048		: RGB_COLOR := X"EB0"; -- giallo ++++
+	constant COLOR_BG		: RGB_COLOR := COLOR_SLATEGRAY;
+	constant COLOR_0		: RGB_COLOR := X"999";
+	constant COLOR_2		: RGB_COLOR := X"EED"; 
+	constant COLOR_4		: RGB_COLOR := X"FEC";
+	constant COLOR_8		: RGB_COLOR := X"EA7";
+	constant COLOR_16		: RGB_COLOR := X"E85";
+	constant COLOR_32		: RGB_COLOR := X"E65";
+	constant COLOR_64		: RGB_COLOR := X"E53";
+	constant COLOR_128		: RGB_COLOR := X"FE5";
+	constant COLOR_256		: RGB_COLOR := X"ED4";
+	constant COLOR_512		: RGB_COLOR := X"ED0";
+	constant COLOR_1024		: RGB_COLOR := X"EC0";
+	constant COLOR_2048		: RGB_COLOR := X"EB0";
 	
 END GAME_TYPES;
