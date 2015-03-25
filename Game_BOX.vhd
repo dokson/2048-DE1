@@ -2,7 +2,6 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 USE WORK.GAME_TYPES.ALL;
-USE WORK.GAME_UTILS.ALL;
 
 entity GAME_BOX is
 	generic
@@ -100,74 +99,91 @@ begin
 	);
 	
 	valueChange : process(number, drawNum1, drawNum2, drawNum3, drawNum4, clk)
-		variable digit4, digit3, digit2, digit1	: integer range 0 to 9;
 	begin
 		if(clk'event and clk = '1')
 		then
 			if not(drawNum1 = '1' or drawNum2 = '1' or drawNum3 = '1' or drawNum4 = '1')
 			then
 				case number is
-					when 0 => 
+					when 0 =>
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= NUL;
+						numbertoDraw4 <= NUL;
 						color <= COLOR_0;
 					when 2 => 
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= NUL;
+						numbertoDraw4 <= '2';
 						color <= COLOR_2;
 					when 4 => 
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= NUL;
+						numbertoDraw4 <= '4';
 						color <= COLOR_4;
 					when 8 => 
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= NUL;
+						numbertoDraw4 <= '8';
 						color <= COLOR_8;
 					when 16 => 
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= '1';
+						numbertoDraw4 <= '6';
 						color <= COLOR_16;
 					when 32 => 
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= '3';
+						numbertoDraw4 <= '2';
 						color <= COLOR_32;
 					when 64 => 
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= NUL;
+						numberToDraw3 <= '6';
+						numbertoDraw4 <= '4';
 						color <= COLOR_64;
 					when 128 =>
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= '1';
+						numberToDraw3 <= '2';
+						numbertoDraw4 <= '8';
 						color <= COLOR_128;
 					when 256 =>
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= '2';
+						numberToDraw3 <= '5';
+						numbertoDraw4 <= '6';
 						color <= COLOR_256;
 					when 512 =>
+						numberToDraw1 <= NUL;
+						numberToDraw2 <= '5';
+						numberToDraw3 <= '1';
+						numbertoDraw4 <= '2';
 						color <= COLOR_512;
 					when 1024 =>
+						numberToDraw1 <= '1';
+						numberToDraw2 <= '0';
+						numberToDraw3 <= '2';
+						numbertoDraw4 <= '4';
 						color <= COLOR_1024;
 					when 2048 =>
+						numberToDraw1 <= '2';
+						numberToDraw2 <= '0';
+						numberToDraw3 <= '4';
+						numbertoDraw4 <= '8';
 						color <= COLOR_2048;
 					when others => 
+						numberToDraw4 <= NUL;
+						numberToDraw3 <= NUL;
+						numberToDraw2 <= NUL;
+						numbertoDraw1 <= NUL;
 						color <= COLOR_BLACK;
 				end case;
-				
-				splitNumber(number, digit4, digit3, digit2, digit1);
-				
-				if(digit4 = 0)
-				then
-					numberToDraw1 <= NUL;
-					if(digit3 = 0)
-					then
-						numberToDraw2 <= NUL;
-						if(digit2 = 0)
-						then
-							numberToDraw3 <= NUL;
-							if(digit1 = 0)
-							then
-								numberToDraw4 <= NUL;
-							else
-								numbertoDraw4 <= digit_to_char(digit1);
-							end if;
-						else
-							numberToDraw3 <= digit_to_char(digit2);
-							numberToDraw4 <= digit_to_char(digit1);
-						end if;
-					else
-						numberToDraw2 <= digit_to_char(digit3);
-						numberToDraw3 <= digit_to_char(digit2);
-						numberToDraw4 <= digit_to_char(digit1);
-					end if;
-				else
-					numberToDraw1 <= digit_to_char(digit4);
-					numberToDraw2 <= digit_to_char(digit3);
-					numberToDraw3 <= digit_to_char(digit2);
-					numberToDraw4 <= digit_to_char(digit1);
-				end if;
-				
 			else
 				color <= COLOR_BLACK;
 			end if;

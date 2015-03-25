@@ -23,8 +23,8 @@ PORT
 		bootstrap	: IN STD_LOGIC;
 		
 		-- gameover / victory
-		gameover,
-		victory		: IN STD_LOGIC;
+		won,
+		lost		: IN STD_LOGIC;
 		
 		-- OUTPUTs
 		hsync,
@@ -704,9 +704,9 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		v_cnt >= downBorder) -- BORDO DOWN
 	THEN
 		-- Grigio
-		red_signal 	:= COLOR_GREY(11 downto 8);
-		green_signal:= COLOR_GREY(7 downto 4);
-		blue_signal	:= COLOR_GREY(3 downto 0);
+		red_signal 	:= COLOR_BORDER(11 downto 8);
+		green_signal:= COLOR_BORDER(7 downto 4);
+		blue_signal	:= COLOR_BORDER(3 downto 0);
 	END IF;
 --- fine BORDO SCHERMO
 
@@ -720,9 +720,9 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	)
 	THEN
 		-- Bianco
-		red_signal(3 downto 0) 	:= COLOR_WHITE(11 downto 8); 		
-		green_signal(3 downto 0):= COLOR_WHITE(7 downto 4);  
-		blue_signal(3 downto 0) := COLOR_WHITE(3 downto 0);  
+		red_signal(3 downto 0) 	:= COLOR_SLATEGRAY(11 downto 8); 		
+		green_signal(3 downto 0):= COLOR_SLATEGRAY(7 downto 4);  
+		blue_signal(3 downto 0) := COLOR_SLATEGRAY(3 downto 0);  
 	END IF;
 --- fine DISEGNO CHAR
 
@@ -842,7 +842,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 ------- FINE BOX
 
 --- DISEGNO DI OGNI CARATTERE : GAME OVER
-	IF (gameover = '1')
+	IF (lost = '1')
 	THEN
 		IF
 		(

@@ -2,6 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE WORK.GAME_TYPES.ALL;
 
 ENTITY GAME_CONTROL IS
 PORT
@@ -10,10 +11,13 @@ PORT
 		clk			: IN STD_LOGIC;		
 		keyboardData: IN STD_LOGIC_VECTOR (7 downto 0);
 		goingReady	: IN STD_LOGIC;
+		isgameover	: IN STD_LOGIC;
+		isvictory	: IN STD_LOGIC;
 		
 		-- OUTPUT
-		enable		: OUT STD_LOGIC;
 		boot		: OUT STD_LOGIC;
+		lost		: OUT STD_LOGIC;
+		won			: OUT STD_LOGIC;
 		-- usiamo 4 bit anche se ne basterebbero 2 per descrivere le 4 direzioni
 		movepadDirection: OUT STD_LOGIC_VECTOR(3 downto 0) 
 	);
@@ -24,14 +28,9 @@ ARCHITECTURE behavior of  GAME_CONTROL IS
 BEGIN
 PROCESS
 
-constant BOOTSTRAP	: STD_LOGIC_VECTOR (1 downto 0):="00";
-constant PLAYING	: STD_LOGIC_VECTOR (1 downto 0):="01";
-constant PAUSED		: STD_LOGIC_VECTOR (1 downto 0):="11";
-constant READY		: STD_LOGIC_VECTOR (1 downto 0):="10";
 
-variable state	: STD_LOGIC_VECTOR (1 downto 0):=BOOTSTRAP;
+variable state	: GAME_STATE := bootstrap;
 
-variable start	: std_logic:='0';
 
 constant keyRESET	: std_logic_vector(7 downto 0):=X"2D";
 constant keyRIGHT	: std_logic_vector(7 downto 0):=X"74";
@@ -50,15 +49,25 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 	case state IS
 		when BOOTSTRAP => 
-			boot<='1';
+			boot <= '1';
+			lost <= '0';
+			won <= '0';
 			IF(goingReady = '1') 
 			THEN
-				state:=PLAYING;
-				boot<='0';
-				enable<='1';
+				state := PLAYING;
+				boot <= '0';
 			END IF;
 		
 		when PLAYING =>
+			if(isgameover = '1') 
+			then
+				state := GAMEOVER;
+			end if;
+			if(isvictory = '1')
+			then
+				state := VICTORY;
+			end if;
+			
 			case keyboardData is
 				when keyRIGHT => -- do move right
 					movepadDirection <= dirRIGHT;
@@ -70,41 +79,24 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 					movepadDirection <= dirDOWN;
 				when others => -- do nothing
 					movepadDirection <= "0000";
-			end case;	
+			end case;				
+
 			
-			IF(keyboardData=keyRESET) 
-			THEN
-				enable<='0';
-				boot<='1';
-				state:=BOOTSTRAP;
-			END IF;
-			
-			IF (goingReady='1') 
-			THEN 
-				state:=READY; 
-			END IF;
-			
-		when PAUSED =>
-			IF(keyboardData=keyRESET)
-			THEN
-				enable<='0';
-				boot<='1';
-				state:=BOOTSTRAP;
-			END IF;
-			
-			IF (goingReady='1') 
-			THEN
-				state:=READY; 
-			END IF;
-			
-		when READY => 
-			enable<='0';
-			IF(keyboardData=keyRESET) THEN
-				enable<='0';
-				boot<='1';
-				state:=BOOTSTRAP;
-			END IF;
+		when GAMEOVER =>
+			lost <= '1';
+		
+		when VICTORY =>
+			won <= '1';
+		when others =>
+			NULL;
+
 	END case;
+	
+	IF(keyboardData=keyRESET) 
+	THEN
+		boot<='1';
+		state:=BOOTSTRAP;
+	END IF;
 	
 END PROCESS;
 END behavior;

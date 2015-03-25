@@ -40,11 +40,14 @@ architecture Behavioral of GAME is
 	signal eastBorder: INTEGER range 0 to 1000;
 	
 	
-	signal gameover: STD_LOGIC;
-	signal victory: STD_LOGIC;
+	signal isgameover: STD_LOGIC;
+	signal isvictory: STD_LOGIC;
 	signal box_values : GAME_GRID;
 	signal score: INTEGER RANGE 0 to 9999;
 	signal movepadDirection: STD_LOGIC_VECTOR(3 downto 0);
+	
+	signal won: STD_LOGIC;
+	signal lost: STD_LOGIC;
 
 BEGIN
 
@@ -71,9 +74,15 @@ ControlUnit: entity work.GAME_CONTROL
 		
 		keyboardData	=> keyCode,	
 		goingReady		=> goingReady, 
+		
+		isgameover	=> isgameover,
+		isvictory	=> isvictory,
 
-		enable			=> enable,		
-		boot			=> boot,
+		boot	=> boot,
+		
+		won		=>	won,
+		lost	=> lost,
+		
 		movepadDirection=> movepadDirection
 	);
 
@@ -92,8 +101,8 @@ Datapath: entity work.GAME_DATA
 		eastBorder		=> eastBorder,
 		
 		goingReady		=> goingReady,
-		victory			=> victory,
-		gameover 		=> gameover,
+		isgameover		=> isgameover,
+		isvictory 		=> isvictory,
 		box_values 		=> box_values,
 		score			=> score
 	);
@@ -112,8 +121,8 @@ View: entity work.GAME_VIEW
 		score			=> score,
 
 		bootstrap		=> boot,
-		gameover		=> gameover,
-		victory			=> victory,
+		lost			=> lost,
+		won				=> won,
 		
 		hsync			=> hsync,		
 		vsync			=> vsync,		

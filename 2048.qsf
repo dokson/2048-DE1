@@ -67,7 +67,6 @@ set_location_assignment PIN_F4 -to leds4[0]
 set_location_assignment PIN_H15 -to PS2_CLK
 set_location_assignment PIN_J14 -to PS2_DAT
 set_location_assignment PIN_B11 -to vsync
-set_location_assignment PIN_R22 -to cheatKey
 set_location_assignment PIN_A9 -to blue[0]
 set_location_assignment PIN_D11 -to blue[1]
 set_location_assignment PIN_A10 -to blue[2]

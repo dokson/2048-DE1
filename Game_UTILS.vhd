@@ -11,9 +11,9 @@ PACKAGE GAME_UTILS IS
 		RETURN CHARACTER;
 	FUNCTION reverse (A: STD_LOGIC_VECTOR) 
 		RETURN STD_LOGIC_VECTOR;
-	FUNCTION isGameOver (values: GAME_GRID)
+	FUNCTION checkGameOver (values: GAME_GRID)
 		RETURN STD_LOGIC;
-	FUNCTION isVictory (values: GAME_GRID)
+	FUNCTION checkVictory (values: GAME_GRID)
 		RETURN STD_LOGIC;
 	PROCEDURE splitNumber 
 	(
@@ -87,7 +87,7 @@ BEGIN
 END reverse;
 
 -- Funz. che stabilisce se la partita è stata persa oppure no
-FUNCTION isGameOver(values: GAME_GRID) RETURN std_logic IS
+FUNCTION checkGameOver(values: GAME_GRID) RETURN std_logic IS
 	variable result			: STD_LOGIC	:= '1';
 BEGIN
 	for i in 0 to 3 loop
@@ -99,10 +99,10 @@ BEGIN
 		end loop;
 	end loop;
 	return result;
-END FUNCTION isGameOver;
+END FUNCTION checkGameOver;
 
 --Funz. che stabilisce se la partita è terminata con la vittoria
-FUNCTION isVictory(values: GAME_GRID) RETURN std_logic IS
+FUNCTION checkVictory(values: GAME_GRID) RETURN std_logic IS
 	variable result			: STD_LOGIC := '0';
 	constant victory_score 	: INTEGER 	:= 2048;
 BEGIN
@@ -116,7 +116,7 @@ BEGIN
 		end loop;
 	end loop;
 	return result;
-END FUNCTION isVictory;
+END FUNCTION checkVictory;
 
 -- Procedura per suddividere un intero 0-9999 nelle sue 4 cifre
 PROCEDURE splitNumber (SIGNAL number: IN INTEGER RANGE 0 TO 9999; SIGNAL X4, X3, X2, X1: OUT INTEGER RANGE 0 TO 9) IS

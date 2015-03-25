@@ -6,7 +6,14 @@ PACKAGE GAME_TYPES IS
 	constant GRID_WIDTH 	: INTEGER := 4;
 	constant GRID_HEIGHT 	: INTEGER := 4; 
 	
+	-- game state type
+	type GAME_STATE is (bootstrap, playing, gameover, victory);
+	
+	-- data type
+	type DATA_STATE is (randupdate, idle, merge1, move1, merge2, move2, merge3, move3);
 	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer;
+	
+	-- tipi per la grafica
 	subtype RGB_COLOR is std_logic_vector(11 downto 0);
 	
 	-- Colori standard
@@ -55,6 +62,7 @@ PACKAGE GAME_TYPES IS
 	
 	-- Colori personalizzati per il gioco
 	constant COLOR_BG		: RGB_COLOR := COLOR_SLATEGRAY;
+	constant COLOR_BORDER	: RGB_COLOR := COLOR_GREY_D;
 	constant COLOR_0		: RGB_COLOR := X"999";
 	constant COLOR_2		: RGB_COLOR := X"EED"; 
 	constant COLOR_4		: RGB_COLOR := X"FEC";
