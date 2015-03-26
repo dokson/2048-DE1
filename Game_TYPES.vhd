@@ -10,7 +10,7 @@ PACKAGE GAME_TYPES IS
 	type GAME_STATE is (bootstrap, playing, gameover, victory);
 	
 	-- data type
-	type DATA_STATE is (randupdate, idle, merge1, move1, merge2, move2, merge3, move3);
+	type DATA_STATE is (randupdate, checkupdate, idle, merge1, move1, merge2, move2, merge3, move3);
 	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer;
 	
 	-- tipi per la grafica

@@ -25,6 +25,8 @@ PACKAGE GAME_UTILS IS
 		position		: IN INTEGER RANGE 0 TO 16; 
 		X, Y			: OUT INTEGER RANGE 0 TO 3
 	);
+	FUNCTION compare(curr_values: GAME_GRID; next_values: GAME_GRID) 
+		RETURN STD_LOGIC; 
 END GAME_UTILS;
  
 PACKAGE BODY GAME_UTILS IS
@@ -88,16 +90,41 @@ END reverse;
 
 -- Funz. che stabilisce se la partita è stata persa oppure no
 FUNCTION checkGameOver(values: GAME_GRID) RETURN std_logic IS
-	variable result			: STD_LOGIC	:= '1';
+	variable full		: STD_LOGIC	:= '1';
+	variable mergeable	: STD_LOGIC := '0';
+	variable result  	: STD_LOGIC := '0';
 BEGIN
 	for i in 0 to 3 loop
 		for j in 0 to 3 loop
 			if(values(i,j) = 0)
 			then
-				result := '0';
+				full := '0';
 			end if;
 		end loop;
 	end loop;
+	for i in 0 to 2 loop
+		for j in 0 to 2 loop
+			if(
+				(values(i,j) = values(i+1,j)) or
+				(values(i,j) = values(i,j+1))
+			)
+			then
+				mergeable := '1';
+			end if;
+		end loop;
+	end loop;
+	-- controllo ultima riga
+	for i in 1 to 3 loop
+		if(
+			(values(3,i-1) = values(3,i)) or
+			(values(i-1,3) = values(i,3))
+		)
+		then
+			mergeable := '1';
+		end if;
+	end loop;
+	
+	result := full and (not mergeable);
 	return result;
 END FUNCTION checkGameOver;
 
@@ -213,4 +240,17 @@ BEGIN
 	end case;
 END convertCoord;
 
+FUNCTION compare(curr_values: GAME_GRID; next_values: GAME_GRID) RETURN std_logic IS
+variable result : STD_LOGIC := '1';
+BEGIN
+	for i in 0 to 3 loop
+		for j in 0 to 3 loop
+			if not (curr_values(i,j) = next_values(i,j))
+			then
+				result := '0';
+			end if;
+		end loop;
+	end loop;
+	return result;
+END compare;
 END GAME_UTILS;
