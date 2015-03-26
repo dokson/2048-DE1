@@ -75,6 +75,8 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 				merge_reg <= (others => '0');
 				reg_state <= randupdate;
 				goingReady <= '1';
+				gameO <= '0';
+				youWin <= '0';
 			elsif(clk'event and clk = '1')
 			then
 				randNum <= unsigned(INrandNum);

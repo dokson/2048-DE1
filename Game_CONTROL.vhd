@@ -32,7 +32,7 @@ PROCESS
 variable state	: GAME_STATE := bootstrap;
 
 
-constant keyRESET	: std_logic_vector(7 downto 0):=X"2D";
+constant keyRESET	: std_logic_vector(7 downto 0):=X"76";
 constant keyRIGHT	: std_logic_vector(7 downto 0):=X"74";
 constant keyLEFT	: std_logic_vector(7 downto 0):=X"6B";
 constant keyUP 		: std_logic_vector(7 downto 0):=X"75";
@@ -80,7 +80,6 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 				when others => -- do nothing
 					movepadDirection <= "0000";
 			end case;				
-
 			
 		when GAMEOVER =>
 			lost <= '1';
