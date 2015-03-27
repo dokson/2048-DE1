@@ -23,7 +23,7 @@ PORT
 		
 		goingReady	: OUT STD_LOGIC;
 		isgameover	: OUT STD_LOGIC;
-		isvictory		: OUT STD_LOGIC;
+		isvictory	: OUT STD_LOGIC;
 		box_values	: BUFFER GAME_GRID;
 		score		: BUFFER INTEGER RANGE 0 to 9999
 	);
@@ -33,13 +33,13 @@ ARCHITECTURE behavior of GAME_DATA IS
 
 signal box_values_curr_status : GAME_GRID := (others => (others => 0));
 signal box_values_next_status : GAME_GRID := (others => (others => 0));
+signal box_values_prev_status : GAME_GRID := (others => (others => 0));
 signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
 signal next_score	: INTEGER RANGE 0 to 9999 := 0;
 signal gameO		: STD_LOGIC := '0';
 signal youWin		: STD_LOGIC := '0';
 signal INrandNum	: STD_LOGIC_VECTOR(3 downto 0) := "0000";
 signal randNum		:  UNSIGNED(3 downto 0) := "0000";
-
 
 signal reg_state, reg_next_state : DATA_STATE := randupdate;
 signal directionPosEdge : STD_LOGIC_VECTOR(3 downto 0);
@@ -75,6 +75,8 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 				merge_reg <= (others => '0');
 				reg_state <= randupdate;
 				goingReady <= '1';
+				gameO <= '0';
+				youWin <= '0';
 			elsif(clk'event and clk = '1')
 			then
 				randNum <= unsigned(INrandNum);
@@ -85,16 +87,16 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 				merge_reg <= merge_next;
 				goingReady <= '0';
 				btn_edgedet <= btn_edgedet_next;
---				gameO <= isGameOver(box_values_next_status);
---				youWin <= isVictory(box_values_next_status);
+				gameO <= checkGameOver(box_values_curr_status);
+				youWin <= checkVictory(box_values_curr_status);
 			end if;
 			score <= curr_score;
 			isgameover <= gameO;
 			box_values <= box_values_curr_status;
-			isvictory	<= youWin;
+			isvictory <= youWin;
 	end process;
 	
-PROCESS (box_values_curr_status, curr_score, movepadDirection, box_values_next_status, 
+PROCESS (box_values_curr_status, curr_score, movepadDirection, box_values_next_status, box_values_prev_status,
 		randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg,
 		merge_next, next_score, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0)
 -- bordo schermo
@@ -111,7 +113,6 @@ constant dirRIGHT : std_logic_vector(3 downto 0):="0010";
 variable i		: integer range 0 to 128 :=0;
 variable x		: INTEGER RANGE 0 to 8;
 variable y		: INTEGER RANGE 0 to 8;
-variable tempGameOver : std_logic;
 
 BEGIN
 
@@ -127,6 +128,7 @@ BEGIN
 	directionPosEdge_next <= directionPosEdge;
 	
 	if(reg_state = idle) then
+		box_values_prev_status <= box_values_curr_status;
 		merge_next <= (others => '0');
 		if(unsigned(directionPosEdge) > 0) then
 			reg_next_state <= merge1;
@@ -158,7 +160,7 @@ BEGIN
 						box_values_next_status(0,2) <= box_values_curr_status(0,0) + box_values_curr_status(0,1);
 						box_values_next_status(0,3) <= box_values_curr_status(0,2)+box_values_curr_status(0,3);
 						merge_next(0) <= '1';
---							next_score <= next_score + box_values_next_status(0,2) + box_values_next_status(0,3);
+--							next_score <= curr_score + box_values_next_status(0,2) + box_values_next_status(0,3);
 					elsif(box_values_curr_status(0,2) = box_values_curr_status(0,3))
 					then
 						box_values_next_status(0,0) <= 0;
@@ -771,7 +773,7 @@ BEGIN
 		elsif(reg_state = move2) then
 			reg_next_state <= merge3;
 		else
-			reg_next_state <= randupdate;
+			reg_next_state <= checkupdate;
 		end if;
 		
 		case directionPosEdge is
@@ -1075,81 +1077,73 @@ BEGIN
 			when others =>
 				reg_next_state <= idle;
 		end case;
-
+		
+	elsif(reg_state = checkupdate)
+	then
+		directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
+		if(compare(box_values_prev_status, box_values_curr_status) = '1')
+		then
+			reg_next_state <= idle;
+		else
+			reg_next_state <= randupdate;
+		end if;
+		
 	-- Inserimento casuale di una nuova casella 2 
 	elsif(reg_state = randupdate)
 	then
 		directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 		reg_next_state <= idle;
 		convertCoord(to_integer(randNum), x, y);
-		tempGameOver := '1';
 		if(box_values_curr_status(x,y) = 0)
 		then
 			box_values_next_status(x,y) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x,y+1) = 0)
 		then
 			box_values_next_status(x,y+1) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x,y+2) = 0)
 		then
 			box_values_next_status(x,y+2) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x,y+3) = 0)
 		then
 			box_values_next_status(x,y+3) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+1,y) = 0)
 		then
 			box_values_next_status(x+1,y) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+1,y+1) = 0)
 		then
 			box_values_next_status(x+1,y+1) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+1,y+2) = 0)
 		then
 			box_values_next_status(x+1,y+2) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+1,y+3) = 0)
 		then
 			box_values_next_status(x+1,y+3) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+2,y) = 0)
 		then
 			box_values_next_status(x+2,y) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+2,y+1) = 0)
 		then
 			box_values_next_status(x+2,y+1) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+2,y+2) = 0)
 		then
 			box_values_next_status(x+2,y+2) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+2,y+3) = 0)
 		then
 			box_values_next_status(x+2,y+3) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+3,y) = 0)
 		then
 			box_values_next_status(x+3,y) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+3,y+1) = 0)
 		then
 			box_values_next_status(x+3,y+1) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+3,y+2) = 0)
 		then
 			box_values_next_status(x+3,y+2) <= 2;
-			tempGameOver := '0';
 		elsif(box_values_curr_status(x+3,y+3) = 0)
 		then
 			box_values_next_status(x+3,y+3) <= 2;
-			tempGameOver := '0';
 		end if;
-		
-		gameO <= tempGameOver;
+	
 	end if;
 -- segnali in uscita
 END PROCESS;
