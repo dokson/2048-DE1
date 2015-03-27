@@ -10,19 +10,14 @@ PORT
 	(
 		-- INPUTs
 		clk			: IN STD_LOGIC;	
-		
-		upBorder 	: IN INTEGER RANGE 0 to 500;
-		downBorder 	: IN INTEGER RANGE 0 to 500;
-		leftBorder 	: IN INTEGER RANGE 0 to 1000;
-		rightBorder : IN INTEGER RANGE 0 to 1000;
-		
+				
 		-- MODEL STATUS
 		box_values	: IN GAME_GRID;
 		score 		: IN INTEGER RANGE 0 to 9999;
 		
-		bootstrap	: IN STD_LOGIC;
+		bootstrap,
 		won,
-		lost		: IN STD_LOGIC;
+		lost			: IN STD_LOGIC;
 		
 		-- OUTPUTs
 		hsync,
@@ -45,8 +40,14 @@ ARCHITECTURE behavior of GAME_VIEW IS
 shared variable h_cnt	: integer range 0 to 1000;
 shared variable v_cnt  	: integer range 0 to 500;
 
+-- Bordi Schermo
+constant leftBorder	: integer := 16;
+constant rightBorder	: integer := 623;
+constant upBorder		: integer := 44;	
+constant downBorder	: integer := 474;
+
 -- Segnali per il disegno della griglia e del colore dei box
-signal drawGrid		: STD_LOGIC;
+signal drawGrid	: STD_LOGIC;
 signal colorGrid	: STD_LOGIC_VECTOR(11 downto 0);
 
 -- Segnali per il disegno dei caratteri su schermo : autori
@@ -56,11 +57,11 @@ signal drawCharL 	: STD_LOGIC;
 signal drawCharA 	: STD_LOGIC;
 signal drawCharC1	: STD_LOGIC;
 signal drawCharE 	: STD_LOGIC;
-signal drawCharSep	: STD_LOGIC;
+signal drawCharSep: STD_LOGIC;
 signal drawCharG 	: STD_LOGIC;
-signal drawCharE1 	: STD_LOGIC;
+signal drawCharE1 : STD_LOGIC;
 signal drawCharZ 	: STD_LOGIC;
-signal drawCharZ1 	: STD_LOGIC;
+signal drawCharZ1 : STD_LOGIC;
 signal drawCharI 	: STD_LOGIC;
 
 -- game over
@@ -378,21 +379,21 @@ variable h_sync			: STD_LOGIC;
 variable v_sync			: STD_LOGIC;
 
 -- Enable del video
-variable video_en		: STD_LOGIC; 
+variable video_en			: STD_LOGIC; 
 variable horizontal_en	: STD_LOGIC;
-variable vertical_en	: STD_LOGIC;
+variable vertical_en		: STD_LOGIC;
 
 -- Segnali colori RGB a 4 bit
 variable red_signal		: STD_LOGIC_VECTOR(3 downto 0); 
 variable green_signal	: STD_LOGIC_VECTOR(3 downto 0);
-variable blue_signal	: STD_LOGIC_VECTOR(3 downto 0);
+variable blue_signal		: STD_LOGIC_VECTOR(3 downto 0);
 
 BEGIN
 
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	--Horizontal Sync
 	--Reset Horizontal Counter	
-	-- resettato al valore 799, anzichè 640, per rispettare i tempi di Front Porch
+	-- resettato al valore 799, anzichï¿½ 640, per rispettare i tempi di Front Porch
 	IF (h_cnt = 799) 
 		THEN
 			h_cnt := 0;

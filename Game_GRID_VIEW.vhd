@@ -8,12 +8,12 @@ entity GAME_GRID_VIEW is
 	(
 		-- INPUT
 		clk			: IN STD_LOGIC;
-		pixel_x 	: IN INTEGER RANGE 0 to 1000;
-		pixel_y 	: IN INTEGER RANGE 0 to 500;	
+		pixel_x 		: IN INTEGER RANGE 0 to 1000;
+		pixel_y 		: IN INTEGER RANGE 0 to 500;	
 		box_values	: IN GAME_GRID;
 		
 		-- OUTPUT
-		color		: OUT STD_LOGIC_VECTOR(11 downto 0); -- colore da mandare in VGA
+		color			: OUT STD_LOGIC_VECTOR(11 downto 0); -- colore da mandare in VGA
 		drawGrid 	: OUT STD_LOGIC := '0' 	-- disegna la Grid quando = 1
 	);
 end GAME_GRID_VIEW;
@@ -24,13 +24,13 @@ ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 constant XfirstColumn	: integer := 16;
 constant YfirstRow		: integer := 46;
 
-constant XsecondColumn	: integer := 168; 	
+constant XsecondColumn	: integer := 167;
 constant YsecondRow		: integer := 153;
 
-constant XthirdColumn	: integer := 320; 	
+constant XthirdColumn	: integer := 319;
 constant YthirdRow		: integer := 260;
 
-constant XfourthColumn	: integer := 472; 	
+constant XfourthColumn	: integer := 471;
 constant YfourthRow		: integer := 367;
 
 -- Segnali per il disegno dei box e il relativo colore

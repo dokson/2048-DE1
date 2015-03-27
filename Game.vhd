@@ -18,10 +18,10 @@ entity GAME is
 		red, 
 		green,
 		blue		: OUT STD_LOGIC_VECTOR(3 downto 0);				
-		leds1 		: OUT STD_LOGIC_VECTOR(6 downto 0); 
-		leds2 		: OUT STD_LOGIC_VECTOR(6 downto 0);
-		leds3 		: OUT STD_LOGIC_VECTOR(6 downto 0); 
-		leds4 		: OUT STD_LOGIC_VECTOR(6 downto 0)
+		leds1 	: OUT STD_LOGIC_VECTOR(6 downto 0); 
+		leds2 	: OUT STD_LOGIC_VECTOR(6 downto 0);
+		leds3 	: OUT STD_LOGIC_VECTOR(6 downto 0); 
+		leds4 	: OUT STD_LOGIC_VECTOR(6 downto 0)
 	);
 end GAME;
 
@@ -31,14 +31,7 @@ architecture Behavioral of GAME is
 	signal keyCode: STD_LOGIC_VECTOR(7 downto 0);			
 	signal goingReady: STD_LOGIC;
 
-	signal enable: STD_LOGIC;
 	signal boot: STD_LOGIC;
-
-	signal northBorder: INTEGER range 0 to 500;
-	signal southBorder: INTEGER range 0 to 500;
-	signal westBorder: INTEGER range 0 to 1000;
-	signal eastBorder: INTEGER range 0 to 1000;
-	
 	
 	signal isgameover: STD_LOGIC;
 	signal isvictory: STD_LOGIC;
@@ -89,50 +82,39 @@ ControlUnit: entity work.GAME_CONTROL
 Datapath: entity work.GAME_DATA
 	port map
 	(
-		clk				=> clock_25Mhz,
-		enable			=> enable,
-		bootstrap		=> boot,
+		clk			=> clock_25Mhz,
+		bootstrap	=> boot,
 		
-		movepadDirection=> movepadDirection,
-
-		northBorder		=> northBorder,
-		southBorder		=> southBorder,
-		westBorder		=> westBorder,
-		eastBorder		=> eastBorder,
+		movepadDirection => movepadDirection,
 		
-		goingReady		=> goingReady,
-		isgameover		=> isgameover,
-		isvictory 		=> isvictory,
-		box_values 		=> box_values,
+		goingReady	=> goingReady,
+		isgameover	=> isgameover,
+		isvictory 	=> isvictory,
+		box_values 	=> box_values,
 		score			=> score
 	);
 
 View: entity work.GAME_VIEW
 	port map
 	(
-		clk				=> clock_25Mhz,
-
-		upBorder		=> northBorder,
-		downBorder		=> southBorder,
-		leftBorder		=> westBorder,
-		rightBorder		=> eastBorder,
+		clk			=> clock_25Mhz,
 		
-		box_values 		=> box_values,
+		box_values 	=> box_values,
 		score			=> score,
 
-		bootstrap		=> boot,
+		bootstrap	=> boot,
 		lost			=> lost,
-		won				=> won,
+		won			=> won,
 		
 		hsync			=> hsync,		
 		vsync			=> vsync,		
-		red				=> red,	
+		red			=> red,	
 		green			=> green,		
 		blue			=> blue,		
 				
 		leds1			=> leds1,		
-		leds2 			=> leds2,
-		leds3 			=> leds3, 
-		leds4 			=> leds4 
+		leds2 		=> leds2,
+		leds3 		=> leds3, 
+		leds4 		=> leds4 
 	);
 end Behavioral;

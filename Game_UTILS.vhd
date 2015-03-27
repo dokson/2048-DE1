@@ -7,8 +7,6 @@ USE WORK.GAME_TYPES.ALL;
 PACKAGE GAME_UTILS IS
 	FUNCTION digit_to_7seg (A: INTEGER RANGE 0 TO 9) 
 		RETURN STD_LOGIC_VECTOR;
-	FUNCTION digit_to_char (A: INTEGER RANGE 0 TO 9)
-		RETURN CHARACTER;
 	FUNCTION reverse (A: STD_LOGIC_VECTOR) 
 		RETURN STD_LOGIC_VECTOR;
 	FUNCTION checkGameOver (values: GAME_GRID)
@@ -53,28 +51,6 @@ BEGIN
 	END CASE;
 	RETURN RESULT;
 END digit_to_7seg;
-
-FUNCTION digit_to_char (A: INTEGER) RETURN CHARACTER IS
-	-- Risultato: uscita 7 bit per 7 segmenti
-	VARIABLE RESULT: CHARACTER;
-BEGIN
-	CASE A IS
-		-- Logica negativa
-		WHEN 0 	=> RESULT := '0';
-		WHEN 1 	=> RESULT := '1';
-		WHEN 2 	=> RESULT := '2';
-		WHEN 3 	=> RESULT := '3';
-		WHEN 4 	=> RESULT := '4';
-		WHEN 5 	=> RESULT := '5';
-		WHEN 6 	=> RESULT := '6';
-		WHEN 7 	=> RESULT := '7';
-		WHEN 8 	=> RESULT := '8';
-		WHEN 9 	=> RESULT := '9';
-		WHEN -- caso impossibile 
-		OTHERS 	=> RESULT := NUL;
-	END CASE;
-	RETURN RESULT;
-END digit_to_char;
 		
 -- Inversione di un generico vettore
 FUNCTION reverse (A: STD_LOGIC_VECTOR) RETURN STD_LOGIC_VECTOR IS
@@ -88,7 +64,7 @@ BEGIN
 	RETURN RESULT;
 END reverse;
 
--- Funz. che stabilisce se la partita è stata persa oppure no
+-- Funz. che stabilisce se la partita sia stata persa o meno
 FUNCTION checkGameOver(values: GAME_GRID) RETURN std_logic IS
 	variable full		: STD_LOGIC	:= '1';
 	variable mergeable	: STD_LOGIC := '0';
@@ -128,12 +104,12 @@ BEGIN
 	return result;
 END FUNCTION checkGameOver;
 
---Funz. che stabilisce se la partita è terminata con la vittoria
+--Funz. che stabilisce se la partita sia terminata con la vittoria
 FUNCTION checkVictory(values: GAME_GRID) RETURN std_logic IS
 	variable result			: STD_LOGIC := '0';
 	constant victory_score 	: INTEGER 	:= 2048;
 BEGIN
-	-- Controlla in tutte le celle se è stato raggiunto il valore necessario per la vittoria
+	-- Controlla in tutte le celle se sia stato raggiunto il valore necessario per la vittoria
 	for i in 0 to 3 loop
 		for j in 0 to 3 loop
 			if(values(i,j) = victory_score)
