@@ -1,0 +1,398 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language italian
+\language_package auto
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2cm
+\rightmargin 3cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0 0 0 4
+\bullet 1 0 8 -1
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+2048 - VHDL su Altera DE1
+\end_layout
+
+\begin_layout Author
+Alessandro Colace (0000700279) e Giacomo Gezzi (0000??????)
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introduzione
+\end_layout
+
+\begin_layout Section
+Storia
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+2048
+\series default
+ è un videogioco a giocatore singolo pubblicato on-line il 9 marzo 2014
+ da Gabriele Cirulli, uno sviluppatore web italiano di 19 anni, il cui obiettivo
+ è quello di far scorrere le piastrelle su una griglia, unirle e creare
+ una tessera con il numero 
+\series bold
+2048
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Considerato come un rompicapo, è molto simile a 
+\series bold
+\emph on
+Threes!
+\series default
+\emph default
+, applicazione pubblicata un mese prima, ma versioni simili includono anche
+ elementi provenienti da 
+\emph on
+Doge, Doctor Who, Flappy Bird e Tetris
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+L'autore definisce questi cloni come 
+\emph on
+
+\begin_inset Quotes fld
+\end_inset
+
+La bellezza dei software open source
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ e non si oppone a loro in quanto, dice, 
+\emph on
+
+\begin_inset Quotes fld
+\end_inset
+
+aggiungono nuove modifiche creative per il gioco
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Meccanica del gioco
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+2048
+\series default
+ si gioca su una semplice griglia grigia di formato
+\series bold
+ 4×4
+\series default
+ in cui scorrono caselle di 
+\series bold
+colori diversi
+\series default
+, con 
+\series bold
+numeri diversi
+\series default
+ (
+\emph on
+tutti i numeri sono potenze di 2
+\emph default
+), senza intralci quando un giocatore le muove.
+ Il gioco usa i
+\series bold
+ tasti freccia della tastiera 
+\series default
+per spostare tutte le caselle 
+\bar under
+a sinistra o a destra oppure in alto o in basso
+\bar default
+.
+ 
+\emph on
+Se due caselle contenenti lo stesso numero si 
+\series bold
+scontrano
+\series default
+\emph default
+ mentre si 
+\series bold
+\emph on
+muovono
+\series default
+\emph default
+, si 
+\series bold
+fondono in un'unica casella
+\series default
+ che avrà come numero la
+\series bold
+ somma delle due tessere che si sono scontrate
+\series default
+ e dunque il 
+\series bold
+colore corrispondente
+\series default
+.
+ Ad ogni turno, un nuova tessera con il valore di 2 apparirà in modo casuale
+ in un punto vuoto sul tabellone.
+\end_layout
+
+\begin_layout Standard
+Inoltre, un tabellone in alto a destra tiene traccia del punteggio dell'utente.
+ Il punteggio dell'utente inizia da zero e viene incrementato ogni volta
+ che due tessere si combinano, con il valore della nuova casella.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+La partita è vinta
+\series default
+ quando, a furia di far combinare le tessere,
+\series bold
+ si riesce a crearne una con il numero 2048
+\series default
+: da qui il nome del gioco.
+\end_layout
+
+\begin_layout Standard
+Se il giocatore 
+\series bold
+non può muovere le caselle
+\series default
+ (
+\emph on
+non ci sono spazi vuoti e senza tessere adiacenti con lo stesso valore
+\emph default
+), 
+\series bold
+finisce la partita
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/2048_Screenshot.png
+	scale 48
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Esempio della Schermata di Gioco
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Colori delle caselle
+\end_layout
+
+\begin_layout Standard
+Nel gioco, ogni numero è abbinato ad un colore differente.
+ Tutti sono "colori caldi", ovvero colori derivati dal rosso, eccetto per
+ il 2 che presenta una tonalità di grigio.
+\end_layout
+
+\begin_layout Standard
+Il 4 presenta una tonalità beige mentre dall'8 al 64 i numeri sono abbinati
+ a varie tonalità di rosso che variano dal mattone per l'8 al sangue per
+ il 64.
+\end_layout
+
+\begin_layout Standard
+Raggiunto il 128, i numeri tornano chiari, utilizzando la tonalità ocra
+ fino al 2048: da un pallido giallo del 128, infatti le tonalità s'intensificano
+ con il 256, il 512 e il 1024 sino a giungere il 2048 che è di colore ocra
+ intenso/oro.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/colours.png
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Colori originali delle caselle del gioco
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Implementazione
+\end_layout
+
+\begin_layout Section
+Prototipo in JAVA
+\end_layout
+
+\begin_layout Standard
+Il gioco originale è stato scritto in 
+\emph on
+JavaScript
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+http://gabrielecirulli.github.io/2048/
+\end_layout
+
+\end_inset
+
+, ma, avendo la necessità di iniziare un progetto utilizzando il codice
+ VHDL da zero, abbiamo preferito riscriverci dapprima un piccolo prototipo
+ in 
+\emph on
+JAV
+\emph default
+A, in quanto uno dei linguaggi che padroneggiamo meglio, in modo da riuscire
+ a capire meglio il codice del gioco e di poterci fare innanzitutto dei
+ test, prima ancora di interfacciarci con il VHDL.
+\end_layout
+
+\end_body
+\end_document
