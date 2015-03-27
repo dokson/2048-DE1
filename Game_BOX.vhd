@@ -6,8 +6,8 @@ USE WORK.GAME_TYPES.ALL;
 entity GAME_BOX is
 	generic
 	(
-		XPOS 	: in NATURAL;
-		YPOS 	: in NATURAL
+		XPOS 	: IN NATURAL;
+		YPOS 	: IN NATURAL
 	);
 	port
 	(

@@ -18,11 +18,9 @@ PORT
 		
 		-- MODEL STATUS
 		box_values	: IN GAME_GRID;
-		score : IN INTEGER RANGE 0 to 9999;
+		score 		: IN INTEGER RANGE 0 to 9999;
 		
 		bootstrap	: IN STD_LOGIC;
-		
-		-- gameover / victory
 		won,
 		lost		: IN STD_LOGIC;
 		
@@ -39,62 +37,31 @@ PORT
 		leds3,
 		leds4 		: OUT STD_LOGIC_VECTOR(6 downto 0)
 	); 
-		
-end  GAME_VIEW;
+end GAME_VIEW;
 
-ARCHITECTURE behavior of  GAME_VIEW IS
+ARCHITECTURE behavior of GAME_VIEW IS
 
 -- Sync Counters
 shared variable h_cnt	: integer range 0 to 1000;
 shared variable v_cnt  	: integer range 0 to 500;
 
--- Segnali per il disegno dei box e il relativo colore
-signal drawbox1	: STD_LOGIC;
-signal color1	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox2	: STD_LOGIC;
-signal color2	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox3	: STD_LOGIC;
-signal color3	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox4	: STD_LOGIC;
-signal color4	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox5	: STD_LOGIC;
-signal color5	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox6	: STD_LOGIC;
-signal color6	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox7	: STD_LOGIC;
-signal color7	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox8	: STD_LOGIC;
-signal color8	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox9	: STD_LOGIC;
-signal color9	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox10: STD_LOGIC;
-signal color10	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox11: STD_LOGIC;
-signal color11	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox12: STD_LOGIC;
-signal color12	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox13: STD_LOGIC;
-signal color13	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox14: STD_LOGIC;
-signal color14	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox15: STD_LOGIC;
-signal color15	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox16: STD_LOGIC;
-signal color16	: STD_LOGIC_VECTOR(11 downto 0);
+-- Segnali per il disegno della griglia e del colore dei box
+signal drawGrid		: STD_LOGIC;
+signal colorGrid	: STD_LOGIC_VECTOR(11 downto 0);
 
 -- Segnali per il disegno dei caratteri su schermo : autori
-signal drawCharC : STD_LOGIC;
-signal drawCharO : STD_LOGIC;
-signal drawCharL : STD_LOGIC;
-signal drawCharA : STD_LOGIC;
-signal drawCharC1 : STD_LOGIC;
-signal drawCharE : STD_LOGIC;
-signal drawCharSep: STD_LOGIC;
-signal drawCharG : STD_LOGIC;
-signal drawCharE1 : STD_LOGIC;
-signal drawCharZ : STD_LOGIC;
-signal drawCharZ1 : STD_LOGIC;
-signal drawCharI : STD_LOGIC;
+signal drawCharC 	: STD_LOGIC;
+signal drawCharO 	: STD_LOGIC;
+signal drawCharL 	: STD_LOGIC;
+signal drawCharA 	: STD_LOGIC;
+signal drawCharC1	: STD_LOGIC;
+signal drawCharE 	: STD_LOGIC;
+signal drawCharSep	: STD_LOGIC;
+signal drawCharG 	: STD_LOGIC;
+signal drawCharE1 	: STD_LOGIC;
+signal drawCharZ 	: STD_LOGIC;
+signal drawCharZ1 	: STD_LOGIC;
+signal drawCharI 	: STD_LOGIC;
 
 -- game over
 signal drawGoG : STD_LOGIC;
@@ -108,7 +75,6 @@ signal drawGoR : STD_LOGIC;
 
 BEGIN
 
-
 --Disegno caratteri : autori
 CHC: entity work.GAME_CHDISPLAY
 	generic map
@@ -120,7 +86,7 @@ CHC: entity work.GAME_CHDISPLAY
 	(
 		pixel_x => h_cnt,
 		pixel_y	=> v_cnt,
-		char_code =>  'C',
+		char_code => 'C',
 		drawChar => drawCharC
 	);
 CHO: entity work.GAME_CHDISPLAY
@@ -268,7 +234,6 @@ CHI: entity work.GAME_CHDISPLAY
 		drawChar => drawCharI
 	);
 
-
 -- disegno caratteri : game over
 CHGOG: entity work.GAME_CHDISPLAY
 	generic map
@@ -382,264 +347,18 @@ CHGOR: entity work.GAME_CHDISPLAY
 		char_code => 'R',
 		drawChar => drawGoR
 	);
-
-
-BOX1: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 16,
-		YPOS => 46
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(0,0),
-		drawbox => drawbox1,
-		color 	=> color1
-	);
-
-BOX2: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 168,
-		YPOS => 46
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(0,1),
-		drawbox => drawbox2,
-		color => color2
-	);
 	
-BOX3: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 320,
-		YPOS => 46
-	)
+GRID: entity work.GAME_GRID_VIEW
 	port map
 	(
-		clk => clk,
+		clk	=> clk,		
 		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(0,2),
-		drawbox => drawbox3,
-		color 	=> color3
+		pixel_y	=> v_cnt,
+		box_values => box_values,
+		drawGrid => drawGrid,
+		color => colorGrid
 	);
 
-BOX4: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 472,
-		YPOS => 46
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(0,3),
-		drawbox => drawbox4,
-		color 	=> color4
-	);
-
-BOX5: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 16,
-		YPOS => 153
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(1,0),
-		drawbox => drawbox5,
-		color 	=> color5
-	);
-
-BOX6: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 168,
-		YPOS => 153
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(1,1),
-		drawbox => drawbox6,
-		color 	=> color6
-	);
-	
-BOX7: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 320,
-		YPOS => 153
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(1,2),
-		drawbox => drawbox7,
-		color 	=> color7
-	);
-
-BOX8: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 472,
-		YPOS => 153
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(1,3),
-		drawbox => drawbox8,
-		color 	=> color8
-	);
-	
-BOX9: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 16,
-		YPOS => 260
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(2,0),
-		drawbox => drawbox9,
-		color 	=> color9
-	);
-	
-BOX10: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 168,
-		YPOS => 260
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(2,1),
-		drawbox => drawbox10,
-		color 	=> color10
-	);
-
-BOX11: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 320,
-		YPOS => 260
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(2,2),
-		drawbox => drawbox11,
-		color 	=> color11
-	);
-
-BOX12: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 472,
-		YPOS => 260
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(2,3),
-		drawbox => drawbox12,
-		color 	=> color12
-	);
-
-BOX13: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 16,
-		YPOS => 367
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(3,0),
-		drawbox => drawbox13,
-		color 	=> color13
-	);
-	
-BOX14: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 168,
-		YPOS => 367
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(3,1),
-		drawbox => drawbox14,
-		color 	=> color14
-	);
-
-BOX15: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 320,
-		YPOS => 367
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(3,2),
-		drawbox => drawbox15,
-		color 	=> color15
-	);
-	
-BOX16: entity work.GAME_BOX
-	generic map
-	(
-		XPOS => 472,
-		YPOS => 367
-	)
-	port map
-	(
-		clk => clk,
-		pixel_x => h_cnt,
-		pixel_y => v_cnt,
-		number 	=> box_values(3,3),
-		drawbox => drawbox16,
-		color 	=> color16
-	);
-	
 SEGCTRL: entity work.GAME_7SEGCTRL
 	port map
 	(
@@ -653,14 +372,7 @@ SEGCTRL: entity work.GAME_7SEGCTRL
 		seven_segs1	=> leds1
 	);
 
-
 PROCESS
-
--- costanti per le scritte
-constant writePositionV	: integer range 0 to 50:=20;
-constant distanceChar	: integer range 0 to 10:= 8;
-constant writeColaceH	: integer range 0 to 1000:=40;
-constant writeGezzH		: integer range 0 to 1000:=100;
 
 variable h_sync			: STD_LOGIC;
 variable v_sync			: STD_LOGIC;
@@ -710,6 +422,15 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	END IF;
 --- fine BORDO SCHERMO
 
+--- DISEGNO GRIGLIA DI GIOCO
+	IF (drawGrid = '1')
+	THEN
+		red_signal(3 downto 0) 	:= colorGrid(11 downto 8); 		
+		green_signal(3 downto 0):= colorGrid(7 downto 4);  
+		blue_signal(3 downto 0) := colorGrid(3 downto 0);  
+	END IF;
+--- fine DISEGNO GRIGLIA DI GIOCO
+
 --- DISEGNO SCRITTA AUTORI
 	IF
 	(	
@@ -725,121 +446,6 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		blue_signal(3 downto 0) := COLOR_SLATEGRAY(3 downto 0);  
 	END IF;
 --- fine DISEGNO CHAR
-
---- DISEGNO DI OGNI BOX
-	IF(drawbox1='1')
-	THEN
-		red_signal(3 downto 0) 	:= color1(11 downto 8); 		
-		green_signal(3 downto 0):= color1(7 downto 4);  
-		blue_signal(3 downto 0) := color1(3 downto 0); 
-	END IF;
-	
-	IF(drawbox2='1')
-	THEN
-		red_signal(3 downto 0) 	:= color2(11 downto 8); 		
-		green_signal(3 downto 0):= color2(7 downto 4);  
-		blue_signal(3 downto 0) := color2(3 downto 0); 
-	END IF;
-	
-	IF(drawbox3='1')
-	THEN
-		red_signal(3 downto 0) 	:= color3(11 downto 8); 		
-		green_signal(3 downto 0):= color3(7 downto 4);  
-		blue_signal(3 downto 0) := color3(3 downto 0); 
-	END IF;
-	
-	IF(drawbox4='1')
-	THEN
-		red_signal(3 downto 0) 	:= color4(11 downto 8); 		
-		green_signal(3 downto 0):= color4(7 downto 4);  
-		blue_signal(3 downto 0) := color4(3 downto 0); 
-	END IF;
-	
-	IF(drawbox5='1')
-	THEN
-		red_signal(3 downto 0) 	:= color5(11 downto 8); 		
-		green_signal(3 downto 0):= color5(7 downto 4);  
-		blue_signal(3 downto 0) := color5(3 downto 0); 
-	END IF;
-	
-	IF(drawbox6='1')
-	THEN
-		red_signal(3 downto 0) 	:= color6(11 downto 8); 		
-		green_signal(3 downto 0):= color6(7 downto 4);  
-		blue_signal(3 downto 0) := color6(3 downto 0); 
-	END IF;
-	
-	IF(drawbox7='1')
-	THEN
-		red_signal(3 downto 0) 	:= color7(11 downto 8); 		
-		green_signal(3 downto 0):= color7(7 downto 4);  
-		blue_signal(3 downto 0) := color7(3 downto 0); 
-	END IF;
-	
-	IF(drawbox8='1')
-	THEN
-		red_signal(3 downto 0) 	:= color8(11 downto 8); 		
-		green_signal(3 downto 0):= color8(7 downto 4);  
-		blue_signal(3 downto 0) := color8(3 downto 0); 
-	END IF;
-	
-	IF(drawbox9='1')
-	THEN
-		red_signal(3 downto 0) 	:= color9(11 downto 8); 		
-		green_signal(3 downto 0):= color9(7 downto 4);  
-		blue_signal(3 downto 0) := color9(3 downto 0); 
-	END IF;
-	
-	IF(drawbox10='1')
-	THEN
-		red_signal(3 downto 0) 	:= color10(11 downto 8); 		
-		green_signal(3 downto 0):= color10(7 downto 4);  
-		blue_signal(3 downto 0) := color10(3 downto 0); 
-	END IF;
-	
-	IF(drawbox11='1')
-	THEN
-		red_signal(3 downto 0) 	:= color11(11 downto 8); 		
-		green_signal(3 downto 0):= color11(7 downto 4);  
-		blue_signal(3 downto 0) := color11(3 downto 0); 
-	END IF;
-	
-	IF(drawbox12='1')
-	THEN
-		red_signal(3 downto 0) 	:= color12(11 downto 8); 		
-		green_signal(3 downto 0):= color12(7 downto 4);  
-		blue_signal(3 downto 0) := color12(3 downto 0); 
-	END IF;
-	
-	IF(drawbox13='1')
-	THEN
-		red_signal(3 downto 0) 	:= color13(11 downto 8); 		
-		green_signal(3 downto 0):= color13(7 downto 4);  
-		blue_signal(3 downto 0) := color13(3 downto 0); 
-	END IF;
-	
-	IF(drawbox14='1')
-	THEN
-		red_signal(3 downto 0) 	:= color14(11 downto 8); 		
-		green_signal(3 downto 0):= color14(7 downto 4);  
-		blue_signal(3 downto 0) := color14(3 downto 0); 
-	END IF;
-	
-	IF(drawbox15='1')
-	THEN
-		red_signal(3 downto 0) 	:= color15(11 downto 8); 		
-		green_signal(3 downto 0):= color15(7 downto 4);  
-		blue_signal(3 downto 0) := color15(3 downto 0); 
-	END IF;
-	
-	IF(drawbox16='1')
-	THEN
-		red_signal(3 downto 0) 	:= color16(11 downto 8); 		
-		green_signal(3 downto 0):= color16(7 downto 4);  
-		blue_signal(3 downto 0) := color16(3 downto 0); 
-	END IF;
-		
-------- FINE BOX
 
 --- DISEGNO DI OGNI CARATTERE : GAME OVER
 	IF (lost = '1')
