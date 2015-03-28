@@ -48,6 +48,7 @@ PACKAGE GAME_TYPES IS
 	-- Colori personalizzati per il gioco
 	constant COLOR_BG		: RGB_COLOR := COLOR_SLATEGRAY;
 	constant COLOR_BORDER	: RGB_COLOR := COLOR_GREY_D;
+	constant COLOR_VICTORY	: RGB_COLOR := X"C12";
 	constant COLOR_0		: RGB_COLOR := X"999";
 	constant COLOR_2		: RGB_COLOR := X"EED"; 
 	constant COLOR_4		: RGB_COLOR := X"FEC";

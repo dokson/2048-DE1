@@ -20,7 +20,7 @@ end GAME_GRID_VIEW;
 
 ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 
--- Dimensioni fisse di tutti i box
+-- Posizioni fisse di tutti i box
 constant XfirstColumn	: integer := 16;
 constant YfirstRow		: integer := 46;
 
@@ -30,7 +30,7 @@ constant YsecondRow		: integer := 153;
 constant XthirdColumn	: integer := 319;
 constant YthirdRow		: integer := 260;
 
-constant XfourthColumn	: integer := 471;
+constant XfourthColumn	: integer := 470;
 constant YfourthRow		: integer := 367;
 
 -- Segnali per il disegno dei box e il relativo colore
@@ -328,7 +328,9 @@ BOX16: entity work.GAME_BOX
 	drawBoxes : process
 		(
 			clk, drawbox1, drawbox2, drawbox3, drawbox4, drawbox5, drawbox6, drawbox7, drawbox8,
-			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16
+			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16,
+			color1, color2, color3, color4, color5, color6, color7, color8, color9, color10, color11, 
+			color12, color13, color14, color15, color16
 		)
 	begin
 		if(clk'event and clk = '1')

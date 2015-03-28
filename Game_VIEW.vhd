@@ -74,6 +74,14 @@ signal drawGoV : STD_LOGIC;
 signal drawGoE1: STD_LOGIC;
 signal drawGoR : STD_LOGIC;
 
+-- you win
+signal drawYwY : STD_LOGIC;
+signal drawYwO : STD_LOGIC;
+signal drawYwU : STD_LOGIC;
+signal drawYwW : STD_LOGIC;
+signal drawYwI : STD_LOGIC;
+signal drawYwN : STD_LOGIC;
+
 BEGIN
 
 --Disegno caratteri : autori
@@ -348,6 +356,93 @@ CHGOR: entity work.GAME_CHDISPLAY
 		char_code => 'R',
 		drawChar => drawGoR
 	);
+
+CHYWY: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 280,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'Y',
+		drawChar => drawYwY
+	);
+
+CHYWO: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 290,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'O',
+		drawChar => drawYwO
+	);
+
+CHYWU: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 300,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'U',
+		drawChar => drawYwU
+	);
+
+CHYWW: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 320,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'W',
+		drawChar => drawYwW
+	);
+
+CHYWI: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 330,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'I',
+		drawChar => drawYwI
+	);
+
+CHYWN: entity work.GAME_CHDISPLAY
+	generic map
+	(
+		XPOS => 340,
+		YPOS => 232
+	)
+	port map
+	(
+		pixel_x => h_cnt,
+		pixel_y	=> v_cnt,
+		char_code => 'N',
+		drawChar => drawYwN
+	);
+
+
+
 	
 GRID: entity work.GAME_GRID_VIEW
 	port map
@@ -461,6 +556,22 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			red_signal(3 downto 0) 	:= COLOR_TEAL(11 downto 8); 		
 			green_signal(3 downto 0):= COLOR_TEAL(7 downto 4);  
 			blue_signal(3 downto 0) := COLOR_TEAL(3 downto 0); 
+		END IF;
+	END IF;
+--- fine DISEGNO CHAR
+
+--- DISEGNO DI OGNI CARATTERE : YOU WIN
+	IF (won = '1')
+	THEN
+		IF
+		(
+			drawYwY='1' OR drawYwO='1' OR drawYwU='1' OR
+			drawYwW='1' OR drawYwI='1' OR drawYwN='1'
+		)
+		THEN
+			red_signal(3 downto 0) 	:= COLOR_VICTORY(11 downto 8); 		
+			green_signal(3 downto 0):= COLOR_VICTORY(7 downto 4);  
+			blue_signal(3 downto 0) := COLOR_VICTORY(3 downto 0); 
 		END IF;
 	END IF;
 --- fine DISEGNO CHAR
