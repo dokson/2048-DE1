@@ -21,17 +21,17 @@ end GAME_GRID_VIEW;
 ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 
 	-- Posizioni fisse di tutti i box
-	constant XfirstColumn	: integer := 15;
-	constant YfirstRow : integer := 46;
+	constant XfirstColumn	: integer := 16;
+	constant YfirstRow 		: integer := 46;
  
-	constant XsecondColumn : integer := 167;
-	constant YsecondRow : integer := 153;
+	constant XsecondColumn 	: integer := 168;
+	constant YsecondRow 		: integer := 153;
 	 
-	constant XthirdColumn : integer := 319;
-	constant YthirdRow : integer := 260;
+	constant XthirdColumn 	: integer := 320;
+	constant YthirdRow 		: integer := 260;
 	 
-	constant XfourthColumn : integer := 471;
-	constant YfourthRow : integer := 367;
+	constant XfourthColumn 	: integer := 472;
+	constant YfourthRow 		: integer := 367;
 
 	-- Segnali per il disegno dei box e il relativo colore
 	signal drawbox1	: STD_LOGIC;
@@ -80,7 +80,7 @@ BOX1: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(0,0),
+		number => box_values(0,0),
 		drawbox => drawbox1,
 		color => color1
 	);
@@ -96,7 +96,7 @@ BOX2: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(0,1),
+		number => box_values(0,1),
 		drawbox => drawbox2,
 		color => color2
 	);
@@ -112,9 +112,9 @@ BOX3: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(0,2),
+		number => box_values(0,2),
 		drawbox => drawbox3,
-		color 	=> color3
+		color => color3
 	);
 
 BOX4: entity work.GAME_BOX
@@ -128,9 +128,9 @@ BOX4: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(0,3),
+		number => box_values(0,3),
 		drawbox => drawbox4,
-		color 	=> color4
+		color => color4
 	);
 
 BOX5: entity work.GAME_BOX
@@ -144,9 +144,9 @@ BOX5: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(1,0),
+		number => box_values(1,0),
 		drawbox => drawbox5,
-		color 	=> color5
+		color => color5
 	);
 
 BOX6: entity work.GAME_BOX
@@ -160,9 +160,9 @@ BOX6: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(1,1),
+		number => box_values(1,1),
 		drawbox => drawbox6,
-		color 	=> color6
+		color => color6
 	);
 	
 BOX7: entity work.GAME_BOX
@@ -176,9 +176,9 @@ BOX7: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(1,2),
+		number => box_values(1,2),
 		drawbox => drawbox7,
-		color 	=> color7
+		color => color7
 	);
 
 BOX8: entity work.GAME_BOX
@@ -192,9 +192,9 @@ BOX8: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(1,3),
+		number => box_values(1,3),
 		drawbox => drawbox8,
-		color 	=> color8
+		color => color8
 	);
 	
 BOX9: entity work.GAME_BOX
@@ -208,9 +208,9 @@ BOX9: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(2,0),
+		number => box_values(2,0),
 		drawbox => drawbox9,
-		color 	=> color9
+		color => color9
 	);
 	
 BOX10: entity work.GAME_BOX
@@ -224,9 +224,9 @@ BOX10: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(2,1),
+		number => box_values(2,1),
 		drawbox => drawbox10,
-		color 	=> color10
+		color => color10
 	);
 
 BOX11: entity work.GAME_BOX
@@ -240,9 +240,9 @@ BOX11: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(2,2),
+		number => box_values(2,2),
 		drawbox => drawbox11,
-		color 	=> color11
+		color => color11
 	);
 
 BOX12: entity work.GAME_BOX
@@ -256,9 +256,9 @@ BOX12: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(2,3),
+		number => box_values(2,3),
 		drawbox => drawbox12,
-		color 	=> color12
+		color => color12
 	);
 
 BOX13: entity work.GAME_BOX
@@ -272,9 +272,9 @@ BOX13: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(3,0),
+		number => box_values(3,0),
 		drawbox => drawbox13,
-		color 	=> color13
+		color => color13
 	);
 	
 BOX14: entity work.GAME_BOX
@@ -288,9 +288,9 @@ BOX14: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(3,1),
+		number => box_values(3,1),
 		drawbox => drawbox14,
-		color 	=> color14
+		color => color14
 	);
 
 BOX15: entity work.GAME_BOX
@@ -304,9 +304,9 @@ BOX15: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(3,2),
+		number => box_values(3,2),
 		drawbox => drawbox15,
-		color 	=> color15
+		color => color15
 	);
 	
 BOX16: entity work.GAME_BOX
@@ -322,7 +322,7 @@ BOX16: entity work.GAME_BOX
 		pixel_y => pixel_y,
 		number => box_values(3,3),
 		drawbox => drawbox16,
-		color 	=> color16
+		color => color16
 	);
 	
 	drawBoxes : process
@@ -334,52 +334,67 @@ BOX16: entity work.GAME_BOX
 		if(clk'event and clk = '1')
 		then
 			--- DISEGNO DI OGNI BOX
-			IF(drawbox1='1')
+			IF(drawbox1 = '1')
 			THEN
-				color <= color1; 		
-			ELSIF(drawbox2='1')
+				color <= color1; 	
+			END IF;	
+			IF(drawbox2 = '1')
 			THEN
-				color <= color2;  
-			ELSIF(drawbox3='1')
+				color <= color2; 
+			END IF;	
+			IF(drawbox3 = '1')
 			THEN
 				color <= color3; 
-			ELSIF(drawbox4='1')
+			END IF;	
+			IF(drawbox4 = '1')
 			THEN
-				color <= color4; 
-			ELSIF(drawbox5='1')
+				color <= color4;
+			END IF;	
+			IF(drawbox5 = '1')
 			THEN
-				color <= color5; 
-			ELSIF(drawbox6='1')
+				color <= color5;
+			END IF;
+			IF(drawbox6 = '1')
 			THEN
-				color <= color6; 
-			ELSIF(drawbox7='1')
+				color <= color6;
+			END IF;
+			IF(drawbox7 = '1')
 			THEN
-				color <= color7; 
-			ELSIF(drawbox8='1')
+				color <= color7;
+			END IF;
+			IF(drawbox8 = '1')
 			THEN
-				color <= color8; 
-			ELSIF(drawbox9='1')
+				color <= color8;
+			END IF;	
+			IF(drawbox9 = '1')
 			THEN
-				color <= color9; 
-			ELSIF(drawbox10='1')
+				color <= color9;
+			END IF;
+			IF(drawbox10 = '1')
 			THEN
-				color <= color10; 
-			ELSIF(drawbox11='1')
+				color <= color10;
+			END IF;
+			IF(drawbox11 = '1')
 			THEN
-				color <= color11; 
-			ELSIF(drawbox12='1')
+				color <= color11;
+			END IF;	
+			IF(drawbox12 = '1')
 			THEN
 				color <= color12; 
-			ELSIF(drawbox13='1')
+			END IF;	
+			IF(drawbox13 = '1')
 			THEN
-				color <= color13; 
-			ELSIF(drawbox14='1')
+				color <= color13;
+			END IF;
+			IF(drawbox14 = '1')
 			THEN
-				color <= color14; 
-			ELSIF(drawbox15='1')
+				color <= color14;
+			END IF;
+			IF(drawbox15 = '1')
 			THEN
-				color <= color15; 
-			ELSIF(drawbox16='1')
+				color <= color15;
+			END IF;
+			IF(drawbox16 = '1')
 			THEN
 				color <= color16;
 			END IF;
@@ -389,10 +404,10 @@ BOX16: entity work.GAME_BOX
 	drawGrid <= '1' 
 	when 
 		(
-			drawbox1 = '1' or drawbox2 = '1' or drawbox3='1' or drawbox4='1' or
-			drawbox5 = '1' or drawbox6 = '1' or drawbox7='1' or drawbox8='1' or
-			drawbox9 = '1' or drawbox10 = '1' or drawbox11='1' or drawbox12='1' or
-			drawbox13 = '1' or drawbox14 = '1' or drawbox15='1' or drawbox16='1'
+			drawbox1 = '1' 	or drawbox2 = '1' 	or drawbox3='1' 	or drawbox4 = '1' 	or
+			drawbox5 = '1' 	or drawbox6 = '1' 	or drawbox7='1' 	or drawbox8 = '1' 	or
+			drawbox9 = '1' 	or drawbox10 = '1' 	or drawbox11='1' 	or drawbox12 = '1' 	or
+			drawbox13 = '1' 	or drawbox14 = '1' 	or drawbox15='1' 	or drawbox16 = '1'
 		)
 	else
 		'0';

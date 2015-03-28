@@ -450,7 +450,7 @@ SEGCTRL: entity work.GAME_7SEGCTRL
 	port map
 	(
 		-- INPUT
-		num	 => score,
+		num => score,
 		
 		-- OUTPUT 
 		seven_segs4 => leds4,
@@ -473,8 +473,8 @@ variable vertical_en		: STD_LOGIC;
 variable colorRGB			: STD_LOGIC_VECTOR(11 downto 0); 
 
 -- Bordi Schermo
-constant leftBorder		: INTEGER := 14;
-constant rightBorder		: INTEGER := 624;
+constant leftBorder		: INTEGER := 15;
+constant rightBorder		: INTEGER := 625;
 constant upBorder			: INTEGER := 44;
 constant downBorder		: INTEGER := 474;
 
