@@ -22,16 +22,16 @@ ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 
 	-- Posizioni fisse di tutti i box
 	constant XfirstColumn	: integer := 16;
-	constant YfirstRow 		: integer := 46;
+	constant YfirstRow 		: integer := 32;
  
 	constant XsecondColumn 	: integer := 168;
-	constant YsecondRow 		: integer := 153;
+	constant YsecondRow 		: integer := 139;
 	 
 	constant XthirdColumn 	: integer := 320;
-	constant YthirdRow 		: integer := 260;
+	constant YthirdRow 		: integer := 246;
 	 
 	constant XfourthColumn 	: integer := 472;
-	constant YfourthRow 		: integer := 367;
+	constant YfourthRow 		: integer := 353;
 
 	-- Segnali per il disegno dei box e il relativo colore
 	signal drawbox1	: STD_LOGIC;
@@ -328,76 +328,78 @@ BOX16: entity work.GAME_BOX
 	drawBoxes : process
 		(
 			drawbox1, drawbox2, drawbox3, drawbox4, drawbox5, drawbox6, drawbox7, drawbox8,
-			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16
+			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16,
+			color1, color2, color3, color4, color5, color6, color7, color8, 
+			color9, color10, color11, color12, color13, color14, color15, color16
 		)
 	begin
 		-- non ha bisogno di essere sincrono in quanto la lettura viene fatta dalla view ad ogni
 		-- fronte positivo del clock (da ricordare!)
-			--- DISEGNO DI OGNI BOX
-			IF(drawbox1 = '1')
-			THEN
-				color <= color1; 	
-			END IF;	
-			IF(drawbox2 = '1')
-			THEN
-				color <= color2; 
-			END IF;	
-			IF(drawbox3 = '1')
-			THEN
-				color <= color3; 
-			END IF;	
-			IF(drawbox4 = '1')
-			THEN
-				color <= color4;
-			END IF;	
-			IF(drawbox5 = '1')
-			THEN
-				color <= color5;
-			END IF;
-			IF(drawbox6 = '1')
-			THEN
-				color <= color6;
-			END IF;
-			IF(drawbox7 = '1')
-			THEN
-				color <= color7;
-			END IF;
-			IF(drawbox8 = '1')
-			THEN
-				color <= color8;
-			END IF;	
-			IF(drawbox9 = '1')
-			THEN
-				color <= color9;
-			END IF;
-			IF(drawbox10 = '1')
-			THEN
-				color <= color10;
-			END IF;
-			IF(drawbox11 = '1')
-			THEN
-				color <= color11;
-			END IF;	
-			IF(drawbox12 = '1')
-			THEN
-				color <= color12; 
-			END IF;	
-			IF(drawbox13 = '1')
-			THEN
-				color <= color13;
-			END IF;
-			IF(drawbox14 = '1')
-			THEN
-				color <= color14;
-			END IF;
-			IF(drawbox15 = '1')
-			THEN
-				color <= color15;
-			END IF;
-			IF(drawbox16 = '1')
-			THEN
-				color <= color16;
-			END IF;
+		--- DISEGNO DI OGNI BOX
+		IF(drawbox1 = '1')
+		THEN
+			color <= color1; 	
+		END IF;	
+		IF(drawbox2 = '1')
+		THEN
+			color <= color2; 
+		END IF;	
+		IF(drawbox3 = '1')
+		THEN
+			color <= color3; 
+		END IF;	
+		IF(drawbox4 = '1')
+		THEN
+			color <= color4;
+		END IF;	
+		IF(drawbox5 = '1')
+		THEN
+			color <= color5;
+		END IF;
+		IF(drawbox6 = '1')
+		THEN
+			color <= color6;
+		END IF;
+		IF(drawbox7 = '1')
+		THEN
+			color <= color7;
+		END IF;
+		IF(drawbox8 = '1')
+		THEN
+			color <= color8;
+		END IF;	
+		IF(drawbox9 = '1')
+		THEN
+			color <= color9;
+		END IF;
+		IF(drawbox10 = '1')
+		THEN
+			color <= color10;
+		END IF;
+		IF(drawbox11 = '1')
+		THEN
+			color <= color11;
+		END IF;	
+		IF(drawbox12 = '1')
+		THEN
+			color <= color12; 
+		END IF;	
+		IF(drawbox13 = '1')
+		THEN
+			color <= color13;
+		END IF;
+		IF(drawbox14 = '1')
+		THEN
+			color <= color14;
+		END IF;
+		IF(drawbox15 = '1')
+		THEN
+			color <= color15;
+		END IF;
+		IF(drawbox16 = '1')
+		THEN
+			color <= color16;
+		END IF;
 	end process drawBoxes;
 	
 	drawGrid <= '1' 

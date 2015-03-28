@@ -361,11 +361,11 @@ Colori originali delle caselle del gioco
 \end_layout
 
 \begin_layout Chapter
-Implementazione
+Analisi
 \end_layout
 
 \begin_layout Section
-Prototipo in JAVA
+Realizzazione di un prototipo
 \end_layout
 
 \begin_layout Standard
@@ -384,14 +384,120 @@ http://gabrielecirulli.github.io/2048/
 \end_inset
 
 , ma, avendo la necessità di iniziare un progetto utilizzando il codice
- VHDL da zero, abbiamo preferito riscriverci dapprima un piccolo prototipo
- in 
+ 
+\series bold
+VHDL
+\series default
+ 
+\emph on
+da zero
+\emph default
+, abbiamo preferito riscriverci dapprima un piccolo prototipo in 
 \emph on
 JAV
 \emph default
 A, in quanto uno dei linguaggi che padroneggiamo meglio, in modo da riuscire
  a capire meglio il codice del gioco e di poterci fare innanzitutto dei
- test, prima ancora di interfacciarci con il VHDL.
+ test, prima ancora di iniziare a usare 
+\series bold
+Quartus II 
+\series default
+di Altera.
+\end_layout
+
+\begin_layout Section
+Altera DE1
+\end_layout
+
+\begin_layout Standard
+Avendo a disposizione una scheda 
+\series bold
+Terasic DE1 
+\series default
+che monta 
+\series bold
+FPGA Cyclone II di ALTERA
+\series default
+, che mette a disposizione numerose features per sviluppare variegati progetti,
+ tra cui una serie di pulsanti ed interruttori, un display 7 segmenti a
+ 4 cifre, una porta VGA, una porta PS/2 e molte altre interfacce I/O.
+ 
+\end_layout
+
+\begin_layout Standard
+Per realizzare la nostra versione 
+\series bold
+VHDL 
+\series default
+del gioco 
+\series bold
+2048
+\series default
+,
+\series bold
+ 
+\series default
+abbiamo deciso di utilizzare i seguenti componenti della scheda fornitaci
+ dal professore:
+\end_layout
+
+\begin_layout Itemize
+l'interfaccia 
+\series bold
+PS/2
+\series default
+ tramite tastiera, per dare i comandi di input
+\end_layout
+
+\begin_layout Itemize
+l'interfaccia 
+\series bold
+VGA
+\series default
+ per visualizzare su monitor lo stato della partita
+\end_layout
+
+\begin_layout Itemize
+il 
+\series bold
+display da 7 segmenti a 4 cifre
+\series default
+ per visualizzare il punteggio corrente della partita
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/altera_de1.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Altera Terasic DE1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Implementazione
 \end_layout
 
 \end_body

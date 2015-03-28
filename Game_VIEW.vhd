@@ -83,7 +83,7 @@ CHC: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 16,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -96,7 +96,7 @@ CHO: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 26,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -109,7 +109,7 @@ CHL: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 36,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -122,7 +122,7 @@ CHA: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 46,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -135,7 +135,7 @@ CHC1: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 56,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -148,7 +148,7 @@ CHE: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 66,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -162,7 +162,7 @@ CHSEP: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 76,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -175,7 +175,7 @@ CHG: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 86,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -188,7 +188,7 @@ CHE1: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 96,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -201,7 +201,7 @@ CHZ: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 106,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -214,7 +214,7 @@ CHZ1: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 116,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -227,7 +227,7 @@ CHI: entity work.GAME_CHDISPLAY
 	generic map
 	(
 		XPOS => 126,
-		YPOS => 26
+		YPOS => 12
 	)
 	port map
 	(
@@ -475,8 +475,8 @@ variable colorRGB			: STD_LOGIC_VECTOR(11 downto 0);
 -- Bordi Schermo
 constant leftBorder		: INTEGER := 15;
 constant rightBorder		: INTEGER := 625;
-constant upBorder			: INTEGER := 44;
-constant downBorder		: INTEGER := 474;
+constant upBorder			: INTEGER := 30;
+constant downBorder		: INTEGER := 460;
 
 BEGIN
 
