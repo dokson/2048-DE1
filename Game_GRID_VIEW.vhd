@@ -20,52 +20,52 @@ end GAME_GRID_VIEW;
 
 ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 
--- Posizioni fisse di tutti i box
-constant XfirstColumn	: integer := 16;
-constant YfirstRow		: integer := 46;
+	-- Posizioni fisse di tutti i box
+	constant XfirstColumn	: integer := 15;
+	constant YfirstRow		: integer := 41;
 
-constant XsecondColumn	: integer := 167;
-constant YsecondRow		: integer := 153;
+	constant XsecondColumn	: integer := 167;
+	constant YsecondRow		: integer := 149;
 
-constant XthirdColumn	: integer := 319;
-constant YthirdRow		: integer := 260;
+	constant XthirdColumn	: integer := 319;
+	constant YthirdRow		: integer := 257;
 
-constant XfourthColumn	: integer := 470;
-constant YfourthRow		: integer := 367;
+	constant XfourthColumn	: integer := 471;
+	constant YfourthRow		: integer := 365;
 
--- Segnali per il disegno dei box e il relativo colore
-signal drawbox1	: STD_LOGIC;
-signal color1	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox2	: STD_LOGIC;
-signal color2	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox3	: STD_LOGIC;
-signal color3	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox4	: STD_LOGIC;
-signal color4	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox5	: STD_LOGIC;
-signal color5	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox6	: STD_LOGIC;
-signal color6	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox7	: STD_LOGIC;
-signal color7	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox8	: STD_LOGIC;
-signal color8	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox9	: STD_LOGIC;
-signal color9	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox10: STD_LOGIC;
-signal color10	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox11: STD_LOGIC;
-signal color11	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox12: STD_LOGIC;
-signal color12	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox13: STD_LOGIC;
-signal color13	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox14: STD_LOGIC;
-signal color14	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox15: STD_LOGIC;
-signal color15	: STD_LOGIC_VECTOR(11 downto 0);
-signal drawbox16: STD_LOGIC;
-signal color16	: STD_LOGIC_VECTOR(11 downto 0);
+	-- Segnali per il disegno dei box e il relativo colore
+	signal drawbox1	: STD_LOGIC;
+	signal color1	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox2	: STD_LOGIC;
+	signal color2	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox3	: STD_LOGIC;
+	signal color3	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox4	: STD_LOGIC;
+	signal color4	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox5	: STD_LOGIC;
+	signal color5	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox6	: STD_LOGIC;
+	signal color6	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox7	: STD_LOGIC;
+	signal color7	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox8	: STD_LOGIC;
+	signal color8	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox9	: STD_LOGIC;
+	signal color9	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox10: STD_LOGIC;
+	signal color10	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox11: STD_LOGIC;
+	signal color11	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox12: STD_LOGIC;
+	signal color12	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox13: STD_LOGIC;
+	signal color13	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox14: STD_LOGIC;
+	signal color14	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox15: STD_LOGIC;
+	signal color15	: STD_LOGIC_VECTOR(11 downto 0);
+	signal drawbox16: STD_LOGIC;
+	signal color16	: STD_LOGIC_VECTOR(11 downto 0);
 
 BEGIN
 
@@ -320,7 +320,7 @@ BOX16: entity work.GAME_BOX
 		clk => clk,
 		pixel_x => pixel_x,
 		pixel_y => pixel_y,
-		number 	=> box_values(3,3),
+		number => box_values(3,3),
 		drawbox => drawbox16,
 		color 	=> color16
 	);
@@ -328,9 +328,7 @@ BOX16: entity work.GAME_BOX
 	drawBoxes : process
 		(
 			clk, drawbox1, drawbox2, drawbox3, drawbox4, drawbox5, drawbox6, drawbox7, drawbox8,
-			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16,
-			color1, color2, color3, color4, color5, color6, color7, color8, color9, color10, color11, 
-			color12, color13, color14, color15, color16
+			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16
 		)
 	begin
 		if(clk'event and clk = '1')
@@ -384,8 +382,6 @@ BOX16: entity work.GAME_BOX
 			ELSIF(drawbox16='1')
 			THEN
 				color <= color16;
-			ELSE
-				color <= COLOR_BG;
 			END IF;
 		end if;
 	end process drawBoxes;

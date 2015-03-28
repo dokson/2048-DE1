@@ -473,9 +473,9 @@ variable vertical_en		: STD_LOGIC;
 variable colorRGB			: STD_LOGIC_VECTOR(11 downto 0); 
 
 -- Bordi Schermo
-constant leftBorder		: INTEGER := 16;
-constant rightBorder		: INTEGER := 623;
-constant upBorder			: INTEGER := 44;	
+constant leftBorder		: INTEGER := 15;
+constant rightBorder		: INTEGER := 624;
+constant upBorder			: INTEGER := 39;
 constant downBorder		: INTEGER := 474;
 
 BEGIN
