@@ -327,12 +327,12 @@ BOX16: entity work.GAME_BOX
 	
 	drawBoxes : process
 		(
-			clk, drawbox1, drawbox2, drawbox3, drawbox4, drawbox5, drawbox6, drawbox7, drawbox8,
+			drawbox1, drawbox2, drawbox3, drawbox4, drawbox5, drawbox6, drawbox7, drawbox8,
 			drawbox9, drawbox10, drawbox11, drawbox12, drawbox13, drawbox14, drawbox15, drawbox16
 		)
 	begin
-		if(clk'event and clk = '1')
-		then
+		-- non ha bisogno di essere sincrono in quanto la lettura viene fatta dalla view ad ogni
+		-- fronte positivo del clock (da ricordare!)
 			--- DISEGNO DI OGNI BOX
 			IF(drawbox1 = '1')
 			THEN
@@ -398,7 +398,6 @@ BOX16: entity work.GAME_BOX
 			THEN
 				color <= color16;
 			END IF;
-		end if;
 	end process drawBoxes;
 	
 	drawGrid <= '1' 
