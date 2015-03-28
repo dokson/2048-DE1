@@ -22,16 +22,16 @@ ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 
 	-- Posizioni fisse di tutti i box
 	constant XfirstColumn	: integer := 15;
-	constant YfirstRow		: integer := 41;
-
-	constant XsecondColumn	: integer := 167;
-	constant YsecondRow		: integer := 149;
-
-	constant XthirdColumn	: integer := 319;
-	constant YthirdRow		: integer := 257;
-
-	constant XfourthColumn	: integer := 471;
-	constant YfourthRow		: integer := 365;
+	constant YfirstRow : integer := 46;
+ 
+	constant XsecondColumn : integer := 167;
+	constant YsecondRow : integer := 153;
+	 
+	constant XthirdColumn : integer := 319;
+	constant YthirdRow : integer := 260;
+	 
+	constant XfourthColumn : integer := 471;
+	constant YfourthRow : integer := 367;
 
 	-- Segnali per il disegno dei box e il relativo colore
 	signal drawbox1	: STD_LOGIC;
