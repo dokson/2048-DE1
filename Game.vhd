@@ -44,14 +44,14 @@ architecture Behavioral of GAME is
 
 BEGIN
 
-ClockGenerator: entity work.GAME_CLKGENERATOR
+ClockDivider: entity work.GAME_CLKGENERATOR
 	port map
 	(
 		clock			=> clk_50Mhz,
-		clock_mezzi 	=> clock_25Mhz
+		clock_mezzi => clock_25Mhz
 	);
 
-KeyboardController: entity work.GAME_KEYBOARD
+Keyboard: entity work.GAME_KEYBOARD
 	port map
 	(
 		clk				=> clock_25Mhz,
@@ -73,10 +73,10 @@ ControlUnit: entity work.GAME_CONTROL
 
 		boot	=> boot,
 		
-		won		=>	won,
+		won	=>	won,
 		lost	=> lost,
 		
-		movepadDirection=> movepadDirection
+		movepadDirection => movepadDirection
 	);
 
 Datapath: entity work.GAME_DATA

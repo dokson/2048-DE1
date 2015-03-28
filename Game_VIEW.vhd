@@ -40,12 +40,6 @@ ARCHITECTURE behavior of GAME_VIEW IS
 shared variable h_cnt	: integer range 0 to 1000;
 shared variable v_cnt  	: integer range 0 to 500;
 
--- Bordi Schermo
-constant leftBorder	: integer := 16;
-constant rightBorder	: integer := 623;
-constant upBorder		: integer := 44;	
-constant downBorder	: integer := 474;
-
 -- Segnali per il disegno della griglia e del colore dei box
 signal drawGrid	: STD_LOGIC;
 signal colorGrid	: STD_LOGIC_VECTOR(11 downto 0);
@@ -440,9 +434,6 @@ CHYWN: entity work.GAME_CHDISPLAY
 		char_code => 'N',
 		drawChar => drawYwN
 	);
-
-
-
 	
 GRID: entity work.GAME_GRID_VIEW
 	port map
@@ -478,17 +469,21 @@ variable video_en			: STD_LOGIC;
 variable horizontal_en	: STD_LOGIC;
 variable vertical_en		: STD_LOGIC;
 
--- Segnali colori RGB a 4 bit
-variable red_signal		: STD_LOGIC_VECTOR(3 downto 0); 
-variable green_signal	: STD_LOGIC_VECTOR(3 downto 0);
-variable blue_signal		: STD_LOGIC_VECTOR(3 downto 0);
+-- Segnale colore RGB a 12 bit
+variable colorRGB			: STD_LOGIC_VECTOR(11 downto 0); 
+
+-- Bordi Schermo
+constant leftBorder		: INTEGER := 16;
+constant rightBorder		: INTEGER := 623;
+constant upBorder			: INTEGER := 44;	
+constant downBorder		: INTEGER := 474;
 
 BEGIN
 
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	--Horizontal Sync
 	--Reset Horizontal Counter	
-	-- resettato al valore 799, anzich� 640, per rispettare i tempi di Front Porch
+	-- resettato al valore 799, anzichè 640, per rispettare i tempi di Front Porch
 	IF (h_cnt = 799) 
 		THEN
 			h_cnt := 0;
@@ -496,34 +491,26 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			h_cnt := h_cnt + 1;
 	END IF;
 
-	--Sfondo
-	IF (v_cnt >= 0) AND (v_cnt <= 479) 
-	THEN
-		-- Nero
-		red_signal 	:= COLOR_BG(11 downto 8);
-		green_signal:= COLOR_BG(7 downto 4);
-		blue_signal	:= COLOR_BG(3 downto 0);	
-	END IF;	
-
 --- BORDI SCHERMO
-	IF (h_cnt <= leftBorder OR -- BORDO LEFT
+	IF 
+	(
+		h_cnt <= leftBorder OR 	-- BORDO LEFT
 		h_cnt >= rightBorder OR -- BORDO RIGHT
-		v_cnt <= upBorder OR -- BORDO UP
-		v_cnt >= downBorder) -- BORDO DOWN
+		v_cnt <= upBorder OR 	-- BORDO UP
+		v_cnt >= downBorder 		-- BORDO DOWN
+	)
 	THEN
-		-- Grigio
-		red_signal 	:= COLOR_BORDER(11 downto 8);
-		green_signal:= COLOR_BORDER(7 downto 4);
-		blue_signal	:= COLOR_BORDER(3 downto 0);
+		colorRGB := COLOR_BORDER;
+	-- SE NON È BORDO, ALLORA È SFONDO
+	ELSE 
+		colorRGB	:= COLOR_BG;
 	END IF;
 --- fine BORDO SCHERMO
 
 --- DISEGNO GRIGLIA DI GIOCO
 	IF (drawGrid = '1')
 	THEN
-		red_signal(3 downto 0) 	:= colorGrid(11 downto 8); 		
-		green_signal(3 downto 0):= colorGrid(7 downto 4);  
-		blue_signal(3 downto 0) := colorGrid(3 downto 0);  
+		colorRGB := colorGrid; 		
 	END IF;
 --- fine DISEGNO GRIGLIA DI GIOCO
 
@@ -536,49 +523,36 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		drawCharZ='1' OR drawCharZ1='1' OR drawCharI='1'
 	)
 	THEN
-		-- Bianco
-		red_signal(3 downto 0) 	:= COLOR_SLATEGRAY(11 downto 8); 		
-		green_signal(3 downto 0):= COLOR_SLATEGRAY(7 downto 4);  
-		blue_signal(3 downto 0) := COLOR_SLATEGRAY(3 downto 0);  
+		colorRGB	:= COLOR_SLATEGRAY;  
 	END IF;
 --- fine DISEGNO CHAR
 
 --- DISEGNO DI OGNI CARATTERE : GAME OVER
-	IF (lost = '1')
+	IF
+	(
+		(drawGoG='1' OR drawGoA='1' OR drawGoM='1' OR drawGoE='1' OR 
+		drawGoO='1' OR drawGoV='1' OR drawGoE1='1' OR drawGoR='1') AND 
+		lost = '1'
+	)
 	THEN
-		IF
-		(
-			drawGoG='1' OR drawGoA='1' OR drawGoM='1' OR
-			drawGoE='1' OR drawGoO='1' OR drawGoV='1' OR 
-			drawGoE1='1' OR drawGoR='1'
-		)
-		THEN
-			red_signal(3 downto 0) 	:= COLOR_TEAL(11 downto 8); 		
-			green_signal(3 downto 0):= COLOR_TEAL(7 downto 4);  
-			blue_signal(3 downto 0) := COLOR_TEAL(3 downto 0); 
-		END IF;
+		colorRGB	:= COLOR_TEAL; 
 	END IF;
---- fine DISEGNO CHAR
+--- fine DISEGNO GAME OVER
 
 --- DISEGNO DI OGNI CARATTERE : YOU WIN
-	IF (won = '1')
+	IF
+	(
+		(drawYwY='1' OR drawYwO='1' OR drawYwU='1' OR
+		drawYwW='1' OR drawYwI='1' OR drawYwN='1' ) AND
+		won = '1'
+	)
 	THEN
-		IF
-		(
-			drawYwY='1' OR drawYwO='1' OR drawYwU='1' OR
-			drawYwW='1' OR drawYwI='1' OR drawYwN='1'
-		)
-		THEN
-			red_signal(3 downto 0) 	:= COLOR_VICTORY(11 downto 8); 		
-			green_signal(3 downto 0):= COLOR_VICTORY(7 downto 4);  
-			blue_signal(3 downto 0) := COLOR_VICTORY(3 downto 0); 
-		END IF;
+		colorRGB	:= COLOR_VICTORY; 
 	END IF;
 --- fine DISEGNO CHAR
------------------------------------------------------------------------
 
-	--Generazione segnale hsync (rispettando la specifica temporale di avere un ritardo "a" di 3.8 us fra un segnale e l'altro)
-	--Infatti (659-639)/25000000 = 0.6 us, ossia il tempo di Front Porch "d". (755-659)/25000000 = 3.8, ossia il tempo "a"
+-- Generazione segnale hsync (rispettando la specifica temporale di avere un ritardo "a" di 3.8 us fra un segnale e l'altro)
+-- Infatti (659-639)/25000000 = 0.6 us, ossia il tempo di Front Porch "d". (755-659)/25000000 = 3.8, ossia il tempo "a"
 	IF (h_cnt <= 755) AND (h_cnt >= 659) 
 	THEN
 		h_sync := '0';
@@ -624,18 +598,19 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	video_en := horizontal_en AND vertical_en;
 
 	-- Assegnamento segnali fisici a VGA
-	red(0)		<= red_signal(0) AND video_en;
-	green(0)  	<= green_signal(0) AND video_en;
-	blue(0)		<= blue_signal(0) AND video_en;
-	red(1)		<= red_signal(1) AND video_en;
-	green(1)  	<= green_signal(1) AND video_en;
-	blue(1)		<= blue_signal(1) AND video_en;
-	red(2)		<= red_signal(2) AND video_en;
-	green(2)    <= green_signal(2) AND video_en;
-	blue(2)		<= blue_signal(2) AND video_en;
-	red(3)		<= red_signal(3) AND video_en;
-	green(3) 	<= green_signal(3) AND video_en;
-	blue(3)		<= blue_signal(3) AND video_en;
+	red(3)	<= colorRGB(11) AND video_en;
+	red(2)	<= colorRGB(10) AND video_en;
+	red(1)	<= colorRGB(9) AND video_en;
+	red(0)	<= colorRGB(8) AND video_en;
+	green(3) <= colorRGB(7) AND video_en;
+	green(2) <= colorRGB(6) AND video_en;
+	green(1) <= colorRGB(5) AND video_en;
+	green(0) <= colorRGB(4) AND video_en;
+	blue(3)	<= colorRGB(3) AND video_en;
+	blue(2)	<= colorRGB(2) AND video_en;
+	blue(1)	<= colorRGB(1) AND video_en;
+	blue(0)	<= colorRGB(0) AND video_en;
+	
 	hsync		<= h_sync;
 	vsync		<= v_sync;
 	

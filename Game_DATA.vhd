@@ -111,7 +111,9 @@ BEGIN
 	reg_next_state <= reg_state;
 	directionPosEdge_next <= directionPosEdge;
 	
-	if(reg_state = idle) then
+	-- Stato: idle fintanto che non arriva una direzione
+	if(reg_state = idle) 
+	then
 		box_values_prev_status <= box_values_curr_status;
 		merge_next <= (others => '0');
 		if(unsigned(directionPosEdge) > 0) then
@@ -119,8 +121,10 @@ BEGIN
 		else
 			directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 		end if;
-	elsif(reg_state = merge1 or reg_state = merge2 or reg_state = merge3) then
-		--next state logic
+	
+	-- Stato: merging
+	elsif(reg_state = merge1 or reg_state = merge2 or reg_state = merge3) 
+	then
 		if(reg_state = merge1) 
 		then
 			reg_next_state <= move1;
@@ -750,6 +754,8 @@ BEGIN
 			when others =>
 				reg_next_state <= idle;
 		end case;
+		
+	-- Stato: movimenti
 	elsif(reg_state = move1 or reg_state = move2 or reg_state = move3)
 	then
 		if(reg_state = move1) then
@@ -1057,12 +1063,12 @@ BEGIN
 					box_values_next_status(0,3) <= 0;
 					box_values_next_status(1,3) <= box_values_curr_status(0,3);
 				end if;
-			-- ALTRO
+			-- niente
 			when others =>
 				reg_next_state <= idle;
 		end case;
 	
-	-- Controllo mossa valida 
+	-- Stato: controllo mossa valida 
 	elsif(reg_state = checkupdate)
 	then
 		directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
@@ -1130,6 +1136,9 @@ BEGIN
 		elsif(box_values_curr_status(x+3,y+3) = 0)
 		then
 			box_values_next_status(x+3,y+3) <= 2;
+		else 
+			-- non dovrebbe mai entrare qui
+			reg_next_state <= idle;
 		end if;
 	end if;
 
