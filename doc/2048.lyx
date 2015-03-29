@@ -396,11 +396,23 @@ da zero
 \series bold
 \emph on
 JAVA
+<<<<<<< HEAD
 \series default
 \emph default
 , in quanto uno dei linguaggi che padroneggiamo meglio, in modo da riuscire
  a capire meglio il codice del gioco e di poterci fare innanzitutto dei
  test, prima ancora di iniziare a usare 
+=======
+\emph default
+ in modo da riuscire a capire meglio il codice del gioco.
+ E' stato scelto il 
+\emph on
+JAVA
+\emph default
+ per la familiarità che abbiamo con esso, in questo modo è stato più semplice
+ fare preliminarmente dei test e avere un quadro generale dello sviluppo.
+ Tutto in vista di un futuro sviluppo in 
+>>>>>>> origin/master
 \series bold
 Quartus II 
 \series default
@@ -420,9 +432,11 @@ che monta
 \series bold
 FPGA Cyclone II di ALTERA
 \series default
-, che mette a disposizione numerose features per sviluppare variegati progetti,
- tra cui una serie di pulsanti ed interruttori, un display 7 segmenti a
- 4 cifre, una porta VGA, una porta PS/2 e molte altre interfacce I/O.
+, la quale mette a disposizione numerose features per sviluppare variegati
+ progetti.
+ Sono presenti su di essa una serie di pulsanti ed interruttori, un display
+ 7 segmenti a 4 cifre, una porta VGA, una porta PS/2 e molte altre interfacce
+ I/O.
  
 \end_layout
 
