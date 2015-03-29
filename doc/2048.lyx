@@ -396,27 +396,28 @@ da zero
 \series bold
 \emph on
 JAVA
-<<<<<<< HEAD
 \series default
 \emph default
-, in quanto uno dei linguaggi che padroneggiamo meglio, in modo da riuscire
- a capire meglio il codice del gioco e di poterci fare innanzitutto dei
- test, prima ancora di iniziare a usare 
-=======
-\emph default
- in modo da riuscire a capire meglio il codice del gioco.
- E' stato scelto il 
+ in modo da riuscire a capire meglio il codice del gioco..
+\end_layout
+
+\begin_layout Standard
+Abbiamo scelto 
 \emph on
 JAVA
 \emph default
- per la familiarità che abbiamo con esso, in questo modo è stato più semplice
- fare preliminarmente dei test e avere un quadro generale dello sviluppo.
- Tutto in vista di un futuro sviluppo in 
->>>>>>> origin/master
+ per la familiarità con questo linguaggio di programmazione: in questo modo
+ è stato più semplice fare svariati test in una fase preliminare e riuscire
+ ad avere un quadro generale dello sviluppo, in vista del futuro utilizzo
+ di 
 \series bold
 Quartus II 
 \series default
-di Altera.
+di 
+\emph on
+Altera
+\emph default
+.
 \end_layout
 
 \begin_layout Section
