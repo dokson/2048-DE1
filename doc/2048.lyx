@@ -393,10 +393,12 @@ VHDL
 da zero
 \emph default
 , abbiamo preferito riscriverci dapprima un piccolo prototipo in 
+\series bold
 \emph on
-JAV
+JAVA
+\series default
 \emph default
-A, in quanto uno dei linguaggi che padroneggiamo meglio, in modo da riuscire
+, in quanto uno dei linguaggi che padroneggiamo meglio, in modo da riuscire
  a capire meglio il codice del gioco e di poterci fare innanzitutto dei
  test, prima ancora di iniziare a usare 
 \series bold
@@ -498,6 +500,216 @@ Altera Terasic DE1
 
 \begin_layout Chapter
 Implementazione
+\end_layout
+
+\begin_layout Section
+Modelli di Realizzazione
+\end_layout
+
+\begin_layout Subsection
+Datapath - Control Unit
+\end_layout
+
+\begin_layout Standard
+La realizzazione del progetto è stata suddivisa in diversi moduli VHDL in
+ accordo col 
+\series bold
+modello Datapath - Control Unit
+\series default
+, racchiudendo nel 
+\series bold
+\emph on
+Datapath
+\series default
+\emph default
+ la 
+\series bold
+\emph on
+logica di gioco
+\series default
+\emph default
+ (meccanismo dei movimenti in seguito alle mosse, stato attuale della griglia
+ di gioco, punteggio, ...) e nella 
+\series bold
+\emph on
+Control Unit
+\series default
+\emph default
+ la gestione degli input del gioco, ovvero i comandi relativi alle 4 mosse
+ effettuabili dal giocatore (
+\noun on
+SU, GIU, DESTRA, SINISTRA
+\noun default
+) o il riavvio della partita, ma anche la notifica dello stato della partita
+ (
+\noun on
+GameOver, Vittoria
+\noun default
+) al giocatore.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/Datapath-ControlUnit.png
+	scale 65
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+DataPath & Control-Unit
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Model - View - Controller
+\end_layout
+
+\begin_layout Standard
+Nonostante all'interno del 
+\series bold
+Datapath
+\series default
+ si abbiano tutte le informazioni necessarie alla visualizzazione del gioco
+ mediante la porta VGA, abbiamo scelto di realizzare un componente separato
+ che si occupi solamente di tale scopo: la 
+\series bold
+View
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In questo modo si sfrutta il 
+\emph on
+design pattern
+\emph default
+ 
+\series bold
+MVC (Model View Controller)
+\series default
+, nel quale i tre componenti hanno responsabilità separate, favorendo la
+ modularità del progetto globale e rendendolo più facilmente estendibile
+ e manutenibile.
+ 
+\end_layout
+
+\begin_layout Standard
+Di conseguenza avremo 3 macrocomponenti:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Datapath (detto anche Model)
+\series default
+: conterrà la cosiddetta 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+logica applicativa
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+, ovvero le operazioni che realizzeranno le funzionalità operative dell'applicaz
+ione
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+View: 
+\series default
+sarà utilizzata per mostrare a video i contenuti del modello; dovrà quindi
+ implementare i meccanismi per disegnare 
+\begin_inset Quotes fld
+\end_inset
+
+pixel per pixel
+\begin_inset Quotes frd
+\end_inset
+
+ l'intera griglia di gioco e per la gestione del 
+\emph on
+protocollo di comunicazione 
+\series bold
+\emph default
+VGA
+\series default
+.
+ È un osservatore passivo e non influenza il 
+\emph on
+modello
+\emph default
+ in alcun modo
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Control Unit (detta anche Controller)
+\series default
+: riceverà tutti gli input dell'utente e dovrà gestire i relativi eventi,
+ decidendo cosa debba fare il 
+\emph on
+modello
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/MVC.png
+	scale 65
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pattern Model View Controller
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
