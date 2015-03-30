@@ -51,11 +51,11 @@ ARCHITECTURE behavior of GAME_VIEW IS
 	signal drawCharA 	: STD_LOGIC;
 	signal drawCharC1	: STD_LOGIC;
 	signal drawCharE 	: STD_LOGIC;
-	signal drawCharSep	: STD_LOGIC;
+	signal drawCharSep: STD_LOGIC;
 	signal drawCharG 	: STD_LOGIC;
-	signal drawCharE1 	: STD_LOGIC;
+	signal drawCharE1 : STD_LOGIC;
 	signal drawCharZ 	: STD_LOGIC;
-	signal drawCharZ1 	: STD_LOGIC;
+	signal drawCharZ1 : STD_LOGIC;
 	signal drawCharI 	: STD_LOGIC;
 
 	-- game over
@@ -462,29 +462,27 @@ SEGCTRL: entity work.GAME_7SEGCTRL
 PROCESS
 	
 	-- HSYNC e VSYNC
-	variable h_sync			: STD_LOGIC;
-	variable v_sync			: STD_LOGIC;
+	variable h_sync : STD_LOGIC;
+	variable v_sync : STD_LOGIC;
 
 	-- Enable del video
-	variable horizontal_en	: STD_LOGIC;
-	variable vertical_en	: STD_LOGIC;
-	variable video_en		: STD_LOGIC; 
+	variable horizontal_en, vertical_en, video_en : STD_LOGIC; 
 
 	-- Segnale colore RGB a 12 bit
-	variable colorRGB		: STD_LOGIC_VECTOR(11 downto 0); 
+	variable colorRGB	: STD_LOGIC_VECTOR(11 downto 0); 
 
 	-- Bordi Schermo
-	constant leftBorder		: INTEGER RANGE 0 to 1000 := 15;
-	constant rightBorder	: INTEGER RANGE 0 to 1000 := 625;
-	constant upBorder		: INTEGER RANGE 0 to 500 := 30;
-	constant downBorder		: INTEGER RANGE 0 to 500 := 460;
+	constant leftBorder	: INTEGER RANGE 0 to 40 	:= 15;
+	constant rightBorder	: INTEGER RANGE 0 to 1000 	:= 625;
+	constant upBorder		: INTEGER RANGE 0 to 40 	:= 30;
+	constant downBorder	: INTEGER RANGE 0 to 500 	:= 460;
 
 BEGIN
 
 	WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	
 	-- Reset Horizontal Counter	
-	-- (al valore 799, anzichè 640, per rispettare i tempi di Front Porch)
+	-- (al valore 799, anzichÃ¨ 640, per rispettare i tempi di Front Porch)
 	IF (h_cnt = 799) 
 	THEN
 		h_cnt := 0;
@@ -502,7 +500,7 @@ BEGIN
 	)
 	THEN
 		colorRGB := COLOR_BORDER;
-	-- SE NON È BORDO, È SFONDO
+	-- SE NON Ãˆ BORDO, Ãˆ SFONDO
 	ELSE 
 		colorRGB := COLOR_BG;
 	END IF;
@@ -589,7 +587,7 @@ BEGIN
 		vertical_en := '0';
 	END IF;
 	
-	-- Video Enable è AND tra i due data enable
+	-- Video Enable = AND tra i due data enable
 	video_en := horizontal_en AND vertical_en;
 
 	-- Assegnamento segnali fisici a VGA
@@ -606,8 +604,8 @@ BEGIN
 	blue(1)		<= colorRGB(1) AND video_en;
 	blue(0)		<= colorRGB(0) AND video_en;
 	
-	hsync		<= h_sync;
-	vsync		<= v_sync;
+	hsync	<= h_sync;
+	vsync	<= v_sync;
 	
 END PROCESS;
 END behavior;

@@ -8,20 +8,23 @@ entity GAME is
     port
 	(
 		-- INPUT
-		clk_50Mhz	: IN  STD_LOGIC;
-		PS2_CLK		: IN  STD_LOGIC;
-		PS2_DAT		: IN  STD_LOGIC;
+		clk_50Mhz,
+			-- Tastiera
+		PS2_CLK,
+		PS2_DAT 		: IN  STD_LOGIC;
 
-		-- OUTPUT	
+		-- OUTPUT
+			-- VGA
 		hsync,
-		vsync	: OUT  STD_LOGIC;		
+		vsync			: OUT  STD_LOGIC;		
 		red, 
 		green,
-		blue	: OUT STD_LOGIC_VECTOR(3 downto 0);				
+		blue 			: OUT STD_LOGIC_VECTOR(3 downto 0);	
+			-- 7 Segmenti
 		leds1,
 		leds2,
 		leds3,
-		leds4 	: OUT STD_LOGIC_VECTOR(6 downto 0)
+		leds4 		: OUT STD_LOGIC_VECTOR(6 downto 0)
 	);
 end GAME;
 
@@ -43,7 +46,7 @@ architecture Behavioural of GAME is
 	signal goingReady	: STD_LOGIC;
 	signal isgameover	: STD_LOGIC;
 	signal isvictory	: STD_LOGIC;
-	signal box_values 	: GAME_GRID;
+	signal box_values : GAME_GRID;
 	signal score		: INTEGER RANGE 0 to 9999;
 
 BEGIN

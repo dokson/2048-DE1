@@ -19,23 +19,21 @@ PORT
 		isgameover,
 		isvictory	: OUT STD_LOGIC;
 		box_values	: BUFFER GAME_GRID;
-		score		: BUFFER INTEGER RANGE 0 to 9999
+		score			: BUFFER INTEGER RANGE 0 to 9999
 	);
 end  GAME_DATA;
 
 ARCHITECTURE behavior of GAME_DATA IS
 
 	-- Occorre tenere conto dello stato attuale, corrente e precedente
-	signal	box_values_curr_status, 
-			box_values_next_status,
-			box_values_prev_status : GAME_GRID := (others => (others => 0));
+	signal box_values_curr_status, box_values_next_status, box_values_prev_status : GAME_GRID := (others => (others => 0));
 	
 	signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
 	signal next_score	: INTEGER RANGE 0 to 9999 := 0;
 	signal gameO		: STD_LOGIC := '0';
 	signal youWin		: STD_LOGIC := '0';
-	signal INrandNum	: STD_LOGIC_VECTOR(3 downto 0) 	:= "0000";
-	signal randNum		: UNSIGNED(3 downto 0)			:= "0000";
+	signal inRandNum	: STD_LOGIC_VECTOR(3 downto 0) 	:= "0000";
+	signal randNum		: UNSIGNED(3 downto 0)				:= "0000";
 
 	signal reg_state, reg_next_state : DATA_STATE := randupdate;
 	signal directionPosEdge,directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
@@ -49,7 +47,7 @@ RANDGEN: entity work.GAME_RANDOMGEN
 	port map
 	(
 		clk => clk,
-		random_num => INrandNum
+		random_num => inRandNum
 	);
 
 btn_posedge0 <= (movepadDirection(0) xor btn_edgedet(0)) when (movepadDirection(0) = '0') else '0';
@@ -59,8 +57,8 @@ btn_posedge3 <= (movepadDirection(3) xor btn_edgedet(3)) when (movepadDirection(
 btn_edgedet_next <= movepadDirection;	
 
 process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
-	constant score_initial_status		: INTEGER RANGE 0 to 9999	:= 0;
-	constant box_values_initial_status 	: GAME_GRID := (others => (others => 0));
+	constant score_initial_status	: INTEGER RANGE 0 to 9999	:= 0;
+	constant box_values_initial_status : GAME_GRID := (others => (others => 0));
 	begin
 			if(bootstrap = '1')
 			then
@@ -74,7 +72,7 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 				youWin <= '0';
 			elsif(clk'event and clk = '1')
 			then
-				randNum <= unsigned(INrandNum);
+				randNum <= unsigned(inRandNum);
 				directionPosEdge <= directionPosEdge_next;
 				box_values_curr_status <= box_values_next_status;
 				curr_score <= next_score;
@@ -91,17 +89,12 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 			isvictory <= youWin;
 	end process;
 	
-PROCESS (box_values_curr_status, curr_score, movepadDirection, box_values_next_status, box_values_prev_status,
-		randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg,
-		merge_next, next_score, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0)
+PROCESS (box_values_curr_status, box_values_next_status, box_values_prev_status, curr_score, next_score, 
+			randNum, movepadDirection, reg_next_state, reg_state, gameO, youWin, directionPosEdge, 
+			merge_next, merge_reg, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0)
 
-constant dirUP 		: std_logic_vector(3 downto 0):="1000";
-constant dirDOWN 	: std_logic_vector(3 downto 0):="0001";
-constant dirLEFT 	: std_logic_vector(3 downto 0):="0100";
-constant dirRIGHT 	: std_logic_vector(3 downto 0):="0010";
-
-variable x	: INTEGER RANGE 0 to 8;
-variable y	: INTEGER RANGE 0 to 8;
+	variable x	: INTEGER RANGE 0 to 8;
+	variable y	: INTEGER RANGE 0 to 8;
 
 BEGIN
 	
@@ -1073,8 +1066,8 @@ BEGIN
 	elsif(reg_state = checkupdate)
 	then
 		directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
-		-- Se la mossa non cambia lo stato della board, la mossa non è valida
-		if(compare(box_values_prev_status, box_values_curr_status) = '1')
+		-- Se la mossa non cambia lo stato della board, la mossa non Ã¨ valida
+		if(equals(box_values_prev_status, box_values_curr_status) = '1')
 		then 
 			-- Quindi non fare nulla
 			reg_next_state <= idle;
@@ -1088,7 +1081,7 @@ BEGIN
 	then
 		reg_next_state <= idle;
 		convertCoord(to_integer(randNum), x, y);
-		-- Cascata di else-if necessaria perchè il num random generato potrebbe essere già occpato
+		-- Cascata di else-if necessaria perchÃ¨ il num random generato potrebbe essere giÃ  occpato
 		if(box_values_curr_status(x,y) = 0)
 		then
 			box_values_next_status(x,y) <= 2;

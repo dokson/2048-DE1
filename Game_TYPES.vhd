@@ -3,15 +3,21 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
 PACKAGE GAME_TYPES IS
-	constant GRID_WIDTH 	: INTEGER RANGE 0 to 8 := 4;
-	constant GRID_HEIGHT 	: INTEGER RANGE 0 to 8 := 4; 
+	constant GRID_WIDTH 	: INTEGER RANGE 0 to 7 := 4;
+	constant GRID_HEIGHT : INTEGER RANGE 0 to 7 := 4; 
 	
-	-- game state type
+	-- direzioni
+	constant dirUP 	: std_logic_vector(3 downto 0) := "1000";
+	constant dirDOWN 	: std_logic_vector(3 downto 0) := "0001";
+	constant dirLEFT 	: std_logic_vector(3 downto 0) := "0100";
+	constant dirRIGHT : std_logic_vector(3 downto 0) := "0010";
+	
+	-- Stati di gioco
 	type GAME_STATE is (bootstrap, playing, gameover, victory);
 	
-	-- data type
+	-- Stati interni del Datapath
 	type DATA_STATE is (randupdate, checkupdate, idle, merge1, move1, merge2, move2, merge3, move3);
-	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer range 0 to 3000;
+	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer range 0 to 4000;
 	
 	-- tipi per la grafica
 	subtype RGB_COLOR is std_logic_vector(11 downto 0);
