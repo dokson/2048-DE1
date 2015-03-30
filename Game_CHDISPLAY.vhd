@@ -23,11 +23,11 @@ end Game_CHDISPLAY;
 
 architecture arch of Game_CHDISPLAY is
 	-- Dimensioni fisse di tutti i caratteri
-	constant larghezza 	: integer := 9; 	
-	constant altezza 	: integer := 16;
+	constant larghezza 	: integer range 0 to 10 := 9; 	
+	constant altezza 	: integer range 0 to 20 := 16;
 	-- Coordinate finali del carattere sullo schermo
-	constant MAX_X 		: integer := XPOS + larghezza; -- larghezza
-	constant MAX_Y 		: integer := YPOS + altezza; -- altezza
+	constant MAX_X 		: integer range 0 to 1000 := XPOS + larghezza; -- larghezza
+	constant MAX_Y 		: integer range 0 to 500 := YPOS + altezza; -- altezza
 	
 	-- Segnali per il disegno dei caratteri su schermo
 	signal charAddr : STD_LOGIC_VECTOR(6 downto 0); -- Indirizzo del carattere sulla ROM

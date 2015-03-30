@@ -25,14 +25,14 @@ end GAME_BOX;
 
 architecture box_arch of GAME_BOX is
 	-- Dimensioni fisse di tutti i box
-	constant larghezza 	: integer := 150; 	
-	constant altezza 	: integer := 105;
+	constant larghezza 	: integer range 0 to 300 := 150; 	
+	constant altezza 	: integer range 0 to 200 := 105;
 	-- Coordinate finali del cubo sullo schermo
-	constant MAX_X 		: integer := XPOS + larghezza; -- larghezza
-	constant MAX_Y 		: integer := YPOS + altezza; -- altezza
+	constant MAX_X 		: integer range 0 to 1000 := XPOS + larghezza; -- larghezza
+	constant MAX_Y 		: integer range 0 to 500 := YPOS + altezza; -- altezza
 	-- Coordinate delle cifre sullo schermo
-	constant X_CHAR		: integer := XPOS + larghezza/2;
-	constant Y_CHAR		: integer := YPOS + altezza/2;
+	constant X_CHAR		: integer range 0 to 1000 := XPOS + larghezza/2;
+	constant Y_CHAR		: integer range 0 to 500:= YPOS + altezza/2;
 	 
 	-- Segnali per la scrittura dei numeri a video
 	signal numberToDraw1: character;

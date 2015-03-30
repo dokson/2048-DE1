@@ -474,10 +474,10 @@ PROCESS
 	variable colorRGB		: STD_LOGIC_VECTOR(11 downto 0); 
 
 	-- Bordi Schermo
-	constant leftBorder		: INTEGER := 15;
-	constant rightBorder	: INTEGER := 625;
-	constant upBorder		: INTEGER := 30;
-	constant downBorder		: INTEGER := 460;
+	constant leftBorder		: INTEGER RANGE 0 to 1000 := 15;
+	constant rightBorder	: INTEGER RANGE 0 to 1000 := 625;
+	constant upBorder		: INTEGER RANGE 0 to 500 := 30;
+	constant downBorder		: INTEGER RANGE 0 to 500 := 460;
 
 BEGIN
 

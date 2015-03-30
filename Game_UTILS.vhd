@@ -107,7 +107,7 @@ END FUNCTION checkGameOver;
 --Funz. che stabilisce se la partita sia terminata con la vittoria
 FUNCTION checkVictory(values: GAME_GRID) RETURN std_logic IS
 	variable result			: STD_LOGIC := '0';
-	constant victory_score 	: INTEGER 	:= 2048;
+	constant victory_score 	: INTEGER RANGE 0 to 3000 := 2048;
 BEGIN
 	-- Controlla in tutte le celle se sia stato raggiunto il valore necessario per la vittoria
 	for i in 0 to 3 loop

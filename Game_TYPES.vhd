@@ -3,15 +3,15 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
 PACKAGE GAME_TYPES IS
-	constant GRID_WIDTH 	: INTEGER := 4;
-	constant GRID_HEIGHT 	: INTEGER := 4; 
+	constant GRID_WIDTH 	: INTEGER RANGE 0 to 8 := 4;
+	constant GRID_HEIGHT 	: INTEGER RANGE 0 to 8 := 4; 
 	
 	-- game state type
 	type GAME_STATE is (bootstrap, playing, gameover, victory);
 	
 	-- data type
 	type DATA_STATE is (randupdate, checkupdate, idle, merge1, move1, merge2, move2, merge3, move3);
-	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer;
+	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer range 0 to 3000;
 	
 	-- tipi per la grafica
 	subtype RGB_COLOR is std_logic_vector(11 downto 0);

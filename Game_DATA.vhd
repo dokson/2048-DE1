@@ -59,7 +59,7 @@ btn_posedge3 <= (movepadDirection(3) xor btn_edgedet(3)) when (movepadDirection(
 btn_edgedet_next <= movepadDirection;	
 
 process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
-	constant score_initial_status		: INTEGER 	:= 0;
+	constant score_initial_status		: INTEGER RANGE 0 to 9999	:= 0;
 	constant box_values_initial_status 	: GAME_GRID := (others => (others => 0));
 	begin
 			if(bootstrap = '1')

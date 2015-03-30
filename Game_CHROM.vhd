@@ -19,9 +19,9 @@ architecture arch of GAME_CHROM is
 	-- Dimensione dell'indirizzo 11
 	-- primi 7 bit identificano il carattere
 	-- ultimi 4 bit identificano una delle 16 righe di pixel
-	constant ADDR_WIDTH: integer:=11;
+	constant ADDR_WIDTH: integer range 0 to 20:=11;
 	-- Dimensione della riga di pixel
-	constant DATA_WIDTH: integer:=8;
+	constant DATA_WIDTH: integer range 0 to 10:=8;
 	
 	-- Indirizzo
 	signal addr_reg: std_logic_vector(ADDR_WIDTH-1 downto 0);
