@@ -8,12 +8,12 @@ entity GAME_GRID_VIEW is
 	(
 		-- INPUT
 		clk			: IN STD_LOGIC;
-		pixel_x 		: IN INTEGER RANGE 0 to 1000;
-		pixel_y 		: IN INTEGER RANGE 0 to 500;	
+		pixel_x 	: IN INTEGER RANGE 0 to 1000;
+		pixel_y 	: IN INTEGER RANGE 0 to 500;	
 		box_values	: IN GAME_GRID;
 		
 		-- OUTPUT
-		color			: OUT STD_LOGIC_VECTOR(11 downto 0); -- colore da mandare in VGA
+		color		: OUT STD_LOGIC_VECTOR(11 downto 0); -- colore da mandare in VGA
 		drawGrid 	: OUT STD_LOGIC := '0' 	-- disegna la Grid quando = 1
 	);
 end GAME_GRID_VIEW;
@@ -25,13 +25,13 @@ ARCHITECTURE grid_arch of GAME_GRID_VIEW IS
 	constant YfirstRow 		: integer := 32;
  
 	constant XsecondColumn 	: integer := 168;
-	constant YsecondRow 		: integer := 139;
+	constant YsecondRow 	: integer := 139;
 	 
 	constant XthirdColumn 	: integer := 320;
 	constant YthirdRow 		: integer := 246;
 	 
 	constant XfourthColumn 	: integer := 472;
-	constant YfourthRow 		: integer := 353;
+	constant YfourthRow 	: integer := 353;
 
 	-- Segnali per il disegno dei box e il relativo colore
 	signal drawbox1	: STD_LOGIC;
@@ -338,7 +338,7 @@ BOX16: entity work.GAME_BOX
 		--- DISEGNO DI OGNI BOX
 		IF(drawbox1 = '1')
 		THEN
-			color <= color1; 	
+			color <= color1;
 		END IF;	
 		IF(drawbox2 = '1')
 		THEN
@@ -408,7 +408,7 @@ BOX16: entity work.GAME_BOX
 			drawbox1 = '1' 	or drawbox2 = '1' 	or drawbox3='1' 	or drawbox4 = '1' 	or
 			drawbox5 = '1' 	or drawbox6 = '1' 	or drawbox7='1' 	or drawbox8 = '1' 	or
 			drawbox9 = '1' 	or drawbox10 = '1' 	or drawbox11='1' 	or drawbox12 = '1' 	or
-			drawbox13 = '1' 	or drawbox14 = '1' 	or drawbox15='1' 	or drawbox16 = '1'
+			drawbox13 = '1' or drawbox14 = '1' 	or drawbox15='1' 	or drawbox16 = '1'
 		)
 	else
 		'0';

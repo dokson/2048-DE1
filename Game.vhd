@@ -14,107 +14,126 @@ entity GAME is
 
 		-- OUTPUT	
 		hsync,
-		vsync		: OUT  STD_LOGIC;		
+		vsync	: OUT  STD_LOGIC;		
 		red, 
 		green,
-		blue		: OUT STD_LOGIC_VECTOR(3 downto 0);				
-		leds1 	: OUT STD_LOGIC_VECTOR(6 downto 0); 
-		leds2 	: OUT STD_LOGIC_VECTOR(6 downto 0);
-		leds3 	: OUT STD_LOGIC_VECTOR(6 downto 0); 
+		blue	: OUT STD_LOGIC_VECTOR(3 downto 0);				
+		leds1,
+		leds2,
+		leds3,
 		leds4 	: OUT STD_LOGIC_VECTOR(6 downto 0)
 	);
 end GAME;
 
-architecture Behavioral of GAME is
+architecture Behavioural of GAME is
 
+	-- Output Clock Generator
 	signal clock_25Mhz: STD_LOGIC;
-	signal keyCode: STD_LOGIC_VECTOR(7 downto 0);			
-	signal goingReady: STD_LOGIC;
+	
+	-- Output Keyboard
+	signal keyCode: STD_LOGIC_VECTOR(7 downto 0);
 
-	signal boot: STD_LOGIC;
+	-- Output Controller
+	signal boot	: STD_LOGIC;
+	signal won 	: STD_LOGIC;
+	signal lost	: STD_LOGIC;
+	signal movepadDirection	: STD_LOGIC_VECTOR(3 downto 0);
 	
-	signal isgameover: STD_LOGIC;
-	signal isvictory: STD_LOGIC;
-	signal box_values : GAME_GRID;
-	signal score: INTEGER RANGE 0 to 9999;
-	signal movepadDirection: STD_LOGIC_VECTOR(3 downto 0);
-	
-	signal won: STD_LOGIC;
-	signal lost: STD_LOGIC;
+	-- Output Datapath
+	signal goingReady	: STD_LOGIC;
+	signal isgameover	: STD_LOGIC;
+	signal isvictory	: STD_LOGIC;
+	signal box_values 	: GAME_GRID;
+	signal score		: INTEGER RANGE 0 to 9999;
 
 BEGIN
 
 ClockDivider: entity work.GAME_CLKGENERATOR
 	port map
 	(
+		-- INPUT
 		clock			=> clk_50Mhz,
-		clock_mezzi => clock_25Mhz
+		
+		-- OUTPUT
+		clock_mezzi 	=> clock_25Mhz
 	);
 
 Keyboard: entity work.GAME_KEYBOARD
 	port map
 	(
+		-- INPUT
 		clk				=> clock_25Mhz,
 		keyboardClock	=> PS2_CLK,
-		keyboardData	=> PS2_DAT,	
+		keyboardData	=> PS2_DAT,
+		
+		-- OUTPUT	
 		keyCode			=> keyCode		
 	);
 
 ControlUnit: entity work.GAME_CONTROL
 	port map
 	(
+		-- INPUT
 		clk				=> clock_25Mhz,
 		
+			-- from Keyboard
 		keyboardData	=> keyCode,	
-		goingReady		=> goingReady, 
 		
+			-- from Datapath
+		goingReady	=> goingReady, 
 		isgameover	=> isgameover,
 		isvictory	=> isvictory,
 
+		-- OUTPUT	
 		boot	=> boot,
-		
-		won	=>	won,
+		won		=> won,
 		lost	=> lost,
-		
 		movepadDirection => movepadDirection
 	);
 
 Datapath: entity work.GAME_DATA
 	port map
 	(
+		-- INPUT
 		clk			=> clock_25Mhz,
-		bootstrap	=> boot,
 		
-		movepadDirection => movepadDirection,
+		-- from ControlUnit
+		bootstrap			=> boot,
+		movepadDirection 	=> movepadDirection,
 		
+		-- OUTPUT
 		goingReady	=> goingReady,
 		isgameover	=> isgameover,
 		isvictory 	=> isvictory,
 		box_values 	=> box_values,
-		score			=> score
+		score		=> score
 	);
 
 View: entity work.GAME_VIEW
 	port map
 	(
+		-- INPUT
 		clk			=> clock_25Mhz,
 		
+			-- from Datapath
 		box_values 	=> box_values,
-		score			=> score,
+		score		=> score,
 
+			-- from ControlUnit
 		bootstrap	=> boot,
-		lost			=> lost,
+		lost		=> lost,
 		won			=> won,
 		
-		hsync			=> hsync,		
-		vsync			=> vsync,		
+		-- OUTPUT
+		hsync		=> hsync,		
+		vsync		=> vsync,		
 		red			=> red,	
-		green			=> green,		
-		blue			=> blue,		
+		green		=> green,		
+		blue		=> blue,		
 				
-		leds1			=> leds1,		
+		leds1		=> leds1,		
 		leds2 		=> leds2,
 		leds3 		=> leds3, 
 		leds4 		=> leds4 
 	);
-end Behavioral;
+end Behavioural;

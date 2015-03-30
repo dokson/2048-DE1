@@ -15,32 +15,33 @@ PORT
 		movepadDirection	: IN STD_LOGIC_VECTOR(3 downto 0);
 
 		-- OUTPUT
-		goingReady	: OUT STD_LOGIC;
-		isgameover	: OUT STD_LOGIC;
+		goingReady,
+		isgameover,
 		isvictory	: OUT STD_LOGIC;
 		box_values	: BUFFER GAME_GRID;
-		score			: BUFFER INTEGER RANGE 0 to 9999
+		score		: BUFFER INTEGER RANGE 0 to 9999
 	);
 end  GAME_DATA;
 
 ARCHITECTURE behavior of GAME_DATA IS
 
-signal box_values_curr_status : GAME_GRID := (others => (others => 0));
-signal box_values_next_status : GAME_GRID := (others => (others => 0));
-signal box_values_prev_status : GAME_GRID := (others => (others => 0));
-signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
-signal next_score	: INTEGER RANGE 0 to 9999 := 0;
-signal gameO		: STD_LOGIC := '0';
-signal youWin		: STD_LOGIC := '0';
-signal INrandNum	: STD_LOGIC_VECTOR(3 downto 0) := "0000";
-signal randNum		: UNSIGNED(3 downto 0)			 := "0000";
+	-- Occorre tenere conto dello stato attuale, corrente e precedente
+	signal	box_values_curr_status, 
+			box_values_next_status,
+			box_values_prev_status : GAME_GRID := (others => (others => 0));
+	
+	signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
+	signal next_score	: INTEGER RANGE 0 to 9999 := 0;
+	signal gameO		: STD_LOGIC := '0';
+	signal youWin		: STD_LOGIC := '0';
+	signal INrandNum	: STD_LOGIC_VECTOR(3 downto 0) 	:= "0000";
+	signal randNum		: UNSIGNED(3 downto 0)			:= "0000";
 
-signal reg_state, reg_next_state : DATA_STATE := randupdate;
-signal directionPosEdge : STD_LOGIC_VECTOR(3 downto 0);
-signal directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
-signal merge_reg, merge_next : STD_LOGIC_VECTOR(3 downto 0);
-signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
-signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal reg_state, reg_next_state : DATA_STATE := randupdate;
+	signal directionPosEdge,directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal merge_reg, merge_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
+	signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
 
 BEGIN
 
@@ -52,7 +53,7 @@ RANDGEN: entity work.GAME_RANDOMGEN
 	);
 
 btn_posedge0 <= (movepadDirection(0) xor btn_edgedet(0)) when (movepadDirection(0) = '0') else '0';
-btn_posedge1 <= (movepadDirection(1) xor btn_edgedet(1)) when (movepadDirection(1) = '0')  else '0';
+btn_posedge1 <= (movepadDirection(1) xor btn_edgedet(1)) when (movepadDirection(1) = '0') else '0';
 btn_posedge2 <= (movepadDirection(2) xor btn_edgedet(2)) when (movepadDirection(2) = '0') else '0';
 btn_posedge3 <= (movepadDirection(3) xor btn_edgedet(3)) when (movepadDirection(3) = '0') else '0';
 btn_edgedet_next <= movepadDirection;	
@@ -94,10 +95,10 @@ PROCESS (box_values_curr_status, curr_score, movepadDirection, box_values_next_s
 		randNum, reg_next_state, reg_state, gameO, youWin, directionPosEdge, merge_reg,
 		merge_next, next_score, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0)
 
-constant dirUP 	: std_logic_vector(3 downto 0):="1000";
+constant dirUP 		: std_logic_vector(3 downto 0):="1000";
 constant dirDOWN 	: std_logic_vector(3 downto 0):="0001";
 constant dirLEFT 	: std_logic_vector(3 downto 0):="0100";
-constant dirRIGHT : std_logic_vector(3 downto 0):="0010";
+constant dirRIGHT 	: std_logic_vector(3 downto 0):="0010";
 
 variable x	: INTEGER RANGE 0 to 8;
 variable y	: INTEGER RANGE 0 to 8;
@@ -1072,7 +1073,7 @@ BEGIN
 	elsif(reg_state = checkupdate)
 	then
 		directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
-		-- Se la mossa non cambia lo stato della board, la mossa non Ã¨ valida
+		-- Se la mossa non cambia lo stato della board, la mossa non è valida
 		if(compare(box_values_prev_status, box_values_curr_status) = '1')
 		then 
 			-- Quindi non fare nulla
@@ -1085,9 +1086,9 @@ BEGIN
 	-- Inserimento casuale di una nuova casella 2 
 	elsif(reg_state = randupdate)
 	then
-		directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 		reg_next_state <= idle;
 		convertCoord(to_integer(randNum), x, y);
+		-- Cascata di else-if necessaria perchè il num random generato potrebbe essere già occpato
 		if(box_values_curr_status(x,y) = 0)
 		then
 			box_values_next_status(x,y) <= 2;
