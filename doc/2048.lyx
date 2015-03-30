@@ -370,9 +370,9 @@ Realizzazione di un prototipo
 
 \begin_layout Standard
 Il gioco originale è stato scritto in 
-\emph on
+\series bold
 JavaScript
-\emph default
+\series default
 
 \begin_inset Foot
 status collapsed
@@ -394,10 +394,8 @@ da zero
 \emph default
 , abbiamo preferito riscriverci dapprima un piccolo prototipo in 
 \series bold
-\emph on
 JAVA
 \series default
-\emph default
  in modo da riuscire a capire meglio il codice del gioco..
 \end_layout
 
@@ -418,6 +416,76 @@ di
 Altera
 \emph default
 .
+\end_layout
+
+\begin_layout Section
+VHDL
+\end_layout
+
+\begin_layout Standard
+Il linguaggio scelto per descrivere l’architettura implementata è il 
+\series bold
+VHDL-93
+\series default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://it.wikipedia.org/wiki/VHDL
+\end_layout
+
+\end_inset
+
+, per l’ampio utilizzo che se ne fa praticamente in tutta Europa per la
+ progettazione hardware che lo porta ad essere uno standard di fatto in
+ materia.
+ 
+\end_layout
+
+\begin_layout Standard
+Il 
+\series bold
+VHDL
+\series default
+ è un linguaggio per la descrizione dell’hardware (
+\emph on
+Hardware Description Language
+\emph default
+), che può essere utilizzato per la documentazione, la simulazione e la
+ sintesi di sistemi digitali.
+ Inizialmente, nei primi anni ’80, lo sviluppo del VHDL è stato supportato
+ dal dipartimento della difesa statunitense, nell’ambito di un progetto
+ denominato 
+\series bold
+VHSIC
+\series default
+ (
+\emph on
+Very High Speed Integrated Circuits
+\emph default
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Il linguaggio è nato quindi con lo scopo di 
+\series bold
+fornire una descrizione non ambigua di un sistema digitale
+\series default
+, che potesse essere interpretata univocamente dai vari progettisti impegnati
+ nello sviluppo del sistema stesso.
+ Una delle caratteristiche richieste al VHDL è la possibilità di 
+\emph on
+simulare il sistema descritto
+\emph default
+, sia a livello funzionale sia 
+\bar under
+tenendo in considerazione tutte le non idealità che si hanno in un circuito
+ reale
+\bar default
+.
+ 
 \end_layout
 
 \begin_layout Section
@@ -511,6 +579,42 @@ Altera Terasic DE1
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Quartus II
+\end_layout
+
+\begin_layout Standard
+Per poter programmare il progetto sulla scheda, è necessario utilizzare
+ 
+\series bold
+Quartus II
+\series default
+, un software di 
+\series bold
+Altera 
+\series default
+che, oltre a permettere di interfacciare computer e DE1, è un comodo ambiente
+ di sviluppo con cui generare il progetto stesso.
+ 
+\end_layout
+
+\begin_layout Standard
+La versione che abbiamo scelto di utilizzare per realizzare questo progetto
+ è la 
+\series bold
+9.1 Web Edition
+\series default
+, con licenza gratuita.
+ Quartus permette sia di comporre una logica unendo porte logiche in uno
+ schematico, sia di sintetizzarne di più complesse, tramite descrizione
+ 
+\emph on
+Verilog o VHDL
+\emph default
+, o ad un livello di astrazione più alto, ad esempio con una macchina a
+ stati finiti.
 \end_layout
 
 \begin_layout Chapter
@@ -725,6 +829,370 @@ Pattern Model View Controller
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Gestione dell'I/O
+\end_layout
+
+\begin_layout Standard
+Come si può vedere in 
+\noun on
+Figura 3.2
+\noun default
+, oltre ai tre sopracitati componenti che descrivono 
+\emph on
+Model, View e Controller
+\emph default
+, il nostro progetto dovrà comprendere inoltre anche i due moduli per la
+ gestione dell'
+\emph on
+Input
+\emph default
+ da 
+\series bold
+tastiera
+\series default
+ e dell'
+\emph on
+Output
+\emph default
+ su 
+\series bold
+monitor
+\series default
+.
+\end_layout
+
+\begin_layout Subsection
+Interfaccia PS/2
+\end_layout
+
+\begin_layout Standard
+In questa sezione ci occuperemo di descrivere nel dettaglio come abbiamo
+ realizzato il componente ausiliario interfacciato direttamente con la porta
+ 
+\series bold
+PS/2
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/ps2_interface.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Interfaccia PS/2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Protocollo
+\end_layout
+
+\begin_layout Standard
+Il 
+\series bold
+PS/2
+\series default
+ è un protocollo 
+\emph on
+seriale, sincrono e bidirezionale
+\emph default
+ sviluppato dall’IBM e ampiamente usato al giorno d’oggi per far comunicare
+ PC con tastiere e mouse.
+\end_layout
+
+\begin_layout Standard
+La scheda 
+\series bold
+DE1
+\series default
+ ha in dotazione una porta PS/2 a 6-pin 
+\noun on
+Mini-DIN
+\noun default
+; per le porte PS/2 esiste anche un altro connettore, il 5-pin 
+\noun on
+Mini-DIN
+\noun default
+ (
+\emph on
+AT/XT
+\emph default
+): i due connettori sono (dal punto di vista elettrico) perfettamente compatibil
+i (il protocollo è sempre il PS/2, l’unica differenza sta nella disposizione
+ dei pin), per cui nel caso si possedesse una tastiera con connettore a
+ 5-pin è sufficiente l’uso di un adattatore.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/ATXT-PS2.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Differenze AT/XT - PS/2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Come si può capire dalle figure precedenti, tutta la comunicazione si basa
+ su un 
+\emph on
+bus formato da 
+\series bold
+due
+\series default
+ linee bidirezionali
+\emph default
+: la linea di 
+\series bold
+clock
+\series default
+ e la linea 
+\series bold
+dati
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Il bus è in uno stato di attesa quando le due linee di clock e di dati sono
+ in uno stato logico alto: questo è l’unico stato nel quale è permesso alla
+ tastiera trasmettere dati.
+ L’host (che nel nostro caso è appunto la board) ha sempre il controllo
+ finale sul bus e può in ogni momento inibire la comunicazione mettendo
+ a massa la linea di clock; alla tastiera invece (
+\emph on
+e solo a lei
+\emph default
+) spetta il compito di 
+\series bold
+generare il clock
+\series default
+.
+\end_layout
+
+\begin_layout Subsubsection
+La Tastiera
+\end_layout
+
+\begin_layout Standard
+La tastiera consiste in una 
+\emph on
+matrice di tasti
+\emph default
+ ciascuno dei quali viene monitorato da un processore interno alla tastiera.
+ 
+\end_layout
+
+\begin_layout Standard
+Ogni tastiera possiede un processore specifico (diverso dagli altri in base
+ alle caratteristiche della tastiera), ma tutti quanti i processori fanno
+ sostanzialmente lo stesso lavoro: controllano quale tasto viene premuto/rilasci
+ato e spediscono all’host il dato appropriato; all’occorrenza si occupano
+ di bufferizzare i dati se la linea di comunicazione risulta occupata.
+\end_layout
+
+\begin_layout Standard
+Il 
+\emph on
+
+\begin_inset Quotes fld
+\end_inset
+
+pacchetto di informazioni
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ trasmesso dalla tastiera all'host viene chiamato 
+\series bold
+Scan Code
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Scan code
+\end_layout
+
+\begin_layout Standard
+Esistono due tipi di 
+\emph on
+scan codes
+\emph default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Make codes
+\series default
+: vengono spediti quando un tasto è premuto o viene tenuto premuto
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Break codes
+\series default
+: utilizzati quando un tasto è rilasciato.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ogni tasto è associato ad un unica coppia 
+\begin_inset Quotes fld
+\end_inset
+
+make code / break code
+\series default
+
+\begin_inset Quotes frd
+\end_inset
+
+, in tal modo l’host può determinare esattamente cos'è successo e a che
+ tasto semplicemente guardando il singolo scan code.
+ Il set di make e break code per ogni tasto forma quello che viene chiamato
+ 
+\series bold
+scan code set
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/keyboard.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Scan code set
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Comunicazione
+\end_layout
+
+\begin_layout Standard
+Come visto precedentemente, i due pins della scheda per la comunicazione
+ sono 
+\series bold
+PS2_CLK
+\series default
+ (il clock della periferica collegata) e 
+\series bold
+PS2_DAT
+\series default
+ (attraverso il quale arrivano le informazioni).
+ 
+\end_layout
+
+\begin_layout Standard
+La comunicazione avviene in modo 
+\emph on
+seriale
+\emph default
+, infatti PS2_DAT permette la trasmissione di un singolo bit alla volta,
+ per questo motivo occorre predisporre un apposito modulo che gestisca il
+ flusso di bit in ingresso, dando in uscita pacchetti contenenti le informazioni
+ in modo ordinato.
+ 
+\end_layout
+
+\begin_layout Standard
+Il componente da noi creato, che si occupa di ricostruire lo 
+\series bold
+Scan Code
+\series default
+ contiene un 
+\bar under
+contatore da 0 a 10
+\bar default
+: ogni singolo messaggio inviato dalla tastiera conterrà la codifica, un
+ bit di parità ed un bit di fine messaggio: la nostra interfaccia 
+\emph on
+dovrà quindi leggere i 10 bit e costruire il dato a 8 bit desiderato
+\emph default
+.
+ 
 \end_layout
 
 \end_body
