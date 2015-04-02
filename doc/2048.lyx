@@ -861,11 +861,15 @@ Output
 \series bold
 monitor
 \series default
+ e sui quattro 
+\series bold
+display 7 segmenti
+\series default
 .
 \end_layout
 
 \begin_layout Subsection
-Interfaccia PS/2
+Interfaccia PS/2 (INPUT)
 \end_layout
 
 \begin_layout Standard
@@ -875,7 +879,7 @@ In questa sezione ci occuperemo di descrivere nel dettaglio come abbiamo
 \series bold
 PS/2
 \series default
-.
+, per la gestione dell'input da tastiera.
 \end_layout
 
 \begin_layout Standard
@@ -960,7 +964,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename img/ATXT-PS2.png
-	scale 70
+	scale 50
 
 \end_inset
 
@@ -1088,8 +1092,19 @@ Make codes
 \series bold
 Break codes
 \series default
-: utilizzati quando un tasto è rilasciato.
- 
+: utilizzati quando un tasto è rilasciato, nel nostro caso è sempre 
+\begin_inset Quotes fld
+\end_inset
+
+
+\series bold
+F0
+\series default
+
+\begin_inset Quotes frd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1107,8 +1122,11 @@ make code / break code
 
 , in tal modo l’host può determinare esattamente cos'è successo e a che
  tasto semplicemente guardando il singolo scan code.
- Il set di make e break code per ogni tasto forma quello che viene chiamato
- 
+ Il set di 
+\emph on
+make e break code
+\emph default
+ per ogni tasto forma quello che viene chiamato 
 \series bold
 scan code set
 \series default
@@ -1117,6 +1135,7 @@ scan code set
 \end_layout
 
 \begin_layout Standard
+\align left
 \begin_inset Float figure
 placement H
 wide false
@@ -1124,9 +1143,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
+\noindent
+\align left
 \begin_inset Graphics
 	filename img/keyboard.png
+	scale 75
 
 \end_inset
 
@@ -1174,7 +1195,6 @@ seriale
  per questo motivo occorre predisporre un apposito modulo che gestisca il
  flusso di bit in ingresso, dando in uscita pacchetti contenenti le informazioni
  in modo ordinato.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1186,13 +1206,447 @@ Scan Code
 \bar under
 contatore da 0 a 10
 \bar default
-: ogni singolo messaggio inviato dalla tastiera conterrà la codifica, un
- bit di parità ed un bit di fine messaggio: la nostra interfaccia 
+: ogni singolo messaggio inviato dalla tastiera conterrà:
+\end_layout
+
+\begin_layout Itemize
+un 
 \emph on
-dovrà quindi leggere i 10 bit e costruire il dato a 8 bit desiderato
+bit di start
+\emph default
+, posto sempre a 0
+\end_layout
+
+\begin_layout Itemize
+la 
+\emph on
+codifica del dato
+\emph default
+, ordinati dal meno significativo
+\end_layout
+
+\begin_layout Itemize
+un
+\emph on
+ bit di parità
+\end_layout
+
+\begin_layout Itemize
+un 
+\emph on
+bit di fine messaggio
+\emph default
+, posto sempre a 1
+\end_layout
+
+\begin_layout Standard
+La nostra interfaccia dovrà quindi leggere gli 
+\emph on
+11 bit e costruire il dato a 8 bit desiderato
 \emph default
 .
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/keyboard_timings.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comunicazione Tastiera -> Board 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Il Componente 
+\begin_inset Quotes fld
+\end_inset
+
+Tastiera
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nel nostro progetto abbiamo deciso di realizzare un singolo componente che
+ comunichi direttamente con la 
+\emph on
+porta PS/2
+\emph default
+, lasciando alla 
+\series bold
+Control Unit 
+\series default
+solo il compito di riconoscere gli 
+\series bold
+scan codes 
+\series default
+ed agire di conseguenza.
+ In particolare, il modulo emette la codifica ricevuta serialmente dalla
+ tastiera fino alla ricezione del 
+\series bold
+break code
+\series default
+, continuando ad emettere quindi 
+\begin_inset Quotes fld
+\end_inset
+
+
+\series bold
+F0
+\series default
+
+\begin_inset Quotes frd
+\end_inset
+
+ fino alla ricezione di un nuovo codice.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Interfaccia VGA (OUTPUT)
+\end_layout
+
+\begin_layout Standard
+In questa sezione ci occuperemo di descrivere nel dettaglio come abbiamo
+ realizzato il componente ausiliario interfacciato direttamente con la porta
+ 
+\series bold
+VGA
+\series default
+, per la gestione dell'output a video.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/vga_interface.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Interfaccia VGA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Protocollo
+\end_layout
+
+\begin_layout Standard
+Il 
+\series bold
+VGA
+\series default
+ (
+\emph on
+Video Graphics Array
+\emph default
+) è uno standard analogico introdotto da IBM alla fine degli anni '80, comunemen
+te impiegato nella visualizzazione di immagini a display da parte di computers.
+ 
+\end_layout
+
+\begin_layout Standard
+Concepito inizialmente come singolo chip allo scopo di sostituire altri
+ standard e hardware preesistenti sul mercato, con il passare del tempo
+ si è imposto come standard universalmente riconosciuto per il pilotaggio
+ di display, tanto da essere impiegato anche attualmente: le schede grafiche
+ presenti sul mercato devono essere almeno in grado di gestire lo schermo
+ con lo 
+\emph on
+standard VGA
+\emph default
+, prima che venga effettuato il boot del sistema operativo e quindi caricato
+ il driver specifico di ogni scheda.
+\end_layout
+
+\begin_layout Standard
+La connessione VGA standard termina con uno spinotto maschio a 15-pin, il
+ cui pinout è mostrato in 
+\noun on
+Figura 3.8
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/vga_pinout.jpg
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pinout VGA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Come si evince dalla figura precedente, lo standard video VGA prevede 
+\series bold
+5 segnali attivi
+\series default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color red
+Rosso (
+\emph on
+Red
+\emph default
+)
+\series default
+\color inherit
+: dedicato alla generazione del colore rosso sullo schermo (
+\emph on
+pin 1
+\emph default
+)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color green
+Verde (
+\emph on
+Green
+\emph default
+)
+\series default
+\color inherit
+: dedicato alla generazione del colore verde sullo schermo (
+\emph on
+pin 2
+\emph default
+)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Blu (
+\emph on
+Blue
+\emph default
+)
+\series default
+\color inherit
+: dedicato alla generazione del colore blu sullo schermo (
+\emph on
+pin 3
+\emph default
+)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color magenta
+Sincronismo orizzontale (
+\emph on
+H Sync
+\emph default
+)
+\series default
+\color inherit
+: usato per la sincronizzazione del video (
+\emph on
+pin 13
+\emph default
+)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color magenta
+Sincronismo verticale (
+\emph on
+V Sync
+\emph default
+)
+\series default
+\color inherit
+: usato per la sincronizzazione del video (
+\emph on
+pin 14
+\emph default
+)
+\end_layout
+
+\begin_layout Standard
+Lo schermo viene diviso in pixel ed il colore di ciascuno di essi è determinato
+ dal valore di tensione del segnale 
+\series bold
+RGB
+\series default
+.
+ Se un certo 
+\emph on
+
+\begin_inset Quotes fld
+\end_inset
+
+canale colore
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ viene pilotato a valore minimo di tensione, si ha che tale colore non viene
+ visualizzato a schermo in corrispondenza di quel particolare pixel (
+\emph on
+colore spento
+\emph default
+), mentre se lo stesso 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+canale colore
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ viene pilotato a 
+\bar under
+tensione massima
+\bar default
+, si ha la 
+\bar under
+massima brillantezza possibile
+\bar default
+ di quel determinato colore per quel particolare pixel.
+ 
+\end_layout
+
+\begin_layout Standard
+Solitamente viene assegnato a ciascuno dei segnali colore (
+\series bold
+RGB
+\series default
+) un certo numero di bit, il cui valore, attraverso un semplice 
+\emph on
+convertitore digitale analogico resistivo
+\emph default
+ (
+\noun on
+Figura 3.7
+\noun default
+), ne determina il livello di tensione che andrà poi a colorare i pixel
+ a schermo.
+ Nel nostro caso si utilizzano 
+\bar under
+4 bit per colore
+\bar default
+, per un totale di 
+\bar under
+12 bit di codifica
+\bar default
+ per un singolo 
+\emph on
+colore RGB
+\emph default
+: questo rende possibili 
+\series bold
+4096
+\series default
+ 
+\bar under
+tonalità di colori
+\end_layout
+
+\begin_layout Standard
+I segnali di 
+\series bold
+sincronismo orizzontale e verticale
+\series default
+ sono segnali interamente digitali, compatibili con i livelli della 
+\emph on
+logica TTL
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+VGA Mode
 \end_layout
 
 \end_body
