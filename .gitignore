@@ -17,7 +17,6 @@
 *.cmp
 *.eqn
 *.html
-*.jpg
 *.bak
 *.qar
 *.sopc_builder
