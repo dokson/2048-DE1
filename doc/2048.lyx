@@ -1778,6 +1778,7 @@ logica TTL.
 VGA Mode
 \end_layout
 
+<<<<<<< HEAD
 \begin_layout Standard
 Per operare in 
 \emph on
@@ -2333,10 +2334,129 @@ front porch
 h_cnt
 \emph default
  il valore della colonna attuale.
+=======
+\begin_layout Section
+Implementazione del modello
+\end_layout
+
+\begin_layout Standard
+Come già detto precedentemente la realizzazione del componente Model del
+ design pattern MVC sarà un punto critico per la realizzazione di questo
+ progetto.
+ Per questo motivo abbiamo deciso di affrontare questo argomento prima della
+ realizzazione delle altre parti.
+\end_layout
+
+\begin_layout Subsection
+Struttura del modello
+\end_layout
+
+\begin_layout Standard
+Analizzando il gioco abbiamo notato che per ogni singolo instante della
+ partita avremo la necessità di rappresentare lo stato delle 16 caselle
+ (4x4) che compongono la 
+\begin_inset Quotes fld
+\end_inset
+
+scacchiera
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Ogni singola cella è rappresentata quindi da un valore numerico compreso
+ tra 0 e 2048.
+ Quindi si è realizzato che per poter mantenere lo stato attuale del gioco
+ sarebbe necessario utilizzare una matrice 4x4 di interi, ognuno rappresentante,
+ appunto, il valore attuale della propria cella.
+ Quindi ripensando un attimo al gioco viene in mente subito che all'istante
+ iniziale il gioco avrà uno stato composto da 16 celle con valore 0, quest
+ ultimo non verrà mostrato a livello di interfaccia grafica perchè rappresenterà
+ semplicemente la cella vuota.
+ Inoltre, l'altro stato notevole sarà quello dove almeno una delle n celle
+ avrà assunto il valore di 2048, questo rappresentarà lo stato di terminazione
+ corrispondente alla vittoria dell'utente.
+\end_layout
+
+\begin_layout Standard
+Ulteriormente allo stato corrente sarà necessario mantenere informazioni
+ riguardo il punteggio attuale, rappresentabile con un intero.
+ Quindi riassumendo serviranno due informazioni per ogni istante di gioco:
+ 
+\end_layout
+
+\begin_layout Itemize
+matrice 4x4 con i valori delle celle;
+\end_layout
+
+\begin_layout Itemize
+punteggio attuale conseguito dall'utente;
+\end_layout
+
+\begin_layout Subsection
+Azioni sul modello
+\end_layout
+
+\begin_layout Standard
+Avendo stabilito quale sia la rappresentazione dello stato, ora, serve comprende
+re quali sono le azioni che il nostro modello deve poter compiere per poter
+ modificare lo stato in risposta all'input inviato dall'utente.
+ Naturalmente il gioco prevede i movimenti nelle 4 direzioni, nella struttura
+ del gioco originali questi movimenti comportano principalmente due conseguenze:
+\end_layout
+
+\begin_layout Enumerate
+Le celle vengono traslate dalla propria posizione iniziale verso la cella
+ massima libera raggiungibile nella direzione d'ingresso.
+ In altre parole, supponiamo che l'utente abbia selezionato la direzione
+ destra: il gioco deve controllare per ogni n-esima cella se la propria
+ cella adiacente (verso destra) sia libera, in caso positivo essa dovrà
+ 
+\begin_inset Quotes fld
+\end_inset
+
+spostarsi
+\begin_inset Quotes frd
+\end_inset
+
+ nella direzione specificata.
+ 
+\end_layout
+
+\begin_layout Enumerate
+L'operazione di movimento è quindi necessaria, ma non sufficiente per comprender
+e il funzionamento di 2048.
+ L'altra azione quindi è il 
+\series bold
+merge
+\series default
+, ovvero 
+\begin_inset Quotes fld
+\end_inset
+
+l'unione
+\begin_inset Quotes frd
+\end_inset
+
+ di due caselle.
+ Anche il merge avviene in base alla direzione specificata dall'utente,
+ in questo caso però se la cella nella direzione prescritta ha lo stesso
+ valore della cella in analisi, allora il valore della cella verso la quale
+ si fa il merge assumerà come nuovo valore la somma dei due valori.
+\end_layout
+
+\begin_layout Standard
+Infine la meccanica di gioco prevede che conseguentemente ad ogni spostamento
+ o merge venga, se libera almeno una casella, inserito un valore 
+\series bold
+2 
+\series default
+in posizione casuale.
+>>>>>>> origin/master
  
 \end_layout
 
 \begin_layout Standard
+<<<<<<< HEAD
 In maniera analoga avviene per quanto riguarda la sincronia verticale, in
  particolare 
 \emph on
@@ -2588,5 +2708,13 @@ END IF;
 video_en := horizontal_en AND vertical_en;
 \end_layout
 
+=======
+Quindi supponendo si dovranno modificare i valori degli interi della matrice
+ 4x4 in base alle azioni intraprese dall'utente, questo farà sì che l'evoluzione
+ del gioco sia costantemente mantenuta.
+ 
+\end_layout
+
+>>>>>>> origin/master
 \end_body
 \end_document
