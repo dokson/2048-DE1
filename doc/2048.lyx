@@ -1266,7 +1266,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Comunicazione Tastiera -> Board 
+Comunicazione Tastiera → Board 
 \end_layout
 
 \end_inset
@@ -1324,6 +1324,131 @@ F0
 \end_inset
 
  fino alla ricezione di un nuovo codice.
+\end_layout
+
+\begin_layout Standard
+Di seguito riportiamo la parte di codice realizzata per la gestione della
+ comunicazione Tastiera → Board (vedi 
+\noun on
+Figura 3.6
+\noun default
+)
+\end_layout
+
+\begin_layout LyX-Code
+Keyboard : process(keyboardClock) begin 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+if falling_edge(keyboardClock) 
+\end_layout
+
+\begin_layout LyX-Code
+then
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- bit di start
+\end_layout
+
+\begin_layout LyX-Code
+if (bitCount = 0 and keyboardData = '0')
+\end_layout
+
+\begin_layout LyX-Code
+then 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+scanCodeReady <= '0'; 
+\end_layout
+
+\begin_layout LyX-Code
+bitCount <= bitCount + 1; 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+-- data
+\end_layout
+
+\begin_layout LyX-Code
+elsif (bitCount > 0 and bitCount < 9)
+\end_layout
+
+\begin_layout LyX-Code
+then 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- si shifta di un bit lo scancode da sinistra
+\end_layout
+
+\begin_layout LyX-Code
+scancode <= keyboardData & scancode(7 downto 1); 
+\end_layout
+
+\begin_layout LyX-Code
+bitCount <= bitCount + 1; 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+-- bit di parità 
+\end_layout
+
+\begin_layout LyX-Code
+elsif (bitCount = 9)
+\end_layout
+
+\begin_layout LyX-Code
+then
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+bitCount <= bitCount + 1;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+-- fine messaggio 
+\end_layout
+
+\begin_layout LyX-Code
+elsif (bitCount = 10) 
+\end_layout
+
+\begin_layout LyX-Code
+then
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+scanCodeReady <= '1';
+\end_layout
+
+\begin_layout LyX-Code
+bitCount <= 0;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end if;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end if;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end process Keyboard;
 \end_layout
 
 \begin_layout Standard
@@ -1553,8 +1678,14 @@ pin 14
 Lo schermo viene diviso in pixel ed il colore di ciascuno di essi è determinato
  dal valore di tensione del segnale 
 \series bold
-RGB
+\color red
+R
+\color green
+G
+\color blue
+B
 \series default
+\color inherit
 .
  Se un certo 
 \emph on
@@ -1640,13 +1771,821 @@ sincronismo orizzontale e verticale
 \series default
  sono segnali interamente digitali, compatibili con i livelli della 
 \emph on
-logica TTL
-\emph default
-.
+logica TTL.
 \end_layout
 
 \begin_layout Subsubsection
 VGA Mode
+\end_layout
+
+\begin_layout Standard
+Per operare in 
+\emph on
+VGA mode
+\emph default
+, occorre avere 
+\series bold
+640x480
+\series default
+ pixel, 
+\series bold
+25Mhz
+\series default
+ di dot clock (ovvero il 
+\emph on
+periodo di clock per disegnare un singolo pixel
+\emph default
+) e un 
+\series bold
+refresh
+\series default
+ dei frame di 
+\series bold
+60Hz
+\series default
+ (ossia la 
+\emph on
+frequenza di aggiornamento dell’intera immagine
+\emph default
+).
+ La visualizzazione avviene per righe: per disegnare la nostra griglia di
+ gioco pixel per pixel, ci serviamo di due contatori, 
+\emph on
+h_cnt
+\emph default
+ e 
+\emph on
+v_cnt
+\emph default
+, che tengono traccia delle coordinate del punto che stiamo rappresentando
+ attualmente, incrementando prima il contatore orizzontale, quindi, al raggiungi
+mento della fine della riga, quello verticale.
+ 
+\end_layout
+
+\begin_layout Standard
+I valori dei due contatori vengono anche sfruttati per generare i segnali
+ di sincronizzazione 
+\emph on
+h_sync
+\emph default
+ e 
+\emph on
+v_sync
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Una volta 
+\begin_inset Quotes fld
+\end_inset
+
+terminata
+\begin_inset Quotes frd
+\end_inset
+
+ una singola riga, occorre attendere un tempo di latenza dovuto a specifiche
+ tecniche, detto 
+\series bold
+Front Porch
+\series default
+, per poi passare alla riga successiva (incrementando quindi il contatore
+ verticale 
+\emph on
+v_cnt
+\emph default
+), fino al raggiungimento dell’ultima riga; a sua volta, la nuova riga dovrà
+ rispettare un tempo di attesa, definito 
+\series bold
+Back Porch
+\series default
+, prima di inviare correttamente i dati.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/vga_diagrams.jpg
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrammi temporali dei segnali di sincronismo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Verranno riportate ora le specifiche temporali del 
+\emph on
+VGA mode
+\emph default
+ per spiegare un po' meglio quanto appena detto.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align left
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="9">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Specifiche temporali orizzontali
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Specifiche temporali verticali 
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+a
+\noun default
+ (µs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+b
+\noun default
+ (µs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+c
+\noun default
+ (µs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+d
+\noun default
+ (µs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Pixel clock (Mhz)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+a
+\noun default
+ (lines)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+b
+\noun default
+ (lines)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+c
+\noun default
+ (lines)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\noun on
+d
+\noun default
+ (lines)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3,8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25,4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0,6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+480
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Un impulso attivo basso di durata 
+\noun on
+a
+\noun default
+ viene applicato al segnale di sincronismo orizzontale della porta VGA;
+ tale periodo determina 
+\emph on
+una riga di dati
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+L'ingresso RGB del monitor dev'essere pilotato a 0 Volt durante il 
+\series bold
+back porch
+\series default
+ dopo l'arrivo dell'impulso 
+\emph on
+h_sync
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Successivamente, nel periodo 
+\noun on
+c
+\noun default
+ viene disegnato sull’uscita ogni singolo pixel relativo a quella linea;
+ infine si attende ancora il tempo 
+\noun on
+d
+\noun default
+, ovvero durante il 
+\series bold
+front porch
+\series default
+, dove il segnale RGB è ancora una volta pilotato a 0 Volt in attesa del
+ successivo 
+\emph on
+h_sync
+\emph default
+.
+ Il grafico della sincronia verticale è il medesimo solamente che l'arrivo
+ del 
+\emph on
+v_sync
+\emph default
+ significa la fine di un frame e l'inizio del successivo.
+\end_layout
+
+\begin_layout Subsubsection
+Realizzazione in VHDL
+\end_layout
+
+\begin_layout Standard
+Come anticipato, abbiamo un contatore orizzontale 
+\emph on
+h_cnt
+\emph default
+ che varia da 0 a 799, un intervallo di valori corrispondente al periodo
+ totale della linea, cioè 31,7 µs (
+\noun on
+a+b+c+d
+\noun default
+ nella tabella); il segnale 
+\emph on
+h_sync
+\emph default
+ si mantiene alto per 
+\emph on
+h_cnt
+\emph default
+ che varia tra 0 e 659, viene posto a 0 quando 
+\emph on
+h_cnt
+\emph default
+ assume valori compresi tra 660 e 755, poi viene nuovamente settato a 1
+ fino a 799
+\end_layout
+
+\begin_layout Standard
+Si inizializza il contatore a 0 nel momento dell’inizio del 
+\series bold
+Display Time
+\series default
+ (vedi 
+\noun on
+figura 3.9
+\noun default
+), spostando 
+\emph on
+back porch
+\emph default
+ dopo il 
+\emph on
+front porch
+\emph default
+.
+ In questo modo il funzionamento del sincronismo non cambia, ma permette
+ di leggere direttamente in 
+\emph on
+h_cnt
+\emph default
+ il valore della colonna attuale.
+ 
+\end_layout
+
+\begin_layout Standard
+In maniera analoga avviene per quanto riguarda la sincronia verticale, in
+ particolare 
+\emph on
+v_cnt
+\emph default
+ varia da 0 a 524, un intervallo di valori corrispondente al periodo totale
+ della schermata, cioè 16.6 ms; il segnale 
+\emph on
+v_sync
+\emph default
+ si mantiene alto per 
+\emph on
+v_cnt
+\emph default
+ che varia tra 0 e 492, viene posto a 0 quando 
+\emph on
+v_cnt
+\emph default
+ assume i valori 493 e 494, poi viene nuovamente settato a 1 fino a 524.
+ 
+\end_layout
+
+\begin_layout Standard
+Esiste un ulteriore segnale interno, 
+\emph on
+video_en
+\emph default
+, attivo solo se 
+\emph on
+h_cnt
+\emph default
+ è minore di 640 e 
+\emph on
+v_cnt
+\emph default
+ è minore di 480, ovvero solo durante il 
+\series bold
+Display Time
+\series default
+; pertanto l’informazione sul colore del pixel viene ricopiata dall'ingresso
+ all'uscita solo quando 
+\emph on
+video_en
+\emph default
+ è settato a '1', cioè solo se ci si trova all'interno dello schermo attivo.
+\end_layout
+
+\begin_layout LyX-Code
+-- Reset Horizontal Counter
+\end_layout
+
+\begin_layout LyX-Code
+IF (h_cnt = 799)
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+h_cnt := 0;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ELSE
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+h_cnt := h_cnt + 1;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\begin_layout LyX-Code
+-- H_SYNC
+\end_layout
+
+\begin_layout LyX-Code
+IF (h_cnt <= 755 AND h_cnt >= 659)
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+h_sync := '0';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ELSE
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+h_sync := '1';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF; 
+\end_layout
+
+\begin_layout LyX-Code
+-- Reset Vertical Counter
+\end_layout
+
+\begin_layout LyX-Code
+IF (v_cnt >= 524 AND h_cnt >= 699)
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+v_cnt := 0;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ELSIF (h_cnt = 699) 
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+v_cnt := v_cnt + 1;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\begin_layout LyX-Code
+-- V_SYNC
+\end_layout
+
+\begin_layout LyX-Code
+IF (v_cnt = 490 OR v_cnt = 491) 
+\end_layout
+
+\begin_layout LyX-Code
+THEN 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+v_sync := '0';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ELSE
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+v_sync := '1';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF; 
+\end_layout
+
+\begin_layout LyX-Code
+-- Horizontal Data Enable 
+\end_layout
+
+\begin_layout LyX-Code
+IF (h_cnt <= 639) 
+\end_layout
+
+\begin_layout LyX-Code
+THEN 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+horizontal_en := '1';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ELSE 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+horizontal_en := '0';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF; 
+\end_layout
+
+\begin_layout LyX-Code
+-- Vertical Data Enable 
+\end_layout
+
+\begin_layout LyX-Code
+IF (v_cnt <= 479)
+\end_layout
+
+\begin_layout LyX-Code
+THEN 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+vertical_en := '1';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+ELSE 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+vertical_en := '0';
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF; 
+\end_layout
+
+\begin_layout LyX-Code
+-- Video Enable 
+\end_layout
+
+\begin_layout LyX-Code
+video_en := horizontal_en AND vertical_en;
 \end_layout
 
 \end_body
