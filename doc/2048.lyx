@@ -2581,7 +2581,7 @@ END Behavioral;
 \end_layout
 
 \begin_layout Section
-Implementazione del Modello (Datapath)
+Implementazione del Datapath (Modello)
 \end_layout
 
 \begin_layout Standard
@@ -2598,49 +2598,176 @@ pattern MVC
  realizzazione delle altre parti.
 \end_layout
 
+\begin_layout Standard
+All’interno del 
+\emph on
+Datapath
+\emph default
+ è presente la la 
+\bar under
+struttura del modello
+\bar default
+ e logica relativa alle 
+\bar under
+regole del gioco
+\bar default
+, ovvero le azioni che verranno eseguite sul modello: viene gestito il 
+\series bold
+movimento 
+\series default
+delle celle, il loro 
+\series bold
+merging
+\series default
+, ovvero l'unione delle celle di valore uguale quando queste si scontrano,
+ l'aggiunta in una posizione casuale di una
+\series bold
+ nuova cella
+\series default
+, l'aggiornamento del 
+\series bold
+punteggio
+\series default
+ e degli 
+\series bold
+stati
+\series default
+ del gioco, che spiegheremo più approfonditamente nei nei prossimi paragrafi.
+\end_layout
+
 \begin_layout Subsection
 Struttura del modello
 \end_layout
 
+\begin_layout Subsubsection
+Griglia di gioco
+\end_layout
+
 \begin_layout Standard
-Analizzando il gioco abbiamo notato che per ogni singolo instante della
- partita avremo la necessità di rappresentare lo stato delle 16 caselle
- (4x4) che compongono la 
+Analizzando il gioco, abbiamo notato che per ogni singolo instante della
+ partita avremo la necessità di rappresentare lo stato delle 
+\series bold
+16 caselle
+\series default
+ (
+\emph on
+4x4
+\emph default
+) che compongono la 
 \begin_inset Quotes fld
 \end_inset
 
+
+\emph on
 scacchiera
+\emph default
+
 \begin_inset Quotes frd
 \end_inset
 
 .
  Ogni singola cella è rappresentata quindi da un valore numerico compreso
- tra 0 e 2048.
- Quindi si è realizzato che per poter mantenere lo stato attuale del gioco
- sarebbe necessario utilizzare una matrice 4x4 di interi, ognuno rappresentante,
- appunto, il valore attuale della propria cella.
- Quindi ripensando un attimo al gioco viene in mente subito che all'istante
- iniziale il gioco avrà uno stato composto da 16 celle con valore 0, quest
- ultimo non verrà mostrato a livello di interfaccia grafica perchè rappresenterà
- semplicemente la cella vuota.
- Inoltre, l'altro stato notevole sarà quello dove almeno una delle n celle
- avrà assunto il valore di 2048, questo rappresentarà lo stato di terminazione
- corrispondente alla vittoria dell'utente.
+ tra 
+\series bold
+0
+\series default
+ e 
+\series bold
+2048
+\series default
+.
+ Per poter mantenere lo stato attuale del gioco si è quindi scelto di utilizzare
+ una matrice 4x4 di interi, ognuno rappresentante, appunto, il valore attuale
+ della propria 
+\series bold
+cella
+\series default
+.
+ Di seguito, la rappresentazione in 
+\emph on
+VHDL
+\emph default
+.
+\end_layout
+
+\begin_layout LyX-Code
+constant GRID_WIDTH  : INTEGER RANGE 0 to 7 := 4; 
+\end_layout
+
+\begin_layout LyX-Code
+constant GRID_HEIGHT : INTEGER RANGE 0 to 7 := 4; 
+\end_layout
+
+\begin_layout LyX-Code
+type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0)
+ of integer range 0 to 4000;
 \end_layout
 
 \begin_layout Standard
-Ulteriormente allo stato corrente sarà necessario mantenere informazioni
- riguardo il punteggio attuale, rappresentabile con un intero.
- Quindi riassumendo serviranno due informazioni per ogni istante di gioco:
+Le 
+\series bold
+celle vuote
+\series default
+ del gioco vengono gestite semplicemente considerando le celle con 
+\emph on
+valore 0
+\emph default
+, che non verranno mostrate a livello di interfaccia grafica, come nel gioco
+ originale, ma questo accorgimento sarà implementato solo a livello di 
+\emph on
+View
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Punteggio della partita
+\end_layout
+
+\begin_layout Standard
+Ulteriormente allo stato corrente della griglia di gioco, sarà necessario
+ mantenere informazioni riguardo il punteggio attuale, rappresentabile con
+ un singolo 
+\emph on
+intero
+\emph default
+.
  
 \end_layout
 
-\begin_layout Itemize
-matrice 4x4 con i valori delle celle;
+\begin_layout Subsubsection
+Stato del gioco
+\end_layout
+
+\begin_layout Standard
+Gli stati notevoli che occorrerà considerare sono principalmente tre:
 \end_layout
 
 \begin_layout Itemize
-punteggio attuale conseguito dall'utente;
+
+\series bold
+Gioco normale
+\series default
+, ovvero la fase dove l'utente può eseguire normalmente tutte le mosse
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Vittoria
+\series default
+, ovvero la creazione di una cella dal valore di 
+\series bold
+2048
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Sconfitta
+\series default
+, ovvero l'impossibilità per il giocatore di effettuare ulteriori mosse
+ sulla griglia di gioco
 \end_layout
 
 \begin_layout Subsection
@@ -2650,58 +2777,114 @@ Azioni sul modello
 \begin_layout Standard
 Avendo stabilito quale sia la rappresentazione dello stato, ora, serve comprende
 re quali sono le azioni che il nostro modello deve poter compiere per poter
- modificare lo stato in risposta all'input inviato dall'utente.
- Naturalmente il gioco prevede i movimenti nelle 4 direzioni, nella struttura
- del gioco originali questi movimenti comportano principalmente due conseguenze:
+ modificare lo stato in risposta all'
+\emph on
+input
+\emph default
+ inviato dall'utente.
+ Il gioco prevede i movimenti nelle 
+\series bold
+4 direzioni
+\series default
+ (
+\noun on
+Su, Giù, Destra, Sinistra
+\noun default
+), che corrispondono ai comandi con cui il giocatore può interagire con
+ il gioco, e ognuno di questi movimenti comporta una serie di eventi in
+ cascata:
 \end_layout
 
 \begin_layout Enumerate
-Le celle vengono traslate dalla propria posizione iniziale verso la cella
- massima libera raggiungibile nella direzione d'ingresso.
- In altre parole, supponiamo che l'utente abbia selezionato la direzione
- destra: il gioco deve controllare per ogni n-esima cella se la propria
- cella adiacente (verso destra) sia libera, in caso positivo essa dovrà
- 
+Una volta che viene impartita la direzione, la prima fase che si considera
+ è la cosiddetta fase di 
+\series bold
+merging
+\series default
+, ovvero le caselle adiacenti contenenti lo stesso valore numerico lungo
+ la direzione impartita, vengono 
 \begin_inset Quotes fld
 \end_inset
 
+
+\emph on
+fuse
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ in un'unica singola cella contenente come nuovo valore la somma delle due
+ caselle generatrici.
+ Questo procedimento viene eseguito prima della fase successiva di movimento
+ e viene definita come fase di 
+\series bold
+MERGE
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+Le celle vengono 
+\series bold
+traslate
+\series default
+ dalla propria posizione iniziale verso la cella massima libera raggiungibile
+ nella direzione d'ingresso.
+ In altre parole, supponiamo che l'utente abbia selezionato la 
+\emph on
+direzione destra
+\emph default
+: il gioco deve controllare per ogni n-esima cella se la propria cella adiacente
+ (verso destra) sia libera, in caso positivo essa dovrà 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
 spostarsi
+\emph default
+
 \begin_inset Quotes frd
 \end_inset
 
  nella direzione specificata.
- 
+ Questa viene definita come fase di 
+\series bold
+MOVE
+\series default
+.
 \end_layout
 
 \begin_layout Enumerate
-L'operazione di movimento è quindi necessaria, ma non sufficiente per comprender
-e il funzionamento di 2048.
- L'altra azione quindi è il 
+L'ultima azione prevista al termine del 
 \series bold
-merge
+merge-move
 \series default
-, ovvero 
-\begin_inset Quotes fld
-\end_inset
+ consiste nell'
+\bar under
+aggiunta di una nuova cella
+\bar default
+ contenente il valore 
+\series bold
+2
+\series default
+ in una posizione casuale libera della griglia di gioco.
+\end_layout
 
-l'unione
-\begin_inset Quotes frd
-\end_inset
-
- di due caselle.
- Anche il merge avviene in base alla direzione specificata dall'utente,
- in questo caso però se la cella nella direzione prescritta ha lo stesso
- valore della cella in analisi, allora il valore della cella verso la quale
- si fa il merge assumerà come nuovo valore la somma dei due valori.
+\begin_layout Subsubsection
+Macchina a Stati Finiti
 \end_layout
 
 \begin_layout Standard
-Infine la meccanica di gioco prevede che conseguentemente ad ogni spostamento
- o merge venga, se libera almeno una casella, inserito un valore 
-\series bold
-2 
-\series default
-in posizione casuale.
+Qui bisogna spiegare la gestione dello stato Idle -> Merge1 -> Move1 ->
+ Merge2 -> Move2 -> Merge3 -> Move3 -> Check (->Idle) -> Update -> Idle
+\end_layout
+
+\begin_layout Standard
+Che programma possiamo usare per disegnare una roba come descritta qui?
+ ---> http://electro-logic.blogspot.it/2014/03/fpga-comunicazione-ad-alta-velocita.
+html
 \end_layout
 
 \end_body
