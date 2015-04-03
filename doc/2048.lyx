@@ -2736,11 +2736,11 @@ intero
 \end_layout
 
 \begin_layout Subsubsection
-Stato del gioco
+FSM del gioco
 \end_layout
 
 \begin_layout Standard
-Gli stati notevoli che occorrerà considerare sono principalmente tre:
+Gli stati che occorrerà considerare sono quattro:
 \end_layout
 
 \begin_layout Itemize
@@ -2797,10 +2797,6 @@ gameover
 )
 \end_layout
 
-\begin_layout Subsubsection
-FSM del gioco
-\end_layout
-
 \begin_layout Standard
 \begin_inset Float figure
 placement H
@@ -2819,7 +2815,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Posizione e indice di ciascun segmento in un Display 7 segmenti
+FSM del gioco
 \end_layout
 
 \end_inset
@@ -2943,6 +2939,37 @@ Dal paragrafo precedente 3.3.2, abbiamo cominciato a comprendere quali sono
  in termini generali le caratteristiche del gioco.
  A questo punto per poter scrivere del codice sarà necessario razionalizzare
  quanto già detto precedentemente e schematizzarlo in maniera chiara.
+ 
+\end_layout
+
+\begin_layout Standard
+Il gioco ha delle regole ben fisse e questo comporta anche delle dimensioni
+ della scacchiera non variabili, ovvero 
+\series bold
+4x4
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+É stato quindi necessario utilizzare 
+\emph on
+3 stati di merge
+\emph default
+ e 
+\emph on
+3 stati di move
+\emph default
+; ovvero, per ogni riga e/o per ogni colonna saranno possibili solamente
+ 3 movimenti e/o merge per ogni input inviato dall'utente.
+ Quindi in ordine, dovremo prima controllare che sia possibile fare il merge
+ e poi verificare la possibilità di fare un movimento, questo per 3 volte,
+ in maniera da essere sicuri di aver tenuto conto di tutte le conseguenze
+ dell'input.
+ Infatti dalle regole del gioco ogni cella deve tentare di spostarsi fino
+ a dove è possibile quindi ad una direzione non corrisponde una sola azione
+ di merge e/o di move, ma al massimo 3.
 \end_layout
 
 \begin_layout Standard
@@ -2950,122 +2977,170 @@ Quindi riassumendo gli stati che abbiamo rilevato precedentemente:
 \end_layout
 
 \begin_layout Itemize
-Stato iniziale: matrice 4x4 completamente a 0;
+
+\series bold
+init
+\series default
+: si predispone la griglia di gioco per una nuova partita, ovvero si colloca
+ un 2 in una cella casuale (in realtà le celle generate saranno due, perchè
+ prima di arrivare allo stato di 
+\emph on
+idle
+\emph default
+, passa subito nello stato 
+\emph on
+randupdate
+\emph default
+, spiegato tra poche righe)
 \end_layout
 
 \begin_layout Itemize
-Stato di idle: lo stato della matrice resta invariato rispetto a quello
- precedente, per esempio l'utente prova a compiere un movimento che non
- comporta alcuna modifica reale, ma l'utente non ha ancora perso può ancora
- compiere movimenti efficaci;
+
+\series bold
+idle
+\series default
+: in questo stato il sistema è in attesa di ricevere un input dall'utente,
+ ovvero una delle 4 mosse effettuabili; questo stato ha un autoanello perchè
+ finchè non viene ricevuta una mossa, il sistema continuerà ad aggiornarsi
+ nello stesso stato corrente
 \end_layout
 
 \begin_layout Itemize
-Stato di vittoria: l'utente ha raggiunto il valore di 2048 in una delle
- caselle della scacchiera;
+
+\series bold
+merge1
+\series default
+: vengono prima controllate le coppie di celle esterne a 2 a 2 che se sono
+ uguali vengono unificate, poi solo quelle più vicine alla parete nella
+ direzione opposta alla direzione, dopodichè se anche queste non sono uguali
+ viene verificata la coppia centrale e infine la coppia più vicina alla
+ parete da cui proviene il movimento; questo viene verificato per tutte
+ le righe se si sta effettuando un movimento orizzontale, oppure per tutte
+ le colonne in caso di movimento verticale (
+\noun on
+Su, Giù
+\noun default
+); da qui ci si porta inevitabilmente allo stato 
+\emph on
+move1
 \end_layout
 
 \begin_layout Itemize
-Stato di sconfitta: lo stato non può più essere modificato, la scacchiera
- è bloccata;
-\end_layout
 
-\begin_layout Subsubsection
-Move e Merge
-\end_layout
-
-\begin_layout Standard
-Con questi 4 stati non riusciamo però a rappresentare in maniera completa
- il nostro gioco, mancano tutto il funzionamento conseguente alle azioni
- dell'utente, ovvero quelli che comportano dei veri e propri cambi di stato.
- Abbiamo detto che le azioni sono raggruppabili in due gruppi quindi esisteranno
- due tipologie di stati attivi:
-\end_layout
-
-\begin_layout Itemize
-Stato di merge: controllo la possibilità di effettuare il merge nella direzione
- predeterminata dall'utente;
+\series bold
+move1
+\series default
+: in questo stato vengono semplicemente mosse le celle che possono muoversi
+ lungo la direzione, in seguito alla fase di 
+\emph on
+merge1, 
+\emph default
+questo movimento porta inevitabilmente alla nuova fase di 
+\emph on
+merge2
 \end_layout
 
 \begin_layout Itemize
-Stato di move: controllo la possibilità di effettuare il movimento nella
- direzione indicata dall'utente;
+
+\series bold
+merge2
+\series default
+: in questa fase vengono rieffettuati i controlli descritti in 
+\emph on
+merge1
+\emph default
+, perchè se la fase 
+\emph on
+move1 
+\emph default
+ha effettuato spostamenti validi, occorre riprovare l'unificazione delle
+ celle: in questa fase non è possibile vengano unificate le celle più vicine
+ alla parete da cui proviene il movimento, perchè sarebbero già state unificate
+ nello stato di 
+\emph on
+merge1
 \end_layout
 
-\begin_layout Standard
-Il gioco ha delle regole ben fisse e questo comporta anche delle dimensioni
- della scacchiera non variabili, ovvero 4x4.
- Abbiamo quindi ipotizzato di utilizzare 3 stati di merge e 3 stati di move.
- Ovvero, per ogni riga e/o per ogni colonna saranno possibili solamente
- 3 movimenti e/o merge per ogni input inviato dall'utente.
- Quindi in ordine dovremo prima controllare che sia possibile fare il merge
- e poi verificare la possibilità di fare un movimento, questo per 3 volte,
- in maniera da essere sicuri di aver tenuto conto di tutte le conseguenze
- dell'input.
- Infatti dalle regole del gioco ogni cella deve tentare di spostarsi fino
- a dove è possibile quindi ad una direzione non corrisponde una sola azione
- di merge e/o di move, ma al massimo 3.
- Di seguito in figura 3.13 mostriamo la rappresentazione in stati finiti
- per la gestione di movimenti e merge.
+\begin_layout Itemize
+
+\series bold
+move2
+\series default
+: come per lo stato 
+\emph on
+move1
+\emph default
+, si provano a muovere le celle che possono farlo, ovvero solo se la fase
+ di 
+\emph on
+merge2 
+\emph default
+ha comportato dei merge
 \end_layout
 
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
+\begin_layout Itemize
 
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename img/FSM merge+move.jpg
-	scale 65
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-FSM azioni sul modello
+\series bold
+merge3
+\series default
+: in questa fase le uniche celle unificabili sono quelle centrali che possono
+ essersi ritrovate unificabili in seguito alla seconda fase di movimento,
+ perchè le altre possibili celle unificabili sono già state controllate
+ nelle fasi precedenti
 \end_layout
 
-\end_inset
+\begin_layout Itemize
 
-
+\series bold
+move3
+\series default
+: come per gli altri stati di move, si riprovano a muovere le celle che
+ possono farlo se l'ultima fase di merge è riuscita a unificare le celle
+ centrali
 \end_layout
 
-\end_inset
+\begin_layout Itemize
 
-
+\series bold
+checkupdate
+\series default
+: in questo stato si controlla che la mossa effettuata dall'utente abbia
+ modificato lo stato della griglia di gioco.
+ Lo stato della matrice potrebbe restare invariato rispetto a quello precedente,
+ in caso di movimenti che non comportino alcuna modifica reale (l'utente
+ non ha ancora perso perchè può ancora compiere movimenti) e in questo caso
+ 
+\emph on
+la mossa non è da considerare come valida
+\emph default
+ e pertanto non si deve procedere all'aggiunta di una nuova cella: si ritorna
+ direttamente nello stato di 
+\emph on
+idle
+\emph default
+ ed è quindi come se non fosse cambiato nulla in seguito alla mossa non
+ valida
 \end_layout
 
-\begin_layout Subsubsection
-Inserimento in una cella casuale
-\end_layout
-
-\begin_layout Standard
-Sappiamo, inoltre, che dopo ogni movimento e/o merge sarà necessario aggiungere
- in una cella casuale il valore 2.
- Quindi, alla precedente FSM sarà necessario aggiungere un nuovo stato,
- che abbiamo chiamato 
-\begin_inset Quotes fld
-\end_inset
-
+\begin_layout Itemize
 
 \series bold
 randupdate
 \series default
+: in questa fase viene aggiunta una nuova cella dal valore 2 in una posizione
+ casuale tra le celle 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+libere
+\emph default
 
 \begin_inset Quotes frd
 \end_inset
 
-.
- Questo stato, infatti, cercherà di inserire in una cella casuale il valore
- 2 in una cella vuota.
- Nel caso in cui il valore casuale estratto sia corrispondente ad una cella
- non vuota, allora dovrà estrarre un nuovo valore e ritentare l'inserimento.
+
 \end_layout
 
 \begin_layout Standard
@@ -3078,8 +3153,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename img/FSM randupdate.jpg
-	scale 65
+	filename img/FSM_moves.png
+	scale 40
 
 \end_inset
 
@@ -3087,7 +3162,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FSM di figura 3.13 con stato di randupdate
+FSM delle azioni
 \end_layout
 
 \end_inset
@@ -3098,6 +3173,35 @@ FSM di figura 3.13 con stato di randupdate
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Nonostante 
+\series bold
+Quartus II
+\series default
+ abbia reso un po' meno leggibile il diagramma della 
+\emph on
+FSM
+\emph default
+, accavallando alcuni stati vicini, si può notare come ogni mossa porti
+ alla sequenza 
+\emph on
+
+\begin_inset Quotes fld
+\end_inset
+
+merge1 → move1 → merge2 → move2 → merge3 → move3 → checkupdate
+\begin_inset Quotes frd
+\end_inset
+
+ 
+\emph default
+che passerà per lo stato 
+\emph on
+randupdate 
+\emph default
+solo nel caso in cui la mossa verrà considerata valida.
 \end_layout
 
 \end_body
