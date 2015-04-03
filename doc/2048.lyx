@@ -2301,12 +2301,12 @@ h_sync
 \emph on
 h_cnt
 \emph default
- che varia tra 0 e 659, viene posto a 0 quando 
+ che varia tra 0 e 658, viene posto a '0' quando 
 \emph on
 h_cnt
 \emph default
- assume valori compresi tra 660 e 755, poi viene nuovamente settato a 1
- fino a 799
+ assume valori compresi tra 659 e 755, poi viene nuovamente settato a '1'
+ fino a 799.
 \end_layout
 
 \begin_layout Standard
@@ -2342,7 +2342,7 @@ In maniera analoga avviene per quanto riguarda la sincronia verticale, in
 v_cnt
 \emph default
  varia da 0 a 524, un intervallo di valori corrispondente al periodo totale
- della schermata, cioè 16.6 ms; il segnale 
+ della schermata, cioè 16,6 ms (60Hz di frequenza); il segnale 
 \emph on
 v_sync
 \emph default
@@ -2350,11 +2350,11 @@ v_sync
 \emph on
 v_cnt
 \emph default
- che varia tra 0 e 492, viene posto a 0 quando 
+ che varia tra 0 e 492, viene posto a '0' quando 
 \emph on
 v_cnt
 \emph default
- assume i valori 493 e 494, poi viene nuovamente settato a 1 fino a 524.
+ assume i valori 493 e 494, poi viene nuovamente settato a '1' fino a 524.
  
 \end_layout
 
@@ -2587,8 +2587,205 @@ END IF;
 video_en := horizontal_en AND vertical_en;
 \end_layout
 
+\begin_layout Subsection
+Interfaccia 7 Segmenti (OUTPUT)
+\end_layout
+
+\begin_layout Standard
+L'ultimo componente ausiliario, utilizzato dalla 
+\emph on
+View
+\emph default
+ è il controllore dei quattro 
+\series bold
+Display a 7 segmenti
+\series default
+ della board, utilizzato per visualizzare il punteggio corrente raggiunto
+ nella partita.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/7segment_interface.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Interfaccia Display 7 Segmenti
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Applicando un livello logico basso fa sì che un segmento si illumini, mentre
+ applicando un livello logico alto lo si spegne: lavora quindi in logica
+ negativa.
+\end_layout
+
+\begin_layout Standard
+Ciascun segmento di ogni 
+\series bold
+Display
+\series default
+ è identificato tramite un indice da 0 a 6, con le posizioni indicate nella
+ 
+\noun on
+Figura 3.11
+\noun default
+; si noti dallo schema logico di 
+\noun on
+Figura 3.10
+\noun default
+ che il punto in ciascun display è 
+\emph on
+scollegato
+\emph default
+ e pertanto 
+\bar under
+non può essere utilizzato
+\bar default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/position-index.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Posizione e indice di ciascun segmento in un Display 7 segmenti
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Realizzazione in VHDL
+\end_layout
+
+\begin_layout Standard
+Il componente da noi realizzato, gestito dalla 
+\emph on
+View
+\emph default
+, prende in ingresso un intero compreso tra 0 e 9999 (ovvero il range di
+ valori rappresentabili tramite i 4 display a 7 segmenti) e restituisce
+ i quattro vettori logici che controllano ciascuno i 7 segmenti di ogni
+ display.
+ Vediamo il frammento di codice nel dettaglio:
+\end_layout
+
+\begin_layout LyX-Code
+numChange : process(num)
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+variable digit4, digit3, digit2, digit1 : integer range 0 to 9;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+begin 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+splitNumber(num, digit4, digit3, digit2, digit1); 	
+\end_layout
+
+\begin_layout LyX-Code
+seven_segs4 <= digit_to_7seg(digit4);
+\end_layout
+
+\begin_layout LyX-Code
+seven_segs3 <= digit_to_7seg(digit3); 
+\end_layout
+
+\begin_layout LyX-Code
+seven_segs2 <= digit_to_7seg(digit2); 
+\end_layout
+
+\begin_layout LyX-Code
+seven_segs1 <= digit_to_7seg(digit1); 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end process numChange;
+\end_layout
+
+\begin_layout Standard
+Come si può vedere, abbiamo creato la funzione 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+splitNumber
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ che suddivide il numero nelle sue quattro cifre, ognuna delle quali verrà
+ convertita nella opportuna combinazione di segmenti che la riproduce sul
+ display, tramite la funzione 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+digit_to_7seg
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
-Implementazione del modello
+Implementazione del Modello
 \end_layout
 
 \begin_layout Standard
