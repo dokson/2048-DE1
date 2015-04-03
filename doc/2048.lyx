@@ -2499,14 +2499,101 @@ digit_to_7seg
 .
 \end_layout
 
-\begin_layout Section
-Implementazione del Modello
+\begin_layout Subsection
+Divisore di Frequenza
 \end_layout
 
 \begin_layout Standard
-Come già detto precedentemente la realizzazione del componente Model del
- design pattern MVC sarà un punto critico per la realizzazione di questo
- progetto.
+Avendo a disposizione solo clock a 50 e 27Mhz, siamo stati obbligati a realizzar
+e un componente che dividesse la frequenza per 2, per ottenere in uscita
+ un clock a 
+\series bold
+25Mhz
+\series default
+ da utilizzare per tutti i dispositivi del progetto.
+\end_layout
+
+\begin_layout Standard
+Il modo più semplice per ottenere un 
+\emph on
+divisore di frequenza
+\emph default
+ è quello di realizzare un contatore che fornisca un segnale in uscita solamente
+ per alcuni valori: nel nostro caso particolare è stato sufficiente un contatore
+ a 1 bit: se il contatore conta ogni fronte di salita (o, volendo, di discesa)
+ infatti, otteniamo già un clock a frequenza dimezzata.
+\end_layout
+
+\begin_layout LyX-Code
+ARCHITECTURE Behavioral OF GAME_CLKGENERATOR IS
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+SIGNAL counter : STD_LOGIC_VECTOR(0 DOWNTO 0);
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+BEGIN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+PROCESS (clock)
+\end_layout
+
+\begin_layout LyX-Code
+BEGIN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+IF (clock = '0' AND clock'event)
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+counter <= counter + 1; 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END PROCESS; 
+\end_layout
+
+\begin_layout LyX-Code
+half_clock <= counter(0);
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END Behavioral;
+\end_layout
+
+\begin_layout Section
+Implementazione del Modello (Datapath)
+\end_layout
+
+\begin_layout Standard
+Come già detto precedentemente la realizzazione del componente 
+\series bold
+Model
+\series default
+ del design 
+\emph on
+pattern MVC
+\emph default
+ sarà un punto critico per la realizzazione di questo progetto.
  Per questo motivo abbiamo deciso di affrontare questo argomento prima della
  realizzazione delle altre parti.
 \end_layout
