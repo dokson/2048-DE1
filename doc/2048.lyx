@@ -622,7 +622,7 @@ Implementazione
 \end_layout
 
 \begin_layout Section
-Modelli di Realizzazione
+Architettura Generale
 \end_layout
 
 \begin_layout Subsection
@@ -657,10 +657,10 @@ Control Unit
  la gestione degli input del gioco, ovvero i comandi relativi alle 4 mosse
  effettuabili dal giocatore (
 \noun on
-SU, GIU, DESTRA, SINISTRA
+Su, Giù, Destra, 
 \noun default
-) o il riavvio della partita, ma anche la notifica dello stato della partita
- (
+Sinistra) o il riavvio della partita, ma anche la notifica dello stato della
+ partita (
 \noun on
 GameOver, Vittoria
 \noun default
@@ -756,9 +756,23 @@ logica applicativa
 \end_inset
 
 , ovvero le operazioni che realizzeranno le funzionalità operative dell'applicaz
-ione
+ione 
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Gestisce un insieme di dati logicamente correlati 
+\end_layout
+
+\begin_layout Itemize
+Risponde alle interrogazioni sui dati
+\end_layout
+
+\begin_layout Itemize
+Risponde alle istruzioni di modifica dello stato 
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 
 \series bold
@@ -781,13 +795,28 @@ protocollo di comunicazione
 VGA
 \series default
 .
- È un osservatore passivo e non influenza il 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Gestisce un’area di visualizzazione, nella quale presenta all’utente una
+ vista dei dati gestiti dal modello 
+\end_layout
+
+\begin_layout Itemize
+Mappa i dati (o parte dei dati) del modello in oggetti visuali
+\end_layout
+
+\begin_layout Itemize
+Visualizza tali oggetti su un (particolare) dispositivo di output È un osservato
+re passivo e non influenza il 
 \emph on
 modello
 \emph default
  in alcun modo
 \end_layout
 
+\end_deeper
 \begin_layout Itemize
 
 \series bold
@@ -799,6 +828,21 @@ Control Unit (detta anche Controller)
 modello
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Gestisce gli input dell’utente 
+\end_layout
+
+\begin_layout Itemize
+Mappa le azioni dell’utente in comandi 
+\end_layout
+
+\begin_layout Itemize
+Invia tali comandi al modello e/o alla view che effettuano le operazioni
+ appropriate 
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 \begin_inset Float figure
 placement H
@@ -2808,6 +2852,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename img/FSM_game.png
+	scale 95
 
 \end_inset
 
@@ -2840,7 +2885,11 @@ re quali sono le azioni che il nostro modello deve poter compiere per poter
 input
 \emph default
  inviato dall'utente.
- Il gioco prevede i movimenti nelle 
+ 
+\end_layout
+
+\begin_layout Standard
+Il gioco prevede i movimenti nelle 
 \series bold
 4 direzioni
 \series default
@@ -2930,20 +2979,89 @@ aggiunta di una nuova cella
  in una posizione casuale libera della griglia di gioco.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
+L'algoritmo 
+\begin_inset Quotes fld
+\end_inset
+
+merge-move
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Partendo dal prototipo scritto da noi in 
+\emph on
+Java
+\emph default
+, ma anche guardando i sorgenti del gioco originale in 
+\emph on
+JavaScript
+\emph default
+, disponibili su 
+\emph on
+GitHub
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+https://github.com/gabrielecirulli/2048
+\end_layout
+
+\end_inset
+
+, ci siamo accorti della grossa 
+\series bold
+complessità
+\series default
+ dell'algoritmo che, scritto con 
+\emph on
+linguaggi di alto livello
+\emph default
+ come gli appena citati, prevede una serie di almeno 
+\bar under
+3 cicli innestati
+\bar default
+, praticamente 
+\series bold
+\bar under
+irrealizzabili in VHDL
+\series default
+\bar default
+, sia per motivazioni di ritardi fisici, ovvero di tempistiche circuitali,
+ sia per la quantità di componenti elettrici che un'implementazione del
+ genere avrebbe comportato.
+\end_layout
+
+\begin_layout Standard
+Abbiamo quindi scelto di realizzarne un'implementazione attraverso una 
+\series bold
+Macchina a Stati Finiti
+\series default
+ che eseguisse le operazioni di 
+\emph on
+merge e move 
+\emph default
+passo-passo, una per volta.
+\end_layout
+
+\begin_layout Subsubsection
 FSM della logica delle azioni
 \end_layout
 
 \begin_layout Standard
-Dal paragrafo precedente 3.3.2, abbiamo cominciato a comprendere quali sono
- in termini generali le caratteristiche del gioco.
- A questo punto per poter scrivere del codice sarà necessario razionalizzare
- quanto già detto precedentemente e schematizzarlo in maniera chiara.
- 
+In questo paragrafo (3.3.2), abbiamo cominciato a spiegare quali sono, in
+ termini generali, le caratteristiche dei movimenti del gioco; a questo
+ punto, per poter descrivere meglio il codice, sarà necessario razionalizzare
+ quanto già detto precedentemente e schematizzarlo in maniera chiara:
 \end_layout
 
 \begin_layout Standard
-Il gioco ha delle regole ben fisse e questo comporta anche delle dimensioni
+il gioco ha delle regole ben fisse e questo comporta anche delle dimensioni
  della scacchiera non variabili, ovvero 
 \series bold
 4x4
@@ -2959,21 +3077,50 @@ Il gioco ha delle regole ben fisse e questo comporta anche delle dimensioni
 \emph default
  e 
 \emph on
-3 stati di move
+3 stati di move;
 \emph default
-; ovvero, per ogni riga e/o per ogni colonna saranno possibili solamente
- 3 movimenti e/o merge per ogni input inviato dall'utente.
- Quindi in ordine, dovremo prima controllare che sia possibile fare il merge
- e poi verificare la possibilità di fare un movimento, questo per 3 volte,
- in maniera da essere sicuri di aver tenuto conto di tutte le conseguenze
- dell'input.
- Infatti dalle regole del gioco ogni cella deve tentare di spostarsi fino
- a dove è possibile quindi ad una direzione non corrisponde una sola azione
- di merge e/o di move, ma al massimo 3.
+ questo perchè ogni cella può muoversi 
+\bar under
+al massimo di 3 caselle
+\bar default
+ (es.
+ da posizione [0,0] a posizione [0,3] è un caso peggiore perchè prevede
+ lo spostamento di una casella lungo una direzione di 3 celle), quindi per
+ ogni riga e/o per ogni colonna saranno possibili 
+\series bold
+\bar under
+massimo 3 movimenti
+\series default
+\bar default
+ per ogni input inviato dall'utente, ma 
+\series bold
+\bar under
+solamente 1 singolo merge
+\series default
+\bar default
+.
+ 
 \end_layout
 
 \begin_layout Standard
-Quindi riassumendo gli stati che abbiamo rilevato precedentemente:
+Quindi in ordine, dovremo prima controllare che sia possibile fare il merge
+ e poi verificare la possibilità di fare un movimento, questo per 3 volte,
+ in maniera da essere sicuri di aver tenuto conto di tutte le possibili
+ conseguenze della mossa impartita dall'input, considerando sempre che ogni
+ mossa può dare adito ad 
+\series bold
+una sola fase di merge
+\series default
+ (di conseguenza se nella fase 
+\emph on
+merge1 
+\emph default
+si avesse luogo ad un merge, non si dovrebbero effettuare ulteriori merge
+ nelle fasi di merge successive).
+\end_layout
+
+\begin_layout Standard
+Riassumendo gli stati che abbiamo anticipato:
 \end_layout
 
 \begin_layout Itemize
@@ -3000,9 +3147,12 @@ randupdate
 idle
 \series default
 : in questo stato il sistema è in attesa di ricevere un input dall'utente,
- ovvero una delle 4 mosse effettuabili; questo stato ha un autoanello perchè
- finchè non viene ricevuta una mossa, il sistema continuerà ad aggiornarsi
- nello stesso stato corrente
+ ovvero una delle 4 mosse effettuabili; questo stato ha un 
+\emph on
+autoanello
+\emph default
+ perchè finchè non viene ricevuta una mossa, il sistema continuerà ad aggiornars
+i nello stesso stato corrente
 \end_layout
 
 \begin_layout Itemize
@@ -3010,13 +3160,32 @@ idle
 \series bold
 merge1
 \series default
-: vengono prima controllate le coppie di celle esterne a 2 a 2 che se sono
- uguali vengono unificate, poi solo quelle più vicine alla parete nella
- direzione opposta alla direzione, dopodichè se anche queste non sono uguali
+: in questa fase, come nelle successive di merging, vengono controllate
+ prima le coppie di celle esterne a 2 a 2 che se sono uguali vengono unificate,
+ poi solo la coppia più vicina alla parete nella direzione opposta alla
+ direzione, dopodichè, se anche questa coppie di celle non è unificabile,
  viene verificata la coppia centrale e infine la coppia più vicina alla
- parete da cui proviene il movimento; questo viene verificato per tutte
- le righe se si sta effettuando un movimento orizzontale, oppure per tutte
- le colonne in caso di movimento verticale (
+ parete da cui proviene il movimento; questo viene verificato 
+\series bold
+per tutte le righe 
+\series default
+se si sta effettuando un movimento 
+\series bold
+orizzontale
+\series default
+ (
+\noun on
+Destra, Sinistra
+\noun default
+), oppure
+\series bold
+ per tutte le colonne
+\series default
+ in caso di movimento 
+\series bold
+verticale
+\series default
+ (
 \noun on
 Su, Giù
 \noun default
@@ -3030,14 +3199,17 @@ move1
 \series bold
 move1
 \series default
-: in questo stato vengono semplicemente mosse le celle che possono muoversi
- lungo la direzione, in seguito alla fase di 
+: in questo stato vengono semplicemente mosse di una cella tutte le caselle
+ che possono muoversi lungo la direzione, in seguito alla fase di 
 \emph on
-merge1, 
+merge1.
+ 
 \emph default
-questo movimento porta inevitabilmente alla nuova fase di 
-\emph on
-merge2
+Da qui si procede in avanti verso merge2 e via dicendo (vedi 
+\noun on
+Figura 3.14
+\noun default
+)
 \end_layout
 
 \begin_layout Itemize
@@ -3054,11 +3226,36 @@ merge1
 move1 
 \emph default
 ha effettuato spostamenti validi, occorre riprovare l'unificazione delle
- celle: in questa fase non è possibile vengano unificate le celle più vicine
- alla parete da cui proviene il movimento, perchè sarebbero già state unificate
- nello stato di 
+ celle; se però fosse già avvenuto un merge nella stessa riga o colonna
+ nella fase 
 \emph on
-merge1
+merge1, 
+\emph default
+in questa fase e nella successiva 
+\emph on
+merge3,
+\emph default
+ non sarà
+\emph on
+ 
+\emph default
+più possibile effettuare merging perchè 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+il protocollo del gioco
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ prevede 
+\series bold
+massimo un'operazione di merge
+\series default
+ per linea/colonna
 \end_layout
 
 \begin_layout Itemize
@@ -3070,12 +3267,8 @@ move2
 \emph on
 move1
 \emph default
-, si provano a muovere le celle che possono farlo, ovvero solo se la fase
- di 
-\emph on
-merge2 
-\emph default
-ha comportato dei merge
+, si muovono ulteriormente di un'altra cella tutte le caselle che possono
+ farlo
 \end_layout
 
 \begin_layout Itemize
@@ -3083,10 +3276,13 @@ ha comportato dei merge
 \series bold
 merge3
 \series default
-: in questa fase le uniche celle unificabili sono quelle centrali che possono
- essersi ritrovate unificabili in seguito alla seconda fase di movimento,
- perchè le altre possibili celle unificabili sono già state controllate
- nelle fasi precedenti
+: se la fase di 
+\emph on
+move2 
+\emph default
+ha mosso le celle in modo che possano essere unificate e non sono già stati
+ effettuati merge lungo tale riga/colonna, si procede ad un merge in questa
+ fase
 \end_layout
 
 \begin_layout Itemize
@@ -3094,9 +3290,16 @@ merge3
 \series bold
 move3
 \series default
-: come per gli altri stati di move, si riprovano a muovere le celle che
- possono farlo se l'ultima fase di merge è riuscita a unificare le celle
- centrali
+: come avvenuto negli stati 
+\emph on
+move1
+\emph default
+ e 
+\emph on
+move2
+\emph default
+, si muovono ulteriormente di un'altra cella tutte le caselle che possono
+ farlo
 \end_layout
 
 \begin_layout Itemize
@@ -3105,21 +3308,21 @@ move3
 checkupdate
 \series default
 : in questo stato si controlla che la mossa effettuata dall'utente abbia
- modificato lo stato della griglia di gioco.
- Lo stato della matrice potrebbe restare invariato rispetto a quello precedente,
- in caso di movimenti che non comportino alcuna modifica reale (l'utente
- non ha ancora perso perchè può ancora compiere movimenti) e in questo caso
- 
-\emph on
-la mossa non è da considerare come valida
-\emph default
+ modificato la disposizione della griglia di gioco: lo stato della matrice
+ potrebbe restare invariato rispetto a quello precedente, in caso di movimenti
+ che non comportino alcuna modifica reale (l'utente non ha ancora perso
+ perchè può ancora compiere movimenti) e in questo caso la 
+\bar under
+mossa non è da considerare come valida
+\bar default
  e pertanto non si deve procedere all'aggiunta di una nuova cella: si ritorna
  direttamente nello stato di 
 \emph on
 idle
 \emph default
- ed è quindi come se non fosse cambiato nulla in seguito alla mossa non
- valida
+ ed è quindi come se non fosse cambiato nulla in seguito alla 
+\noun on
+mossa non valida
 \end_layout
 
 \begin_layout Itemize
@@ -3202,6 +3405,1481 @@ che passerà per lo stato
 randupdate 
 \emph default
 solo nel caso in cui la mossa verrà considerata valida.
+\end_layout
+
+\begin_layout Paragraph
+Esempio
+\end_layout
+
+\begin_layout Standard
+Per rendere meglio l'idea di come funzioni la FSM e del perchè siano 
+\bar under
+necessari 3 stati di merge-move
+\bar default
+, facciamo un esempio partendo da una configurazione casuale della griglia
+ di gioco (
+\emph on
+verranno evidenziate le celle che hanno subito una modifica durante uno
+ stato
+\emph default
+).
+\end_layout
+
+\begin_layout Standard
+\noindent
+Partendo da: 
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ effettuando la mossa 
+\noun on
+Destra, 
+\noun default
+avremo come effetto la seguente sequenza:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ al termine di 
+\emph on
+merge1,
+\emph default
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ al termine di 
+\emph on
+move1, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ al termine di 
+\emph on
+merge2
+\emph default
+, 
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ al termine di 
+\emph on
+move2
+\emph default
+, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ al termine di 
+\emph on
+merge
+\emph default
+3, 
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset space \enskip{}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ al termine di 
+\emph on
+move3
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Dal momento che la mossa effettuata dal giocatore ha
+\series bold
+ modificato lo stato iniziale della griglia
+\series default
+, passerà dallo stato 
+\emph on
+checkupdate
+\emph default
+ a 
+\emph on
+randupdate
+\emph default
+, che comporterà l'aggiunta di una nuova cella con valore 2 in una posizione
+ casuale tra le celle vuote.
+ Si noti che durante lo stato 
+\emph on
+merge3 
+\emph default
+non vengono effettuati i merge sulle prime due righe perchè tali righe avevano
+ già subito un'operazione di merge e, come già detto, 
+\series bold
+non è possibile effettuare più di un'operazione di merging per riga/colonna
+ nel corso dei movimenti di una singola mossa
+\series default
+.
 \end_layout
 
 \end_body
