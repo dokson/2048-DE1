@@ -18,8 +18,8 @@ PORT
 		goingReady,
 		isgameover,
 		isvictory	: OUT STD_LOGIC;
-		box_values	: BUFFER GAME_GRID;
-		score			: BUFFER INTEGER RANGE 0 to 9999
+		box_values	: OUT GAME_GRID;
+		score			: OUT INTEGER RANGE 0 to 9999
 	);
 end  GAME_DATA;
 

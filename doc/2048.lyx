@@ -3054,10 +3054,14 @@ FSM della logica delle azioni
 \end_layout
 
 \begin_layout Standard
-In questo paragrafo (3.3.2), abbiamo cominciato a spiegare quali sono, in
- termini generali, le caratteristiche dei movimenti del gioco; a questo
- punto, per poter descrivere meglio il codice, sarà necessario razionalizzare
- quanto già detto precedentemente e schematizzarlo in maniera chiara:
+In 
+\series bold
+3.3.2
+\series default
+, abbiamo cominciato a spiegare quali sono, in termini generali, le caratteristi
+che dei movimenti del gioco; a questo punto, per poter descrivere meglio
+ il codice, sarà necessario razionalizzare quanto già detto precedentemente
+ e schematizzarlo in maniera chiara:
 \end_layout
 
 \begin_layout Standard
@@ -3634,7 +3638,7 @@ Partendo da:
 \noun on
 Destra, 
 \noun default
-avremo come effetto la seguente sequenza:
+avremo come effetto la sequenza:
 \end_layout
 
 \begin_layout Standard
@@ -4880,6 +4884,119 @@ non è possibile effettuare più di un'operazione di merging per riga/colonna
  nel corso dei movimenti di una singola mossa
 \series default
 .
+\end_layout
+
+\begin_layout Subsection
+Datapath - Out of the Box (VHDL)
+\end_layout
+
+\begin_layout Standard
+Concludiamo questa sezione mostrando i collegamenti 
+\begin_inset Quotes fld
+\end_inset
+
+out of the box
+\begin_inset Quotes frd
+\end_inset
+
+ che il 
+\emph on
+Datapath
+\emph default
+ instaura con 
+\emph on
+Controller
+\emph default
+ e 
+\emph on
+View.
+\end_layout
+
+\begin_layout Standard
+Come si può vedere, l'unico segnale che gli arriva dal 
+\emph on
+Controller
+\emph default
+, oltre al segnale di 
+\emph on
+bootstrap
+\emph default
+ per effettuare il 
+\emph on
+reset 
+\emph default
+del sistema, è la direzione della mossa.
+ Tutti gli altri segnali sono di uscita e comunicano al 
+\emph on
+Controller 
+\emph default
+lo stato della partita e alla 
+\emph on
+View
+\emph default
+ i valori della griglia di gioco e il punteggio corrente.
+\end_layout
+
+\begin_layout LyX-Code
+ENTITY GAME_DATAPATH IS 
+\end_layout
+
+\begin_layout LyX-Code
+PORT
+\end_layout
+
+\begin_layout LyX-Code
+( 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+clk       : IN STD_LOGIC; 
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+-- Connections for the Controller
+\end_layout
+
+\begin_layout LyX-Code
+bootstrap : IN STD_LOGIC;
+\end_layout
+
+\begin_layout LyX-Code
+movepadDirection                  : IN STD_LOGIC_VECTOR(3 downto 0);
+\end_layout
+
+\begin_layout LyX-Code
+goingReady, isGameOver, isVictory : OUT STD_LOGIC; 
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+-- Connections for the View
+\end_layout
+
+\begin_layout LyX-Code
+box_values : OUT GAME_GRID;
+\end_layout
+
+\begin_layout LyX-Code
+score      : OUT INTEGER RANGE 0 to 9999 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+);
+\end_layout
+
+\begin_layout LyX-Code
+end GAME_DATAPATH;
 \end_layout
 
 \end_body
