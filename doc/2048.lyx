@@ -2609,12 +2609,206 @@ l'unione
 \end_layout
 
 \begin_layout Standard
-Infine la meccanica di gioco prevede che conseguentemente ad ogni spostamento
- o merge venga, se libera almeno una casella, inserito un valore 
+Infine la meccanica di gioco prevede che conseguentemente ad ogni azione,
+ spostamento o merge, venga inserito in una casella vuota, scelta casualmente,
+ il valore 
 \series bold
-2 
+2
 \series default
-in posizione casuale.
+.
+ Nel caso in cui non sia presente neanche una casella vuota ci sono due
+ possibilità:
+\end_layout
+
+\begin_layout Enumerate
+C'è la possibilità di effettuare uno o più merge, non sono permessi movimenti,
+ infatti, la scacchiera risulterà essere completamente riempita da valori
+ diversi da 0;
+\end_layout
+
+\begin_layout Enumerate
+Non esiste nessuna azione possibile per l'utente, ovvero, tutte le caselle
+ sono non vuote e non esistono azioni di merge attuabili.
+ In pratica, abbiamo perso;
+\end_layout
+
+\begin_layout Standard
+Abbiamo quindi compreso che il gioco possa terminare in due forme:
+\end_layout
+
+\begin_layout Itemize
+Vittoria: raggiunto il valore 2048 in una calla qualsiasi;
+\end_layout
+
+\begin_layout Itemize
+Sconfitta: non posso compiere più movimenti, la scacchiera è bloccata, nessuna
+ direzione può cambiare lo stato attuale delle caselle del gioco;
+\end_layout
+
+\begin_layout Subsection
+FSM del modello
+\end_layout
+
+\begin_layout Standard
+Dalla precedente sottosezione (3.3.2) abbiamo cominciato a comprendere quali
+ sono in termini generali le caratteristiche del gioco.
+ A questo punto per poter scrivere del codice sarà necessario razionalizzare
+ quanto già detto precedentemente e schematizzarlo in maniera chiara.
+\end_layout
+
+\begin_layout Standard
+Quindi riassumendo gli stati che abbiamo rilevato precedentemente:
+\end_layout
+
+\begin_layout Itemize
+Stato iniziale: matrice 4x4 completamente a 0;
+\end_layout
+
+\begin_layout Itemize
+Stato di idle: lo stato della matrice resta invariato rispetto a quello
+ precedente, per esempio l'utente prova a compiere un movimento che non
+ comporta alcuna modifica reale, ma l'utente non ha ancora perso può ancora
+ compiere movimenti efficaci;
+\end_layout
+
+\begin_layout Itemize
+Stato di vittoria: l'utente ha raggiunto il valore di 2048 in una delle
+ caselle della scacchiera;
+\end_layout
+
+\begin_layout Itemize
+Stato di sconfitta: lo stato non può più essere modificato, la scacchiera
+ è bloccata;
+\end_layout
+
+\begin_layout Subsubsection
+Move e Merge
+\end_layout
+
+\begin_layout Standard
+Con questi 4 stati non riusciamo però a rappresentare in maniera completa
+ il nostro gioco, mancano tutto il funzionamento conseguente alle azioni
+ dell'utente, ovvero quelli che comportano dei veri e propri cambi di stato.
+ Abbiamo detto che le azioni sono raggruppabili in due gruppi quindi esisteranno
+ due tipologie di stati attivi:
+\end_layout
+
+\begin_layout Itemize
+Stato di merge: controllo la possibilità di effettuare il merge nella direzione
+ predeterminata dall'utente;
+\end_layout
+
+\begin_layout Itemize
+Stato di move: controllo la possibilità di effettuare il movimento nella
+ direzione indicata dall'utente;
+\end_layout
+
+\begin_layout Standard
+Il gioco ha delle regole ben fisse e questo comporta anche delle dimensioni
+ della scacchiera non variabili, ovvero 4x4.
+ Abbiamo quindi ipotizzato di utilizzare 3 stati di merge e 3 stati di move.
+ Ovvero, per ogni riga e/o per ogni colonna saranno possibili solamente
+ 3 movimenti e/o merge per ogni input inviato dall'utente.
+ Quindi in ordine dovremo prima controllare che sia possibile fare il merge
+ e poi verificare la possibilità di fare un movimento, questo per 3 volte,
+ in maniera da essere sicuri di aver tenuto conto di tutte le conseguenze
+ dell'input.
+ Infatti dalle regole del gioco ogni cella deve tentare di spostarsi fino
+ a dove è possibile quindi ad una direzione non corrisponde una sola azione
+ di merge e/o di move, ma al massimo 3.
+ Di seguito in figura 3.13 mostriamo la rappresentazione in stati finiti
+ per la gestione di movimenti e merge.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/FSM merge+move.jpg
+	scale 65
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+FSM azioni sul modello
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Inserimento in una cella casuale
+\end_layout
+
+\begin_layout Standard
+Sappiamo, inoltre, che dopo ogni movimento e/o merge sarà necessario aggiungere
+ in una cella casuale il valore 2.
+ Quindi, alla precedente FSM sarà necessario aggiungere un nuovo stato,
+ che abbiamo chiamato 
+\begin_inset Quotes fld
+\end_inset
+
+
+\series bold
+randupdate
+\series default
+
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Questo stato, infatti, cercherà di inserire in una cella casuale il valore
+ 2 in una cella vuota.
+ Nel caso in cui il valore casuale estratto sia corrispondente ad una cella
+ non vuota, allora dovrà estrarre un nuovo valore e ritentare l'inserimento.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/FSM randupdate.jpg
+	scale 65
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+FSM di figura 3.13 con stato di randupdate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
