@@ -2792,12 +2792,12 @@ Gli stati che occorrerà considerare sono quattro:
 \series bold
 Stato iniziale
 \series default
-, ovvero all'inizio della partita viene inizializzata la matrice con due
- celle casuali dal valore 2 (
+, ovvero fase precedente alla partita in cui vengono inizializzate tutte
+ le variabili che successivamente manterrano lo stato del gioco (
 \emph on
-bootstrap
+ fase di bootstrap
 \emph default
-)
+);
 \end_layout
 
 \begin_layout Itemize
@@ -2805,11 +2805,12 @@ bootstrap
 \series bold
 Gioco normale
 \series default
-, ovvero la fase dove l'utente può eseguire normalmente tutte le mosse (
+, ovvero la fase di gioco vero e proprio, dove l'utente può interagire con
+ il sistema ed eseguire normalmente tutte le mosse (
 \emph on
-playing
+fase di playing
 \emph default
-)
+);
 \end_layout
 
 \begin_layout Itemize
@@ -2819,13 +2820,17 @@ Vittoria
 \series default
 , ovvero la creazione di una cella dal valore di 
 \series bold
-2048 
+2048
+\series default
+, che per la logica del gioco risulta essere la 
+\series bold
+vittoria 
 \series default
 (
 \emph on
-victory
+fase finale di victory
 \emph default
-)
+);
 \end_layout
 
 \begin_layout Itemize
@@ -2834,11 +2839,15 @@ victory
 Sconfitta
 \series default
 , ovvero l'impossibilità per il giocatore di effettuare ulteriori mosse
- sulla griglia di gioco (
+ sulla griglia di gioco, in altre parole la 
+\series bold
+sconfitta
+\series default
+ (
 \emph on
-gameover
+fase finale di gameover
 \emph default
-)
+);
 \end_layout
 
 \begin_layout Standard
