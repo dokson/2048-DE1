@@ -2625,6 +2625,163 @@ END Behavioral;
 \end_layout
 
 \begin_layout Section
+Implementazione del Controller (Control Unit)
+\end_layout
+
+\begin_layout Standard
+Avendo adottato il design pattern 
+\emph on
+MVC 
+\emph default
+una delle 3 fasi principali della progettazione riguarda appunto il 
+\series bold
+Controller
+\series default
+.
+ Questo componente, già descritta precedentemente, ha il compito di gestire
+ le relazioni tra 
+\series bold
+Model
+\series default
+ e 
+\series bold
+View
+\series default
+.
+ In altre parole esso deve farsì che la View riesca a mostrare le modifiche
+ del modello senza realmente conoscerlo.
+\end_layout
+
+\begin_layout Standard
+Il primo compito che affideremo al Controller sarà appunto quello di gestire
+ lo stato dell'intero sistema.
+\end_layout
+
+\begin_layout Subsection
+Struttura del Controller
+\end_layout
+
+\begin_layout Subsubsection
+FSM del gioco
+\end_layout
+
+\begin_layout Standard
+Gli stati di sistema che occorrerà considerare sono quattro:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Stato iniziale
+\series default
+, ovvero fase precedente alla partita in cui vengono inizializzate tutte
+ le variabili che successivamente manterrano lo stato del gioco, nel modello
+ del gioco (
+\emph on
+ fase di bootstrap
+\emph default
+);
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Gioco normale
+\series default
+, ovvero la fase di gioco vero e proprio, dove l'utente può interagire con
+ il sistema ed eseguire normalmente tutte le mosse (
+\emph on
+fase di playing
+\emph default
+);
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Vittoria
+\series default
+, ovvero la creazione di una cella dal valore di 
+\series bold
+2048
+\series default
+, che per la logica del gioco risulta essere la 
+\series bold
+vittoria 
+\series default
+(
+\emph on
+fase finale di victory
+\emph default
+);
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Sconfitta
+\series default
+, ovvero l'impossibilità per il giocatore di effettuare ulteriori mosse
+ sulla griglia di gioco, in altre parole la 
+\series bold
+sconfitta
+\series default
+ (
+\emph on
+fase finale di gameover
+\emph default
+);
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/FSM_game.png
+	scale 95
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+FSM del gioco
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Riportiamo di seguito la rappresentazione in VHDL:
+\end_layout
+
+\begin_layout LyX-Code
+type GAME_STATE is (bootstrap, playing, gameover, victory);
+\end_layout
+
+\begin_layout Subsubsection
+Gestione degli Input
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
 Implementazione del Modello (Datapath)
 \end_layout
 
@@ -2777,109 +2934,6 @@ intero
 \emph default
 .
  
-\end_layout
-
-\begin_layout Subsubsection
-FSM del gioco
-\end_layout
-
-\begin_layout Standard
-Gli stati che occorrerà considerare sono quattro:
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Stato iniziale
-\series default
-, ovvero fase precedente alla partita in cui vengono inizializzate tutte
- le variabili che successivamente manterrano lo stato del gioco (
-\emph on
- fase di bootstrap
-\emph default
-);
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Gioco normale
-\series default
-, ovvero la fase di gioco vero e proprio, dove l'utente può interagire con
- il sistema ed eseguire normalmente tutte le mosse (
-\emph on
-fase di playing
-\emph default
-);
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Vittoria
-\series default
-, ovvero la creazione di una cella dal valore di 
-\series bold
-2048
-\series default
-, che per la logica del gioco risulta essere la 
-\series bold
-vittoria 
-\series default
-(
-\emph on
-fase finale di victory
-\emph default
-);
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Sconfitta
-\series default
-, ovvero l'impossibilità per il giocatore di effettuare ulteriori mosse
- sulla griglia di gioco, in altre parole la 
-\series bold
-sconfitta
-\series default
- (
-\emph on
-fase finale di gameover
-\emph default
-);
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename img/FSM_game.png
-	scale 95
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-FSM del gioco
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
