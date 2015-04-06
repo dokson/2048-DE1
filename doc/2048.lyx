@@ -2949,8 +2949,8 @@ constant keyDOWN 	: std_logic_vector(7 downto 0) := X"72";
 \end_layout
 
 \begin_layout Standard
-Ora riportiamo diversi estratti del codice per mostrare la gestione delle
- 4 direzioni ricevute dalla tastiera.
+Ora riportiamo un estratto del codice della controller unit per la gestione
+ delle direzioni:
 \end_layout
 
 \begin_layout LyX-Code
