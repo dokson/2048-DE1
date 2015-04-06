@@ -2837,6 +2837,184 @@ riniziare
 \emph on
 bootstrap.
  
+\emph default
+Come tasto corrispondente abbiamo selezionato 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+ESC
+\begin_inset Quotes frd
+\end_inset
+
+.
+ 
+\emph default
+Quindi in corrispondenza alla pressione del tasto di reset, qualsiasi sia
+ lo stato della FSM del gioco la control unit dovrà modificarlo in bootstrap.
+ Questo stato specificherà al model di resettarsi e di tornare allo stato
+ di gioco iniziale, che in logica di gioco corrisponderà all'inizio di una
+ nuova partita.
+ Segue il codice che si occupa di realizzare questo comportamento
+\emph on
+.
+\end_layout
+
+\begin_layout LyX-Code
+IF(keyboardData=keyRESET)  	
+\end_layout
+
+\begin_layout LyX-Code
+THEN 		
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+boot <= '1'; 		
+\end_layout
+
+\begin_layout LyX-Code
+state := BOOTSTRAP; 	
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\begin_layout Standard
+Per le direzioni dobbiamo mappare le 4 frecce in modo da informare il Model
+ su quale sarà l'azione da compiere di conseguenza.
+ Quindi nella logica VHDL servirà un segnale di uscita dalla control unit
+ che diventi input per il model.
+ Di seguito il codice VHDL di tale segnale:
+\end_layout
+
+\begin_layout LyX-Code
+movepadDirection : OUT STD_LOGIC_VECTOR(3 downto 0)
+\end_layout
+
+\begin_layout Standard
+Abbiamo utilizzato 4 bit di rappresentazione, anche se ne sarebbero bastati
+ solamente 2.
+ Questo per farsì che le direzioni si distinguano per almeno due bit una
+ dall'altra evitando situazioni di segnali spuri, che potrebbero influenzare
+ le meccaniche di gioco.
+\end_layout
+
+\begin_layout Standard
+Riassumendo nel seguente codice si mostrano le rappresentazioni selezionate
+ per codificare i 5 input ricevibili da tastiera:
+\end_layout
+
+\begin_layout LyX-Code
+-- RESET
+\end_layout
+
+\begin_layout LyX-Code
+constant keyRESET	: std_logic_vector(7 downto 0) := X"76"; 
+\end_layout
+
+\begin_layout LyX-Code
+-- DESTRA	
+\end_layout
+
+\begin_layout LyX-Code
+constant keyRIGHT	: std_logic_vector(7 downto 0) := X"74"; 
+\end_layout
+
+\begin_layout LyX-Code
+-- SINISTRA	
+\end_layout
+
+\begin_layout LyX-Code
+constant keyLEFT	: std_logic_vector(7 downto 0) := X"6B"; 
+\end_layout
+
+\begin_layout LyX-Code
+-- SU	
+\end_layout
+
+\begin_layout LyX-Code
+constant keyUP 		: std_logic_vector(7 downto 0) := X"75"; 
+\end_layout
+
+\begin_layout LyX-Code
+-- GIU	
+\end_layout
+
+\begin_layout LyX-Code
+constant keyDOWN 	: std_logic_vector(7 downto 0) := X"72";
+\end_layout
+
+\begin_layout Standard
+Ora riportiamo diversi estratti del codice per mostrare la gestione delle
+ 4 direzioni ricevute dalla tastiera.
+\end_layout
+
+\begin_layout LyX-Code
+		
+\end_layout
+
+\begin_layout LyX-Code
+case keyboardData is 				
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+when keyRIGHT => -- do move right 					
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+movepadDirection <= dirRIGHT; 				
+\end_layout
+
+\begin_layout LyX-Code
+when keyLEFT => -- do move left 					
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+movepadDirection <= dirLEFT; 				
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+when KEYUP => -- do move right 					
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+movepadDirection <= dirUP; 				
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+when KEYDOWN => -- do move left 					
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+movepadDirection <= dirDOWN; 				
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+when others => -- do nothing 					
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+movepadDirection <= "0000"; 			
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout LyX-Code
+end case;				 			
 \end_layout
 
 \begin_layout Section
