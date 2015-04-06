@@ -32,7 +32,7 @@ PROCESS
 	constant keyRESET	: std_logic_vector(7 downto 0) := X"76";
 	constant keyRIGHT	: std_logic_vector(7 downto 0) := X"74";
 	constant keyLEFT	: std_logic_vector(7 downto 0) := X"6B";
-	constant keyUP 	: std_logic_vector(7 downto 0) := X"75";
+	constant keyUP 		: std_logic_vector(7 downto 0) := X"75";
 	constant keyDOWN 	: std_logic_vector(7 downto 0) := X"72";
 
 BEGIN

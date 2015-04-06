@@ -2654,7 +2654,9 @@ View
 
 \begin_layout Standard
 Il primo compito che affideremo al Controller sarà appunto quello di gestire
- lo stato dell'intero sistema.
+ lo stato dell'intero sistema, questo anche in risposta agli input che riceverà
+ dall'esterno.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -2778,7 +2780,63 @@ Gestione degli Input
 \end_layout
 
 \begin_layout Standard
+Altro compito essenziale del nostro controller sarà, come già detto, la
+ gestione degli input inviati dall'utente tramite periferica PS/2.
+ Abbiamo già descritto precedentemente il protocollo PS/2 e abbiamo già
+ spiegato come funzionerà il componente che si occuperà di comunicare direttamen
+te con la periferica.
+ Quindi dal punto di vista del controller gli input dell'utente saranno
+ rappresentati da un segnale 
+\series bold
+keyboardData
+\series default
+, che in codice VHDL corrisponde a:
+\end_layout
 
+\begin_layout LyX-Code
+keyboardData: IN STD_LOGIC_VECTOR (7 downto 0);
+\end_layout
+
+\begin_layout Standard
+Tramite questo segnale giungeranno le codifiche rappresentative dei tasti
+ premuti dall'utente.
+ Analizzando la logica del nostro gioco ci si rende conto che dovremo mappare
+ le 
+\series bold
+4 direzioni
+\series default
+, per semplicità scegliamo le 4 frecce della tastiera.
+ Inoltre avremo bisogno di un tasto di 
+\series bold
+reset
+\series default
+ per poter riportare allo stato iniziale il gioco.
+\end_layout
+
+\begin_layout Standard
+Prima di passare alle 4 direzioni di movimento, andiamo ad analizzare il
+ comando di 
+\begin_inset Quotes fld
+\end_inset
+
+reset
+\begin_inset Quotes frd
+\end_inset
+
+, necessario per 
+\begin_inset Quotes fld
+\end_inset
+
+riniziare
+\begin_inset Quotes frd
+\end_inset
+
+ la partita da zero portando tutto il sistema allo stato iniziale.
+ Dalla figura 3.13 si può notare che questo stato corrisponderà, appunto,
+ a quello di 
+\emph on
+bootstrap.
+ 
 \end_layout
 
 \begin_layout Section
