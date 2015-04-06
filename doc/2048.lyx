@@ -2781,7 +2781,11 @@ Gestione degli Input
 
 \begin_layout Standard
 Altro compito essenziale del nostro controller sarà, come già detto, la
- gestione degli input inviati dall'utente tramite periferica PS/2.
+ gestione degli input inviati dall'utente tramite periferica 
+\series bold
+PS/2
+\series default
+.
  Abbiamo già descritto precedentemente il protocollo PS/2 e abbiamo già
  spiegato come funzionerà il componente che si occuperà di comunicare direttamen
 te con la periferica.
@@ -2790,7 +2794,11 @@ te con la periferica.
 \series bold
 keyboardData
 \series default
-, che in codice VHDL corrisponde a:
+, che in codice 
+\emph on
+VHDL
+\emph default
+ corrisponde a:
 \end_layout
 
 \begin_layout LyX-Code
@@ -2805,7 +2813,11 @@ Tramite questo segnale giungeranno le codifiche rappresentative dei tasti
 \series bold
 4 direzioni
 \series default
-, per semplicità scegliamo le 4 frecce della tastiera.
+, per semplicità scegliamo le 
+\series bold
+4 frecce
+\series default
+ della tastiera.
  Inoltre avremo bisogno di un tasto di 
 \series bold
 reset
@@ -2852,13 +2864,25 @@ ESC
  
 \emph default
 Quindi in corrispondenza alla pressione del tasto di reset, qualsiasi sia
- lo stato della FSM del gioco la control unit dovrà modificarlo in bootstrap.
+ lo stato della 
+\emph on
+FSM
+\emph default
+ del gioco la 
+\series bold
+Control Unit
+\series default
+ dovrà modificarlo in bootstrap.
  Questo stato specificherà al model di resettarsi e di tornare allo stato
  di gioco iniziale, che in logica di gioco corrisponderà all'inizio di una
  nuova partita.
  Segue il codice che si occupa di realizzare questo comportamento
 \emph on
 .
+\end_layout
+
+\begin_layout LyX-Code
+...
 \end_layout
 
 \begin_layout LyX-Code
@@ -2883,12 +2907,34 @@ state := BOOTSTRAP;
 END IF;
 \end_layout
 
+\begin_layout LyX-Code
+...
+\end_layout
+
 \begin_layout Standard
-Per le direzioni dobbiamo mappare le 4 frecce in modo da informare il Model
+Per le direzioni dobbiamo mappare le 4 frecce in modo da informare il 
+\series bold
+Model
+\series default
  su quale sarà l'azione da compiere di conseguenza.
- Quindi nella logica VHDL servirà un segnale di uscita dalla control unit
- che diventi input per il model.
- Di seguito il codice VHDL di tale segnale:
+ Quindi nella logica 
+\emph on
+VHDL
+\emph default
+ servirà un segnale di uscita dalla 
+\series bold
+Control Unit
+\series default
+ che diventi input per il 
+\emph on
+model
+\emph default
+.
+ Di seguito il codice 
+\emph on
+VHDL
+\emph default
+ di tale segnale:
 \end_layout
 
 \begin_layout LyX-Code
@@ -2896,11 +2942,25 @@ movepadDirection : OUT STD_LOGIC_VECTOR(3 downto 0)
 \end_layout
 
 \begin_layout Standard
-Abbiamo utilizzato 4 bit di rappresentazione, anche se ne sarebbero bastati
- solamente 2.
+Abbiamo utilizzato 4 
+\emph on
+bit
+\emph default
+ di rappresentazione, anche se ne sarebbero bastati solamente 2.
  Questo per farsì che le direzioni si distinguano per almeno due bit una
- dall'altra evitando situazioni di segnali spuri, che potrebbero influenzare
- le meccaniche di gioco.
+ dall'altra evitando situazioni di segnali 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+spuri
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+, che potrebbero influenzare le meccaniche di gioco.
 \end_layout
 
 \begin_layout Standard
@@ -2954,9 +3014,14 @@ Ora riportiamo un estratto del codice della controller unit per la gestione
 \end_layout
 
 \begin_layout LyX-Code
-		
+	
 \end_layout
 
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_deeper
 \begin_layout LyX-Code
 case keyboardData is 				
 \end_layout
@@ -3014,7 +3079,308 @@ movepadDirection <= "0000";
 \end_deeper
 \end_deeper
 \begin_layout LyX-Code
-end case;				 			
+end case;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout Subsubsection
+Stati di terminazione di gioco
+\end_layout
+
+\begin_layout Standard
+Come mostrato nella 
+\series bold
+figura 3.13
+\series default
+ esistono due possibili esiti per la partita in corso, vittoria o sconfitta.
+ Sarà quindi proprio il controller a dover reagire ad una eventuale situazione
+ di terminazione e modificare lo stato del sistema 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+playing
+\emph default
+ 
+\emph on
+→ 
+\series bold
+victory
+\series default
+
+\begin_inset Quotes frd
+\end_inset
+
+ 
+\emph default
+o 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+playing
+\emph default
+ 
+\emph on
+→ 
+\series bold
+gameover
+\series default
+
+\begin_inset Quotes frd
+\end_inset
+
+.
+ 
+\emph default
+Abbiamo però detto che è il modello del gioco a conoscere lo stato attuale
+ della partita vera e propria, quindi sarà compito di questo notificare
+ al controller un'eventuale vittoria o sconfitta.
+ Avremo così due segnali, entrambi in ingresso e rappresentati da un solo
+ bit.
+\end_layout
+
+\begin_layout LyX-Code
+isgameover	: IN STD_LOGIC;
+\end_layout
+
+\begin_layout LyX-Code
+isvictory	: IN STD_LOGIC;
+\end_layout
+
+\begin_layout Standard
+Quando uno di essi assume il valore positivo 
+\series bold
+1
+\series default
+, allora il controller pone lo stato corrispondente.
+ Naturalmente essi sono legati intrinsecamente da una logica 
+\series bold
+mutualmente esclusiva
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Gli stati di vittoria e sconfitta dovranno però avere delle conseguenze
+ 
+\begin_inset Quotes fld
+\end_inset
+
+grafiche
+\begin_inset Quotes frd
+\end_inset
+
+ nella 
+\series bold
+View
+\series default
+ per notificare all'utente l'eventuale terminazione.
+ Per questo il controller gestirà due segnali di output connessi alla View
+ (questi diventeranno positivi quando lo stato interno sarà rispettivamente
+ 
+\emph on
+victory 
+\emph default
+o 
+\emph on
+gameover
+\emph default
+)
+\emph on
+.
+ 
+\emph default
+Per dare un'idea più pratica del funzionamento mostriamo la gestione dello
+ stato di vittoria nel codice VHDL, quello di sconfitta è esattamente speculare:
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+when PLAYING =>
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+if(isvictory = '1') -- segnale proveniente dal modello		
+\end_layout
+
+\begin_layout LyX-Code
+then 				
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+state := VICTORY; -- registro che mantiene lo stato del sistema			
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end if;
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+when VICTORY => 			
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+won <= '1'; -- segnale di output connesso alla view
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout Standard
+Il segnale 
+\emph on
+won 
+\emph default
+è appunto il segnale viene inviato alla View per i motivi mostrati precedentemen
+te.
+\end_layout
+
+\begin_layout Subsection
+Control Unit - Out of the Box (VHDL)
+\end_layout
+
+\begin_layout Standard
+Per concludere mostriamo i collegamente, già in parte specificati nella
+ 
+\series bold
+sottosezione 3.3.1
+\series default
+, che il controller ha con gli altri due componenti del design pattern MVC.
+\end_layout
+
+\begin_layout LyX-Code
+ENTITY GAME_CONTROL IS 
+\end_layout
+
+\begin_layout LyX-Code
+PORT 	
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+(    		
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- INPUT 		
+\end_layout
+
+\begin_layout LyX-Code
+clk			: IN STD_LOGIC;		 		
+\end_layout
+
+\begin_layout LyX-Code
+keyboardData: IN STD_LOGIC_VECTOR (7 downto 0); 		
+\end_layout
+
+\begin_layout LyX-Code
+goingReady	: IN STD_LOGIC; 		
+\end_layout
+
+\begin_layout LyX-Code
+isgameover	: IN STD_LOGIC; 		
+\end_layout
+
+\begin_layout LyX-Code
+isvictory	: IN STD_LOGIC; 	
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+		
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- OUTPUT 		
+\end_layout
+
+\begin_layout LyX-Code
+boot,  		lost, 		
+\end_layout
+
+\begin_layout LyX-Code
+won			: OUT STD_LOGIC; 		
+\end_layout
+
+\begin_layout LyX-Code
+-- usiamo 4 bit anche se ne basterebbero 2 per descrivere le 4 direzioni
+ 		
+\end_layout
+
+\begin_layout LyX-Code
+movepadDirection : OUT STD_LOGIC_VECTOR(3 downto 0)  	
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+); 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end  GAME_CONTROL;
+\end_layout
+
+\begin_layout Standard
+Il segnale 
+\emph on
+goingReady 
+\emph default
+è un segnale del 
+\series bold
+Model
+\series default
+ che ha lo scopo di notificare al 
+\emph on
+controller
+\emph default
+ l'avvenuta inizializzazione di tutti i registri di tale componente.
+ Diciamo che è il segnale di 
+\emph on
+feedback
+\emph default
+ che permette alla 
+\series bold
+Control Unit
+\series default
+ di passare dallo stato di 
+\series bold
+\emph on
+bootstrap
+\series default
+\emph default
+ a quello di 
+\series bold
+\emph on
+playing
+\series default
+\emph default
+.
 \end_layout
 
 \begin_layout Section
