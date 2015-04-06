@@ -2885,7 +2885,24 @@ re quali sono le azioni che il nostro modello deve poter compiere per poter
 input
 \emph default
  inviato dall'utente.
- 
+ Come già detto precedentemente le mosse dell'utente saranno considerate
+ solamente nello stato di 
+\begin_inset Quotes fld
+\end_inset
+
+playing
+\begin_inset Quotes frd
+\end_inset
+
+ o 
+\begin_inset Quotes fld
+\end_inset
+
+gioco normale
+\begin_inset Quotes frd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
