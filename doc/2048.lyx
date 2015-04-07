@@ -618,14 +618,10 @@ Verilog o VHDL
 \end_layout
 
 \begin_layout Chapter
-Implementazione
-\end_layout
-
-\begin_layout Section
 Architettura Generale
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Datapath - Control Unit
 \end_layout
 
@@ -679,7 +675,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename img/Datapath-ControlUnit.png
-	scale 65
+	scale 70
 
 \end_inset
 
@@ -700,7 +696,7 @@ DataPath & Control-Unit
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Model - View - Controller
 \end_layout
 
@@ -761,7 +757,7 @@ ione
 
 \begin_deeper
 \begin_layout Itemize
-Gestisce un insieme di dati logicamente correlati 
+Gestisce un insieme di dati logicamente correlati
 \end_layout
 
 \begin_layout Itemize
@@ -769,7 +765,7 @@ Risponde alle interrogazioni sui dati
 \end_layout
 
 \begin_layout Itemize
-Risponde alle istruzioni di modifica dello stato 
+Risponde alle istruzioni di modifica dello stato
 \end_layout
 
 \end_deeper
@@ -800,7 +796,7 @@ VGA
 \begin_deeper
 \begin_layout Itemize
 Gestisce un’area di visualizzazione, nella quale presenta all’utente una
- vista dei dati gestiti dal modello 
+ vista dei dati gestiti dal modello
 \end_layout
 
 \begin_layout Itemize
@@ -830,16 +826,16 @@ modello
 
 \begin_deeper
 \begin_layout Itemize
-Gestisce gli input dell’utente 
+Gestisce gli input dell’utente
 \end_layout
 
 \begin_layout Itemize
-Mappa le azioni dell’utente in comandi 
+Mappa le azioni dell’utente in comandi
 \end_layout
 
 \begin_layout Itemize
 Invia tali comandi al modello e/o alla view che effettuano le operazioni
- appropriate 
+ appropriate
 \end_layout
 
 \end_deeper
@@ -875,7 +871,7 @@ Pattern Model View Controller
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Gestione dell'I/O
 \end_layout
 
@@ -912,7 +908,7 @@ display 7 segmenti
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Interfaccia PS/2 (INPUT)
 \end_layout
 
@@ -957,7 +953,7 @@ Interfaccia PS/2
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Protocollo
 \end_layout
 
@@ -1069,7 +1065,7 @@ generare il clock
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 La Tastiera
 \end_layout
 
@@ -1191,7 +1187,7 @@ status open
 \align left
 \begin_inset Graphics
 	filename img/keyboard.png
-	scale 75
+	scale 70
 
 \end_inset
 
@@ -1212,7 +1208,7 @@ Scan code set
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Comunicazione
 \end_layout
 
@@ -1323,7 +1319,7 @@ Comunicazione Tastiera → Board
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Il Componente 
 \begin_inset Quotes fld
 \end_inset
@@ -1502,7 +1498,7 @@ end process Keyboard;
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Interfaccia VGA (OUTPUT)
 \end_layout
 
@@ -1547,7 +1543,7 @@ Interfaccia VGA
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Protocollo
 \end_layout
 
@@ -1583,9 +1579,9 @@ standard VGA
 La connessione VGA standard termina con uno spinotto maschio a 15-pin, il
  cui pinout è mostrato in 
 \noun on
-Figura 3.8
+Figura 
 \noun default
-.
+4.6.
 \end_layout
 
 \begin_layout Standard
@@ -1783,9 +1779,9 @@ convertitore digitale analogico resistivo
 \emph default
  (
 \noun on
-Figura 3.7
+Figura 
 \noun default
-), ne determina il livello di tensione che andrà poi a colorare i pixel
+4.5), ne determina il livello di tensione che andrà poi a colorare i pixel
  a schermo.
  Nel nostro caso si utilizzano 
 \bar under
@@ -1818,7 +1814,7 @@ sincronismo orizzontale e verticale
 logica TTL.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 VGA Mode
 \end_layout
 
@@ -2038,7 +2034,7 @@ v_sync
  significa la fine di un frame e l'inizio del successivo.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Realizzazione in VHDL
 \end_layout
 
@@ -2346,7 +2342,7 @@ END IF;
 video_en := horizontal_en AND vertical_en;
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Interfaccia 7 Segmenti (OUTPUT)
 \end_layout
 
@@ -2457,7 +2453,7 @@ Posizione e indice di ciascun segmento in un Display 7 segmenti
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Realizzazione in VHDL
 \end_layout
 
@@ -2543,7 +2539,7 @@ digit_to_7seg
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Divisore di Frequenza
 \end_layout
 
@@ -2624,7 +2620,7 @@ half_clock <= counter(0);
 END Behavioral;
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Implementazione del Controller (Control Unit)
 \end_layout
 
@@ -2659,11 +2655,11 @@ Il primo compito che affideremo al Controller sarà appunto quello di gestire
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Struttura del Controller
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 FSM del gioco
 \end_layout
 
@@ -2775,7 +2771,7 @@ Riportiamo di seguito la rappresentazione in VHDL:
 type GAME_STATE is (bootstrap, playing, gameover, victory);
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Gestione degli Input
 \end_layout
 
@@ -2973,39 +2969,39 @@ Riassumendo nel seguente codice si mostrano le rappresentazioni selezionate
 \end_layout
 
 \begin_layout LyX-Code
-constant keyRESET	: std_logic_vector(7 downto 0) := X"76"; 
+constant keyRESET : std_logic_vector(7 downto 0) := X"76"; 
 \end_layout
 
 \begin_layout LyX-Code
--- DESTRA	
+-- DESTRA
 \end_layout
 
 \begin_layout LyX-Code
-constant keyRIGHT	: std_logic_vector(7 downto 0) := X"74"; 
+constant keyRIGHT : std_logic_vector(7 downto 0) := X"74";
 \end_layout
 
 \begin_layout LyX-Code
--- SINISTRA	
+-- SINISTRA
 \end_layout
 
 \begin_layout LyX-Code
-constant keyLEFT	: std_logic_vector(7 downto 0) := X"6B"; 
+constant keyLEFT  : std_logic_vector(7 downto 0) := X"6B";
 \end_layout
 
 \begin_layout LyX-Code
--- SU	
+-- SU
 \end_layout
 
 \begin_layout LyX-Code
-constant keyUP 		: std_logic_vector(7 downto 0) := X"75"; 
+constant keyUP    : std_logic_vector(7 downto 0) := X"75";
 \end_layout
 
 \begin_layout LyX-Code
--- GIU	
+-- GIU
 \end_layout
 
 \begin_layout LyX-Code
-constant keyDOWN 	: std_logic_vector(7 downto 0) := X"72";
+constant keyDOWN  : std_logic_vector(7 downto 0) := X"72";
 \end_layout
 
 \begin_layout Standard
@@ -3036,6 +3032,7 @@ when keyRIGHT => -- do move right
 movepadDirection <= dirRIGHT; 				
 \end_layout
 
+\end_deeper
 \begin_layout LyX-Code
 when keyLEFT => -- do move left 					
 \end_layout
@@ -3057,7 +3054,7 @@ movepadDirection <= dirUP;
 
 \end_deeper
 \begin_layout LyX-Code
-when KEYDOWN => -- do move left 					
+when KEYDOWN => -- do move left 			
 \end_layout
 
 \begin_deeper
@@ -3077,7 +3074,6 @@ movepadDirection <= "0000";
 
 \end_deeper
 \end_deeper
-\end_deeper
 \begin_layout LyX-Code
 end case;
 \end_layout
@@ -3087,14 +3083,14 @@ end case;
 ...
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Stati di terminazione di gioco
 \end_layout
 
 \begin_layout Standard
 Come mostrato nella 
 \series bold
-figura 3.13
+figura 5.1
 \series default
  esistono due possibili esiti per la partita in corso, vittoria o sconfitta.
  Sarà quindi proprio il controller a dover reagire ad una eventuale situazione
@@ -3147,11 +3143,11 @@ Abbiamo però detto che è il modello del gioco a conoscere lo stato attuale
 \end_layout
 
 \begin_layout LyX-Code
-isgameover	: IN STD_LOGIC;
+isgameover : IN STD_LOGIC;
 \end_layout
 
 \begin_layout LyX-Code
-isvictory	: IN STD_LOGIC;
+isvictory  : IN STD_LOGIC;
 \end_layout
 
 \begin_layout Standard
@@ -3221,7 +3217,7 @@ then
 
 \begin_deeper
 \begin_layout LyX-Code
-state := VICTORY; -- registro che mantiene lo stato del sistema			
+state := VICTORY; -- registro che mantiene lo stato del sistema		
 \end_layout
 
 \end_deeper
@@ -3235,7 +3231,7 @@ end if;
 
 \end_deeper
 \begin_layout LyX-Code
-when VICTORY => 			
+when VICTORY => 
 \end_layout
 
 \begin_deeper
@@ -3258,15 +3254,14 @@ won
 te.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Control Unit - Out of the Box (VHDL)
 \end_layout
 
 \begin_layout Standard
-Per concludere mostriamo i collegamente, già in parte specificati nella
- 
+Per concludere mostriamo i collegamenti, già in parte specificati nella
 \series bold
-sottosezione 3.3.1
+ Sezione 5.1.3
 \series default
 , che il controller ha con gli altri due componenti del design pattern MVC.
 \end_layout
@@ -3290,23 +3285,23 @@ PORT
 \end_layout
 
 \begin_layout LyX-Code
-clk			: IN STD_LOGIC;		 		
+clk	      : IN STD_LOGIC;		 		
 \end_layout
 
 \begin_layout LyX-Code
-keyboardData: IN STD_LOGIC_VECTOR (7 downto 0); 		
+keyboardData : IN STD_LOGIC_VECTOR (7 downto 0); 		
 \end_layout
 
 \begin_layout LyX-Code
-goingReady	: IN STD_LOGIC; 		
+goingReady   : IN STD_LOGIC; 		
 \end_layout
 
 \begin_layout LyX-Code
-isgameover	: IN STD_LOGIC; 		
+isgameover   : IN STD_LOGIC; 		
 \end_layout
 
 \begin_layout LyX-Code
-isvictory	: IN STD_LOGIC; 	
+isvictory    : IN STD_LOGIC; 	
 \end_layout
 
 \end_deeper
@@ -3320,11 +3315,7 @@ isvictory	: IN STD_LOGIC;
 \end_layout
 
 \begin_layout LyX-Code
-boot,  		lost, 		
-\end_layout
-
-\begin_layout LyX-Code
-won			: OUT STD_LOGIC; 		
+boot, lost, won  : OUT STD_LOGIC;
 \end_layout
 
 \begin_layout LyX-Code
@@ -3383,7 +3374,7 @@ playing
 .
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Implementazione del Modello (Datapath)
 \end_layout
 
@@ -3438,11 +3429,11 @@ stati
  del gioco, che spiegheremo più approfonditamente nei nei prossimi paragrafi.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Struttura del modello
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Griglia di gioco
 \end_layout
 
@@ -3523,7 +3514,7 @@ View
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Punteggio della partita
 \end_layout
 
@@ -3538,7 +3529,7 @@ intero
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Azioni sul modello
 \end_layout
 
@@ -3661,7 +3652,7 @@ aggiunta di una nuova cella
  in una posizione casuale libera della griglia di gioco.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 L'algoritmo 
 \begin_inset Quotes fld
 \end_inset
@@ -3731,7 +3722,7 @@ merge e move
 passo-passo, una per volta.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 FSM della logica delle azioni
 \end_layout
 
@@ -5568,7 +5559,7 @@ non è possibile effettuare più di un'operazione di merging per riga/colonna
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Datapath - Out of the Box (VHDL)
 \end_layout
 
