@@ -17,7 +17,7 @@ PACKAGE GAME_TYPES IS
 	
 	-- Stati interni del Datapath
 	type DATA_STATE is (randupdate, checkupdate, idle, merge1, move1, merge2, move2, merge3, move3);
-	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer range 0 to 4000;
+	type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0) of integer;
 	
 	-- tipi per la grafica
 	subtype RGB_COLOR is std_logic_vector(11 downto 0);
