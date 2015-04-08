@@ -2840,8 +2840,11 @@ riniziare
 \end_inset
 
  la partita da zero portando tutto il sistema allo stato iniziale.
- Dalla figura 3.13 si può notare che questo stato corrisponderà, appunto,
- a quello di 
+ Dalla 
+\series bold
+figura 5.1
+\series default
+ si può notare che questo stato corrisponderà, appunto, a quello di 
 \emph on
 bootstrap.
  
