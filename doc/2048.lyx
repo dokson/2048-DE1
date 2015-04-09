@@ -2964,7 +2964,15 @@ spuri
 
 \begin_layout Standard
 Riassumendo nel seguente codice si mostrano le rappresentazioni selezionate
- per codificare i 5 input ricevibili da tastiera:
+ per codificare i 
+\series bold
+5 input
+\series default
+ ricevibili da tastiera (vedere
+\noun on
+ Figura 4.3
+\noun default
+ per lo scan code set)
 \end_layout
 
 \begin_layout LyX-Code
@@ -3010,10 +3018,6 @@ constant keyDOWN  : std_logic_vector(7 downto 0) := X"72";
 \begin_layout Standard
 Ora riportiamo un estratto del codice della controller unit per la gestione
  delle direzioni:
-\end_layout
-
-\begin_layout LyX-Code
-	
 \end_layout
 
 \begin_layout LyX-Code
@@ -3497,7 +3501,7 @@ constant GRID_HEIGHT : INTEGER RANGE 0 to 7 := 4;
 
 \begin_layout LyX-Code
 type GAME_GRID is array (GRID_HEIGHT-1 downto 0, GRID_WIDTH -1 downto 0)
- of integer range 0 to 4000;
+ of integer;
 \end_layout
 
 \begin_layout Standard
@@ -5688,18 +5692,15 @@ il protocollo
 \series bold
 VGA
 \series default
-, messo a disposizione dal 
+, messo a disposizione dalla 
 \emph on
 DE-1
 \emph default
  per la gestione degli output a video.
- A questo punto non ci resta che implementare un componente che gestisca
- questo protocollo e che ci permetta di disegnare su monitor un'interfaccia
- simile a quella utilizzata dal gioco originale in 
-\emph on
-Javascript
-\emph default
-, sempre tenendo presente che abbiamo una risoluzione massima di 
+ A questo punto non ci resta che implementare un componente che ci permetta
+ di disegnare pixel per pixel un'interfaccia simile a quella utilizzata
+ dal gioco originale, sempre tenendo in considerazione il fatto di avere
+ a che fare con una risoluzione di 
 \series bold
 640x480
 \series default
@@ -5707,49 +5708,381 @@ Javascript
 \end_layout
 
 \begin_layout Standard
-Osservando il gioco originale si nota che principalmente vi sono 3 componenti:
-\end_layout
-
-\begin_layout Itemize
-Una 
+Abbiamo deciso di scomporre la realizzazione attraverso un approccio
 \series bold
-view principale
+ top-down
 \series default
- che conterrà tutti i componenti grafici e che si occuperà di comunicare
- con modello e controller;
+, ovvero partendo dal componente più esterno, suddividendolo successivamente
+ in parti più piccole, di conseguenza abbiamo realizzato 4 livelli di componenti
+:
 \end_layout
 
-\begin_layout Itemize
-Una 
+\begin_layout Enumerate
+La 
 \series bold
-griglia
+View 
+\series default
+principale che conterrà tutti i componenti grafici e che si occuperà di
+ comunicare con modello e controller
+\end_layout
+
+\begin_layout Enumerate
+La 
+\series bold
+Grid
 \series default
  (
+\emph on
+scacchiera
+\emph default
+) che dovrà contenere le 16 celle
+\end_layout
+
+\begin_layout Enumerate
+I singoli 
+\series bold
+Box
+\series default
+ (
+\emph on
+celle
+\emph default
+) che avranno un determinato colore in base al valore contenuto
+\end_layout
+
+\begin_layout Enumerate
+I 
+\series bold
+valori 
+\series default
+delle singole celle, che sono appunto i valori numerici da dover mostrare
+ a video
+\end_layout
+
+\begin_layout Section
+View (Top-level)
+\end_layout
+
+\begin_layout Standard
+Questa classe si occupa di disegnare i componenti 
 \begin_inset Quotes fld
 \end_inset
 
 
 \emph on
-scacchiera
+sottostanti
 \emph default
 
 \begin_inset Quotes frd
 \end_inset
 
-) che dovrà contenere le 16 celle.
-\end_layout
-
-\begin_layout Itemize
-Le singole 
-\series bold
-celle
-\series default
- che avranno un proprio colore in base al valore contenuto e naturalmente
- dovranno mostrare anche il valore stesso.
+ e contiene il codice già riportato nella 
+\noun on
+Sezione 4.2.3 
+\noun default
+per la corretta realizzazione del protocollo VGA.
 \end_layout
 
 \begin_layout Standard
-Quindi procederemo all'implementazione di ognuno di questi componenti.
+Per creare il riquadro di gioco, sono stati innanzitutto definiti i valori
+ in pixel dei 4 bordi (
+\emph on
+upBorder, downBorder, leftBorder, rightBorder
+\emph default
+) per poter a colorare la regione esterna diversamente dallo sfondo.
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout LyX-Code
+-- Disegno Bordi
+\end_layout
+
+\begin_layout LyX-Code
+IF
+\end_layout
+
+\begin_layout LyX-Code
+( 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+h_cnt <= leftBorder OR  -- BORDO LEFT
+\end_layout
+
+\begin_layout LyX-Code
+h_cnt >= rightBorder OR -- BORDO RIGHT
+\end_layout
+
+\begin_layout LyX-Code
+v_cnt <= upBorder OR    -- BORDO UP
+\end_layout
+
+\begin_layout LyX-Code
+v_cnt >= downBorder 	-- BORDO DOWN
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+)
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+colorRGB := COLOR_BORDER;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+-- SE NON È BORDO, È SFONDO
+\end_layout
+
+\begin_layout LyX-Code
+ELSE
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+colorRGB := COLOR_BG;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout Standard
+Il segnale 
+\emph on
+colorRGB
+\emph default
+ è a 12bit e i colori utilizzati nei nostri codici sono stati definiti in
+ 
+\noun on
+esadecimale
+\noun default
+ in un package di supporto da noi creato (
+\emph on
+GAME_TYPES.vhd
+\emph default
+).
+\end_layout
+
+\begin_layout Standard
+Inoltre, in relazione agli stati di 
+\series bold
+Vittoria
+\series default
+ e 
+\series bold
+Sconfitta
+\series default
+ (vedi 
+\noun on
+sezione 5.1.1
+\noun default
+), questo modulo si occupa di visualizzare a schermo le scritte che identificano
+ la particolare situazione.
+ La richiesta di disegno di una particolare scritta è mutuata dalla
+\series bold
+ Control Unit
+\series default
+ tramite i segnali 
+\emph on
+won 
+\emph default
+e 
+\emph on
+lost
+\emph default
+.
+ Sulla logica e sulla realizzazione dei singolicaratteri delle scritte ci
+ soffermeremo più avanti all'interno di questo capitolo.
+\end_layout
+
+\begin_layout Section
+Grid
+\end_layout
+
+\begin_layout Standard
+All'interno di questa classe sono state semplicemente definite le coordinate
+ dei 
+\series bold
+16 singoli Box
+\series default
+, indicando i valori in pixel di inizio delle singole righe e colonne, per
+ un totale quindi di 8 valori (
+\emph on
+XfirstColumn, YfirstRow, XsecondColumn, YsecondRow, XthirdColumn, YthirdRow,
+ XfourthColumn, YfourthRow
+\emph default
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Questa classe si occupa semplicemente di mandare il segnale relativo al
+ 
+\series bold
+colore
+\series default
+ da disegnare alla vista, che gli arriva dai singoli box.
+ Il segnale relativo al colore viene selezionato attraverso un 
+\emph on
+Multiplexer
+\emph default
+, a seconda che ci si trovi all'interno delle coordinate del determinato
+ box, che quindi avrà 
+\begin_inset Quotes fld
+\end_inset
+
+il controllo
+\begin_inset Quotes frd
+\end_inset
+
+ del colore.
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+[Game_VIEW.vhd]
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout LyX-Code
+-- Disegno griglia di gioco
+\end_layout
+
+\begin_layout LyX-Code
+IF (drawGrid = '1')
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+colorRGB := colorGrid;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\begin_layout LyX-Code
+...
+\end_layout
+
+\begin_layout Standard
+Questo è il codice contenuto all'interno della 
+\series bold
+View
+\series default
+ con cui viene utilizzato il segnale colore che arriva dalla classe 
+\series bold
+Grid
+\series default
+.
+\end_layout
+
+\begin_layout Section
+Box
+\end_layout
+
+\begin_layout Standard
+La classe 
+\series bold
+Box
+\series default
+ si occupa di decidere il colore sulla base del valore contenuto e di 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+accendere
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ le cifre all'interno del box.
+ In caso in cui il valore sia 0, come già detto, il box non fa visualizzare
+ nulla.
+\end_layout
+
+\begin_layout Standard
+Nella classe sono state definite le 
+\series bold
+dimensioni fisse
+\series default
+ del box (e le relative coordinate finali) e le 
+\series bold
+coordinate
+\series default
+ (centrali) di 
+\bar under
+dove saranno posizionate le cifre
+\bar default
+ all'interno del box.
+\end_layout
+
+\begin_layout LyX-Code
+-- Dimensioni fisse di tutti i box
+\end_layout
+
+\begin_layout LyX-Code
+constant larghezza : integer range 0 to 200 := 150; 
+\end_layout
+
+\begin_layout LyX-Code
+constant altezza   : integer range 0 to 200 := 105; 
+\end_layout
+
+\begin_layout LyX-Code
+-- Coordinate finali del cubo sullo schermo
+\end_layout
+
+\begin_layout LyX-Code
+constant MAX_X  : integer range 0 to 1000 := XPOS + larghezza; -- larghezza
+\end_layout
+
+\begin_layout LyX-Code
+constant MAX_Y  : integer range 0 to 500  := YPOS + altezza;   -- altezza
+ 
+\end_layout
+
+\begin_layout LyX-Code
+-- Coordinate delle cifre sullo schermo
+\end_layout
+
+\begin_layout LyX-Code
+constant X_CHAR : integer range 0 to 1000 := XPOS + larghezza/2; 
+\end_layout
+
+\begin_layout LyX-Code
+constant Y_CHAR : integer range 0 to 500  := YPOS + altezza/2; 
+\end_layout
+
+\begin_layout LyX-Code
+constant SPACE  : integer range 0 to 15   := 10;
 \end_layout
 
 \end_body
