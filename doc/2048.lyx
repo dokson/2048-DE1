@@ -5675,5 +5675,82 @@ score      : OUT INTEGER RANGE 0 to 9999
 end GAME_DATAPATH;
 \end_layout
 
+\begin_layout Chapter
+Implementazione della View
+\end_layout
+
+\begin_layout Standard
+Abbiamo già presentato nella 
+\series bold
+sezione 4.2 
+\series default
+il protocollo 
+\series bold
+VGA
+\series default
+, messo a disposizione dal 
+\emph on
+DE-1
+\emph default
+ per la gestione degli output a video.
+ A questo punto non ci resta che implementare un componente che gestisca
+ questo protocollo e che ci permetta di disegnare su monitor un'interfaccia
+ simile a quella utilizzata dal gioco originale in 
+\emph on
+Javascript
+\emph default
+, sempre tenendo presente che abbiamo una risoluzione massima di 
+\series bold
+640x480
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Osservando il gioco originale si nota che principalmente vi sono 3 componenti:
+\end_layout
+
+\begin_layout Itemize
+Una 
+\series bold
+view principale
+\series default
+ che conterrà tutti i componenti grafici e che si occuperà di comunicare
+ con modello e controller;
+\end_layout
+
+\begin_layout Itemize
+Una 
+\series bold
+griglia
+\series default
+ (
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+scacchiera
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+) che dovrà contenere le 16 celle.
+\end_layout
+
+\begin_layout Itemize
+Le singole 
+\series bold
+celle
+\series default
+ che avranno un proprio colore in base al valore contenuto e naturalmente
+ dovranno mostrare anche il valore stesso.
+\end_layout
+
+\begin_layout Standard
+Quindi procederemo all'implementazione di ognuno di questi componenti.
+\end_layout
+
 \end_body
 \end_document
