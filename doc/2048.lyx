@@ -298,68 +298,6 @@ Esempio della Schermata di Gioco
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Colori delle caselle
-\end_layout
-
-\begin_layout Standard
-Nel gioco, ogni numero è abbinato ad un colore differente.
- Tutti sono "colori caldi", ovvero colori derivati dal rosso, eccetto per
- il 2 che presenta una tonalità di grigio.
-\end_layout
-
-\begin_layout Standard
-Il 4 presenta una tonalità beige mentre dall'8 al 64 i numeri sono abbinati
- a varie tonalità di rosso che variano dal mattone per l'8 al sangue per
- il 64.
-\end_layout
-
-\begin_layout Standard
-Raggiunto il 128, i numeri tornano chiari, utilizzando la tonalità ocra
- fino al 2048: da un pallido giallo del 128, infatti le tonalità s'intensificano
- con il 256, il 512 e il 1024 sino a giungere il 2048 che è di colore ocra
- intenso/oro.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename img/colours.png
-	scale 75
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Colori originali delle caselle del gioco
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
 Analisi
 \end_layout
@@ -5755,8 +5693,8 @@ I
 \series bold
 valori 
 \series default
-delle singole celle, che sono appunto i valori numerici da dover mostrare
- a video
+delle singole celle, che sono appunto i singoli valori numerici da dover
+ mostrare a video
 \end_layout
 
 \begin_layout Section
@@ -6083,6 +6021,675 @@ constant Y_CHAR : integer range 0 to 500  := YPOS + altezza/2;
 
 \begin_layout LyX-Code
 constant SPACE  : integer range 0 to 15   := 10;
+\end_layout
+
+\begin_layout Subsection
+Colori delle caselle
+\end_layout
+
+\begin_layout Standard
+Nel gioco, ogni numero è abbinato ad un colore differente.
+ Tutti sono 
+\emph on
+colori caldi
+\emph default
+, ovvero colori derivati dal rosso, eccetto per il 
+\series bold
+2
+\series default
+ che presenta una tonalità di grigio.
+\end_layout
+
+\begin_layout Standard
+Il 
+\series bold
+4
+\series default
+ presenta una tonalità beige mentre dall'
+\series bold
+8
+\series default
+ al 
+\series bold
+64
+\series default
+ i numeri sono abbinati a varie tonalità di rosso che variano dal mattone
+ per l'8 al sangue per il 64.
+\end_layout
+
+\begin_layout Standard
+Raggiunto il 
+\series bold
+128
+\series default
+, i numeri tornano chiari, utilizzando la tonalità ocra fino al 
+\series bold
+2048
+\series default
+: da un pallido giallo del 128, infatti le tonalità s'intensificano con
+ il 
+\series bold
+256
+\series default
+, il 
+\series bold
+512
+\series default
+ e il 
+\series bold
+1024
+\series default
+ sino a giungere il 2048 che è di colore ocra intenso/oro.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/colours.png
+	scale 80
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Colori originali delle caselle del gioco
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Come già detto nella 
+\noun on
+Sezione 7.1,
+\noun default
+ tutti gli 11 colori (
+\emph on
+in realtà 12 considerando le 
+\bar under
+celle vuote
+\emph default
+\bar default
+) sopraindicati sono stati definiti in un apposito package, convertendoli
+ nella loro rappresentazione a 12 bit, indicata per comodità in esadecimale.
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_0	: RGB_COLOR := X"999";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_2	: RGB_COLOR := X"EED";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_4	: RGB_COLOR := X"FEC";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_8	: RGB_COLOR := X"EA7";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_16   : RGB_COLOR := X"E85";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_32   : RGB_COLOR := X"E65";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_64   : RGB_COLOR := X"E53";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_128  : RGB_COLOR := X"FE5";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_256  : RGB_COLOR := X"ED4";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_512  : RGB_COLOR := X"ED0";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_1024 : RGB_COLOR := X"EC0";
+\end_layout
+
+\begin_layout LyX-Code
+constant COLOR_2048 : RGB_COLOR := X"EB0";
+\end_layout
+
+\begin_layout Section
+Valori e Caratteri
+\end_layout
+
+\begin_layout Subsection
+ROM dei Caratteri
+\end_layout
+
+\begin_layout Standard
+La visualizzazione su schermo dei caratteri, dovendo produrre scritture
+ di varia natura, sia 
+\emph on
+cifre
+\emph default
+ che 
+\emph on
+lettere
+\emph default
+, ovvero tutti i 
+\bar under
+caratteri di testo
+\bar default
+ 
+\series bold
+ASCII
+\series default
+ sul display 
+\series bold
+VGA
+\series default
+, ha portato alla produzione di una 
+\emph on
+libreria 
+\emph default
+contenente i primi 
+\series bold
+128
+\series default
+ caratteri 
+\series bold
+0x00-0x7F
+\series default
+ (0-127) della tabella 
+\series bold
+\noun on
+ASCII / ISO 8859-1 (Latin-1)
+\series default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://cs.stanford.edu/people/miles/iso8859.html
+\end_layout
+
+\end_inset
+
+
+\noun default
+ disegnati 
+\series bold
+pixel per pixel: 
+\series default
+ogni carattere, per nostra comodità, avrà una dimensione di 
+\series bold
+8 pixel di larghezza
+\series default
+ per un'
+\series bold
+altezza di 16 pixel
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Abbiamo deciso di creare una 
+\series bold
+ROM
+\series default
+ contenente il modello dei pixel che dovranno essere visualizzati sullo
+ schermo quando un particolare carattere deve essere visualizzato.
+ I bit contenuti all'interno di questa ROM indicano quali pixel del 
+\series bold
+rettangolo di 8x16 
+\series default
+dovranno essere 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+accesi
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ per ciascuna linea; quindi molto semplicemente:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+'1'
+\series default
+ indica che il pixel corrispondente deve essere acceso
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+'0'
+\series default
+ indica che il pixel corrispondente 
+\series bold
+non
+\series default
+ deve assere acceso
+\end_layout
+
+\begin_layout Standard
+Ad esempio il carattere 
+\series bold
+'O'
+\series default
+, alla 
+\emph on
+posizione 79
+\emph default
+ della tabella, è stato così rappresentato:
+\end_layout
+
+\begin_layout LyX-Code
+-- carattere 79 		
+\end_layout
+
+\begin_layout LyX-Code
+"00000000", -- 0 		
+\end_layout
+
+\begin_layout LyX-Code
+"00000000", -- 1 		
+\end_layout
+
+\begin_layout LyX-Code
+"01111100", -- 2  ***** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 3 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 4 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 5 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 6 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 7 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 8 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- 9 **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"11000110", -- a **   ** 
+\end_layout
+
+\begin_layout LyX-Code
+"01111100", -- b  ***** 
+\end_layout
+
+\begin_layout LyX-Code
+"00000000", -- c 		
+\end_layout
+
+\begin_layout LyX-Code
+"00000000", -- d 		
+\end_layout
+
+\begin_layout LyX-Code
+"00000000", -- e 		
+\end_layout
+
+\begin_layout LyX-Code
+"00000000", -- f
+\end_layout
+
+\begin_layout Standard
+Si noti che, per comodità di ricerca e di comprensione, a fianco di ogni
+ riga di pixel è stato aggiunto nel commento la linea da 
+\series bold
+0 a 16 (
+\emph on
+0-F
+\emph default
+)
+\series default
+ del carattere e il corrispondente risultato che dovrebbe essere prodotto
+ a video.
+ Di seguito il codice 
+\emph on
+VHDL
+\emph default
+ che rappresenta il modello della classe:
+\end_layout
+
+\begin_layout LyX-Code
+entity GAME_CHROM is 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+port
+\end_layout
+
+\begin_layout LyX-Code
+(
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- INPUT 
+\end_layout
+
+\begin_layout LyX-Code
+char_addr: IN STD_LOGIC_VECTOR(6 downto 0);
+\end_layout
+
+\begin_layout LyX-Code
+row_addr : IN STD_LOGIC_VECTOR(3 downto 0); 
+\end_layout
+
+\begin_layout LyX-Code
+-- OUTPUT
+\end_layout
+
+\begin_layout LyX-Code
+data : OUT STD_LOGIC_VECTOR(7 downto 0) -- vettore di pixel accesi/spenti
+ 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+); 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+end GAME_CHROM;
+\end_layout
+
+\begin_layout Standard
+In 
+\series bold
+ingresso
+\series default
+ troviamo l'indirizzo del carattere (
+\emph on
+char_addr
+\emph default
+), che permette appunto di selezionare i 128 caratteri contenuti nella ROM,
+ affiancati dai 4 bit (
+\emph on
+row_addr
+\emph default
+) che permettono di selezionare le 16 righe di pixel: in 
+\series bold
+uscita
+\series default
+ troviamo quindi il vettore di bit che rappresenta la determinata linea
+ del carattere.
+\end_layout
+
+\begin_layout Subsection
+Contenitore/Visualizzatore del Carattere
+\end_layout
+
+\begin_layout Standard
+Per un comodo utilizzo della ROM appena spiegata, ci siamo prodotti un'ulteriore
+ classe per la visualizzazione di un determinato carattere ad una posizione
+ specifica.
+ Qui di seguito il codice che andremo a spiegare nel dettaglio per capirne
+ il meccanismo.
+\end_layout
+
+\begin_layout LyX-Code
+entity Game_CHDISPLAY is 
+\end_layout
+
+\begin_layout LyX-Code
+-- Coordinate del box 
+\end_layout
+
+\begin_layout LyX-Code
+generic 	
+\end_layout
+
+\begin_layout LyX-Code
+( 		
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+XPOS : IN NATURAL;
+\end_layout
+
+\begin_layout LyX-Code
+YPOS : IN NATURAL 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+);
+\end_layout
+
+\begin_layout LyX-Code
+port
+\end_layout
+
+\begin_layout LyX-Code
+( 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- INPUT 
+\end_layout
+
+\begin_layout LyX-Code
+pixel_x : IN INTEGER RANGE 0 to 1000;
+\end_layout
+
+\begin_layout LyX-Code
+pixel_y : IN INTEGER RANGE 0 to 500;
+\end_layout
+
+\begin_layout LyX-Code
+char_code : IN CHARACTER;
+\end_layout
+
+\begin_layout LyX-Code
+-- OUTPUT 
+\end_layout
+
+\begin_layout LyX-Code
+drawChar : OUT STD_LOGIC := '0' -- disegna il char quando drawChar = 1
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+); 
+\end_layout
+
+\begin_layout LyX-Code
+end Game_CHDISPLAY;
+\end_layout
+
+\begin_layout Standard
+Ogni carattere viene inizializzato ad una determinata posizione
+\emph on
+ (X,Y)
+\emph default
+ e il segnale 
+\emph on
+drawChar
+\emph default
+ in uscita indicherà alla vista quando accendere i pixel del carattere,
+ tramite i valori 
+\emph on
+h_cnt
+\emph default
+ e 
+\emph on
+v_cnt
+\emph default
+ dati in ingresso (vedi 
+\noun on
+Sezione 4.2
+\noun default
+).
+\end_layout
+
+\begin_layout Standard
+Se volessimo disegnare il carattere 
+\series bold
+'O'
+\series default
+ sopradescritto alle coordinate (
+\series bold
+100,50
+\series default
+) sarebbe sufficiente inserire nella 
+\emph on
+View
+\emph default
+ il seguente frammento di codice:
+\end_layout
+
+\begin_layout LyX-Code
+CHAR_O: entity work.GAME_CHDISPLAY
+\end_layout
+
+\begin_layout LyX-Code
+generic map 
+\end_layout
+
+\begin_layout LyX-Code
+( 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\series bold
+XPOS => 100, YPOS => 50
+\series default
+ 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+)
+\end_layout
+
+\begin_layout LyX-Code
+port map 
+\end_layout
+
+\begin_layout LyX-Code
+( 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+pixel_x => h_cnt, pixel_y => v_cnt, 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+char_code => 'O'
+\series default
+, 
+\end_layout
+
+\begin_layout LyX-Code
+drawChar => drawChar_O
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+);
+\end_layout
+
+\begin_layout Standard
+E dalla 
+\series bold
+View
+\series default
+ basterebbe utilizzare il segnale 
+\emph on
+drawChar_O
+\emph default
+ per poterlo colorare a piacimento, in questo modo:
+\end_layout
+
+\begin_layout LyX-Code
+IF (drawChar_O = '1')
+\end_layout
+
+\begin_layout LyX-Code
+THEN
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+colorRGB := COLOR_XXX;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+END IF;
+\end_layout
+
+\begin_layout Standard
+Infatti, mentre la 
+\series bold
+View
+\series default
+ scorre pixel per pixel, il segnale 
+\emph on
+drawChar_O
+\emph default
+ si valorizza a '1' solo quando alla determinata linea e alla determinata
+ posizione, dal vettore in 
+\bar under
+uscita dalla ROM
+\bar default
+ per il carattere 'O' esce un segnale logico alto.
 \end_layout
 
 \end_body
