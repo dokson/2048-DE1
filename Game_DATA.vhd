@@ -66,7 +66,7 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 				curr_score <= score_initial_status;
 				directionPosEdge <= (others => '0');
 				merge_reg <= (others => '0');
-				reg_state <= randupdate;
+				reg_state <= init;
 				goingReady <= '1';
 				gameO <= '0';
 				youWin <= '0';
@@ -105,8 +105,15 @@ BEGIN
 	reg_next_state <= reg_state;
 	directionPosEdge_next <= directionPosEdge;
 	
+	-- Stato: bootstrap
+	if(reg_state = init) 
+	then
+		reg_next_state <= randupdate;
+		convertCoord(to_integer(randNum), x, y);
+		box_values_next_status(x,y) <= 2;
+	
 	-- Stato: idle fintanto che non arriva una direzione
-	if(reg_state = idle) 
+	elsif(reg_state = idle) 
 	then
 		box_values_prev_status <= box_values_curr_status;
 		merge_next <= (others => '0');
