@@ -35,7 +35,7 @@ ARCHITECTURE behavior of GAME_DATA IS
 	signal inRandNum	: STD_LOGIC_VECTOR(3 downto 0) 	:= "0000";
 	signal randNum		: UNSIGNED(3 downto 0)				:= "0000";
 
-	signal reg_state, reg_next_state : DATA_STATE := randupdate;
+	signal reg_state, reg_next_state : DATA_STATE := init;
 	signal directionPosEdge,directionPosEdge_next : STD_LOGIC_VECTOR(3 downto 0);
 	signal merge_reg, merge_next : STD_LOGIC_VECTOR(3 downto 0);
 	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
