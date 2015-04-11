@@ -6758,7 +6758,7 @@ INTEGER
 32 bit
 \series default
 .
- La maggior parte dei valori presenti nel nostro progetto non necessitano
+ La maggior parte dei valori presenti nel nostro progetto non necessita
  di 32 bit per essere rappresentati, ma di un numero nettamente inferiore,
  per questo abbiamo deciso di utilizzare solamente i bit necessari per rappresen
 tare ogni valore numerico.
