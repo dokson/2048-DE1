@@ -13,8 +13,8 @@ entity GAME_BOX is
 	(
 		-- INPUT
 		clk		: IN STD_LOGIC;
-		pixel_x 	: IN INTEGER RANGE 0 to 1000;
-		pixel_y 	: IN INTEGER RANGE 0 to 500;
+		pixel_x : IN INTEGER RANGE 0 to 1000;
+		pixel_y : IN INTEGER RANGE 0 to 500;
 		number	: IN INTEGER RANGE 0 to 2500; 		
 		
 		-- OUTPUT
@@ -25,29 +25,35 @@ end GAME_BOX;
 
 architecture box_arch of GAME_BOX is
 	-- Dimensioni fisse di tutti i box
-	constant larghezza 	: integer range 0 to 200 := 150; 	
-	constant altezza 		: integer range 0 to 200 := 105;
+	constant larghezza 	: integer range 0 to 300 := 150; 	
+	constant altezza 	: integer range 0 to 200 := 105;
 	-- Coordinate finali del cubo sullo schermo
-	constant MAX_X 		: integer range 0 to 1000 	:= XPOS + larghezza; -- larghezza
-	constant MAX_Y 		: integer range 0 to 500 	:= YPOS + altezza; -- altezza
+	constant MAX_X 		: integer range 0 to 1000 := XPOS + larghezza; -- larghezza
+	constant MAX_Y 		: integer range 0 to 500 := YPOS + altezza; -- altezza
 	-- Coordinate delle cifre sullo schermo
-	constant X_CHAR		: integer range 0 to 1000 	:= XPOS + larghezza/2;
-	constant Y_CHAR		: integer range 0 to 500	:= YPOS + altezza/2;
-	constant SPACE			: integer range 0 to 15		:= 10;
+	constant X_CHAR		: integer range 0 to 1000 := XPOS + larghezza/2;
+	constant Y_CHAR		: integer range 0 to 500:= YPOS + altezza/2;
+	 
 	-- Segnali per la scrittura dei numeri a video
-	signal numberToDraw1, numberToDraw2, numberToDraw3, numberToDraw4	: character;
-	signal drawNum1, drawNum2, drawNum3, drawNum4 : std_logic;
+	signal numberToDraw1: character;
+	signal numberToDraw2: character;
+	signal numberToDraw3: character;
+	signal numberToDraw4: character;
+	signal drawNum1		: std_logic;
+	signal drawNum2		: std_logic;
+	signal drawNum3		: std_logic;
+	signal drawNum4		: std_logic;
 
 begin
 	CH1: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => X_CHAR-2*SPACE,
+		XPOS => X_CHAR-20,
 		YPOS => Y_CHAR
 	)
 	port map
 	(
-		pixel_x 		=> pixel_x,
+		pixel_x 	=> pixel_x,
 		pixel_y		=> pixel_y,
 		char_code 	=> numberToDraw1,
 		drawChar 	=> drawNum1
@@ -55,7 +61,7 @@ begin
 	CH2: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => X_CHAR-SPACE,
+		XPOS => X_CHAR-10,
 		YPOS => Y_CHAR
 	)
 	port map
@@ -73,7 +79,7 @@ begin
 	)
 	port map
 	(
-		pixel_x 		=> pixel_x,
+		pixel_x 	=> pixel_x,
 		pixel_y		=> pixel_y,
 		char_code 	=> numberToDraw3,
 		drawChar 	=> drawNum3
@@ -81,12 +87,12 @@ begin
 	CH4: entity work.GAME_CHDISPLAY
 	generic map
 	(
-		XPOS => X_CHAR+SPACE,
+		XPOS => X_CHAR+10,
 		YPOS => Y_CHAR
 	)
 	port map
 	(
-		pixel_x 		=> pixel_x,
+		pixel_x 	=> pixel_x,
 		pixel_y		=> pixel_y,
 		char_code 	=> numberToDraw4,
 		drawChar 	=> drawNum4
