@@ -336,6 +336,7 @@ BOX16: entity work.GAME_BOX
 		-- non ha bisogno di essere sincrono in quanto la lettura viene fatta dalla view ad ogni
 		-- fronte positivo del clock (da ricordare!)
 		--- DISEGNO DI OGNI BOX
+		color <= (others => '0');
 		IF(drawbox1 = '1')
 		THEN
 			color <= color1;

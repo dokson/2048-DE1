@@ -522,7 +522,7 @@ BEGIN
 		drawCharZ='1' OR drawCharZ1='1' OR drawCharI='1'
 	)
 	THEN
-		colorRGB := COLOR_SLATEGRAY;  
+		colorRGB := COLOR_TEAL;  
 	END IF;
 
 	-- Disegno "GAME OVER"

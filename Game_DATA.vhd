@@ -28,6 +28,7 @@ ARCHITECTURE behavior of GAME_DATA IS
 	-- Occorre tenere conto dello stato attuale, corrente e precedente
 	signal	box_values_curr_status, 
 			box_values_next_status,
+			box_values_next_prev_status,
 			box_values_prev_status : GAME_GRID := (others => (others => 0));
 	
 	signal curr_score	: INTEGER RANGE 0 to 9999 := 0;
@@ -77,6 +78,7 @@ process(clk, bootstrap, curr_score, box_values_curr_status, gameO, youWin)
 				randNum <= unsigned(INrandNum);
 				directionPosEdge <= directionPosEdge_next;
 				box_values_curr_status <= box_values_next_status;
+				box_values_prev_status <= box_values_next_prev_status;
 				curr_score <= next_score;
 				reg_state <= reg_next_state;
 				merge_reg <= merge_next;
@@ -111,6 +113,7 @@ BEGIN
 	merge_next <= merge_reg;
 	reg_next_state <= reg_state;
 	directionPosEdge_next <= directionPosEdge;
+	box_values_next_prev_status <= box_values_prev_status;
 	
 	-- Stato: bootstrap
 	if(reg_state = init) 
@@ -123,10 +126,11 @@ BEGIN
 	-- Stato: idle fintanto che non arriva una direzione
 	elsif(reg_state = idle) 
 	then
-		box_values_prev_status <= box_values_curr_status;
+		box_values_next_prev_status <= box_values_curr_status;
 		merge_next <= (others => '0');
 		if(unsigned(directionPosEdge) > 0) then
 			reg_next_state <= merge1;
+			next_score <= curr_score + 1;
 		else
 			directionPosEdge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 		end if;
@@ -1095,7 +1099,6 @@ BEGIN
 	elsif(reg_state = randupdate)
 	then
 		reg_next_state <= idle;
-		next_score <= curr_score + 1;
 		convertCoord(to_integer(randNum), x, y);
 		-- Cascata di else-if necessaria perchè il num random generato potrebbe essere già occpato
 		if(box_values_curr_status(x,y) = 0)
