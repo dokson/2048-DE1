@@ -539,13 +539,7 @@ che, oltre a permettere di interfacciare computer e DE1, è un comodo ambiente
 \end_layout
 
 \begin_layout Standard
-La versione che abbiamo scelto di utilizzare per realizzare questo progetto
- è la 
-\series bold
-9.1 Web Edition
-\series default
-, con licenza gratuita.
- Quartus permette sia di comporre una logica unendo porte logiche in uno
+Quartus permette sia di comporre una logica unendo porte logiche in uno
  schematico, sia di sintetizzarne di più complesse, tramite descrizione
  
 \emph on
@@ -5860,7 +5854,11 @@ All'interno di questa classe sono state semplicemente definite le coordinate
 16 singoli Box
 \series default
 , indicando i valori in pixel di inizio delle singole righe e colonne, per
- un totale quindi di 8 valori (
+ un totale quindi di 
+\series bold
+8 variabili
+\series default
+ (
 \emph on
 XfirstColumn, YfirstRow, XsecondColumn, YsecondRow, XthirdColumn, YthirdRow,
  XfourthColumn, YfourthRow
@@ -6045,29 +6043,25 @@ Il
 \series bold
 4
 \series default
- presenta una tonalità beige mentre dall'
+ presenta una tonalità beige mentre dall'8 al 64 i numeri sono abbinati
+ a varie tonalità di rosso che variano dal mattone per l'
 \series bold
 8
 \series default
- al 
+ al sangue per il 
 \series bold
 64
 \series default
- i numeri sono abbinati a varie tonalità di rosso che variano dal mattone
- per l'8 al sangue per il 64.
+.
 \end_layout
 
 \begin_layout Standard
-Raggiunto il 
+Raggiunto il 128, i numeri tornano chiari, utilizzando la tonalità ocra
+ fino al 2048: da un pallido giallo del 
 \series bold
 128
 \series default
-, i numeri tornano chiari, utilizzando la tonalità ocra fino al 
-\series bold
-2048
-\series default
-: da un pallido giallo del 128, infatti le tonalità s'intensificano con
- il 
+, infatti le tonalità s'intensificano con il 
 \series bold
 256
 \series default
@@ -6079,7 +6073,11 @@ Raggiunto il
 \series bold
 1024
 \series default
- sino a giungere il 2048 che è di colore ocra intenso/oro.
+ sino a giungere il 
+\series bold
+2048
+\series default
+ che è di colore ocra intenso/oro.
 \end_layout
 
 \begin_layout Standard
@@ -6693,11 +6691,178 @@ uscita dalla ROM
 \end_layout
 
 \begin_layout Chapter
+Report di Compilazione e RTL
+\end_layout
+
+\begin_layout Standard
+Riportiamo in questo capitolo il report dei risultati della compilazione
+ del progetto e successivamente lo schematico a blocchi RTL, realizzato
+ con 
+\emph on
+Quartus II
+\emph default
+, per evidenziare meglio le interconnessioni fra i vari componenti del nostro
+ sistema.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/report.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Report di compilazione
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Questo report è stato ottenuto su un 
+\series bold
+Intel i3-2120
+\series default
+ (
+\emph on
+3M Cache, 3.30 GHz
+\emph default
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://ark.intel.com/it/products/53426/Intel-Core-i3-2120-Processor-3M-Cache-3_30-
+GHz
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/RTL_system.png
+	scale 54
+	rotateAngle -90
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schematico RTL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Come si può vedere dalla figura soprastante, gli unici 
+\bar under
+ingressi del nostro sistema
+\bar default
+ sono il
+\series bold
+ clock a 50Mhz
+\series default
+, che viene dato in ingresso al divisore di frequenza (vedi 
+\noun on
+Sezione 4.4
+\noun default
+), e i 
+\series bold
+due ingressi 
+\series default
+provenienti dalla 
+\series bold
+tastiera
+\series default
+, ovvero clock e data (quest'ultimo verrà elaborato come keyCode a 8 bit,
+ vedere 
+\noun on
+Sezione 4.1
+\noun default
+); mentre le uscite, tutte provenienti dalla 
+\emph on
+View
+\emph default
+, sono i segnali che permettono di comunicare alla porta VGA come disegnare
+ la grafica su monitor (vedi 
+\noun on
+Sezione 4.2
+\noun default
+) e le uscite che pilotano i quattro display a 7 segmenti (vedi 
+\noun on
+Sezione 4.
+\noun default
+3) per mostrare il punteggio.
+\end_layout
+
+\begin_layout Standard
+Questa RTL permette di verificare anche a occhio di come il 
+\series bold
+modello MVC
+\series default
+ sia stato 
+\bar under
+pienamente rispettato
+\bar default
+: il 
+\emph on
+Controller
+\emph default
+ riceve appunto gli input dell'utente ed è il solo a decidere cosa debba
+ fare il 
+\emph on
+Model
+\emph default
+, che a sua volta trasferisce i dati alla 
+\emph on
+View.
+\end_layout
+
+\begin_layout Chapter
 Conclusioni
 \end_layout
 
 \begin_layout Standard
-Il progetto realizzato ha richiesto una grande quantità delle
+Il progetto realizzato ha richiesto una buona parte delle
 \series bold
  risorse logiche
 \series default
@@ -6709,29 +6874,37 @@ DE-1
 \series bold
 Altera
 \series default
-, in termini percentuali all'incirca il (93%).
+, in termini percentuali esattamente l'85%.
  Abbiamo operato diversi accorgimenti, volti ad ottimizzare questo risultato,
- ma non siamo riusciti a scendere sotto la soglia del 90%.
+ ma non siamo riusciti a scendere sotto questa soglia.
  Questo risultato non ci ha stupito, infatti, la scelta di realizzare strumenti
  fortemente 
 \series bold
 riutilizzabili
 \series default
-, come i componenti grafici, richiede sicuramente un numero di funzioni
- logiche elevato.
- Per quanto riguarda invece i 
+, come i 
+\emph on
+componenti grafic
+\emph default
+i, richiede sicuramente un numero di funzioni logiche elevato.
+ 
+\end_layout
+
+\begin_layout Standard
+Per quanto riguarda invece i 
 \series bold
 registri
 \series default
  forniti dalla scheda, siamo riusciti a mantenere una percentuale molto
- bassa, intorno al (6)%.
+ bassa, intorno al 5%.
  Infine, per ottenere il bitstream 
 \series bold
 \emph on
-Quartus II versione 9.1 SP2
+Quartus II
 \series default
 \emph default
- impiega all'incirca 12 minuti.
+ impieghiamo circa 5 minuti, utilizzando il sistema citato nel precedente
+ capitolo.
 \end_layout
 
 \begin_layout Standard
@@ -6770,9 +6943,9 @@ Considerazioni
 
 \begin_layout Standard
 Come già detto nella 
-\series bold
-sottosezione 6.1.1
-\series default
+\noun on
+SottoSezione 6.1.1
+\noun default
 , abbiamo deciso di rappresentare lo stato delle 16 caselle tramite una
  matrice 4x4 di interi.
  Questa scelta mira ad una maggiore leggibilità della rappresentazione,
