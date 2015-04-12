@@ -6917,7 +6917,7 @@ INTEGER
 \emph on
 INTEGER RANGE
 \emph default
-, definendo così il range entro il quale il valore dobba essere rappresentato.
+, definendo così il range entro il quale il valore debba essere rappresentato.
  Questa decisione è stata presa perché il 
 \emph on
 VHDL,
@@ -6957,7 +6957,7 @@ SottoSezione 6.1.1
  Prevediamo che in questa maniera il numero di risorse logiche richieste
  dal gioco diminuisca fortemente e con essa anche il tempo necessario per
  ottenere il bitstream risultante.
- Questa modifica ad ogni modo richiederebbe delle modifiche non indifferenti
+ Questo cambiamento ad ogni modo richiederebbe delle modifiche non indifferenti
  nella logica del modello e, come già detto, anche una peggiore leggibilità
  del codice stesso.
 \end_layout
