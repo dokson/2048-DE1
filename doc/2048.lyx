@@ -6874,7 +6874,7 @@ DE-1
 \series bold
 Altera
 \series default
-, in termini percentuali esattamente l'85%.
+, in termini percentuali esattamente l'83%.
  Abbiamo operato diversi accorgimenti, volti ad ottimizzare questo risultato,
  ma non siamo riusciti a scendere sotto questa soglia.
  Questo risultato non ci ha stupito, infatti, la scelta di realizzare strumenti
@@ -6895,15 +6895,15 @@ Per quanto riguarda invece i
 \series bold
 registri
 \series default
- forniti dalla scheda, siamo riusciti a mantenere una percentuale molto
- bassa, intorno al 5%.
+ forniti dalla scheda, siamo riusciti a mantenere una percentuale bassa,
+ ovvero l'8%.
  Infine, per ottenere il bitstream 
 \series bold
 \emph on
 Quartus II
 \series default
 \emph default
- impieghiamo circa 5 minuti, utilizzando il sistema citato nel precedente
+ impieghiamo circa 6 minuti, utilizzando il sistema citato nel precedente
  capitolo.
 \end_layout
 
