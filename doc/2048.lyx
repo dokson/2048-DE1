@@ -431,7 +431,7 @@ Altera DE1
 \end_layout
 
 \begin_layout Standard
-Avendo a disposizione una scheda 
+La scheda a nostra disposizione è la 
 \series bold
 Terasic DE1 
 \series default
@@ -533,20 +533,32 @@ Quartus II
 \series bold
 Altera 
 \series default
-che, oltre a permettere di interfacciare computer e DE1, è un comodo ambiente
- di sviluppo con cui generare il progetto stesso.
+che, oltre a permettere di interfacciare computer e 
+\emph on
+DE1
+\emph default
+, è un comodo ambiente di sviluppo con cui generare il progetto stesso.
  
 \end_layout
 
 \begin_layout Standard
-Quartus permette sia di comporre una logica unendo porte logiche in uno
- schematico, sia di sintetizzarne di più complesse, tramite descrizione
- 
+
+\emph on
+Quartus
+\emph default
+ permette sia di comporre una logica unendo porte logiche in uno 
+\emph on
+schematico
+\emph default
+, sia di sintetizzarne di più complesse, tramite descrizione 
 \emph on
 Verilog o VHDL
 \emph default
-, o ad un livello di astrazione più alto, ad esempio con una macchina a
- stati finiti.
+, o ad un livello di astrazione più alto, ad esempio con una 
+\bar under
+macchina a stati finiti
+\bar default
+.
 \end_layout
 
 \begin_layout Chapter
@@ -851,7 +863,11 @@ In questa sezione ci occuperemo di descrivere nel dettaglio come abbiamo
 \series bold
 PS/2
 \series default
-, per la gestione dell'input da tastiera.
+, per la gestione dell'
+\series bold
+input
+\series default
+ da tastiera.
 \end_layout
 
 \begin_layout Standard
@@ -1064,7 +1080,9 @@ Make codes
 \series bold
 Break codes
 \series default
-: utilizzati quando un tasto è rilasciato, nel nostro caso è sempre 
+: utilizzati quando un tasto è rilasciato, 
+\bar under
+nel nostro caso è sempre 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1761,7 +1779,7 @@ VGA mode
 \series default
  pixel, 
 \series bold
-25Mhz
+25MHz
 \series default
  di dot clock (ovvero il 
 \emph on
@@ -2476,11 +2494,14 @@ Divisore di Frequenza
 \end_layout
 
 \begin_layout Standard
-Avendo a disposizione solo clock a 50 e 27Mhz, siamo stati obbligati a realizzar
-e un componente che dividesse la frequenza per 2, per ottenere in uscita
- un clock a 
+Avendo a disposizione solo clock a 
+\emph on
+50 e 27MHz
+\emph default
+, siamo stati obbligati a realizzare un componente che dividesse la frequenza
+ per 2, per ottenere in uscita un clock a 
 \series bold
-25Mhz
+25MHz
 \series default
  da utilizzare per tutti i dispositivi del progetto.
 \end_layout
@@ -2493,7 +2514,11 @@ divisore di frequenza
  è quello di realizzare un contatore che fornisca un segnale in uscita solamente
  per alcuni valori: nel nostro caso particolare è stato sufficiente un contatore
  a 1 bit: se il contatore conta ogni fronte di salita (o, volendo, di discesa)
- infatti, otteniamo già un clock a frequenza dimezzata.
+ infatti, otteniamo già un 
+\bar under
+clock a frequenza dimezzata
+\bar default
+.
 \end_layout
 
 \begin_layout LyX-Code
@@ -2559,14 +2584,14 @@ Implementazione del Controller (Control Unit)
 \begin_layout Standard
 Avendo adottato il design pattern 
 \emph on
-MVC 
+MVC, 
 \emph default
 una delle 3 fasi principali della progettazione riguarda appunto il 
 \series bold
 Controller
 \series default
 .
- Questo componente, già descritta precedentemente, ha il compito di gestire
+ Questo componente, già descritto precedentemente, ha il compito di gestire
  le relazioni tra 
 \series bold
 Model
@@ -2576,14 +2601,23 @@ Model
 View
 \series default
 .
- In altre parole esso deve farsì che la View riesca a mostrare le modifiche
- del modello senza realmente conoscerlo.
+ In altre parole, esso deve fare in modo che la 
+\emph on
+View
+\emph default
+ riesca a mostrare le modifiche del modello senza realmente conoscerlo.
 \end_layout
 
 \begin_layout Standard
-Il primo compito che affideremo al Controller sarà appunto quello di gestire
- lo stato dell'intero sistema, questo anche in risposta agli input che riceverà
- dall'esterno.
+Il primo compito che affideremo al 
+\emph on
+Controller
+\emph default
+ sarà appunto quello di gestire lo stato dell'intero sistema, anche in 
+\series bold
+risposta agli input
+\series default
+ che riceverà dall'esterno.
  
 \end_layout
 
@@ -2608,7 +2642,7 @@ Stato iniziale
  le variabili che successivamente manterrano lo stato del gioco, nel modello
  del gioco (
 \emph on
- fase di bootstrap
+fase di bootstrap
 \emph default
 );
 \end_layout
@@ -2696,7 +2730,11 @@ FSM del gioco
 \end_layout
 
 \begin_layout Standard
-Riportiamo di seguito la rappresentazione in VHDL:
+Riportiamo di seguito la rappresentazione degli stati di gioco in 
+\emph on
+VHDL
+\emph default
+:
 \end_layout
 
 \begin_layout LyX-Code
@@ -2714,14 +2752,22 @@ Altro compito essenziale del nostro controller sarà, come già detto, la
 PS/2
 \series default
 .
- Abbiamo già descritto precedentemente il protocollo PS/2 e abbiamo già
- spiegato come funzionerà il componente che si occuperà di comunicare direttamen
-te con la periferica.
+ 
+\end_layout
+
+\begin_layout Standard
+Abbiamo già descritto precedentemente il protocollo PS/2 e abbiamo già spiegato
+ come funzionerà il componente che si occuperà di comunicare direttamente
+ con la periferica.
  Quindi dal punto di vista del controller gli input dell'utente saranno
  rappresentati da un segnale 
 \series bold
 keyboardData
 \series default
+, 
+\bar under
+a 8 bit
+\bar default
 , che in codice 
 \emph on
 VHDL
@@ -2759,19 +2805,19 @@ Prima di passare alle 4 direzioni di movimento, andiamo ad analizzare il
 \begin_inset Quotes fld
 \end_inset
 
+
+\emph on
 reset
+\emph default
+
 \begin_inset Quotes frd
 \end_inset
 
 , necessario per 
-\begin_inset Quotes fld
-\end_inset
-
-riniziare
-\begin_inset Quotes frd
-\end_inset
-
- la partita da zero portando tutto il sistema allo stato iniziale.
+\emph on
+ricominciare
+\emph default
+ la partita da zero, portando tutto il sistema allo stato iniziale.
  Dalla 
 \series bold
 figura 5.1
@@ -2781,7 +2827,7 @@ figura 5.1
 bootstrap.
  
 \emph default
-Come tasto corrispondente abbiamo selezionato 
+Abbiamo deciso di cablare il tasto 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2791,11 +2837,17 @@ ESC
 \begin_inset Quotes frd
 \end_inset
 
-.
  
 \emph default
-Quindi in corrispondenza alla pressione del tasto di reset, qualsiasi sia
- lo stato della 
+della tastiera come tasto di 
+\emph on
+reset
+\emph default
+; quindi, in corrispondenza alla pressione del tasto 
+\emph on
+ESC
+\emph default
+, qualsiasi sia lo stato della 
 \emph on
 FSM
 \emph default
@@ -2803,11 +2855,21 @@ FSM
 \series bold
 Control Unit
 \series default
- dovrà modificarlo in bootstrap.
- Questo stato specificherà al model di resettarsi e di tornare allo stato
- di gioco iniziale, che in logica di gioco corrisponderà all'inizio di una
- nuova partita.
- Segue il codice che si occupa di realizzare questo comportamento
+ dovrà modificarlo in 
+\emph on
+bootstrap
+\emph default
+: questo stato specificherà al 
+\emph on
+Model
+\emph default
+ di resettarsi e di tornare allo stato di gioco iniziale, che in logica
+ di gioco corrisponderà all'inizio di una nuova partita.
+ 
+\end_layout
+
+\begin_layout Standard
+Segue il codice che si occupa di realizzare questo comportamento
 \emph on
 .
 \end_layout
@@ -2904,7 +2966,11 @@ Riassumendo nel seguente codice si mostrano le rappresentazioni selezionate
 \noun on
  Figura 4.3
 \noun default
- per lo scan code set)
+ per lo 
+\series bold
+scan code set
+\series default
+)
 \end_layout
 
 \begin_layout LyX-Code
@@ -2948,8 +3014,11 @@ constant keyDOWN  : std_logic_vector(7 downto 0) := X"72";
 \end_layout
 
 \begin_layout Standard
-Ora riportiamo un estratto del codice della controller unit per la gestione
- delle direzioni:
+Ora riportiamo un estratto del codice della 
+\emph on
+Controller Unit
+\emph default
+ per la gestione delle direzioni:
 \end_layout
 
 \begin_layout LyX-Code
@@ -3031,7 +3100,15 @@ Come mostrato nella
 \series bold
 figura 5.1
 \series default
- esistono due possibili esiti per la partita in corso, vittoria o sconfitta.
+ esistono due possibili esiti per la partita in corso, 
+\emph on
+vittoria
+\emph default
+ o 
+\emph on
+sconfitta
+\emph default
+.
  Sarà quindi proprio il controller a dover reagire ad una eventuale situazione
  di terminazione e modificare lo stato del sistema 
 \begin_inset Quotes fld
@@ -3073,7 +3150,9 @@ gameover
 
 .
  
-\emph default
+\end_layout
+
+\begin_layout Standard
 Abbiamo però detto che è il modello del gioco a conoscere lo stato attuale
  della partita vera e propria, quindi sarà compito di questo notificare
  al controller un'eventuale vittoria o sconfitta.
@@ -3094,24 +3173,19 @@ Quando uno di essi assume il valore positivo
 \series bold
 1
 \series default
-, allora il controller pone lo stato corrispondente.
- Naturalmente essi sono legati intrinsecamente da una logica 
+, il controller pone lo stato corrispondente: naturalmente essi sono legati
+ intrinsecamente da una logica 
 \series bold
-mutualmente esclusiva
+mutuamente esclusiva
 \series default
 .
 \end_layout
 
 \begin_layout Standard
-Gli stati di vittoria e sconfitta dovranno però avere delle conseguenze
- 
-\begin_inset Quotes fld
-\end_inset
-
-grafiche
-\begin_inset Quotes frd
-\end_inset
-
+Gli stati di vittoria e sconfitta dovranno però avere delle 
+\emph on
+conseguenze grafiche
+\emph default
  nella 
 \series bold
 View
@@ -3133,7 +3207,15 @@ gameover
  
 \emph default
 Per dare un'idea più pratica del funzionamento mostriamo la gestione dello
- stato di vittoria nel codice VHDL, quello di sconfitta è esattamente speculare:
+ stato di 
+\series bold
+vittoria
+\series default
+ nel codice 
+\emph on
+VHDL
+\emph default
+, quello di sconfitta è esattamente speculare:
 \end_layout
 
 \begin_layout LyX-Code
@@ -3151,7 +3233,7 @@ if(isvictory = '1') -- segnale proveniente dal modello
 \end_layout
 
 \begin_layout LyX-Code
-then 				
+then
 \end_layout
 
 \begin_deeper
@@ -3189,8 +3271,11 @@ Il segnale
 \emph on
 won 
 \emph default
-è appunto il segnale viene inviato alla View per i motivi mostrati precedentemen
-te.
+è appunto il segnale viene inviato alla 
+\emph on
+View
+\emph default
+ per i motivi mostrati precedentemente.
 \end_layout
 
 \begin_layout Section
@@ -3202,7 +3287,15 @@ Per concludere mostriamo i collegamenti, già in parte specificati nella
 \series bold
  Sezione 5.1.3
 \series default
-, che il controller ha con gli altri due componenti del design pattern MVC.
+, che il 
+\emph on
+Controller 
+\emph default
+ha con gli altri due componenti del 
+\emph on
+design pattern MVC
+\emph default
+.
 \end_layout
 
 \begin_layout LyX-Code
@@ -4023,7 +4116,7 @@ randupdate
 solo nel caso in cui la mossa verrà considerata valida.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Esempio
 \end_layout
 
@@ -5537,16 +5630,32 @@ bootstrap
 \emph on
 reset 
 \emph default
-del sistema, è la direzione della mossa.
+del sistema, è la 
+\series bold
+direzione
+\series default
+ della mossa.
  Tutti gli altri segnali sono di uscita e comunicano al 
 \emph on
 Controller 
 \emph default
-lo stato della partita e alla 
+lo 
+\series bold
+stato
+\series default
+ della partita e alla 
 \emph on
 View
 \emph default
- i valori della griglia di gioco e il punteggio corrente.
+ i 
+\series bold
+valori della griglia di gioco
+\series default
+ e il 
+\series bold
+punteggio corrente
+\series default
+.
 \end_layout
 
 \begin_layout LyX-Code
@@ -6690,6 +6799,92 @@ uscita dalla ROM
  per il carattere 'O' esce un segnale logico alto.
 \end_layout
 
+\begin_layout Section
+View - Out of the Box (VHDL)
+\end_layout
+
+\begin_layout Standard
+Concludiamo questo capitolo mostrando i collegamenti 
+\begin_inset Quotes fld
+\end_inset
+
+out of the box
+\begin_inset Quotes frd
+\end_inset
+
+ della 
+\emph on
+View
+\emph default
+.
+\end_layout
+
+\begin_layout LyX-Code
+ENTITY GAME_VIEW IS PORT
+\end_layout
+
+\begin_layout LyX-Code
+(
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+-- INPUT
+\end_layout
+
+\begin_layout LyX-Code
+clk : IN STD_LOGIC;	 			
+\end_layout
+
+\begin_layout LyX-Code
+-- MODEL STATUS
+\end_layout
+
+\begin_layout LyX-Code
+box_values : IN GAME_GRID; 
+\end_layout
+
+\begin_layout LyX-Code
+score : IN INTEGER RANGE 0 to 9999; 	
+\end_layout
+
+\begin_layout LyX-Code
+bootstrap, won, lost : IN STD_LOGIC; 
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+-- OUTPUT
+\end_layout
+
+\begin_layout LyX-Code
+hsync, vsync : OUT STD_LOGIC; 
+\end_layout
+
+\begin_layout LyX-Code
+red, green, blue : OUT STD_LOGIC_VECTOR(3 downto 0);
+\end_layout
+
+\begin_layout LyX-Code
+-- USCITE 7 bit per i 4 display 7 segmenti 
+\end_layout
+
+\begin_layout LyX-Code
+leds1, leds2, leds3, leds4 : OUT STD_LOGIC_VECTOR(6 downto 0) 	
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+);
+\end_layout
+
+\begin_layout LyX-Code
+end GAME_VIEW;
+\end_layout
+
 \begin_layout Chapter
 Report di Compilazione e RTL
 \end_layout
@@ -6857,6 +7052,11 @@ Model
 View.
 \end_layout
 
+\begin_layout Standard
+Per quanto riguarda i collegamenti interni, si rimanda alle singole sezioni
+ dei componenti per una migliore comprensione.
+\end_layout
+
 \begin_layout Chapter
 Conclusioni
 \end_layout
@@ -6874,7 +7074,11 @@ DE-1
 \series bold
 Altera
 \series default
-, in termini percentuali esattamente l'83%.
+, in termini percentuali esattamente l'
+\series bold
+83%
+\series default
+.
  Abbiamo operato diversi accorgimenti, volti ad ottimizzare questo risultato,
  ma non siamo riusciti a scendere sotto questa soglia.
  Questo risultato non ci ha stupito, infatti, la scelta di realizzare strumenti
@@ -6887,7 +7091,6 @@ riutilizzabili
 componenti grafic
 \emph default
 i, richiede sicuramente un numero di funzioni logiche elevato.
- 
 \end_layout
 
 \begin_layout Standard
@@ -6896,7 +7099,11 @@ Per quanto riguarda invece i
 registri
 \series default
  forniti dalla scheda, siamo riusciti a mantenere una percentuale bassa,
- ovvero l'8%.
+ ovvero l'
+\series bold
+8%
+\series default
+.
  Infine, per ottenere il bitstream 
 \series bold
 \emph on
@@ -6910,31 +7117,37 @@ Quartus II
 \begin_layout Standard
 Un accorgimento in termini di ottimizzazione è stato quello di trasformare
  tutti i tipi di segnali 
-\emph on
-INTEGER
-\emph default
+\noun on
+Integer
+\noun default
  in 
-\emph on
-INTEGER RANGE
-\emph default
+\noun on
+Integer Range
+\noun default
 , definendo così il range entro il quale il valore debba essere rappresentato.
  Questa decisione è stata presa perché il 
 \emph on
 VHDL,
 \emph default
  se non specificato il range di riferimento, rappresenta gli 
-\emph on
-INTEGER
-\emph default
+\noun on
+Integer
+\noun default
  sempre tramite 
 \series bold
 32 bit
 \series default
 .
- La maggior parte dei valori presenti nel nostro progetto non necessita
- di 32 bit per essere rappresentati, ma di un numero nettamente inferiore,
- per questo abbiamo deciso di utilizzare solamente i bit necessari per rappresen
-tare ogni valore numerico.
+ La maggior parte dei valori presenti nel nostro progetto 
+\bar under
+non necessita di 32 bit
+\bar default
+ per essere rappresentati, ma di un 
+\emph on
+numero nettamente inferiore
+\emph default
+, per questo abbiamo deciso di utilizzare solamente i bit necessari per
+ rappresentare ogni valore numerico.
 \end_layout
 
 \begin_layout Section
@@ -6947,19 +7160,89 @@ Come già detto nella
 SottoSezione 6.1.1
 \noun default
 , abbiamo deciso di rappresentare lo stato delle 16 caselle tramite una
- matrice 4x4 di interi.
- Questa scelta mira ad una maggiore leggibilità della rappresentazione,
- siamo però ben consci che essa non abbia favorito invece l'ottimizzazione
- del circuito.
+ 
+\emph on
+matrice 4x4 di interi
+\emph default
+; questa scelta mira ad una
+\series bold
+ maggiore leggibilità
+\series default
+ della rappresentazione, siamo però ben consci che essa non abbia favorito
+ invece l'ottimizzazione del circuito.
  Infatti, una possibile modifica potrebbe essere di diminuire la dimensionalità
  della rappresentazione passando da 2 dimensioni ad 1 (un'array con lunghezza
  16).
- Prevediamo che in questa maniera il numero di risorse logiche richieste
+ 
+\end_layout
+
+\begin_layout Standard
+Prevediamo che in questa maniera il numero di risorse logiche richieste
  dal gioco diminuisca fortemente e con essa anche il tempo necessario per
  ottenere il bitstream risultante.
- Questo cambiamento ad ogni modo richiederebbe delle modifiche non indifferenti
- nella logica del modello e, come già detto, anche una peggiore leggibilità
+ Questo cambiamento, ad ogni modo, richiederebbe delle modifiche non indifferent
+i nella logica del modello e, come già detto, anche una 
+\bar under
+peggiore leggibilità
+\bar default
  del codice stesso.
+\end_layout
+
+\begin_layout Section
+Ulteriori Miglioramenti
+\end_layout
+
+\begin_layout Standard
+Un ulteriore 
+\emph on
+improvement
+\emph default
+ del codice del gioco, dato che i valori del gioco sono le sole potenze
+ del 2 comprese tra 
+\begin_inset Formula $2^{1}$
+\end_inset
+
+ e 
+\begin_inset Formula $2^{11}$
+\end_inset
+
+, potrebbe essere quello di non servirsi direttamente degli 
+\noun on
+Integer
+\noun default
+, che sono utili soprattutto per scopo di visualizzazione a video, ma sempliceme
+nte di un vettore di 
+\noun on
+Std_Logic
+\noun default
+ di dimensione 12, dove il singolo bit valorizzato a 
+\series bold
+'1'
+\series default
+ indicherebbe quale delle 12 potenze del 2 si stia rappresentando, oppure,
+ in logica binaria, basterebbero solo 5 bit (
+\begin_inset Formula $2^{5}=16$
+\end_inset
+
+) per rappresentare 12 valori.
+ 
+\end_layout
+
+\begin_layout Standard
+Ovviamente adottando un miglioramento del genere, si dovrebbero fare ulteriori
+ conversioni numeriche a livello di 
+\emph on
+View
+\emph default
+, ma anche questo genere di miglioramento consentirebbe un 
+\series bold
+risparmio notevole
+\series default
+ 
+\series bold
+di risorse logiche
+\series default
+.
 \end_layout
 
 \end_body
